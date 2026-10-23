@@ -76,8 +76,8 @@
       const s=pick(services,svcW);
       const ms=masters.filter(m=>m.cats.includes(s.cat));const m=ms[Math.floor(R()*ms.length)];
       const pool=clients;
-      let c;if(pool.length>40&&R()<0.64){c=pool[Math.floor(Math.pow(R(),1.6)*pool.length)];if(c.loyal<0.15&&R()<0.5)c=pool[Math.floor(R()*pool.length)];}else c=newClient(t);
-      const hour=9+Math.floor(R()*12),minute=R()<0.5?0:30;
+      let c;if(pool.length>40&&R()<0.64){c=pool[pool.length-1-Math.floor(Math.pow(R(),2.4)*pool.length)];if(c.loyal<0.15&&R()<0.5)c=pool[Math.floor(R()*pool.length)];}else c=newClient(t);
+      const hour=9+Math.floor(R()*12),minute=[0,15,30,45][Math.floor(R()*4)];
       const isPast=t<today.getTime()||(t===today.getTime()&&hour+minute/60<nowHour);
       let status;
       if(isPast){const x=R();status=x<0.885?'done':x<0.95?'cancelled':'noshow';}
