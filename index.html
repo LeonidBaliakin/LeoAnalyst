@@ -905,7 +905,7 @@ async function submitLead(e){
       else showLeadStatus(dict.formError,'error');
       return;
     }
-    $('#leadEntry').hidden=true;$('#leadSuccess').hidden=false;$('#leadFinish').focus();
+    track('generate_lead',{contact_method:leadMethod,site_language:state.locale});$('#leadEntry').hidden=true;$('#leadSuccess').hidden=false;$('#leadFinish').focus();
   }catch(error){
     showLeadStatus(dict.formError,'error');
   }finally{
@@ -913,7 +913,8 @@ async function submitLead(e){
     $('#leadSubmit [data-i18n="formSubmit"]').textContent=LEAD_DELIVERY_ENABLED?COPY[state.locale].formSubmit:COPY[state.locale].formPreviewSubmit;
   }
 }
-$$('[data-open-lead]').forEach(el=>el.addEventListener('click',openLead));
+function track(name,params){try{if(typeof gtag==='function')gtag('event',name,params||{})}catch{}}
+$$('[data-open-lead]').forEach(el=>el.addEventListener('click',()=>{const where=el.closest('header')?'header':(el.closest('section[id]')?.id||el.closest('section')?.className.split(' ')[0]||'page');track('lead_form_open',{button_location:where,site_language:state.locale});openLead()}));
 $('#leadClose').addEventListener('click',closeLead);
 $('#leadFinish').addEventListener('click',closeLead);
 lead.addEventListener('pointerdown',e=>{if(e.target===lead)closeLead()});
