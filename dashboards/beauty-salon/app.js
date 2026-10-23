@@ -14,8 +14,8 @@ const extra=store.get('extra',[]);
 const T=(ru,en)=>state.lang==='ru'?ru:en;
 const L=o=>o?(state.lang==='ru'?o.ru:o.en):'';
 const svcById=Object.fromEntries(D.services.map(s=>[s.id,s])),mstById=Object.fromEntries(D.masters.map(m=>[m.id,m])),cliById=Object.fromEntries(D.clients.map(c=>[c.id,c])),catById=Object.fromEntries(D.categories.map(c=>[c.id,c])),chById=Object.fromEntries(D.channels.map(c=>[c.id,c])),distById=Object.fromEntries(D.districts.map(d=>[d.id,d]));
-const catColor={hair:'#2b8763',nails:'#d4707f',face:'#5b8fd6',brows:'#e2ad45',body:'#8b6fd0'};
-const catSoft={hair:'var(--fern-soft)',nails:'var(--rose-soft)',face:'var(--sky-soft)',brows:'var(--honey-soft)',body:'#ece6f8'};
+const catColor={hair:'#9a6cc4',nails:'#d9667f',face:'#e88a62',brows:'#c79a3e',body:'#5f9e9a'};
+const catSoft={hair:'var(--fern-soft)',nails:'var(--rose-soft)',face:'var(--peach-soft)',brows:'#f8eedb',body:'#e2f1ef'};
 
 /* ---------- data helpers ---------- */
 function all(){return D.bookings.concat(extra)}
@@ -135,7 +135,7 @@ function barChart(el,cfg){
 }
 function spark(data,color){const w=110,h=36,max=Math.max(...data),min=Math.min(...data),sp=max-min||1;const pts=data.map((v,i)=>[i/(data.length-1)*w,h-3-(v-min)/sp*(h-8)]);return`<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${smooth(pts)}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round"/></svg>`;}
 function gauge(p){const N=64,cx=150,cy=150,r1=104,r2=136;let s='';const on=Math.round(N*Math.min(1,p/100));
- for(let i=0;i<N;i++){const a=Math.PI*(1-i/(N-1)),c=Math.cos(a),sn=Math.sin(a);const lit=i<on;const col=lit?`hsl(${150-i*0.55} ${45+i*0.3}% ${36+i*0.35}%)`:'var(--line-2)';s+=`<line x1="${(cx+r1*c).toFixed(1)}" y1="${(cy-r1*sn).toFixed(1)}" x2="${(cx+r2*c).toFixed(1)}" y2="${(cy-r2*sn).toFixed(1)}" stroke="${col}" stroke-width="3.4" stroke-linecap="round"/>`;}
+ for(let i=0;i<N;i++){const a=Math.PI*(1-i/(N-1)),c=Math.cos(a),sn=Math.sin(a);const lit=i<on;const col=lit?`hsl(${((272+i*1.85)%360).toFixed(0)} ${(52+i*0.35).toFixed(0)}% ${(50+i*0.22).toFixed(0)}%)`:'var(--line-2)';s+=`<line x1="${(cx+r1*c).toFixed(1)}" y1="${(cy-r1*sn).toFixed(1)}" x2="${(cx+r2*c).toFixed(1)}" y2="${(cy-r2*sn).toFixed(1)}" stroke="${col}" stroke-width="3.4" stroke-linecap="round"/>`;}
  return`<svg viewBox="0 0 300 160" aria-hidden="true">${s}</svg>`;}
 function ring(p,color){const r=20,c=2*Math.PI*r;return`<svg class="ring" width="52" height="52" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="${r}" fill="none" stroke="var(--surface-2)" stroke-width="6"/><circle cx="26" cy="26" r="${r}" fill="none" stroke="${color}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(c*p/100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 26 26)"/><text x="26" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">${Math.round(p)}%</text></svg>`;}
 
@@ -164,7 +164,7 @@ function pageOverview(){
  chartJobs.push(()=>{const el=$('#ovBars');if(!el)return;const mode=state.barMode;let labels=[],nw=[],rp=[],rv=[],titles=[];
   if(mode==='month'){for(let i=11;i>=0;i--){const d=new Date(TODAY);d.setDate(1);d.setMonth(d.getMonth()-i);const f=d.getTime(),e=new Date(d.getFullYear(),d.getMonth()+1,0).getTime();const bs=all().filter(b=>b.t>=f&&b.t<=Math.min(e,TODAY)&&done(b));labels.push(d.toLocaleDateString(state.lang==='ru'?'ru-RU':'en-GB',{month:'short'}).replace('.',''));titles.push(d.toLocaleDateString(state.lang==='ru'?'ru-RU':'en-GB',{month:'long',year:'numeric'}));nw.push(bs.filter(isNew).length);rp.push(bs.filter(b=>!isNew(b)).length);rv.push(sum(bs,b=>b.price));}}
   else{for(let i=11;i>=0;i--){const e=TODAY-i*7*DAY,f=e-6*DAY;const bs=all().filter(b=>b.t>=f&&b.t<=e&&done(b));labels.push(dt(f));titles.push(dt(f)+' — '+dt(e));nw.push(bs.filter(isNew).length);rp.push(bs.filter(b=>!isNew(b)).length);rv.push(sum(bs,b=>b.price));}}
-  barChart(el,{labels,highlight:11,series:[{name:T('Повторные визиты','Returning visits'),data:rp,color:'var(--fern-2)'},{name:T('Новые клиенты','New clients'),data:nw,color:'var(--honey)'}],fmt:v=>num(v),fmtAxis:v=>num(v),tipTitle:i=>titles[i],extraTip:i=>`<div class="tr"><span>${T('Выручка','Revenue')}</span><span>${money(rv[i])}</span></div>`,aria:T('Визиты по месяцам','Visits by month')});});
+  barChart(el,{labels,highlight:11,series:[{name:T('Повторные визиты','Returning visits'),data:rp,color:'var(--fern-2)'},{name:T('Новые клиенты','New clients'),data:nw,color:'var(--peach)'}],fmt:v=>num(v),fmtAxis:v=>num(v),tipTitle:i=>titles[i],extraTip:i=>`<div class="tr"><span>${T('Выручка','Revenue')}</span><span>${money(rv[i])}</span></div>`,aria:T('Визиты по месяцам','Visits by month')});});
  return`
  <div class="grid g-hero">
   <section class="card welcome">
@@ -179,13 +179,13 @@ function pageOverview(){
   <section class="card kpi"><div class="kpi-top"><span class="kpi-label">${T('Выручка за 30 дней','Revenue, 30 days')}</span><span class="kpi-ico" style="background:var(--sky-soft);color:var(--sky)">${ico('wallet',18)}</span></div>
    <div class="kpi-value">${money(rev,true)} ${delta(rev,revP)}</div>
    <div class="kpi-chart">${spark(dailyRev,'var(--sky)')}</div><div class="kpi-foot"><span>${T('к прошлым 30 дням','vs previous 30 days')}</span></div></section>
-  <section class="card kpi" ${low.length?'role="button" tabindex="0" data-act="lowgo" style="cursor:pointer"':''}><div class="kpi-top"><span class="kpi-label">${T('Услуги с низкой загрузкой','Underbooked services')}</span><span class="kpi-ico" style="background:var(--honey-soft);color:#b07a17">${ico('alert',18)}</span></div>
+  <section class="card kpi" ${low.length?'role="button" tabindex="0" data-act="lowgo" style="cursor:pointer"':''}><div class="kpi-top"><span class="kpi-label">${T('Услуги с низкой загрузкой','Underbooked services')}</span><span class="kpi-ico" style="background:var(--peach-soft);color:#c0603a">${ico('alert',18)}</span></div>
    <div class="kpi-value">${low.length} <span class="delta down">${T('нужно внимание','needs attention')}</span></div>
    <div class="low-list">${low.slice(0,3).map(s=>`<span class="low-item"><span class="low-thumb">${art(s,'t'+(artUid++))}</span><span>${esc(L(s))}<small>${T('загрузка','load')} ${st[s.id].load}%</small></span></span>`).join('')}</div><div class="kpi-foot"><span>${T('Откройте, чтобы предложить акцию','Open to plan a promotion')}</span></div></section>
  </div>
  <div class="grid g-2-1 mt">
   <section class="card"><div class="card-head"><div><h2 class="card-title">${T('Визиты студии','Studio visits')}</h2><p class="card-sub">${T('Пришедшие клиенты: новые и повторные. Наведите на столбец','Completed visits: new and returning clients. Hover a column')}</p></div>
-   <div class="head-actions"><div class="legend"><span><i style="background:var(--fern-2)"></i>${T('Повторные','Returning')}</span><span><i style="background:var(--honey)"></i>${T('Новые','New')}</span></div>
+   <div class="head-actions"><div class="legend"><span><i style="background:var(--fern-2)"></i>${T('Повторные','Returning')}</span><span><i style="background:var(--peach)"></i>${T('Новые','New')}</span></div>
    <div class="seg"><button data-act="barmode" data-v="month" aria-pressed="${state.barMode==='month'}">${T('Месяцы','Months')}</button><button data-act="barmode" data-v="week" aria-pressed="${state.barMode==='week'}">${T('Недели','Weeks')}</button></div></div></div>
    <div class="chart" id="ovBars"></div></section>
   <section class="card"><div class="card-head"><div><h2 class="card-title">${T('План месяца','Monthly target')}</h2><p class="card-sub">${T('Выручка с 1-го числа к плану','Revenue since the 1st vs target')} ${money(D.monthPlan,true)}</p></div></div>
@@ -211,7 +211,7 @@ function pageServices(){
  <div class="grid g-4">
   ${kpiMini(T('Услуг в каталоге','Services listed'),num(D.services.length),T(`${D.categories.length} направлений`,`${D.categories.length} categories`),'sparkle','var(--fern-soft)','var(--fern)')}
   ${kpiMini(T('Визитов за 30 дней','Visits, 30 days'),num(b30.length),T('пришли и оплатили','completed and paid'),'calendar','var(--sky-soft)','var(--sky)')}
-  ${kpiMini(T('Средний чек','Average ticket'),money(avg),T('за одну услугу','per service'),'wallet','var(--honey-soft)','#b07a17')}
+  ${kpiMini(T('Средний чек','Average ticket'),money(avg),T('за одну услугу','per service'),'wallet','var(--peach-soft)','#c0603a')}
   ${kpiMini(T('Низкая загрузка','Underbooked'),num(low.length),T('стоит продвинуть','worth promoting'),'alert','var(--rose-soft)','var(--rose)')}
  </div>
  <div class="toolbar mt"><div class="chips" role="group" aria-label="${T('Направления','Categories')}"><button class="chip" data-act="cat" data-v="all" aria-pressed="${state.category==='all'}">${T('Все','All')} <small>${D.services.length}</small></button>${D.categories.map(c=>`<button class="chip" data-act="cat" data-v="${c.id}" aria-pressed="${state.category===c.id}"><i style="background:${catColor[c.id]}"></i>${esc(L(c))} <small>${D.services.filter(s=>s.cat===c.id).length}</small></button>`).join('')}</div>
@@ -251,7 +251,7 @@ function pageBookings(){
  <div class="grid g-4">
   ${kpiMini(T('Всего записей','Bookings'),num(n),T('за выбранный период','in the selected period'),'calendar','var(--fern-soft)','var(--fern)',' '+delta(n,prev.length))}
   ${kpiMini(T('Пришли','Show-up rate'),pct(n?dn/n*100:0,1),`${num(dn)} ${T('визитов','visits')}`,'repeat','var(--sky-soft)','var(--sky)')}
-  ${kpiMini(T('Отмены','Cancellations'),pct(n?cn/n*100:0,1),`${num(cn)} ${T('записей','bookings')}`,'x','var(--honey-soft)','#b07a17',' '+delta(cn/(n||1),cnt(prev,'cancelled')/(prev.length||1),true))}
+  ${kpiMini(T('Отмены','Cancellations'),pct(n?cn/n*100:0,1),`${num(cn)} ${T('записей','bookings')}`,'x','var(--peach-soft)','#c0603a',' '+delta(cn/(n||1),cnt(prev,'cancelled')/(prev.length||1),true))}
   ${kpiMini(T('Неявки','No-shows'),pct(n?ns/n*100:0,1),`${T('потеряно','lost')} ${money(sum(past.filter(b=>b.status==='noshow'),b=>b.price),true)}`,'alert','var(--rose-soft)','var(--rose)')}
  </div>
  <div class="grid g-1-1 mt">
@@ -278,7 +278,7 @@ function pageMasters(){
  chartJobs.push(()=>{const el=$('#mstDow');if(!el)return;barChart(el,{labels:days,h:230,series:[{name:T('Записей','Bookings'),data:x.dow,color:m.color}],fmt:v=>num(v),fmtAxis:v=>num(v),aria:T('Записи по дням недели','Bookings by weekday')});});
  return`
  <div class="page-head"><div><p>${T('Загрузка, выручка и постоянные клиенты каждого мастера','Workload, revenue and loyal clients for each team member')}</p><h1>${T('Мастера','Team')}</h1></div><div class="head-actions">${periodSeg([30,90,365])}</div></div>
- <div class="masters">${D.masters.map(mm=>{const s=ms[mm.id];return`<button class="card mst" data-act="master" data-v="${mm.id}" aria-pressed="${mm.id===sel}"><div class="mst-top"><span class="avatar" style="background:${mm.color}">${esc(L(mm).split(' ').map(w=>w[0]).join(''))}</span><span><b>${esc(L(mm))}</b><small>${esc(L(mm.role))} · <span class="stars">★ ${mm.rating.toFixed(1)}</span></small></span>${ring(s.load,mm.color)}</div>
+ <div class="masters">${D.masters.map(mm=>{const s=ms[mm.id];return`<button class="card mst" data-act="master" data-v="${mm.id}" aria-pressed="${mm.id===sel}"><div class="mst-top"><span class="avatar" style="background:${mm.color}">${esc(L(mm).split(' ').map(w=>w[0]).join(''))}</span><span><b>${esc(L(mm))}</b><small>${esc(L(mm.role))}</small><span class="stars">★ ${mm.rating.toFixed(1)}</span></span>${ring(s.load,mm.color)}</div>
   <div class="mst-stats"><div><small>${T('Выручка','Revenue')}</small><b>${money(s.rev,true)}</b></div><div><small>${T('Клиентов','Clients')}</small><b>${num(s.clients.size)}</b></div><div><small>${T('Повторные','Returning')}</small><b>${pct(s.n?s.rep/s.n*100:0)}</b></div></div></button>`;}).join('')}</div>
  <div class="grid g-2-1 mt">
   <section class="card"><div class="card-head"><div><h2 class="card-title">${esc(L(m))}: ${T('записи по дням недели','bookings by weekday')}</h2><p class="card-sub">${T('Помогает планировать смены и акции на тихие дни','Helps plan shifts and promote quiet days')}</p></div></div><div class="chart" id="mstDow"></div></section>
@@ -305,7 +305,7 @@ function pageClients(){
  <div class="page-head"><div><p>${T('Откуда приходят клиенты, где живут и кто возвращается','Where clients come from, where they live and who comes back')}</p><h1>${T('Клиенты','Clients')}</h1></div><div class="head-actions">${periodSeg([30,90,365])}<button class="btn" data-act="csv" data-v="clients">${ico('download',16)}CSV</button></div></div>
  <div class="grid g-4">
   ${kpiMini(T('Клиентов','Clients'),num(uniq.size),T('пришли хотя бы раз','visited at least once'),'people','var(--fern-soft)','var(--fern)',' '+delta(uniq.size,new Set(prev.map(b=>b.client)).size))}
-  ${kpiMini(T('Новые','New clients'),num(newC.size),T('первый визит в студию','first visit to the studio'),'sparkle','var(--honey-soft)','#b07a17')}
+  ${kpiMini(T('Новые','New clients'),num(newC.size),T('первый визит в студию','first visit to the studio'),'sparkle','var(--peach-soft)','#c0603a')}
   ${kpiMini(T('Повторные визиты','Returning visits'),pct(repShare,1),T('доля визитов постоянных','share from regulars'),'repeat','var(--sky-soft)','var(--sky)')}
   ${kpiMini(T('Средний чек','Average ticket'),money(avg),T('к прошлому периоду','vs previous period'),'wallet','var(--rose-soft)','var(--rose)',' '+delta(avg,avgP))}
  </div>
