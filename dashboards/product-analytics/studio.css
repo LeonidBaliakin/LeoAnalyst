@@ -1,0 +1,318 @@
+/* Pulse Studio v2 — customizable visual layer.
+   Based on the owner's reference: minimal ERP-style layouts, dark/sky KPI cards,
+   compact navigation, clean data density and tactile hover states.
+   Edit this file to redesign the dashboard without touching app.js or data.js. */
+:root{
+  --paper:#f6f8f7;--surface:#ffffff;--soft:#f3f6f6;
+  --ink:#18232a;--muted:#81909b;--line:#e4e9e9;
+  --nav:#151d23;--nav-line:#303d43;
+  --mint:#168f99;--mint-light:#def2f1;
+  --blue:#518ad7;--purple:#8e7cd3;--orange:#f0b97a;--red:#d86669;
+  --shadow:0 5px 26px rgba(13,30,43,.035);
+  --round:20px;--text:13px;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+html,body{min-height:100%;scroll-behavior:smooth}
+body{background:var(--paper);letter-spacing:-.005em}
+button,input,select{transition:border-color .18s ease,background-color .18s ease,box-shadow .18s ease,color .18s ease}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #438eac;outline-offset:3px}
+.shell{grid-template-columns:76px minmax(0,1fr)}
+.sidebar{width:76px;padding:17px 10px 18px;min-height:100vh;height:100vh;background:var(--nav);overflow:visible;border-right:1px solid rgba(255,255,255,.06)}
+.sidebar .brand{justify-content:center;padding:4px 0 37px;margin:0}
+.sidebar .brand>span:last-child{display:none}
+.sidebar .brand-emblem{width:43px;height:43px;border-radius:14px;background:#c0e4ec;color:#14232e;box-shadow:0 7px 19px #0002}
+.sidebar .side-label{display:none}
+.sidebar .side-nav{gap:12px}
+.sidebar .nav-button{height:47px;min-height:47px;width:54px;padding:12px;margin:0;justify-content:center;font-size:0;border-radius:14px;position:relative;overflow:visible}
+.sidebar .nav-button svg{width:21px;height:21px}
+.sidebar .nav-button .nav-ico{width:25px;height:25px}
+.sidebar .nav-button.active{background:#2b3d44;color:#ddfaff}
+.sidebar .nav-button.active::after{content:"";position:absolute;right:-10px;top:12px;height:22px;width:3px;background:#9fd4e3;border-radius:3px 0 0 3px}
+.sidebar .nav-button:hover{background:#27343a;color:#fff}
+.sidebar .sidebar-bottom{padding:12px 0 0}
+.sidebar .sidebar-note{display:none}
+.sidebar .back-link{height:42px;width:54px;padding:12px 16px;font-size:0;display:grid;place-items:center;opacity:.75;margin:0}
+.sidebar .back-link svg{width:20px;height:20px}
+.sidebar .back-link:hover{opacity:1;color:#d8f2ed}
+.main{min-width:0}
+.topbar{height:80px;padding:0 26px;gap:19px;box-shadow:0 1px 0 rgba(31,46,55,.04);background:#fff;z-index:12}
+.topbar-left{flex:1;min-width:0;display:flex;align-items:center;gap:22px}
+.topbar-logo{display:flex;align-items:center;gap:10px;flex:0 0 auto;padding-right:20px;border-right:1px solid var(--line)}
+.logo-dot{height:34px;width:34px;display:grid;place-items:center;background:#1a242a;color:white;border-radius:11px;font-weight:850;font-size:17px;box-shadow:0 2px 10px #131c2020}
+.topbar-logo strong{display:block;font-size:15px;letter-spacing:-.05em;color:#1b252b}
+.topbar-logo small{display:block;margin-top:2px;color:#9ba5ac;font-size:9px;letter-spacing:.04em;font-weight:650}
+.workspace-tabs{display:flex;align-items:center;gap:3px;overflow-x:auto;min-width:0;scrollbar-width:none;padding:8px 2px}
+.workspace-tabs::-webkit-scrollbar{display:none}
+.workspace-tab{padding:10px 12px;border:1px solid transparent;background:transparent;white-space:nowrap;flex:0 0 auto;border-radius:12px;font-size:11.5px;font-weight:740;color:#7a8790;transition:all .22s cubic-bezier(.2,.9,.2,1)}
+.workspace-tab:hover{background:#f3f6f6;color:#202c32}
+.workspace-tab.active{background:#1d292f;border-color:#1d292f;color:#fff;box-shadow:0 6px 15px #13252f18;transform:translateY(-1px)}
+.bar-actions{gap:7px;flex:0 0 auto}
+.head-btn{background:#fff;border-color:#e5e9eb;color:#405260;border-radius:11px;height:37px;min-width:37px;padding:0 10px}
+.head-btn:hover{border-color:#9bbdc3;color:#206b79;background:#f7fbfc}
+.head-btn.theme-toggle{background:#f4f7f7}
+.head-btn.head-text{font-weight:850;min-width:39px}
+.flag-chip{background:#edf8f5;color:#2a8c7a;border:1px solid #e0f1ed;padding:8px 10px;letter-spacing:.03em}
+.content{max-width:1850px;padding:29px 30px 60px}
+.page-head{margin-bottom:23px;align-items:center}
+.page-head h1{font-size:clamp(29px,2.6vw,40px);font-weight:820;letter-spacing:-.055em;color:var(--ink)}
+.eyebrow{letter-spacing:.13em;color:#4e8e95;font-size:10px;margin-bottom:9px}
+.page-head .subhead{font-size:13px;color:var(--muted)}
+.secondary-btn,.primary-btn{height:38px;border-radius:12px;font-size:11px;box-shadow:none}
+.primary-btn{background:#1c292e}
+.primary-btn:hover{background:#334953}
+.secondary-btn{background:#fff;border-color:#e1e7e7;color:#54636e}
+.filterbar{border-radius:16px;display:flex;align-items:flex-end;gap:13px;flex-wrap:wrap;padding:15px 17px;margin-bottom:19px;border-color:#e4e9e8;box-shadow:0 7px 19px #263e4506;position:relative;z-index:5}
+.filter-group{padding:0;display:flex;flex-direction:column;align-items:stretch;gap:6px;flex:1 1 112px;min-width:98px}
+.filter-group:nth-child(2){flex:1 1 134px}
+.filter-group label{font-size:10px;font-weight:800;letter-spacing:.01em;color:#71838f}
+.control{max-width:none;width:100%;min-height:39px;padding:7px 25px 7px 10px;background:#f8fafb;border:1px solid #e5e9eb;border-radius:10px;color:#263844;font-size:11px;font-weight:720;cursor:pointer;appearance:auto}
+.control:hover{background:#fff;border-color:#93b8c3}
+.control:focus{background:#fff;border-color:#448c9c}
+.date-input{max-width:none;padding-right:6px}
+.filterbar .divider-v{display:none}
+.filter-reset{min-height:39px;margin-left:auto;padding:10px 13px;color:#526e77;background:#f1f7f8;border:1px solid #e6eff0;border-radius:10px}
+.filter-reset:hover{text-decoration:none;background:#e0edef;color:#1b5660}
+.metric-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:17px}
+.metric-card{min-height:153px;border-radius:18px;padding:20px 21px;border:1px solid #e6ebeb;box-shadow:0 6px 23px #152c3107;color:#1c262d;background:#fff;transform:translateY(0)}
+.metric-card::before{width:130px;height:100%;background:radial-gradient(ellipse at 110% -10%,var(--marker,#9acbda),transparent 72%);opacity:.10}
+.metric-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #132a3412;border-color:#d5e2e3}
+.metric-card.selected{border-color:#81b2bb;box-shadow:0 0 0 2px rgba(64,132,146,.20),0 10px 25px #152c3120}
+.metric-card .metric-overline{font-size:11px;font-weight:750;color:#5f707b}
+.metric-card .metric-icon{width:30px;height:30px;border-radius:10px;background:#fff9;color:#487b88}
+.metric-card .metric-icon svg{width:17px;height:17px}
+.metric-card .metric-value{font-weight:850;font-size:clamp(23px,2.1vw,34px);margin-top:13px;letter-spacing:-.058em;color:inherit}
+.metric-card .metric-foot{margin-top:15px}
+.metric-card .comparison-text{color:#9eabb3}
+.metric-card .delta{color:#218b80;font-weight:840}
+.metric-card--revenue{background:linear-gradient(140deg,#263238,#131f25);border-color:#1f2b30;color:#fff}
+.metric-card--revenue .metric-overline{color:#c1d3d6}
+.metric-card--revenue .metric-icon{background:#ffffff20;color:#e3f4f4}
+.metric-card--revenue .comparison-text{color:#a5babe}
+.metric-card--revenue .delta{color:#acf1cf}
+.metric-card--revenue:hover{border-color:#415a63}
+.metric-card--mau{background:#dcecf8;border-color:#dcecf8}
+.metric-card--mau .metric-icon{background:#c9e3f5;color:#2a6d96}
+.metric-card--dau{background:#f2f4f7}
+.metric-card--retention{background:#e9f4ee;border-color:#e9f1e9}
+.metric-card--retention .metric-icon{background:#d2eadd;color:#448365}
+.metric-card--wau{background:#fff}
+.metric-card--stickiness{background:#f0f1fc}
+.metric-card--stickiness .metric-icon{background:#e4e7f5;color:#7777ad}
+.metric-card--arpu{background:#fff6ee}
+.metric-card--arpu .metric-icon{background:#fff0df;color:#ad865e}
+.metric-card--ltv{background:#fff}
+.metric-card--ltv .metric-icon{background:#e8f4f5}
+.card{border-color:#e3e9e8;border-radius:21px;box-shadow:0 6px 25px #14314408}
+.card-inner{padding:24px}
+.card-header{margin-bottom:20px}
+.card-title{font-size:16px;font-weight:810;letter-spacing:-.035em}
+.card-subtitle{font-size:11px;line-height:1.65;color:#81929b;margin-top:6px}
+.card-head-tag{background:#ecf5f4;color:#518d88;border-radius:9px;font-size:10px;padding:7px 10px}
+.grid-main{grid-template-columns:minmax(0,1.7fr) minmax(300px,.9fr);gap:17px}
+.grid-equal,.grid-three{gap:17px}
+.chart-frame{display:grid;grid-template-columns:94px minmax(0,1fr);gap:10px;align-items:start;min-width:0;width:100%}
+.chart-drawing{min-width:0}
+.chart-y-axis{height:252px;display:flex;flex-direction:column;justify-content:space-between;text-align:right;box-sizing:border-box;padding:14px 7px 19px 0;color:#83939d;font-size:11px;font-weight:650;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.chart-y-axis span{overflow:hidden;text-overflow:ellipsis}
+.chart-stage{height:252px;overflow:hidden;position:relative;min-width:0}
+.chart-stage svg{display:block;overflow:hidden}
+.chart-tooltip{background:#21343c;border:1px solid #3d515a;box-shadow:0 15px 27px #142c3750;border-radius:11px}
+.axis-labels{margin-top:10px;display:flex;align-items:center;justify-content:space-between;color:#93a0a9;font-size:10px;font-weight:700;gap:3px}
+.axis-labels span{white-space:nowrap}
+.legend{gap:9px;flex-wrap:wrap;margin-top:16px}
+.legend-item{font-size:11px}
+.legend-mark{border-radius:4px}
+.mini-item{gap:11px}
+.mini-icon{background:#dfeef3;color:#487c9a}
+.submetric{background:#f5f8fa;border-radius:12px}
+.submetric b{font-size:21px}
+.narrative-card{background:linear-gradient(140deg,#193139,#19272f);border:1px solid #28404a;box-shadow:0 16px 34px #172c3917;border-radius:22px}
+.narrative-card .hint{color:#a4e0d8}
+.narrative-card h3{font-weight:800;letter-spacing:-.04em}
+.donut{filter:saturate(.85)}
+.donut-center{background:var(--surface)}
+.bar-button:hover,.legend-row:hover{background:#f4f8fa}
+.progress-track{background:#e9eff1}
+.progress-fill{border-radius:50px}
+.data-table th{background:#f4f7f8;color:#829099}
+.data-table td{border-color:#eff1f3}
+.data-table tbody tr:hover td{background:#f5f9f9}
+.tab-pills{background:#f0f4f5}
+.tab-pill.active{color:#236b79}
+/* Daily cohort heatmap: the primary retention visualization */
+.retention-summary{margin-bottom:18px}
+.retention-matrix-card{margin-bottom:18px}
+.daily-cohort-table{min-width:810px;border-spacing:5px;font-size:11px}
+.daily-cohort-table th{font-weight:800;color:#7b8991;padding:11px 9px}
+.daily-cohort-table td{padding:0;background:none;border-radius:9px}
+.daily-cohort-table th:first-child{min-width:136px}
+.daily-cohort-table .cohort-name{white-space:nowrap;color:var(--ink);background:transparent}
+.daily-cohort-table .cohort-users{font-weight:750;color:#56707b}
+.daily-cell{display:block;padding:14px 5px;min-height:44px;color:#1f4750;border-radius:8px;font-weight:850;font-size:11px;border:1px solid #ffffff85;transition:transform .16s ease,filter .16s ease,box-shadow .16s ease;cursor:pointer}
+.daily-cell:hover{transform:translateY(-2px) scale(1.025);filter:saturate(1.2);box-shadow:0 7px 17px #17415a2d;border:1px solid #5b9eac;z-index:2;position:relative}
+.daily-cell:focus-visible{outline:2px solid #154d57}
+.daily-cohort-table .cohort-empty{background:#f1f4f5;color:#b8c3c6;border-radius:8px;min-height:44px;padding:14px 5px}
+.heatmap-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap}
+.heatmap-key{display:flex;align-items:center;gap:4px;color:#85949b;font-size:10px;font-weight:750}
+.heatmap-key span:first-child{margin-right:7px}.heatmap-key span:last-child{margin-left:7px}
+.heatmap-key i{display:inline-block;width:27px;height:13px;border-radius:4px}
+.heatmap-key i:nth-of-type(1){background:#e9f5f5}.heatmap-key i:nth-of-type(2){background:#c8e6e6}.heatmap-key i:nth-of-type(3){background:#96d2d6}.heatmap-key i:nth-of-type(4){background:#65b4bf}.heatmap-key i:nth-of-type(5){background:#378c9b}
+.retention-guide{display:flex;flex-direction:column;gap:17px}
+.retention-guide>div{display:grid;grid-template-columns:33px minmax(0,1fr);column-gap:13px;align-items:center;row-gap:4px}
+.guide-step{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:#e4f2f5;color:#25798a;font-weight:850;font-size:11px;grid-row:span 2}
+.retention-guide b{font-size:12px;color:var(--ink)}
+.retention-guide p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}
+.focus-card{border-radius:22px;padding:28px;background:#172c33;color:#fff;border:1px solid #263f47;box-shadow:0 12px 32px #152b321d;display:flex;flex-direction:column;justify-content:center;gap:12px;min-height:290px}
+.focus-tag{color:#aee6da;background:#ffffff11;align-self:flex-start;border-radius:8px;padding:7px 11px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.focus-card h2{font-size:19px;letter-spacing:-.04em;margin:7px 0 0;font-weight:830}
+.focus-value{font-size:49px;letter-spacing:-.065em;font-weight:850;color:#c8eef0;line-height:1.1}
+.focus-card p{margin:0;color:#b0c5c9;font-size:12px;line-height:1.8}
+.focus-card button{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:#d4edf2;color:#193843;padding:10px 13px;border-radius:10px;font-weight:800;font-size:11px;margin-top:8px}
+.focus-card button:hover{background:#fff}
+.overlay{background:#101c22ad;backdrop-filter:blur(7px)}
+.overlay-panel{border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 100px #09192150}
+.detail-kpi{border:1px solid var(--line);border-radius:12px}
+.toast{background:#172a30;border-color:#315f68}
+.demo-disclaimer{padding-top:20px;color:#a1aeb5}
+/* Dark mode: only the dedicated theme button can activate this skin. */
+body.dark{--paper:#111a20;--surface:#1b292e;--soft:#26343a;--ink:#ebf3f3;--muted:#a4b7bd;--line:#35464b;--mint-light:#26494d;--shadow:0 8px 28px #07111838}
+.dark .topbar{background:#19272d;box-shadow:0 1px 0 #32434a}
+.dark .topbar-logo{border-color:#37494e}
+.dark .topbar-logo strong{color:#eff5f4}
+.dark .topbar-logo small{color:#99b0b6}
+.dark .workspace-tab{color:#afbec2}
+.dark .workspace-tab:hover{background:#2c3b42;color:#fff}
+.dark .workspace-tab.active{background:#dcf0f2;color:#1a343c;border-color:#dcf0f2}
+.dark .head-btn{background:#24343b;color:#d4e4e6;border-color:#36474c}
+.dark .flag-chip{background:#23433d;color:#b7e8d4;border-color:#34574d}
+.dark .filterbar,.dark .control{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.dark .control:hover,.dark .control:focus{background:#22383d;border-color:#749ca5}
+.dark .filter-group label{color:#a8bac0}
+.dark .filter-reset{background:#2b4249;color:#c1dadd;border-color:#375159}
+.dark .metric-card{background:#202e34;border-color:#35464d;color:#eaf3f3}
+.dark .metric-card .metric-overline,.dark .metric-card .comparison-text{color:#b3c4c9}
+.dark .metric-card .metric-icon{background:#31454a;color:#b2dce1}
+.dark .metric-card--revenue{background:linear-gradient(135deg,#c4e8ec,#a5cbd4);color:#14252d}
+.dark .metric-card--revenue .metric-overline,.dark .metric-card--revenue .comparison-text{color:#476570}
+.dark .metric-card--revenue .metric-icon{background:#ffffffb3;color:#244753}
+.dark .metric-card--revenue .delta{color:#146a66}
+.dark .metric-card--mau{background:#28495c}
+.dark .metric-card--retention{background:#25433c}
+.dark .metric-card--dau{background:#273a47}
+.dark .metric-card--stickiness{background:#35344b}
+.dark .metric-card--arpu{background:#453a31}
+.dark .card{border-color:var(--line)}
+.dark .card-title{color:#edf5f5}
+.dark .chart-y-axis,.dark .axis-labels{color:#9bafb6}
+.dark .focus-card{background:#d6edf1;color:#193039}
+.dark .focus-card h2{color:#1c3c45}
+.dark .focus-card .focus-value{color:#1e5865}
+.dark .focus-card .focus-tag{background:#ffffff91;color:#286e79}
+.dark .focus-card p{color:#627e83}
+.dark .focus-card button{background:#173943;color:#dcf2f2}
+.dark .daily-cell{color:#e6f5f7;border-color:#ffffff19}
+.dark .daily-cohort-table .cohort-name{color:#e3edee}
+.dark .daily-cohort-table .cohort-users{color:#bdd1d3}
+.dark .daily-cohort-table .cohort-empty{background:#28383e;color:#67838c}
+.dark .heatmap-key i:nth-of-type(1){background:#213941}
+.dark .heatmap-key i:nth-of-type(2){background:#28626a}
+.dark .heatmap-key i:nth-of-type(3){background:#33818a}
+.dark .heatmap-key i:nth-of-type(4){background:#48a0ac}
+.dark .heatmap-key i:nth-of-type(5){background:#62bbc4}
+.dark .guide-step{background:#2b4952;color:#bae3ea}
+.dark .retention-guide b{color:#edf5f6}
+.dark .narrative-card{background:#17282e}
+.dark .cohort-table td{background:#26383d}
+.dark .cohort-table td:nth-child(2){background:transparent}
+.dark .cohort-table th{color:#adbdc1}
+.dark .filter-reset:hover{background:#39565e}
+.dark .input-search,.dark .overlay-x{background:#2c3a40;color:#eaf2f2;border-color:var(--line)}
+.dark .data-table th{background:#25383e}
+@media(max-width:1600px){
+  .topbar{padding:0 20px;gap:13px}
+  .topbar-left{gap:13px}
+  .topbar-logo{padding-right:11px}
+  .workspace-tab{padding:9px 10px;font-size:11px}
+  .bar-actions{gap:5px}
+}
+@media(max-width:1320px){
+  .topbar-logo{display:none}
+  .workspace-tabs{flex:1}
+  .metric-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .metric-card{padding:17px}
+  .metric-card .metric-value{font-size:clamp(23px,2.6vw,30px)}
+  .content{padding:24px 24px 48px}
+}
+@media(max-width:1080px){
+  .shell{grid-template-columns:62px minmax(0,1fr)}
+  .sidebar{width:62px;padding-left:5px;padding-right:5px}
+  .sidebar .nav-button{width:50px}
+  .sidebar .nav-button.active::after{right:-5px}
+  .topbar{height:74px}
+  .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-main,.grid-equal{grid-template-columns:1fr}
+  .grid-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .filter-group{flex:1 1 calc(25% - 15px)}
+  .filter-reset{margin-left:0}
+}
+@media(max-width:800px){
+  .shell{display:block}
+  .sidebar{display:none!important}
+  .main{width:100%}
+  .topbar{position:sticky;display:block;height:auto;min-height:93px;padding:12px 14px 8px}
+  .topbar-left{display:block}
+  .topbar-logo{display:flex;border:0;align-items:center;padding:0;margin:0 0 9px}
+  .logo-dot{height:30px;width:30px}
+  .topbar-logo small{display:none}
+  .topbar-logo strong{font-size:14px}
+  .workspace-tabs{width:100%;padding:4px 0;gap:4px}
+  .workspace-tab{padding:8px 10px;font-size:11px}
+  .bar-actions{position:absolute;right:12px;top:10px;gap:5px}
+  .bar-actions [data-command],.bar-actions .flag-chip{display:none}
+  .head-btn{min-width:33px;height:33px;padding:0 8px}
+  .content{padding:20px 16px 40px}
+  .page-head{display:flex;align-items:flex-start}
+  .page-head h1{font-size:29px}
+  .page-cta{margin-top:0;flex:0 0 auto}
+  .page-cta .secondary-btn{display:none}
+  .filterbar{gap:10px;padding:13px}
+  .filter-group{width:calc(33.333% - 8px);min-width:115px;flex:1 1 calc(33.333% - 8px)}
+  .filter-group label{width:auto}
+  .control{width:100%;max-width:none}
+  .grid-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .metric-card .metric-value{font-size:27px}
+  .chart-frame{grid-template-columns:84px minmax(0,1fr);gap:7px}
+  .chart-y-axis{font-size:10px}
+}
+@media(max-width:580px){
+  .page-head{display:block}
+  .page-head h1{font-size:27px}
+  .page-cta{margin-top:14px}
+  .page-cta .primary-btn{min-width:100%;width:100%}
+  .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .metric-card{min-height:137px;padding:15px 13px}
+  .metric-card .metric-value{font-size:clamp(22px,5.5vw,30px);margin-top:12px}
+  .metric-card .comparison-text{display:none}
+  .metric-card .metric-overline{font-size:10px}
+  .metric-card .metric-icon{height:26px;width:26px}
+  .filterbar{gap:10px}
+  .filter-group{flex:1 1 calc(50% - 6px);width:calc(50% - 6px);min-width:0}
+  .filter-reset{width:100%;text-align:center}
+  .card-inner{padding:18px}
+  .chart-frame{grid-template-columns:74px minmax(0,1fr);gap:5px}
+  .chart-y-axis{height:210px;font-size:9px;padding-top:14px;padding-bottom:20px;padding-right:3px}
+  .chart-stage{height:210px}
+  .axis-labels{font-size:9px}
+  .axis-labels span:nth-child(even){display:none}
+  .grid-three{grid-template-columns:1fr}
+  .retention-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .retention-summary .card-inner{padding:12px}
+  .retention-summary .metric-value{font-size:20px;white-space:normal}
+  .retention-summary .card-subtitle{font-size:9px}
+  .retention-summary .metric-overline{font-size:10px}
+  .retention-summary .metric-icon{display:none}
+  .focus-value{font-size:40px}
+  .retention-guide p{font-size:11px}
+  .overlay-panel{padding:22px}
+}
+@media(prefers-reduced-motion:reduce){.workspace-tab,.metric-card,.daily-cell{transition:none}}
