@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="ru">
 <head>
+<meta charset="utf-8">
 <meta name="google-site-verification" content="lLGjybUNhVYjjVlHIigqH1v5pKnFoH7f4Ce1vQtF4YQ" />
- <!-- Google Analytics 4 -->
+<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RD7CLDCHGF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-G-RD7CLDCHGF');
+  gtag('config', 'G-RD7CLDCHGF');
 </script>
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fafafa">
 <meta name="description" content="Покажем, где бизнес теряет деньги и клиентов, и что улучшить. Бизнес- и продуктовая аналитика, сайты и внедрение ИИ под ключ.">
@@ -726,7 +726,7 @@ function renderAll(){const d=COPY[state.locale];
 const dashModal=$('#dashModal'),dashFrame=$('#dashModalFrame');let dashLastFocus=null;
 function openDashboard(card){const url=card.dataset.dashboard;try{localStorage.setItem('pulse_lang',state.locale)}catch{}
  dashLastFocus=card;$('#dashModalTitle').textContent=COPY[state.locale][card.dataset.titleKey]||'';$('#dashModalNewTab').href=url;
- dashFrame.src=url;dashModal.hidden=false;document.body.style.overflow='hidden';$('#dashModalClose').focus();}
+ dashFrame.src=url;dashModal.hidden=false;try{gtag('event','open_dashboard',{dashboard:card.dataset.titleKey})}catch{}document.body.style.overflow='hidden';$('#dashModalClose').focus();}
 function closeDashboard(){if(dashModal.hidden)return;dashModal.hidden=true;dashFrame.src='about:blank';document.body.style.overflow='';dashLastFocus?.focus();}
 $$('[data-dashboard]').forEach(c=>c.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey)return;e.preventDefault();openDashboard(c)}));
 $('#dashModalClose').addEventListener('click',closeDashboard);
