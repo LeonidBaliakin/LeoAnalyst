@@ -94,24 +94,23 @@ function pageDashboard(){
   ${stat(T('Ждут проверки','Awaiting review'),pending,'',T('нужна ваша оценка','need your sign-off'))}
  </div>
  <div class="g gdash mt">
-  <section class="card has-caps"><div class="ch"><div><h2 class="ct">${T('Закрытые задачи за неделю','Tasks closed this week')}</h2><p class="cs">${T('Наведите на день — штриховкой показаны будущие дни','Hover a day — hatched days are still ahead')}</p></div></div>
+  <section class="card has-caps span-all"><div class="ch"><div><h2 class="ct">${T('Закрытые задачи за неделю','Tasks closed this week')}</h2><p class="cs">${T('Наведите на день — штриховкой показаны будущие дни','Hover a day — hatched days are still ahead')}</p></div></div>
    <div class="caps">${week.map((w,i)=>`<button class="cap" data-act="cap" data-v="${i}" aria-pressed="${i===sel}" aria-label="${days[i]}: ${w.future?T('ещё впереди','ahead'):w.v+' '+T('задач','tasks')}"><span class="bubble">${w.future?T('впереди','ahead'):w.v+' '+T('задач','tasks')}</span><span class="pill ${w.future?'off':''}" style="height:${w.future?62:Math.max(18,w.v/wmax*100)}%;${w.future?'':`background:${i===sel?'var(--bar-1)':w.v/wmax>.7?'var(--bar-2)':'var(--bar-3)'}`}"></span><span>${days[i]}</span></button>`).join('')}</div></section>
   <section class="card remind"><div class="ch"><h2 class="ct">${T('Напоминание','Reminder')}</h2></div>
    <h3>${esc(L(ev))}</h3><p>${T('Сегодня','Today')}, ${ev.start}:00 — ${ev.end}:00 · ${esc(L(prj[ev.project]))}</p>
    <div class="avs" style="justify-content:flex-start;margin:12px 0 0 7px">${ev.people.map(id=>av(ppl[id])).join('')}</div>
-   <button class="btn btn-p" data-act="meet">${ico('video',16)}${T('Начать встречу','Start meeting')}</button></section>
+   <button class="btn btn-p" data-act="meet">${ico('video',16)}${T('Начать встречу','Start meeting')}</button>
+   <div class="next-ev"><h4>${T('Дальше по плану','Coming up')}</h4>${D.events.filter(e=>e.t>TODAY).sort((x,y)=>x.t-y.t||x.start-y.start).slice(0,3).map(e=>`<button class="ne" data-act="go" data-v="calendar"><span>${esc(L(e))}</span><small>${dt(e.t,{weekday:'short',day:'numeric',month:'short'})}, ${e.start}:00</small></button>`).join('')}</div></section>
   <section class="card"><div class="ch"><h2 class="ct">${T('Проекты','Projects')}</h2><button class="btn btn-sm" data-act="go" data-v="tasks">${ico('plus',14)}${T('Задача','Task')}</button></div>
    <div class="plist">${D.projects.slice(0,6).map(p=>`<button class="prow" data-act="proj" data-v="${p.id}">${pico(p)}<span><b>${esc(L(p))}</b><small>${T('Срок','Due')}: ${dt(p.due,{day:'numeric',month:'short',year:'numeric'})}</small></span></button>`).join('')}</div></section>
  </div>
- <div class="g gdash mt">
+ <div class="g g21 row2 mt">
   <section class="card"><div class="ch"><div><h2 class="ct">${T('Команда','Team collaboration')}</h2><p class="cs">${T('Кто чем занят прямо сейчас','Who is working on what right now')}</p></div><button class="btn btn-sm" data-act="go" data-v="team">${ico('plus',14)}${T('Участник','Member')}</button></div>
    <div>${team.map(({p,t})=>`<div class="mrow">${av(p,'md',true)}<span><b>${esc(L(p))}</b><small>${T('Работает над','Working on')} <em>${esc(L(t))}</em></small></span><span class="pill-st st-${t.status}">${stLabel(t.status)}</span></div>`).join('')}</div></section>
   <section class="card"><div class="ch"><div><h2 class="ct">${T('Прогресс задач','Task progress')}</h2><p class="cs">${T('Все задачи текущего спринта','All tasks in the current sprint')}</p></div></div>
    <div class="half">${halfDonut(pct,[{v:doneN/all,c:'var(--bar-1)'},{v:revN/all,c:'var(--bar-2)'},{v:progN/all,c:'var(--bar-3)'}])}<div class="v"><b>${pct}%</b><small>${T('задач закрыто','tasks closed')}</small></div></div>
    <div class="half-legend"><span><i style="background:var(--bar-1)"></i>${T('Готово','Done')}</span><span><i style="background:var(--bar-2)"></i>${T('Проверка','Review')}</span><span><i style="background:var(--bar-3)"></i>${T('В работе','In progress')}</span><span><i style="background:repeating-linear-gradient(45deg,var(--line-2) 0 2px,transparent 2px 4px)"></i>${T('Не начаты','Not started')}</span></div></section>
-  <section class="card timer ${state.timer.running?'':'paused'}"><div><h2 class="ct">${T('Учёт времени','Time tracker')}</h2><div class="now-task">${T('Сейчас','Now')}: ${esc(L(D.tasks[7]))}</div></div>
-   <div class="clock" id="clock">${clockText()}</div>
-   <div class="tbtns"><button class="pause" data-act="timer" aria-label="${state.timer.running?T('Пауза','Pause'):T('Продолжить','Resume')}">${ico(state.timer.running?'pause':'play')}</button><button class="stop" data-act="stoptimer" aria-label="${T('Остановить','Stop')}">${ico('stop')}</button></div></section>
+
  </div>`;}
 function stat(label,n,chg,foot,hero){return`<section class="card stat ${hero?'hero':''}"><div class="lab">${label}<button class="arrow" data-act="go" data-v="analytics" aria-label="${T('Подробнее','Details')}">${ico('arrow',15)}</button></div><div class="num">${n}</div><div class="foot">${chg?`<span class="chg">${chg}</span>`:''}${foot}</div></section>`;}
 function elapsed(){const t=state.timer;return Math.floor((t.acc+(t.running?Date.now()-t.start:0))/1000);}
@@ -274,7 +273,6 @@ document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if
  render();});
 document.addEventListener('change',e=>{if(e.target.matches('select[data-move]'))moveTask(e.target.dataset.move,e.target.value);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(state.modal||state.person)){state.modal=null;state.person=null;render();}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){const q=$('#q');if(q&&q.offsetParent){e.preventDefault();q.focus();}}});
-setInterval(()=>{const c=$('#clock');if(c&&state.timer.running)c.innerHTML=clockText();},1000);
 let lw=innerWidth;addEventListener('resize',()=>{clearTimeout(window.__rz);window.__rz=setTimeout(()=>{if(Math.abs(innerWidth-lw)>8){lw=innerWidth;jobs.length&&render();}},160);});
 render();
 })();

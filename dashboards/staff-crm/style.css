@@ -325,3 +325,10 @@ body.dark .set-nav button[aria-pressed="true"]{color:var(--a-300)}
 
 :root{--bar-1:var(--a-900);--bar-2:var(--a-700);--bar-3:var(--a-300)}
 body.dark{--bar-1:color-mix(in srgb,var(--a-300) 85%,#fff);--bar-2:var(--a-500);--bar-3:color-mix(in srgb,var(--a-500) 45%,var(--surface))}
+.remind{display:flex;flex-direction:column}
+.next-ev{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line-2);display:flex;flex-direction:column;gap:4px}
+.next-ev h4{margin:0 0 4px;font-size:12.5px;color:var(--muted);font-weight:700}
+.ne{display:flex;justify-content:space-between;gap:10px;align-items:baseline;border:0;background:transparent;padding:7px 8px;margin:0 -8px;border-radius:10px;text-align:left;font-size:13px;font-weight:650}
+.ne:hover{background:var(--surface-2)}
+.ne small{color:var(--muted);font-weight:500;font-size:12px;white-space:nowrap}
+@media(min-width:821px) and (max-width:1100px){.row2{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
