@@ -546,7 +546,7 @@
     const max=Math.max(1,...allEventTypes.map(e=>s.eventMap[e.id].count));
     const items=eventsList(s);
     if(!items.length)return `<tr><td colspan="4">${T('События не найдены','No events match your search')}</td></tr>`;
-    return items.map((item)=>`<tr><td>${T(item.ru,item.en)}</td><td class="table-num">${number(item.count)}</td><td class="table-num">${number(item.users)}</td><td><div class="progress-track" style="height:7px;min-width:120px"><div class="progress-fill" style="width:${item.count/max*100}%"></div></div></td></tr>`).join('');
+    return items.map((item)=>`<tr><td>${T(item.ru,item.en)}</td><td class="table-num">${number(item.count)}</td><td class="table-num">${number(item.users)}</td><td><div class="progress-track" style="height:7px;min-width:48px"><div class="progress-fill" style="width:${item.count/max*100}%"></div></div></td></tr>`).join('');
   }
   function eventsPage(s) {
     return `<div class="grid-three">

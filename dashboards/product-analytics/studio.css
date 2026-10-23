@@ -316,3 +316,22 @@ body.dark{--paper:#111a20;--surface:#1b292e;--soft:#26343a;--ink:#ebf3f3;--muted
   .overlay-panel{padding:22px}
 }
 @media(prefers-reduced-motion:reduce){.workspace-tab,.metric-card,.daily-cell{transition:none}}
+
+/* Compact, auto-fitting tables: columns shrink to content, headers may wrap, scroll only as last resort */
+.data-table{min-width:0;width:100%;table-layout:auto}
+.data-table th{white-space:normal;line-height:1.25;padding:11px 8px;vertical-align:bottom;hyphens:auto;overflow-wrap:normal}
+.data-table td{padding:12px 8px}
+.data-table th:first-child,.data-table td:first-child{padding-left:12px}
+.data-table th:last-child,.data-table td:last-child{padding-right:12px}
+@media(max-width:700px){
+ .data-table{font-size:10.5px}
+ .data-table th{padding:9px 6px}
+ .data-table td{padding:10px 6px}
+ .data-table th:first-child,.data-table td:first-child{padding-left:8px}
+ .data-table th:last-child,.data-table td:last-child{padding-right:8px}
+}
+.data-table .sort-header{white-space:normal;text-align:inherit;line-height:1.25}
+.data-table th.table-num .sort-header{text-align:right}
+@media(max-width:700px){.data-table td{white-space:normal}.data-table td.table-num{white-space:nowrap}}
+@media(max-width:480px){.data-table{font-size:10px}.data-table th,.data-table td{padding-left:5px;padding-right:5px}.data-table .progress-track{min-width:28px!important}}
+@media(max-width:400px){.data-table:has(#event-rows) th:nth-child(4),#event-rows td:nth-child(4){display:none}}
