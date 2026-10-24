@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efeae2">
+  <title>3D-дашборд транспортной компании — пример | LeoAnalyst</title>
+  <meta name="description" content="Интерактивный 3D-дашборд транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и цена топлива. Демо-данные.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <noscript><h1>3D-дашборд транспортной компании</h1><p>Интерактивный 3D-дашборд транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и цена топлива. Демо-данные.</p></noscript>
+  <div id="world" aria-hidden="true"></div>
+  <header class="top" id="top"></header>
+  <span class="hint" id="hint"></span>
+  <nav class="dock" id="dock" aria-label="Разделы"></nav>
+  <div class="panel" id="panel" role="dialog" aria-modal="true" aria-hidden="true"><div class="sheet" id="sheet"></div></div>
+  <script src="three.min.js"></script>
+  <script src="orbit.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
