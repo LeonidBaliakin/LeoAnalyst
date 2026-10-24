@@ -54,12 +54,12 @@ const jobs=[];
 
 /* ---------- sections ---------- */
 const SECTIONS=[
- {id:'office',ru:'Финансы',en:'Finance',bru:'Офис',ben:'Office',dot:'#1f9a6e'},
- {id:'parking',ru:'Мониторинг',en:'Live fleet',bru:'Стоянка',ben:'Truck yard',dot:'#ff5a1f'},
- {id:'repair',ru:'Парк и ремонт',en:'Fleet & repairs',bru:'Ремонтный бокс',ben:'Repair shop',dot:'#e0443e'},
- {id:'warehouse',ru:'Рейсы',en:'Trips',bru:'Склад',ben:'Warehouse',dot:'#4f73c9'},
- {id:'drivers',ru:'Водители',en:'Drivers',bru:'Водительская',ben:'Drivers lounge',dot:'#8b6fd0'},
- {id:'gate',ru:'Наёмный транспорт',en:'Subcontracted',bru:'КПП',ben:'Gatehouse',dot:'#e8a32e'}];
+ {id:'office',ru:'Финансы',en:'Finance',bru:'Финансы',ben:'Finance',dot:'#1f9a6e'},
+ {id:'parking',ru:'Мониторинг',en:'Live fleet',bru:'Мониторинг',ben:'Live fleet',dot:'#ff5a1f'},
+ {id:'repair',ru:'Парк и ремонт',en:'Fleet & repairs',bru:'Парк и ремонт',ben:'Fleet & repairs',dot:'#e0443e'},
+ {id:'warehouse',ru:'Расписание рейсов',en:'Trip schedule',bru:'Расписание рейсов',ben:'Trip schedule',dot:'#4f73c9'},
+ {id:'drivers',ru:'Водители',en:'Drivers',bru:'Водители',ben:'Drivers',dot:'#8b6fd0'},
+ {id:'gate',ru:'Наёмный транспорт',en:'Subcontracted',bru:'Наёмный транспорт',ben:'Subcontracted',dot:'#e8a32e'}];
 const SUB={office:{ru:'Выручка, расходы и маржа компании',en:'Revenue, costs and margin'},parking:{ru:'Где сейчас машины и насколько они загружены',en:'Where the trucks are and how loaded'},repair:{ru:'Состояние парка, ремонты, топливо и пробег',en:'Fleet condition, repairs, fuel and mileage'},warehouse:{ru:'Рейсы, тонно-километры и направления',en:'Trips, tonne-km and lanes'},drivers:{ru:'Кто в рейсе, кто отдыхает и как работают водители',en:'Who is driving, who is resting and how they perform'},gate:{ru:'Подрядчики против собственного парка',en:'Subcontractors vs own fleet'}};
 function labelData(){const a=agg(30,0,['heavy','medium']);const v=D.vehicles;const line=v.filter(x=>x.status==='line').length,rep=v.filter(x=>x.status==='repair'),urg=rep.filter(x=>x.repair.kind==='urgent').length;const dr=D.drivers;
  return{office:[money(a.rev,true),T(`выручка · маржа ${pct(a.margin)}`,`revenue · margin ${pct(a.margin)}`)],parking:[T(`${line} из ${v.length}`,`${line} of ${v.length}`),T('машин на линии','trucks on the road')],repair:[T(`${rep.length} машин`,`${rep.length} trucks`),T(`в ремонте · ${urg} срочно`,`in repair · ${urg} urgent`)],warehouse:[big(a.tkm,T('т·км','t·km')),T(`${pct(a.ontime,0)} рейсов вовремя`,`${pct(a.ontime,0)} trips on time`)],drivers:[T(`${dr.length} водителя`,`${dr.length} drivers`),T(`${dr.filter(d=>d.state==='line').length} в рейсе · ${dr.filter(d=>d.state==='rest').length} отдых`,`${dr.filter(d=>d.state==='line').length} driving · ${dr.filter(d=>d.state==='rest').length} resting`)],gate:[money(a.revHired,true),T(`${pct(a.revHired/a.rev*100,0)} выручки · маржа ${pct(a.marginHired,0)}`,`${pct(a.revHired/a.rev*100,0)} of revenue · margin ${pct(a.marginHired,0)}`)]};}
@@ -169,7 +169,7 @@ const groups={};function building(id,x,z){const g=new THREE.Group();g.position.s
 function makeTruck(color,big=true){const t=new THREE.Group();const L=big?5.2:3,tc=-(L/2)+.2;
  box(L,1.8,1.7,color,tc,1.45,0,t);box(1.6,1.9,1.7,0xf5f5f5,(big?1.5:.8),1.3,0,t);box(.08,.8,1.4,0x26303c,(big?2.32:1.62),1.6,0,t);box(L+1.6,.3,1.2,0x2b2f36,tc+.8,.55,0,t);
  const wm=mat(0x1f2126,{roughness:.9}),hub=mat(0xc5cad2,{metalness:.6,roughness:.3});
- const wx=big?[1.6,-3.5,-4.45]:[1.0,-2.1];for(const x of wx)for(const z of[-.82,.82]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.42,.42,.3,16),wm);w.rotation.x=Math.PI/2;w.position.set(x,.42,z);w.castShadow=true;t.add(w);const h=new THREE.Mesh(new THREE.CylinderGeometry(.17,.17,.32,10),hub);h.rotation.x=Math.PI/2;h.position.set(x,.42,z);t.add(h);}
+ const wx=big?[1.95,.15,-.75,-3.15,-3.95,-4.75]:[1.05,-1.55,-2.2];for(const x of wx)for(const z of[-.82,.82]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.42,.42,.3,16),wm);w.rotation.x=Math.PI/2;w.position.set(x,.42,z);w.castShadow=true;t.add(w);const h=new THREE.Mesh(new THREE.CylinderGeometry(.17,.17,.32,10),hub);h.rotation.x=Math.PI/2;h.position.set(x,.42,z);t.add(h);}
  S.add(t);return t;}
 [[-5.6,0xff5a1f,1],[-2.8,0xff5a1f,1],[0,0xf2f2f2,0],[2.8,0xff5a1f,1],[5.6,0x4f73c9,0]].forEach(([x,c,b])=>{const t=makeTruck(c,!!b);t.position.set(4+x,0,-11.8);t.rotation.y=Math.PI/2;});
 // one-way loop on the main road: east on z=2.5, west on z=5.5; trucks evenly spaced, so they never overlap
@@ -179,7 +179,7 @@ function applyTheme(){const dark=state.theme==='dark';document.body.classList.to
 // labels
 const top={office:10.5,repair:7,parking:3.5,warehouse:6,drivers:6.4,gate:4.5};const lblPos={gate:new THREE.Vector3(20.2,0,-1.2)};
 const labels=SECTIONS.map(s=>{const el=document.createElement('div');el.className='label';el.addEventListener('click',()=>enter(s.id));document.body.appendChild(el);return{s,el};});
-function renderLabels(){const ld=labelData();labels.forEach(({s,el})=>{el.innerHTML=`<div class="lb"><small><i style="background:${s.dot}"></i>${state.lang==='ru'?s.bru:s.ben}</small><b>${esc(ld[s.id][0])}</b><em>${esc(ld[s.id][1])}</em><span class="go">${L(s)} →</span></div><div class="stem"></div>`;el.setAttribute('role','button');el.setAttribute('tabindex','0');el.setAttribute('aria-label',L(s));el.onkeydown=e=>{if(e.key==='Enter')enter(s.id);};});}
+function renderLabels(){const ld=labelData();labels.forEach(({s,el})=>{el.innerHTML=`<div class="lb"><small><i style="background:${s.dot}"></i>${state.lang==='ru'?s.bru:s.ben}</small><b>${esc(ld[s.id][0])}</b><em>${esc(ld[s.id][1])}</em><span class="go">${T('Открыть','Open')} →</span></div><div class="stem"></div>`;el.setAttribute('role','button');el.setAttribute('tabindex','0');el.setAttribute('aria-label',L(s));el.onkeydown=e=>{if(e.key==='Enter')enter(s.id);};});}
 // picking
 const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let hover=null;const pickables=Object.values(groups);
 function pick(e){const r=R.domElement.getBoundingClientRect();mouse.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mouse,C);const hit=ray.intersectObjects(pickables,true)[0];if(!hit)return null;let o=hit.object;while(o&&!o.userData.id)o=o.parent;return o?o.userData.id:null;}
