@@ -410,11 +410,11 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 
 .solution-custom{font:inherit;text-align:left;background:#17191e;border-color:#17191e;color:#fff;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}.solution-custom:hover{background:#262a32;transform:translateY(-4px)}.solution-custom:active{transform:scale(.98)}.solution-custom .solution-icon{background:#84F0E0;color:#10141a}.solution-custom .solution-desc{color:#b9bec9}.solution-custom .solution-cta{color:#84F0E0}
 /* === thinker stage === */
-.thinker-stage{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:150px 560px;column-gap:22px;margin-top:6px}
+.thinker-stage{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:150px auto;column-gap:22px;margin-top:6px}
 .thinker-figure{grid-column:2/4;grid-row:2;position:relative;z-index:1;justify-self:center;width:min(100%,400px);height:600px;margin-top:96px}
 .thinker-figure::before{content:"";position:absolute;inset:6% -22% 0;border-radius:50%;background:radial-gradient(closest-side,#efe9e1 0%,rgba(239,233,225,.6) 55%,rgba(239,233,225,0) 100%);pointer-events:none}
-.guy{position:absolute;inset:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 80%,transparent 99%);mask-image:linear-gradient(#000 80%,transparent 99%);transform-origin:50% 100%}.guy-frame{position:absolute;left:0;top:0;width:100%;height:auto;opacity:0;z-index:0;user-select:none;-webkit-user-drag:none}.guy-frame:nth-child(3){opacity:1}.guy-frame.was-on{opacity:1;z-index:1}.guy-frame.is-on{opacity:1;z-index:2;transition:opacity .26s cubic-bezier(.16,1,.3,1)}.guy-frame:not(.is-on):not(.was-on){opacity:0}
-@media(prefers-reduced-motion:no-preference){.guy{animation:guy-breathe 5.5s ease-in-out infinite}}@keyframes guy-breathe{0%,100%{transform:none}50%{transform:translateY(-3px) scale(1.006)}}
+.guy{position:absolute;inset:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 80%,transparent 99%);mask-image:linear-gradient(#000 80%,transparent 99%);transform-origin:50% 100%}.guy-frame{position:absolute;left:0;top:0;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+
 
 .thought{position:relative;z-index:2;width:min(100%,390px);background:#fff;border:1px solid #e6e3dc;border-radius:30px;box-shadow:0 14px 34px -18px rgba(52,44,30,.28),0 2px 6px rgba(52,44,30,.04);transition:box-shadow .3s cubic-bezier(.16,1,.3,1),opacity .3s,border-color .3s}
 .thought[data-pos]{grid-row:1;align-self:start;justify-self:center;width:100%}.thought[data-pos=o1]{grid-column:1;margin-top:58px;justify-self:start}.thought[data-pos=i1]{grid-column:2}.thought[data-pos=i2]{grid-column:3}.thought[data-pos=o2]{grid-column:4;margin-top:58px;justify-self:end}
@@ -477,7 +477,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 <header class="site-header">
  <div class="container site-nav">
   <a href="#top" class="brand" aria-label="Сайты и аналитика"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M4 21V14M11 21V7M18 21V12M25 21V4" stroke="#84F0E0" stroke-width="3.6" stroke-linecap="round"/></svg></span><span data-i18n="brandA">Сайты</span><span class="sep">&</span><span data-i18n="brandB">Аналитика</span></a>
-  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#services" data-i18n="navServices">Решения</a><a href="#process" data-i18n="navProcess">Этапы</a><a href="#demo" data-i18n="navDemo">Примеры</a><a href="#contact" data-i18n="navContact">Контакты</a></nav>
+  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#services" data-i18n="navServices">Решения</a><a href="#demo" data-i18n="navDemo">Примеры</a><a href="#contact" data-i18n="navContact">Контакты</a></nav>
   <div class="nav-right"><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to English">EN</button><button class="nav-contact" type="button" data-open-lead><span data-i18n="navCta">Оставить заявку</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><button class="menu-btn" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
  </div>
 </header>
@@ -499,7 +499,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
     <p class="section-description" data-i18n="problemsDesc">Не нужно разбираться в сложных инструментах. Вы описываете проблему — мы показываем, какое решение и какие цифры помогут.</p>
    </div>
    <div class="thinker-stage" id="thinkerStage">
-    <div class="thinker-figure" aria-hidden="true"><div class="guy"><img class="guy-frame" src="assets/guy/l2.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"><img class="guy-frame" src="assets/guy/l1.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"><img class="guy-frame" src="assets/guy/c.webp?v=202610251945" alt="" width="560" height="1086" decoding="async"><img class="guy-frame" src="assets/guy/r1.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"><img class="guy-frame" src="assets/guy/r2.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"></div></div>
+    <div class="thinker-figure" aria-hidden="true"><div class="guy"><img class="guy-frame" src="assets/guy/c.webp?v=202610251950" alt="" width="560" height="1086" decoding="async"></div></div>
     <article class="thought thought-business" data-pos="o1">
      <button class="thought-head" type="button" id="thought-business-btn" aria-expanded="false" aria-controls="thought-business-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25V16M12 25V9M19 25V19M26 25V6"/><path d="M3 28h26"/></svg></span><span class="thought-q" data-i18n="problemBizQuestion">Продажи идут, но прибыль непонятна?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
      <div class="thought-body" id="thought-business-body" role="region" aria-labelledby="thought-business-btn"><div class="thought-inner">
@@ -546,7 +546,6 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
    <article class="service-card" id="service-ai" data-service="ai"><div class="service-top"><span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="4"/><path d="M8 11h.01M16 11h.01M9 15c2 2 4 2 6 0M12 5V2"/></svg></span><span class="service-number">03 / AI</span></div><h3 data-i18n="serviceAiTitle">ИИ-агент по вашим данным</h3><p data-i18n="serviceAiDesc">Задаёте вопрос обычными словами — получаете цифры и объяснение без ручного поиска по отчётам.</p><details class="service-more"><summary data-i18n="moreIncludes">Что входит</summary><ul><li data-i18n="aiPoint1">Подключение согласованных источников</li><li data-i18n="aiPoint2">Настройка и проверка ответов</li><li data-i18n="aiPoint3">Обучение вашей команды</li></ul></details></article>
    <article class="service-card" id="service-web" data-service="web"><div class="service-top"><span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="17" rx="3"/><path d="M3 8.5h18M7 6h.01M10 6h.01M6.5 13h11M6.5 17h7"/></svg></span><span class="service-number">04 / WEB</span></div><h3 data-i18n="serviceWebTitle">Разработка сайтов</h3><p data-i18n="serviceWebDesc">Лендинги и многостраничные сайты — быстрые, понятные и подготовленные к получению заявок.</p><details class="service-more"><summary data-i18n="moreIncludes">Что входит</summary><ul><li data-i18n="webPoint1">Дизайн и адаптация под телефон</li><li data-i18n="webPoint2">Формы заявок и базовая аналитика</li><li data-i18n="webPoint3">Публикация и передача проекта</li></ul></details></article>
   </div></div></section>
- <section class="process-section" id="process"><div class="container"><div class="process-header"><div><h2 data-i18n="processHeading">Вы понимаете каждый шаг. И каждую цифру.</h2></div><p class="section-description" data-i18n="processDesc">Без непонятных схем и лишней бюрократии. Согласуем задачу, сделаем решение и научим им пользоваться.</p></div><div class="steps"><article class="step"><span class="step-num">01</span><h3 data-i18n="step1Title">Разбираем задачу</h3><p data-i18n="step1Desc">Узнаём цели, доступные данные и что важно для вашего бизнеса.</p></article><article class="step"><span class="step-num">02</span><h3 data-i18n="step2Title">Согласуем план</h3><p data-i18n="step2Desc">Фиксируем объём, сроки, стоимость и конечный результат.</p></article><article class="step"><span class="step-num">03</span><h3 data-i18n="step3Title">Создаём и проверяем</h3><p data-i18n="step3Desc">Разрабатываем, тестируем на реальных сценариях, показываем прогресс.</p></article><article class="step"><span class="step-num">04</span><h3 data-i18n="step4Title">Передаём и объясняем</h3><p data-i18n="step4Desc">Вы получаете рабочий инструмент и понимаете, как им пользоваться.</p></article></div></div></section>
  <section class="showcase" id="demo">
   <div class="container">
    <div class="showcase-intro"><div><h2 data-i18n="demoHeading">Не просто графики.<br>Попробуйте сами.</h2></div><p class="section-description" data-i18n="demoDesc">Меняйте период, открывайте показатели, выбирайте источники и ищите потери в воронке. Это действующий пример, а не картинка.</p></div>
@@ -1069,7 +1068,7 @@ detectLocaleByIP();
  const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
  const wide=matchMedia('(min-width: 1101px)');
  document.documentElement.classList.add('js-thoughts');
- let api=null,closeTimer=0,mx=innerWidth/2,my=innerHeight/3,pending=false;
+ let closeTimer=0;
  function setOpen(t,open){
   t.classList.toggle('is-open',open);
   const btn=t.querySelector('.thought-head'),body=t.querySelector('.thought-body');
@@ -1079,9 +1078,9 @@ detectLocaleByIP();
   clearTimeout(closeTimer);
   thoughts.forEach(o=>{if(o!==t&&o.classList.contains('is-open'))setOpen(o,false)});
   if(!t.classList.contains('is-open')){setOpen(t,true);try{track('open_problem',{problem:t.className.match(/thought-(\w+)/)[1],via:src})}catch{}}
-  stage.classList.add('has-open');api&&api.focus(t);
+  stage.classList.add('has-open');
  }
- function close(t){setOpen(t,false);if(!thoughts.some(o=>o.classList.contains('is-open'))){stage.classList.remove('has-open');api&&(api.focus(null),api.look(mx,my))}}
+ function close(t){setOpen(t,false);if(!thoughts.some(o=>o.classList.contains('is-open'))){stage.classList.remove('has-open')}}
  thoughts.forEach(t=>{
   setOpen(t,false);
   t.querySelector('.thought-head').addEventListener('click',()=>t.classList.contains('is-open')?close(t):open(t,'click'));
@@ -1090,7 +1089,6 @@ detectLocaleByIP();
   t.addEventListener('focusin',()=>{if(wide.matches)open(t,'focus')});
   t.addEventListener('keydown',e=>{if(e.key==='Escape'){close(t);t.querySelector('.thought-head').focus()}});
  });
- addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(!api||pending)return;pending=true;requestAnimationFrame(()=>{pending=false;api.look(mx,my)})},{passive:true});
 
  // entrance: the thoughts surface one by one the first time the stage is seen
  if(!reduced&&'IntersectionObserver' in window){
@@ -1099,32 +1097,13 @@ detectLocaleByIP();
   },{threshold:.25});io.observe(stage);
  }
 
- // Character: five head angles, cross-faded by where the cursor (or the open thought) is
- (function(){
-  const fig=stage.querySelector('.thinker-figure');if(!fig)return;
-  const frames=[...fig.querySelectorAll('.guy-frame')];   // order: l2, l1, c, r1, r2
-  let idx=2,prevT=0;
-  function show(n){
-   if(n===idx)return;const old=frames[idx];idx=n;
-   frames.forEach(f=>f.classList.remove('was-on'));
-   old.classList.remove('is-on');old.classList.add('was-on');
-   frames[n].classList.add('is-on');
-   clearTimeout(prevT);prevT=setTimeout(()=>old.classList.remove('was-on'),reduced?0:300);
-  }
-  function aimAt(x){
-   const r=fig.getBoundingClientRect(),t=Math.max(-1,Math.min(1,(x-(r.left+r.width/2))/Math.max(innerWidth*.28,220)));
-   const p=(t+1)*2;if(Math.abs(p-idx)>.55)show(Math.max(0,Math.min(4,Math.round(p))));
-  }
-  let focusEl=null;
-  api={look(x){if(!focusEl)aimAt(x)},focus(el){focusEl=el||null;if(el){const r=el.getBoundingClientRect();aimAt(r.left+r.width/2)}}};
-  frames[2].classList.add('is-on');
- })();
+ // character is static — he just thinks
 })();
 
 /* ===== Lists rise in once, content visible by default ===== */
 (function(){
  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)||!Element.prototype.animate)return;
- const groups=['.service-grid','.steps','#solutionsGrid'].map(s=>document.querySelector(s)).filter(Boolean);
+ const groups=['.service-grid','#solutionsGrid'].map(s=>document.querySelector(s)).filter(Boolean);
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);
   [...e.target.children].forEach((c,i)=>c.animate([{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'none'}],{duration:560,delay:Math.min(i,6)*70,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
  }),{threshold:.15});
