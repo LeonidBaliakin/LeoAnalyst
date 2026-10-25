@@ -411,7 +411,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 .solution-custom{font:inherit;text-align:left;background:#17191e;border-color:#17191e;color:#fff;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}.solution-custom:hover{background:#262a32;transform:translateY(-4px)}.solution-custom:active{transform:scale(.98)}.solution-custom .solution-icon{background:#84F0E0;color:#10141a}.solution-custom .solution-desc{color:#b9bec9}.solution-custom .solution-cta{color:#84F0E0}
 /* === problems as floating thoughts === */
 .thoughts-layout{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center}
-.thoughts-intro h2{margin:0 0 18px;text-wrap:balance}
+.thoughts-intro h2{margin:0 0 22px;text-wrap:balance}
 .thoughts-intro .section-description{margin:0 0 22px;max-width:420px}
 .thoughts-intro .problem-bottom{flex-direction:column;align-items:flex-start;gap:6px;padding:0}
 .thought-cloud{position:relative;height:540px}
@@ -457,10 +457,11 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 .js-thoughts .thought.is-open .thought-dot{opacity:0}
 .js-thoughts .thought-cloud.has-open .thought:not(.is-open){opacity:.5}
 @media(min-width:1001px) and (prefers-reduced-motion:no-preference){
- .js-thoughts .thought:not(.is-open){animation:thought-float 8s ease-in-out infinite}
+ .js-thoughts .thought:not(.is-open){animation:thought-float 8s ease-in-out infinite;will-change:transform;backface-visibility:hidden}
+ .js-thoughts .thought-cloud:hover .thought{animation-play-state:paused}
  .js-thoughts .thought[data-pos=b]{animation-duration:9.5s;animation-delay:-2s}.js-thoughts .thought[data-pos=c]{animation-duration:8.8s;animation-delay:-4.5s}.js-thoughts .thought[data-pos=d]{animation-duration:10s;animation-delay:-6s}
 }
-@keyframes thought-float{0%,100%{translate:0 0}30%{translate:5px -8px}65%{translate:-4px -3px}}
+@keyframes thought-float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-6px,0)}}
 @media(max-width:1000px){
  .thoughts-layout{grid-template-columns:1fr;gap:26px}
  .thought-cloud{height:auto;display:grid;gap:10px}
@@ -477,7 +478,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 <header class="site-header">
  <div class="container site-nav">
   <a href="#top" class="brand" aria-label="Сайты и аналитика"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M4 21V14M11 21V7M18 21V12M25 21V4" stroke="#84F0E0" stroke-width="3.6" stroke-linecap="round"/></svg></span><span data-i18n="brandA">Сайты</span><span class="sep">&</span><span data-i18n="brandB">Аналитика</span></a>
-  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#demo" data-i18n="navDemo">Примеры</a><a href="#contact" data-i18n="navContact">Контакты</a></nav>
+  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#demo" data-i18n="navDemo">Примеры</a></nav>
   <div class="nav-right"><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to English">EN</button><button class="nav-contact" type="button" data-open-lead><span data-i18n="navCta">Оставить заявку</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><button class="menu-btn" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
  </div>
 </header>
@@ -496,7 +497,6 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
   <div class="container thoughts-layout">
    <div class="thoughts-intro">
     <h2 id="problemsHeading" data-i18n="problemsHeading">Что сейчас мешает вашему бизнесу?</h2>
-    <p class="section-description" data-i18n="problemsDesc">Откройте мысль — покажем, как решаем это: по шагам и технически.</p>
     <div class="problem-bottom"><span data-i18n="problemBottom">Узнали свою ситуацию? Начните с короткого описания задачи.</span><button type="button" class="problem-cta-link" data-open-lead><span data-i18n="problemBottomLink">Оставить заявку</span><span aria-hidden="true"> ↗</span></button></div>
    </div>
    <div class="thought-cloud" id="thoughtCloud">
@@ -553,7 +553,6 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
    <p class="demo-caption"><strong data-i18n="demoDataNotice">Все цифры демонстрационные.</strong> <span data-i18n="demoCaption">Фильтры, графики и расчёты работают прямо на странице.</span></p>
   </div>
  </section>
- <section class="contact-section" id="contact"><div class="container"><div class="contact-panel"><h2 data-i18n="contactHeading">Не знаете, с чего начать? Начнём с вашей задачи.</h2><p data-i18n="contactDesc">Опишите, что хотите улучшить. Предложим подход, оценим объём работы и стоимость — без навязанных услуг.</p><button type="button" class="solid-btn" data-open-lead><span data-i18n="contactCta">Оставить заявку</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div></div></section>
 </main>
 <footer class="footer"><div class="container footer-inner"><div class="footer-left"><strong data-i18n="brandFull">Сайты и аналитика</strong><span data-i18n="footerDisclosure">В интерактивном примере используются вымышленные данные.</span><span data-i18n="footerCopy">© 2026 Леонид Балякин · самозанятый</span></div><div class="footer-links"><a href="#top" data-i18n="footerTop">Наверх ↑</a><a href="mailto:analystleogroup@gmail.com">analystleogroup@gmail.com</a></div></div></footer>
 
@@ -1075,7 +1074,7 @@ detectLocaleByIP();
  });
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){
   const io=new IntersectionObserver(es=>{if(!es.some(e=>e.isIntersecting))return;io.disconnect();
-   thoughts.forEach((t,i)=>t.animate([{opacity:0,transform:'translateY(16px) scale(.96)'},{opacity:1,transform:'none'}],{duration:600,delay:100+i*90,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}))},{threshold:.2});
+   thoughts.forEach((t,i)=>t.animate([{opacity:0,translate:'0 16px'},{opacity:1,translate:'0 0'}],{duration:600,delay:100+i*90,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}))},{threshold:.2});
   io.observe(cloud);
  }
 })();
