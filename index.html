@@ -409,6 +409,67 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 .problem-heading h2,.section-heading-centered h2,.process-header h2,.showcase-intro h2{text-wrap:balance}
 
 .solution-custom{font:inherit;text-align:left;background:#17191e;border-color:#17191e;color:#fff;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}.solution-custom:hover{background:#262a32;transform:translateY(-4px)}.solution-custom:active{transform:scale(.98)}.solution-custom .solution-icon{background:#84F0E0;color:#10141a}.solution-custom .solution-desc{color:#b9bec9}.solution-custom .solution-cta{color:#84F0E0}
+/* === problems as floating thoughts === */
+.thoughts-layout{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center}
+.thoughts-intro h2{margin:0 0 18px;text-wrap:balance}
+.thoughts-intro .section-description{margin:0 0 22px;max-width:420px}
+.thoughts-intro .problem-bottom{flex-direction:column;align-items:flex-start;gap:6px;padding:0}
+.thought-cloud{position:relative;height:540px}
+.thought{position:absolute;z-index:1;width:300px;background:#fff;border:1px solid #e6e3dc;border-radius:26px;box-shadow:0 14px 34px -18px rgba(40,44,60,.28),0 2px 6px rgba(40,44,60,.04);transition:width .38s cubic-bezier(.16,1,.3,1),box-shadow .3s,opacity .3s,border-color .3s}
+.thought[data-pos=a]{top:6px;left:0}
+.thought[data-pos=b]{top:84px;right:0}
+.thought[data-pos=c]{bottom:84px;left:5%}
+.thought[data-pos=d]{bottom:6px;right:9%}
+.thought-head{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:15px 16px;cursor:pointer;border-radius:26px}
+.thought-head:focus-visible{outline:2px solid #1275ff;outline-offset:2px}
+.thought-icon{flex:0 0 38px;height:38px;display:grid;place-items:center;border-radius:12px}
+.thought-icon svg{width:21px;height:21px}
+.thought-business .thought-icon{background:#e9f2ff;color:#2e7fe4}.thought-product .thought-icon{background:#f0ecff;color:#7c63d8}.thought-ai .thought-icon{background:#e3f6f0;color:#14937e}.thought-web .thought-icon{background:#fbf1e3;color:#b8772f}
+.thought-q{flex:1;font-size:15px;font-weight:720;line-height:1.35;letter-spacing:-.015em;color:#1d2027;text-wrap:balance}
+.thought-plus{flex:0 0 28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#f2f1ee;color:#4a4f5a;transition:transform .3s cubic-bezier(.16,1,.3,1),background .2s,color .2s}
+.thought-plus svg{width:14px;height:14px}
+.thought-head:hover .thought-plus{background:#e7e5e0}
+.thought-inner{padding:0 20px}
+.thought-inner>:last-child{margin-bottom:18px!important}
+.thought-solve{margin:2px 0 10px;font-size:17px;line-height:1.35;letter-spacing:-.02em;color:#17191e}
+.thought-solve b{font-weight:780}
+.thought-steps{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.thought-steps li{position:relative;padding-left:20px;font-size:14px;line-height:1.55;color:#5d626d}
+.thought-steps li::before{content:"";position:absolute;left:3px;top:.6em;width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.35}
+.thought-business .thought-steps li::before{background:#2e7fe4;opacity:.8}.thought-product .thought-steps li::before{background:#7c63d8;opacity:.8}.thought-ai .thought-steps li::before{background:#14937e;opacity:.8}.thought-web .thought-steps li::before{background:#b8772f;opacity:.8}
+.thought-actions{display:flex;flex-wrap:wrap;gap:8px 20px}
+.thought-link{display:inline-flex;align-items:center;gap:7px;padding:6px 0;border:0;background:none;font:inherit;font-size:13px;font-weight:750;color:#283548;cursor:pointer}
+.thought-link svg{width:16px;height:16px;transition:transform .2s}
+.thought-link:hover svg{transform:translateX(4px)}
+.thought-cta{color:#176fce}
+.thought-dot{position:absolute;display:block;width:14px;height:14px;border-radius:50%;background:#fff;border:1px solid #e6e3dc;box-shadow:0 6px 14px -8px rgba(40,44,60,.3);pointer-events:none;transition:opacity .2s}
+.thought-dot-s{width:8px;height:8px}
+.thought[data-pos=a] .thought-dot{right:26px;bottom:-20px}.thought[data-pos=a] .thought-dot-s{right:12px;bottom:-36px}
+.thought[data-pos=b] .thought-dot{left:26px;bottom:-20px}.thought[data-pos=b] .thought-dot-s{left:12px;bottom:-36px}
+.thought[data-pos=c] .thought-dot{right:26px;top:-20px}.thought[data-pos=c] .thought-dot-s{right:12px;top:-36px}
+.thought[data-pos=d] .thought-dot{left:26px;top:-20px}.thought[data-pos=d] .thought-dot-s{left:12px;top:-36px}
+.js-thoughts .thought-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1)}
+.js-thoughts .thought-body>.thought-inner{min-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:opacity .2s,transform .38s cubic-bezier(.16,1,.3,1)}
+.js-thoughts .thought.is-open{z-index:3;width:min(100%,440px);border-color:#d9d6cf;box-shadow:0 28px 60px -26px rgba(40,44,60,.4),0 2px 8px rgba(40,44,60,.05)}
+.js-thoughts .thought.is-open .thought-body{grid-template-rows:1fr}
+.js-thoughts .thought.is-open .thought-inner{opacity:1;transform:none;transition-delay:.06s}
+.js-thoughts .thought.is-open .thought-plus{transform:rotate(45deg);background:#17191e;color:#fff}
+.js-thoughts .thought.is-open .thought-dot{opacity:0}
+.js-thoughts .thought-cloud.has-open .thought:not(.is-open){opacity:.5}
+@media(min-width:1001px) and (prefers-reduced-motion:no-preference){
+ .js-thoughts .thought:not(.is-open){animation:thought-float 8s ease-in-out infinite}
+ .js-thoughts .thought[data-pos=b]{animation-duration:9.5s;animation-delay:-2s}.js-thoughts .thought[data-pos=c]{animation-duration:8.8s;animation-delay:-4.5s}.js-thoughts .thought[data-pos=d]{animation-duration:10s;animation-delay:-6s}
+}
+@keyframes thought-float{0%,100%{translate:0 0}30%{translate:5px -8px}65%{translate:-4px -3px}}
+@media(max-width:1000px){
+ .thoughts-layout{grid-template-columns:1fr;gap:26px}
+ .thought-cloud{height:auto;display:grid;gap:10px}
+ .thought[data-pos],.js-thoughts .thought.is-open{position:relative;inset:auto;width:auto}
+ .thought-dot{display:none}
+ .js-thoughts .thought-cloud.has-open .thought:not(.is-open){opacity:1}
+}
+@media(max-width:600px){.thought-q{font-size:15px}.thought-solve{font-size:16px}.thought-inner{padding:0 16px}}
+@media(prefers-reduced-motion:reduce){.js-thoughts .thought-body,.js-thoughts .thought-inner,.thought-plus,.thought{transition:none}}
 /* === section entrance (one restrained pattern for lists) === */
 </style>
 </head>
@@ -416,7 +477,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 <header class="site-header">
  <div class="container site-nav">
   <a href="#top" class="brand" aria-label="Сайты и аналитика"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M4 21V14M11 21V7M18 21V12M25 21V4" stroke="#84F0E0" stroke-width="3.6" stroke-linecap="round"/></svg></span><span data-i18n="brandA">Сайты</span><span class="sep">&</span><span data-i18n="brandB">Аналитика</span></a>
-  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#services" data-i18n="navServices">Решения</a><a href="#demo" data-i18n="navDemo">Примеры</a><a href="#contact" data-i18n="navContact">Контакты</a></nav>
+  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#demo" data-i18n="navDemo">Примеры</a><a href="#contact" data-i18n="navContact">Контакты</a></nav>
   <div class="nav-right"><button class="lang-btn" id="langBtn" type="button" aria-label="Switch to English">EN</button><button class="nav-contact" type="button" data-open-lead><span data-i18n="navCta">Оставить заявку</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><button class="menu-btn" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
  </div>
 </header>
@@ -432,50 +493,52 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
  </section>
 
  <section class="problems-section" id="problems" aria-labelledby="problemsHeading">
-  <div class="container">
-   <div class="problem-heading">
-    <div><h2 id="problemsHeading" data-i18n="problemsHeading">Что сейчас мешает вашему бизнесу?</h2></div>
-    <p class="section-description" data-i18n="problemsDesc">Не нужно разбираться в сложных инструментах. Вы описываете проблему — мы показываем, какое решение и какие цифры помогут.</p>
+  <div class="container thoughts-layout">
+   <div class="thoughts-intro">
+    <h2 id="problemsHeading" data-i18n="problemsHeading">Что сейчас мешает вашему бизнесу?</h2>
+    <p class="section-description" data-i18n="problemsDesc">Откройте мысль — покажем, как решаем это: по шагам и технически.</p>
+    <div class="problem-bottom"><span data-i18n="problemBottom">Узнали свою ситуацию? Начните с короткого описания задачи.</span><button type="button" class="problem-cta-link" data-open-lead><span data-i18n="problemBottomLink">Оставить заявку</span><span aria-hidden="true"> ↗</span></button></div>
    </div>
-   <div class="problem-grid">
-    <article class="problem-card problem-business">
-     <div class="problem-top"><span class="problem-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25V16M12 25V9M19 25V19M26 25V6"/><path d="M3 28h26"/></svg></span><span class="problem-number">01</span></div>
-     <span class="problem-question" data-i18n="problemBizQuestion">Продажи идут, но прибыль непонятна?</span>
-     <h3 class="problem-result" data-i18n="problemBizResult">Покажем, где заработать больше и куда уходят деньги. На цифрах.</h3>
-     <p class="problem-detail" data-i18n="problemBizDetail">Соберём продажи, расходы и прибыль в понятный отчёт. Объясним, на что смотреть и как пользоваться самостоятельно.</p>
-     <a class="problem-link" href="#service-business"><span data-i18n="problemLink">Как решаем</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
+   <div class="thought-cloud" id="thoughtCloud">
+    <article class="thought thought-business" data-pos="a" id="problem-business">
+     <button class="thought-head" type="button" id="thought-business-btn" aria-expanded="false" aria-controls="thought-business-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25V16M12 25V9M19 25V19M26 25V6"/><path d="M3 28h26"/></svg></span><span class="thought-q" data-i18n="t1q">Вы точно знаете, сколько зарабатываете после всех расходов?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
+     <div class="thought-body" id="thought-business-body" role="region" aria-labelledby="thought-business-btn"><div class="thought-inner">
+      <p class="thought-solve"><b data-i18n="howLabel">Как решаем:</b> <span data-i18n="t1a">соберём все деньги бизнеса в один дашборд.</span></p>
+      <ul class="thought-steps"><li data-i18n="t1s1">Подключаем CRM, 1С, банковские выписки и таблицы — через выгрузки или API.</li><li data-i18n="t1s2">Сводим данные в одну базу (SQL), считаем выручку, маржу и расходы по направлениям.</li><li data-i18n="t1s3">Дашборд с фильтрами по периодам, менеджерам и каналам обновляется сам.</li></ul>
+      <div class="thought-actions"><a class="thought-link" href="dashboards/finance/" data-dashboard="dashboards/finance/?v=202610231911" data-title-key="solFinanceTitle"><span data-i18n="seeExample">Смотреть пример</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a><button type="button" class="thought-link thought-cta" data-open-lead><span data-i18n="discussTask">Обсудить задачу</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></button></div>
+     </div></div>
+     <i class="thought-dot" aria-hidden="true"></i><i class="thought-dot thought-dot-s" aria-hidden="true"></i>
     </article>
-    <article class="problem-card problem-product">
-     <div class="problem-top"><span class="problem-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h22M8 15h17M12 22h10M16 28h4"/><circle cx="6" cy="8" r="2" fill="currentColor" stroke="none"/></svg></span><span class="problem-number">02</span></div>
-     <span class="problem-question" data-i18n="problemProductQuestion">Люди приходят, но не доходят до оплаты?</span>
-     <h3 class="problem-result" data-i18n="problemProductResult">Покажем, что улучшить, чтобы больше клиентов доходили до покупки.</h3>
-     <p class="problem-detail" data-i18n="problemProductDetail">Разберём путь клиента по цифрам. Найдём точки роста и объясним, как проверять результат изменений.</p>
-     <a class="problem-link" href="#service-product"><span data-i18n="problemLink">Как решаем</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
+    <article class="thought thought-product" data-pos="b" id="problem-product">
+     <button class="thought-head" type="button" id="thought-product-btn" aria-expanded="false" aria-controls="thought-product-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h22M8 15h17M12 22h10M16 28h4"/></svg></span><span class="thought-q" data-i18n="t2q">Сколько клиентов уходит на полпути к оплате — и почему?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
+     <div class="thought-body" id="thought-product-body" role="region" aria-labelledby="thought-product-btn"><div class="thought-inner">
+      <p class="thought-solve"><b data-i18n="howLabel">Как решаем:</b> <span data-i18n="t2a">найдём шаг, на котором ломается путь клиента.</span></p>
+      <ul class="thought-steps"><li data-i18n="t2s1">Настраиваем сбор событий на сайте или в приложении: Яндекс Метрика, GA4 или своё логирование.</li><li data-i18n="t2s2">Строим воронки, когорты и удержание — видно, где и кто теряется.</li><li data-i18n="t2s3">Предлагаем изменения и проверяем их A/B-тестом на цифрах, а не на ощущениях.</li></ul>
+      <div class="thought-actions"><a class="thought-link" href="dashboards/product-analytics/" data-dashboard="dashboards/product-analytics/?v=202610231911" data-title-key="solProductTitle"><span data-i18n="seeExample">Смотреть пример</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a><button type="button" class="thought-link thought-cta" data-open-lead><span data-i18n="discussTask">Обсудить задачу</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></button></div>
+     </div></div>
+     <i class="thought-dot" aria-hidden="true"></i><i class="thought-dot thought-dot-s" aria-hidden="true"></i>
     </article>
-    <article class="problem-card problem-ai">
-     <div class="problem-top"><span class="problem-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9h18a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H14l-7 4v-4a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4Z"/><path d="m11 17 3 3 7-7"/></svg></span><span class="problem-number">03</span></div>
-     <span class="problem-question" data-i18n="problemAiQuestion">Чтобы получить ответ, снова нужен аналитик?</span>
-     <h3 class="problem-result" data-i18n="problemAiResult">Спрашивайте о бизнесе — получайте ответы с цифрами.</h3>
-     <p class="problem-detail" data-i18n="problemAiDetail">Подключим ИИ к вашим данным. Научим задавать вопросы, получать отчёты и понимать, откуда берутся выводы.</p>
-     <a class="problem-link" href="#service-ai"><span data-i18n="problemLink">Как решаем</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
+    <article class="thought thought-ai" data-pos="c" id="problem-ai">
+     <button class="thought-head" type="button" id="thought-ai-btn" aria-expanded="false" aria-controls="thought-ai-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9h18a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H14l-7 4v-4a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4Z"/><path d="m11 17 3 3 7-7"/></svg></span><span class="thought-q" data-i18n="t3q">Каждый отчёт — через аналитика и через три дня?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
+     <div class="thought-body" id="thought-ai-body" role="region" aria-labelledby="thought-ai-btn"><div class="thought-inner">
+      <p class="thought-solve"><b data-i18n="howLabel">Как решаем:</b> <span data-i18n="t3a">ИИ-ассистент отвечает на вопросы о бизнесе за секунды.</span></p>
+      <ul class="thought-steps"><li data-i18n="t3s1">Подключаем ИИ только к согласованным источникам данных — без лишнего доступа.</li><li data-i18n="t3s2">Настраиваем ответы с цифрами и ссылкой на источник, проверяем точность на ваших вопросах.</li><li data-i18n="t3s3">Работает в привычном чате — Telegram или веб; учим команду им пользоваться.</li></ul>
+      <div class="thought-actions"><button type="button" class="thought-link thought-cta" data-open-lead><span data-i18n="discussTask">Обсудить задачу</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></button></div>
+     </div></div>
+     <i class="thought-dot" aria-hidden="true"></i><i class="thought-dot thought-dot-s" aria-hidden="true"></i>
     </article>
-    <article class="problem-card problem-web">
-     <div class="problem-top"><span class="problem-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="25" height="21" rx="4"/><path d="M4 12h24M9 9h.01M13 9h.01M9 19h14M9 23h9"/></svg></span><span class="problem-number">04</span></div>
-     <span class="problem-question" data-i18n="problemWebQuestion">Нет сайта или он не помогает получать заявки?</span>
-     <h3 class="problem-result" data-i18n="problemWebResult">Создадим сайт, на котором клиенту понятно, что вы предлагаете.</h3>
-     <p class="problem-detail" data-i18n="problemWebDetail">Продуманный дизайн, удобная мобильная версия, формы связи и аналитика заявок — под ключ.</p>
-     <a class="problem-link" href="#service-web"><span data-i18n="problemLink">Как решаем</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
+    <article class="thought thought-web" data-pos="d" id="problem-web">
+     <button class="thought-head" type="button" id="thought-web-btn" aria-expanded="false" aria-controls="thought-web-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="25" height="21" rx="4"/><path d="M4 12h24M9 19h14M9 23h9"/></svg></span><span class="thought-q" data-i18n="t4q">Ваш сайт приносит заявки — или просто существует?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
+     <div class="thought-body" id="thought-web-body" role="region" aria-labelledby="thought-web-btn"><div class="thought-inner">
+      <p class="thought-solve"><b data-i18n="howLabel">Как решаем:</b> <span data-i18n="t4a">делаем сайт, который понятно объясняет и продаёт.</span></p>
+      <ul class="thought-steps"><li data-i18n="t4s1">Структура и тексты под вашего клиента, удобная версия для телефона.</li><li data-i18n="t4s2">Формы и кнопки связи плюс аналитика: видно, откуда пришла каждая заявка.</li><li data-i18n="t4s3">Быстрая загрузка, базовое SEO, публикация на вашем домене и передача доступов.</li></ul>
+      <div class="thought-actions"><button type="button" class="thought-link thought-cta" data-open-lead><span data-i18n="discussTask">Обсудить задачу</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></button></div>
+     </div></div>
+     <i class="thought-dot" aria-hidden="true"></i><i class="thought-dot thought-dot-s" aria-hidden="true"></i>
     </article>
    </div>
-   <div class="problem-bottom"><span data-i18n="problemBottom">Узнали свою ситуацию? Начните с короткого описания задачи.</span><button type="button" class="problem-cta-link" data-open-lead><span data-i18n="problemBottomLink">Оставить заявку</span><span aria-hidden="true"> ↗</span></button></div>
   </div>
  </section>
- <section class="services-section" id="services"><div class="container"><div class="section-heading-centered"><h2 data-i18n="servicesHeading">От сайта до полного понимания бизнеса.</h2><p class="section-description" data-i18n="servicesDesc">Можно заказать одну услугу или собрать всё вместе: сайт, данные, показатели и понятные решения.</p></div><div class="service-grid">
-   <article class="service-card" id="service-business" data-service="business"><div class="service-top"><span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4m0 16h17M8 16v-4m5 4V8m5 8V5"/></svg></span><span class="service-number">01 / BI</span></div><h3 data-i18n="serviceBizTitle">Аналитика бизнеса</h3><p data-i18n="serviceBizDesc">Продажи, клиенты и расходы в одном месте. Покажем цифрами, какие направления приносят результат.</p><details class="service-more"><summary data-i18n="moreIncludes">Что входит</summary><ul><li data-i18n="bizPoint1">Сбор данных из CRM и таблиц</li><li data-i18n="bizPoint2">Дашборд с главными показателями</li><li data-i18n="bizPoint3">Выводы и рекомендации по цифрам</li></ul></details></article>
-   <article class="service-card" id="service-product" data-service="product"><div class="service-top"><span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17h16M5 14l5-5 3 3 6-7M17 5h2v2"/></svg></span><span class="service-number">02 / PRODUCT</span></div><h3 data-i18n="serviceProductTitle">Продуктовая аналитика</h3><p data-i18n="serviceProductDesc">Узнаем, где пользователи уходят из продукта, почему не возвращаются и на каком шаге теряются оплаты.</p><details class="service-more"><summary data-i18n="moreIncludes">Что входит</summary><ul><li data-i18n="prodPoint1">Сбор пользовательских событий</li><li data-i18n="prodPoint2">Воронки, удержание, конверсии</li><li data-i18n="prodPoint3">Проверяемые гипотезы улучшений</li></ul></details></article>
-   <article class="service-card" id="service-ai" data-service="ai"><div class="service-top"><span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="4"/><path d="M8 11h.01M16 11h.01M9 15c2 2 4 2 6 0M12 5V2"/></svg></span><span class="service-number">03 / AI</span></div><h3 data-i18n="serviceAiTitle">ИИ-агент по вашим данным</h3><p data-i18n="serviceAiDesc">Задаёте вопрос обычными словами — получаете цифры и объяснение без ручного поиска по отчётам.</p><details class="service-more"><summary data-i18n="moreIncludes">Что входит</summary><ul><li data-i18n="aiPoint1">Подключение согласованных источников</li><li data-i18n="aiPoint2">Настройка и проверка ответов</li><li data-i18n="aiPoint3">Обучение вашей команды</li></ul></details></article>
-   <article class="service-card" id="service-web" data-service="web"><div class="service-top"><span class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="17" rx="3"/><path d="M3 8.5h18M7 6h.01M10 6h.01M6.5 13h11M6.5 17h7"/></svg></span><span class="service-number">04 / WEB</span></div><h3 data-i18n="serviceWebTitle">Разработка сайтов</h3><p data-i18n="serviceWebDesc">Лендинги и многостраничные сайты — быстрые, понятные и подготовленные к получению заявок.</p><details class="service-more"><summary data-i18n="moreIncludes">Что входит</summary><ul><li data-i18n="webPoint1">Дизайн и адаптация под телефон</li><li data-i18n="webPoint2">Формы заявок и базовая аналитика</li><li data-i18n="webPoint3">Публикация и передача проекта</li></ul></details></article>
-  </div></div></section>
  <section class="showcase" id="demo">
   <div class="container">
    <div class="showcase-intro"><div><h2 data-i18n="demoHeading">Не просто графики.<br>Попробуйте сами.</h2></div><p class="section-description" data-i18n="demoDesc">Меняйте период, открывайте показатели, выбирайте источники и ищите потери в воронке. Это действующий пример, а не картинка.</p></div>
@@ -598,7 +661,7 @@ ru:{
  brandA:'Сайты',brandB:'Аналитика',brandFull:'Сайты и аналитика',navProblems:'Ваши задачи',navDemo:'Примеры',navServices:'Решения',navProcess:'Этапы',navContact:'Контакты',navCta:'Оставить заявку',
  heroTag:'Сайты · бизнес‑аналитика · продуктовая аналитика · ИИ',heroTitleA:'Где теряются деньги и клиенты?',heroTitleB:'Покажем на цифрах.',heroLead:'Поможем понять, что улучшать: соберём данные, найдём слабые места и объясним выводы. Создаём сайты, внедряем аналитику и ИИ под ключ.',ctaDiscuss:'Оставить заявку',ctaExplore:'Какие задачи решаем',trustOne:'Только проверяемые выводы',trustTwo:'Покажем и научим',
  problemsTag:'НАЧНЁМ С ВАШЕЙ ЗАДАЧИ',problemsHeading:'Что сейчас мешает вашему бизнесу?',problemsDesc:'Не нужно разбираться в сложных инструментах. Вы описываете проблему — мы показываем, какое решение и какие цифры помогут.',
- problemLink:'Как решаем',problemBottom:'Узнали свою ситуацию? Начните с короткого описания задачи.',problemBottomLink:'Оставить заявку',
+ problemLink:'Как решаем',problemsHeading:"Что сейчас мешает вашему бизнесу?",problemsDesc:"Откройте мысль — покажем, как решаем это: по шагам и технически.",howLabel:"Как решаем:",seeExample:"Смотреть пример",discussTask:"Обсудить задачу",t1q:"Вы точно знаете, сколько зарабатываете после всех расходов?",t1a:"соберём все деньги бизнеса в один дашборд.",t1s1:"Подключаем CRM, 1С, банковские выписки и таблицы — через выгрузки или API.",t1s2:"Сводим данные в одну базу (SQL), считаем выручку, маржу и расходы по направлениям.",t1s3:"Дашборд с фильтрами по периодам, менеджерам и каналам обновляется сам.",t2q:"Сколько клиентов уходит на полпути к оплате — и почему?",t2a:"найдём шаг, на котором ломается путь клиента.",t2s1:"Настраиваем сбор событий на сайте или в приложении: Яндекс Метрика, GA4 или своё логирование.",t2s2:"Строим воронки, когорты и удержание — видно, где и кто теряется.",t2s3:"Предлагаем изменения и проверяем их A/B-тестом на цифрах, а не на ощущениях.",t3q:"Каждый отчёт — через аналитика и через три дня?",t3a:"ИИ-ассистент отвечает на вопросы о бизнесе за секунды.",t3s1:"Подключаем ИИ только к согласованным источникам данных — без лишнего доступа.",t3s2:"Настраиваем ответы с цифрами и ссылкой на источник, проверяем точность на ваших вопросах.",t3s3:"Работает в привычном чате — Telegram или веб; учим команду им пользоваться.",t4q:"Ваш сайт приносит заявки — или просто существует?",t4a:"делаем сайт, который понятно объясняет и продаёт.",t4s1:"Структура и тексты под вашего клиента, удобная версия для телефона.",t4s2:"Формы и кнопки связи плюс аналитика: видно, откуда пришла каждая заявка.",t4s3:"Быстрая загрузка, базовое SEO, публикация на вашем домене и передача доступов.",problemBottom:'Узнали свою ситуацию? Начните с короткого описания задачи.',problemBottomLink:'Оставить заявку',
  problemBizQuestion:'Продажи идут, но прибыль непонятна?',problemBizResult:'Покажем, где заработать больше и куда уходят деньги. На цифрах.',problemBizDetail:'Соберём продажи, расходы и прибыль в понятный отчёт. Объясним, на что смотреть и как пользоваться самостоятельно.',
  problemProductQuestion:'Люди приходят, но не доходят до оплаты?',problemProductResult:'Покажем, что улучшить, чтобы больше клиентов доходили до покупки.',problemProductDetail:'Разберём путь клиента по цифрам. Найдём точки роста и объясним, как проверять результат изменений.',
  problemAiQuestion:'Чтобы получить ответ, снова нужен аналитик?',problemAiResult:'Спрашивайте о бизнесе — получайте ответы с цифрами.',problemAiDetail:'Подключим ИИ к вашим данным. Научим задавать вопросы, получать отчёты и понимать, откуда берутся выводы.',
@@ -629,7 +692,7 @@ en:{
  brandA:'Websites',brandB:'Analytics',brandFull:'Websites & analytics',navProblems:'Your challenges',navDemo:'Examples',navServices:'Solutions',navProcess:'Our process',navContact:'Contact',navCta:'Send an enquiry',
  heroTag:'Websites · business analytics · product analytics · AI',heroTitleA:'Where are revenue and customers slipping away?',heroTitleB:'We’ll show you in the numbers.',heroLead:'Understand what to improve: we connect your data, reveal friction points and explain the findings. Websites, analytics and AI delivered end to end.',ctaDiscuss:'Send an enquiry',ctaExplore:'Explore the problems we solve',trustOne:'Verifiable findings',trustTwo:'We show you how it works',
  problemsTag:'START WITH YOUR CHALLENGE',problemsHeading:'What is holding your business back?',problemsDesc:'You don’t need to master complex tools. Tell us the problem — we’ll show which solution and metrics can help.',
- problemLink:'See the solution',problemBottom:'Recognize the problem? Start with a short description.',problemBottomLink:'Send an enquiry',
+ problemLink:'See the solution',problemsHeading:"What is holding your business back?",problemsDesc:"Open a thought — we’ll show how we solve it, step by step and technically.",howLabel:"How we solve it:",seeExample:"See an example",discussTask:"Discuss your task",t1q:"Do you really know what you earn after all costs?",t1a:"we bring all of your business money into one dashboard.",t1s1:"We connect your CRM, accounting, bank statements and spreadsheets — via exports or API.",t1s2:"Data goes into one database (SQL); we calculate revenue, margin and costs by line of business.",t1s3:"A dashboard with filters by period, manager and channel that updates itself.",t2q:"How many customers drop off halfway to payment — and why?",t2a:"we find the step where the customer journey breaks.",t2s1:"We set up event tracking on your site or app: Yandex Metrica, GA4 or custom logging.",t2s2:"We build funnels, cohorts and retention — you see where and who is lost.",t2s3:"We suggest changes and verify them with A/B tests, by numbers, not gut feeling.",t3q:"Every report goes through an analyst and takes three days?",t3a:"an AI assistant answers business questions in seconds.",t3s1:"We connect AI only to the data sources you approve — no extra access.",t3s2:"Answers come with numbers and a source link; we test accuracy on your real questions.",t3s3:"It works in the chat you already use — Telegram or web; we train your team.",t4q:"Does your website bring in leads — or does it just exist?",t4a:"we build a site that explains clearly and sells.",t4s1:"Structure and copy written for your customer, a comfortable mobile version.",t4s2:"Contact forms and buttons plus analytics: you see where every lead came from.",t4s3:"Fast loading, basic SEO, launch on your domain and full handover.",problemBottom:'Recognize the problem? Start with a short description.',problemBottomLink:'Send an enquiry',
  problemBizQuestion:'Sales are coming in, but profit is unclear?',problemBizResult:'See where you can earn more and where the money goes. Backed by numbers.',problemBizDetail:'We bring sales, costs and profit into one clear report. We explain what to look at and how to use it yourself.',
  problemProductQuestion:'People visit, but never reach checkout?',problemProductResult:'Find what to improve so more customers make it to purchase.',problemProductDetail:'We analyze the customer journey, identify opportunities and show how to measure the impact of changes.',
  problemAiQuestion:'Does every simple question still need an analyst?',problemAiResult:'Ask about your business. Get answers backed by data.',problemAiDetail:'We connect AI to your data and teach you to ask questions, get reports and verify where conclusions come from.',
@@ -990,10 +1053,37 @@ $('#langBtn').addEventListener('click',()=>{state.locale=state.locale==='ru'?'en
 if(!userChoseLocale)state.locale=browserLanguage();
 renderAll();updateLangBtn();
 detectLocaleByIP();
+/* ===== Problems as thoughts: hover (desktop) or tap to open ===== */
+(function(){
+ const cloud=document.getElementById('thoughtCloud');if(!cloud)return;
+ const thoughts=[...cloud.querySelectorAll('.thought')];
+ const wide=matchMedia('(min-width: 1001px)');
+ document.documentElement.classList.add('js-thoughts');
+ let closeTimer=0;
+ function setOpen(t,open){t.classList.toggle('is-open',open);t.querySelector('.thought-head').setAttribute('aria-expanded',String(open));t.querySelector('.thought-body').inert=!open}
+ function open(t,via){clearTimeout(closeTimer);thoughts.forEach(o=>{if(o!==t&&o.classList.contains('is-open'))setOpen(o,false)});
+  if(!t.classList.contains('is-open')){setOpen(t,true);try{track('open_problem',{problem:t.id.replace('problem-',''),via})}catch{}}
+  cloud.classList.add('has-open')}
+ function close(t){setOpen(t,false);if(!thoughts.some(o=>o.classList.contains('is-open')))cloud.classList.remove('has-open')}
+ thoughts.forEach(t=>{
+  setOpen(t,false);
+  t.querySelector('.thought-head').addEventListener('click',()=>t.classList.contains('is-open')?close(t):open(t,'click'));
+  t.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse'&&wide.matches)open(t,'hover')});
+  t.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&wide.matches){clearTimeout(closeTimer);closeTimer=setTimeout(()=>close(t),280)}});
+  t.addEventListener('focusin',()=>{if(wide.matches)open(t,'focus')});
+  t.addEventListener('keydown',e=>{if(e.key==='Escape'){close(t);t.querySelector('.thought-head').focus()}});
+ });
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>{if(!es.some(e=>e.isIntersecting))return;io.disconnect();
+   thoughts.forEach((t,i)=>t.animate([{opacity:0,transform:'translateY(16px) scale(.96)'},{opacity:1,transform:'none'}],{duration:600,delay:100+i*90,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}))},{threshold:.2});
+  io.observe(cloud);
+ }
+})();
+
 /* ===== Lists rise in once, content visible by default ===== */
 (function(){
  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)||!Element.prototype.animate)return;
- const groups=['.problem-grid','.service-grid','#solutionsGrid'].map(s=>document.querySelector(s)).filter(Boolean);
+ const groups=['#solutionsGrid'].map(s=>document.querySelector(s)).filter(Boolean);
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);
   [...e.target.children].forEach((c,i)=>c.animate([{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'none'}],{duration:560,delay:Math.min(i,6)*70,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
  }),{threshold:.15});
