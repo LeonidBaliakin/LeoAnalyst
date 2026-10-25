@@ -410,17 +410,17 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 
 .solution-custom{font:inherit;text-align:left;background:#17191e;border-color:#17191e;color:#fff;cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}.solution-custom:hover{background:#262a32;transform:translateY(-4px)}.solution-custom:active{transform:scale(.98)}.solution-custom .solution-icon{background:#84F0E0;color:#10141a}.solution-custom .solution-desc{color:#b9bec9}.solution-custom .solution-cta{color:#84F0E0}
 /* === thinker stage === */
-.thinker-stage{--ink-soft:#5c6573;position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,430px) minmax(0,1fr);grid-template-rows:310px 310px;column-gap:28px;margin-top:-6px}
-.thinker-figure{grid-column:2;grid-row:1/3;position:relative;align-self:stretch}
-.thinker-figure::before{content:"";position:absolute;inset:8% -6% 4%;border-radius:50%;background:radial-gradient(closest-side,#efe6d8 0%,rgba(239,230,216,.55) 55%,rgba(239,230,216,0) 100%);pointer-events:none}
-.thinker-poster,.thinker-figure canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;-webkit-mask-image:linear-gradient(#000 80%,transparent 99%);mask-image:linear-gradient(#000 80%,transparent 99%)}
-.thinker-figure canvas{opacity:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
-.thinker-figure.is-live canvas{opacity:1}.thinker-figure.is-live .thinker-poster{opacity:0;transition:opacity .5s .1s}
+.thinker-stage{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:150px 560px;column-gap:22px;margin-top:6px}
+.thinker-figure{grid-column:2/4;grid-row:2;position:relative;z-index:1;justify-self:center;width:min(100%,400px);height:600px;margin-top:96px}
+.thinker-figure::before{content:"";position:absolute;inset:6% -22% 0;border-radius:50%;background:radial-gradient(closest-side,#efe9e1 0%,rgba(239,233,225,.6) 55%,rgba(239,233,225,0) 100%);pointer-events:none}
+.guy{position:absolute;inset:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 80%,transparent 99%);mask-image:linear-gradient(#000 80%,transparent 99%);transform-origin:50% 100%}.guy-frame{position:absolute;left:0;top:0;width:100%;height:auto;opacity:0;z-index:0;user-select:none;-webkit-user-drag:none}.guy-frame:nth-child(3){opacity:1}.guy-frame.was-on{opacity:1;z-index:1}.guy-frame.is-on{opacity:1;z-index:2;transition:opacity .26s cubic-bezier(.16,1,.3,1)}.guy-frame:not(.is-on):not(.was-on){opacity:0}
+@media(prefers-reduced-motion:no-preference){.guy{animation:guy-breathe 5.5s ease-in-out infinite}}@keyframes guy-breathe{0%,100%{transform:none}50%{transform:translateY(-3px) scale(1.006)}}
+
 .thought{position:relative;z-index:2;width:min(100%,390px);background:#fff;border:1px solid #e6e3dc;border-radius:30px;box-shadow:0 14px 34px -18px rgba(52,44,30,.28),0 2px 6px rgba(52,44,30,.04);transition:box-shadow .3s cubic-bezier(.16,1,.3,1),opacity .3s,border-color .3s}
-.thought[data-pos=tl]{grid-column:1;grid-row:1;align-self:end;justify-self:end;margin-bottom:20px}
-.thought[data-pos=tr]{grid-column:3;grid-row:1;align-self:end;justify-self:start;margin-bottom:20px}
-.thought[data-pos=bl]{grid-column:1;grid-row:2;align-self:start;justify-self:end;margin-top:20px}
-.thought[data-pos=br]{grid-column:3;grid-row:2;align-self:start;justify-self:start;margin-top:20px}
+.thought[data-pos]{grid-row:1;align-self:start;justify-self:center;width:100%}.thought[data-pos=o1]{grid-column:1;margin-top:58px;justify-self:start}.thought[data-pos=i1]{grid-column:2}.thought[data-pos=i2]{grid-column:3}.thought[data-pos=o2]{grid-column:4;margin-top:58px;justify-self:end}
+
+
+
 .thought-head{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:14px;width:100%;padding:18px 20px;cursor:pointer;border-radius:30px}
 .thought-head:focus-visible{outline:2px solid #1275ff;outline-offset:2px}
 .thought-icon{flex:0 0 44px;height:44px;display:grid;place-items:center;border-radius:15px}
@@ -436,33 +436,34 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 .thought .problem-link{padding:6px 0;margin:0}
 .thought-dot{position:absolute;display:block;width:16px;height:16px;border-radius:50%;background:#fff;border:1px solid #e6e3dc;box-shadow:0 6px 14px -8px rgba(52,44,30,.3);pointer-events:none}
 .thought-dot-s{width:9px;height:9px}
-.thought[data-pos=tl] .thought-dot{right:-14px;bottom:-14px}.thought[data-pos=tl] .thought-dot-s{right:-28px;bottom:-30px}
-.thought[data-pos=tr] .thought-dot{left:-14px;bottom:-14px}.thought[data-pos=tr] .thought-dot-s{left:-28px;bottom:-30px}
-.thought[data-pos=bl] .thought-dot{right:-14px;top:-14px}.thought[data-pos=bl] .thought-dot-s{right:-28px;top:-30px}
-.thought[data-pos=br] .thought-dot{left:-14px;top:-14px}.thought[data-pos=br] .thought-dot-s{left:-28px;top:-30px}
+.thought[data-pos=o1] .thought-dot{right:10px;bottom:-26px}.thought[data-pos=o1] .thought-dot-s{right:-16px;bottom:-50px}.thought[data-pos=i1] .thought-dot{right:44px;bottom:-30px}.thought[data-pos=i1] .thought-dot-s{right:26px;bottom:-60px}.thought[data-pos=i2] .thought-dot{left:44px;bottom:-30px}.thought[data-pos=i2] .thought-dot-s{left:26px;bottom:-60px}.thought[data-pos=o2] .thought-dot{left:10px;bottom:-26px}.thought[data-pos=o2] .thought-dot-s{left:-16px;bottom:-50px}
+
+
+
 /* collapsed state only when the script is running, so content stays readable without JS */
 .js-thoughts .thought-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.16,1,.3,1)}
 .js-thoughts .thought-body>.thought-inner{min-height:0;overflow:hidden;opacity:0;transform:translateY(-6px);transition:opacity .22s,transform .38s cubic-bezier(.16,1,.3,1)}
 .js-thoughts .thought.is-open .thought-body{grid-template-rows:1fr}
 .js-thoughts .thought.is-open .thought-inner{opacity:1;transform:none;transition-delay:.06s}
 .js-thoughts .thought.is-open{z-index:3;border-color:#d9d4c9;box-shadow:0 26px 54px -24px rgba(52,44,30,.38),0 2px 8px rgba(52,44,30,.05)}
-.js-thoughts .thought.is-open .thought-plus{transform:rotate(45deg);background:#17191e;color:#fff}
+.js-thoughts .thought.is-open .thought-dot{opacity:0}.js-thoughts .thought.is-open .thought-plus{transform:rotate(45deg);background:#17191e;color:#fff}
 .js-thoughts .thinker-stage.has-open .thought:not(.is-open){opacity:.58}
+@media(min-width:1101px){.js-thoughts .thought.is-open{width:min(130%,400px)}}
 @media(min-width:1101px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
  .js-thoughts .thought:not(.is-open){animation:thought-drift 7s ease-in-out infinite}
- .js-thoughts .thought[data-pos=tr]{animation-delay:-1.8s}.js-thoughts .thought[data-pos=bl]{animation-delay:-3.4s}.js-thoughts .thought[data-pos=br]{animation-delay:-5.1s}
+ .js-thoughts .thought[data-pos=i1]{animation-delay:-1.8s}.js-thoughts .thought[data-pos=i2]{animation-delay:-3.4s}.js-thoughts .thought[data-pos=o2]{animation-delay:-5.1s}
 }
 @keyframes thought-drift{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media(max-width:1100px){
- .thinker-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;gap:12px}
- .thinker-figure{grid-column:1/-1;grid-row:auto;height:360px;width:min(100%,320px);justify-self:center;margin-bottom:4px}
+ .thinker-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;gap:12px;margin-top:0}
+ .thinker-figure{grid-column:1/-1;grid-row:auto;order:5;height:480px;width:min(100%,320px);justify-self:center;margin:12px 0 0}
  .thought[data-pos]{grid-column:auto;grid-row:auto;align-self:start;justify-self:stretch;width:auto;margin:0}
  .thought-dot{display:none}
  .js-thoughts .thinker-stage.has-open .thought:not(.is-open){opacity:1}
 }
 @media(max-width:700px){
  .thinker-stage{grid-template-columns:1fr}
- .thinker-figure{height:330px;width:min(100%,300px);margin-top:-8px}
+ .thinker-figure{height:430px;width:min(100%,280px)}.thinker-figure::before{inset:6% 0 0}
  .thought{border-radius:24px}.thought-head{padding:15px 16px;border-radius:24px;gap:12px}
  .thought-icon{flex-basis:40px;height:40px;border-radius:13px}.thought-q{font-size:15px}
  .thought-inner{padding:0 18px}.thought .problem-result{font-size:19px}
@@ -498,8 +499,8 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
     <p class="section-description" data-i18n="problemsDesc">Не нужно разбираться в сложных инструментах. Вы описываете проблему — мы показываем, какое решение и какие цифры помогут.</p>
    </div>
    <div class="thinker-stage" id="thinkerStage">
-    <div class="thinker-figure" aria-hidden="true"><img class="thinker-poster" src="assets/thinker.webp" alt="" width="520" height="640" loading="lazy" decoding="async"><canvas id="thinkerCanvas"></canvas></div>
-    <article class="thought thought-business" data-pos="tl">
+    <div class="thinker-figure" aria-hidden="true"><div class="guy"><img class="guy-frame" src="assets/guy/l2.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"><img class="guy-frame" src="assets/guy/l1.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"><img class="guy-frame" src="assets/guy/c.webp?v=202610251945" alt="" width="560" height="1086" decoding="async"><img class="guy-frame" src="assets/guy/r1.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"><img class="guy-frame" src="assets/guy/r2.webp?v=202610251945" alt="" width="560" height="1086" decoding="async" fetchpriority="low"></div></div>
+    <article class="thought thought-business" data-pos="o1">
      <button class="thought-head" type="button" id="thought-business-btn" aria-expanded="false" aria-controls="thought-business-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25V16M12 25V9M19 25V19M26 25V6"/><path d="M3 28h26"/></svg></span><span class="thought-q" data-i18n="problemBizQuestion">Продажи идут, но прибыль непонятна?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
      <div class="thought-body" id="thought-business-body" role="region" aria-labelledby="thought-business-btn"><div class="thought-inner">
       <h3 class="problem-result" data-i18n="problemBizResult">Покажем, где заработать больше и куда уходят деньги. На цифрах.</h3>
@@ -508,7 +509,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
      </div></div>
      <i class="thought-dot" aria-hidden="true"></i><i class="thought-dot thought-dot-s" aria-hidden="true"></i>
     </article>
-    <article class="thought thought-product" data-pos="tr">
+    <article class="thought thought-product" data-pos="i1">
      <button class="thought-head" type="button" id="thought-product-btn" aria-expanded="false" aria-controls="thought-product-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h22M8 15h17M12 22h10M16 28h4"/><circle cx="6" cy="8" r="2" fill="currentColor" stroke="none"/></svg></span><span class="thought-q" data-i18n="problemProductQuestion">Люди приходят, но не доходят до оплаты?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
      <div class="thought-body" id="thought-product-body" role="region" aria-labelledby="thought-product-btn"><div class="thought-inner">
       <h3 class="problem-result" data-i18n="problemProductResult">Покажем, что улучшить, чтобы больше клиентов доходили до покупки.</h3>
@@ -517,7 +518,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
      </div></div>
      <i class="thought-dot" aria-hidden="true"></i><i class="thought-dot thought-dot-s" aria-hidden="true"></i>
     </article>
-    <article class="thought thought-ai" data-pos="bl">
+    <article class="thought thought-ai" data-pos="i2">
      <button class="thought-head" type="button" id="thought-ai-btn" aria-expanded="false" aria-controls="thought-ai-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9h18a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H14l-7 4v-4a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4Z"/><path d="m11 17 3 3 7-7"/></svg></span><span class="thought-q" data-i18n="problemAiQuestion">Чтобы получить ответ, снова нужен аналитик?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
      <div class="thought-body" id="thought-ai-body" role="region" aria-labelledby="thought-ai-btn"><div class="thought-inner">
       <h3 class="problem-result" data-i18n="problemAiResult">Спрашивайте о бизнесе — получайте ответы с цифрами.</h3>
@@ -526,7 +527,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
      </div></div>
      <i class="thought-dot" aria-hidden="true"></i><i class="thought-dot thought-dot-s" aria-hidden="true"></i>
     </article>
-    <article class="thought thought-web" data-pos="br">
+    <article class="thought thought-web" data-pos="o2">
      <button class="thought-head" type="button" id="thought-web-btn" aria-expanded="false" aria-controls="thought-web-body"><span class="thought-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="25" height="21" rx="4"/><path d="M4 12h24M9 9h.01M13 9h.01M9 19h14M9 23h9"/></svg></span><span class="thought-q" data-i18n="problemWebQuestion">Нет сайта или он не помогает получать заявки?</span><span class="thought-plus" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg></span></button>
      <div class="thought-body" id="thought-web-body" role="region" aria-labelledby="thought-web-btn"><div class="thought-inner">
       <h3 class="problem-result" data-i18n="problemWebResult">Создадим сайт, на котором клиенту понятно, что вы предлагаете.</h3>
@@ -1098,24 +1099,26 @@ detectLocaleByIP();
   },{threshold:.25});io.observe(stage);
  }
 
- // 3D: load three.js only when the stage gets close to the viewport
- function canWebGL(){try{const c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')))}catch{return false}}
- function load(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
- let started=false;
- function boot(){
-  if(started||!canWebGL())return;started=true;
-  const v='?v=202610251500';
-  (window.THREE?Promise.resolve():load('assets/three.min.js'+v)).then(()=>window.LeoThinker?0:load('assets/thinker.js'+v)).then(()=>{
-   const canvas=document.getElementById('thinkerCanvas');
-   api=window.LeoThinker.mount(canvas,{reduced});
-   canvas.parentElement.classList.add('is-live');
-   api.look(mx,my);
-   let visible=false;
-   const vis=new IntersectionObserver(es=>{visible=es[0].isIntersecting;visible&&!document.hidden?api.start():api.stop()});vis.observe(canvas);
-   document.addEventListener('visibilitychange',()=>{document.hidden?api.stop():visible&&api.start()});
-  }).catch(()=>{/* poster image stays in place */});
- }
- if('IntersectionObserver' in window){const pre=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){pre.disconnect();boot()}},{rootMargin:'600px 0px'});pre.observe(stage)}else boot();
+ // Character: five head angles, cross-faded by where the cursor (or the open thought) is
+ (function(){
+  const fig=stage.querySelector('.thinker-figure');if(!fig)return;
+  const frames=[...fig.querySelectorAll('.guy-frame')];   // order: l2, l1, c, r1, r2
+  let idx=2,prevT=0;
+  function show(n){
+   if(n===idx)return;const old=frames[idx];idx=n;
+   frames.forEach(f=>f.classList.remove('was-on'));
+   old.classList.remove('is-on');old.classList.add('was-on');
+   frames[n].classList.add('is-on');
+   clearTimeout(prevT);prevT=setTimeout(()=>old.classList.remove('was-on'),reduced?0:300);
+  }
+  function aimAt(x){
+   const r=fig.getBoundingClientRect(),t=Math.max(-1,Math.min(1,(x-(r.left+r.width/2))/Math.max(innerWidth*.28,220)));
+   const p=(t+1)*2;if(Math.abs(p-idx)>.55)show(Math.max(0,Math.min(4,Math.round(p))));
+  }
+  let focusEl=null;
+  api={look(x){if(!focusEl)aimAt(x)},focus(el){focusEl=el||null;if(el){const r=el.getBoundingClientRect();aimAt(r.left+r.width/2)}}};
+  frames[2].classList.add('is-on');
+ })();
 })();
 
 /* ===== Lists rise in once, content visible by default ===== */
