@@ -479,6 +479,59 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 .badge-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#16191f;color:#84F0E0;flex:0 0 auto}
 .badge-ic svg{width:15px;height:15px}
 @media(max-width:600px){.hero-badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}.hero-badges li{flex-direction:column;justify-content:flex-start;gap:7px;padding:10px 6px 11px;border-radius:16px;font-size:11.5px;line-height:1.3;text-align:center;text-wrap:balance}.badge-ic{width:28px;height:28px}}
+/* === cost calculator (same visual language as the lead form) === */
+.calc-section{padding:96px 0 104px}
+.calc-intro{display:flex;align-items:end;justify-content:space-between;gap:36px;margin-bottom:30px}
+.calc-intro h2{margin:0;text-wrap:balance}
+.calc-intro .section-description{margin:0 0 6px;max-width:440px}
+.calc-card{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:0;background:#fff;border:1px solid #e3e5ea;border-radius:30px;box-shadow:0 30px 70px -40px rgba(14,27,49,.28);overflow:hidden}
+.calc-form{padding:32px 34px 30px;display:grid;gap:22px}
+.calc-q{font-size:13px;color:#303640;font-weight:720;line-height:1.45;margin:0 0 9px}
+.calc-services{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.calc-svc{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:13px 13px 12px;border:1px solid #e1e5eb;border-radius:16px;background:#fafbfc;color:#303640;font:inherit;font-size:13px;font-weight:720;line-height:1.3;text-align:left;cursor:pointer;transition:border-color .16s,background .16s,box-shadow .16s,transform .16s}
+.calc-svc:hover{border-color:#c9d0da;background:#fff}
+.calc-svc:active{transform:scale(.98)}
+.calc-svc[aria-pressed="true"]{background:#fff;border-color:#17191e;box-shadow:0 0 0 1px #17191e}
+.calc-svc .ic{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:#eef1f5;color:#4a5160}
+.calc-svc[aria-pressed="true"] .ic{background:#17191e;color:#84F0E0}
+.calc-svc .ic svg{width:17px;height:17px}
+.calc-seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:5px;padding:5px;border-radius:13px;background:#f1f3f6}
+.calc-seg button{border:1px solid transparent;background:transparent;border-radius:9px;color:#727987;min-height:39px;padding:4px 8px;font:inherit;font-size:13px;font-weight:730;line-height:1.25;cursor:pointer;transition:background .16s,color .16s,box-shadow .16s}
+.calc-seg button:hover{color:#1b2f4e}
+.calc-seg button[aria-pressed="true"]{color:#151c28;background:#fff;box-shadow:0 2px 9px rgba(14,27,49,.09)}
+.calc-hint{display:block;margin-top:7px;font-size:12px;color:#8a909b}
+.calc-extras{display:flex;flex-wrap:wrap;gap:8px}
+.calc-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 13px 8px 9px;border:1px solid #e1e5eb;border-radius:999px;background:#fafbfc;font:inherit;font-size:13px;font-weight:650;color:#3a404b;cursor:pointer;transition:border-color .16s,background .16s}
+.calc-chip:hover{border-color:#c9d0da;background:#fff}
+.calc-chip .box{width:18px;height:18px;border-radius:6px;border:1.5px solid #b9c0cb;display:grid;place-items:center;background:#fff;transition:background .16s,border-color .16s}
+.calc-chip .box svg{width:12px;height:12px;opacity:0;color:#fff}
+.calc-chip[aria-pressed="true"]{border-color:#17191e;background:#fff}
+.calc-chip[aria-pressed="true"] .box{background:#17191e;border-color:#17191e}
+.calc-chip[aria-pressed="true"] .box svg{opacity:1}
+.calc-result{display:flex;flex-direction:column;gap:16px;padding:32px 30px 30px;background:#16191f;color:#f3f5f8}
+.calc-result-label{font-size:13px;color:#a7aebb;font-weight:650;margin:0}
+.calc-price{font-size:clamp(28px,2.9vw,36px);text-wrap:balance;font-weight:790;letter-spacing:-.045em;line-height:1.1;margin:0;font-variant-numeric:tabular-nums;color:#fff}
+.calc-meta{display:grid;gap:10px;margin:0;padding:14px 0 0;border-top:1px solid rgba(255,255,255,.1)}
+.calc-meta div{display:flex;justify-content:space-between;gap:12px;font-size:13.5px}
+.calc-meta dt{color:#a7aebb}.calc-meta dd{margin:0;font-weight:700;text-align:right;color:#f3f5f8;font-variant-numeric:tabular-nums}
+.calc-includes{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:13px;color:#c9cfd9;line-height:1.45}
+.calc-includes li{position:relative;padding-left:20px}
+.calc-includes li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:5px;border-left:2px solid #84F0E0;border-bottom:2px solid #84F0E0;transform:rotate(-45deg)}
+.calc-send{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:auto;border:0;border-radius:14px;padding:15px 18px;background:#84F0E0;color:#0f1a1d;font:inherit;font-size:14px;font-weight:780;cursor:pointer;transition:background .18s,transform .18s}
+.calc-send:hover{background:#9ff5e9}.calc-send:active{transform:scale(.98)}
+.calc-send svg{width:17px;height:17px}
+.calc-note{margin:0;font-size:12px;line-height:1.5;color:#8d95a3}
+.calc-price,.calc-meta dd{transition:opacity .18s}
+.calc-flash{animation:calc-flash .32s cubic-bezier(.16,1,.3,1)}
+@keyframes calc-flash{from{opacity:.35;transform:translateY(3px)}to{opacity:1;transform:none}}
+/* estimate attached to the lead form */
+.lead-estimate{display:flex;align-items:flex-start;gap:12px;margin:0 0 20px;padding:12px 14px;border:1px solid #d7ece8;border-radius:14px;background:#f2fbf9;font-size:13px;line-height:1.5;color:#2d3a3a}
+.lead-estimate b{display:block;color:#13332f;font-size:13.5px}
+.lead-estimate button{margin-left:auto;flex:0 0 auto;border:0;background:none;color:#5d6b6a;font:inherit;font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.lead-calc-link{display:inline-block;margin:-14px 0 20px;border:0;background:none;padding:0;color:#1a74de;font:inherit;font-size:13px;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:980px){.calc-card{grid-template-columns:1fr}.calc-result{padding:26px 24px}.calc-intro{flex-direction:column;align-items:flex-start;gap:14px}}
+@media(max-width:600px){.calc-section{padding:64px 0 72px}.calc-form{padding:22px 18px;gap:18px}.calc-card{border-radius:24px}.calc-services{grid-template-columns:repeat(2,minmax(0,1fr))}.calc-seg{grid-auto-flow:row;grid-template-columns:repeat(var(--n,3),minmax(0,1fr))}.calc-seg button{font-size:12.5px}}
+@media(prefers-reduced-motion:reduce){.calc-flash{animation:none}}
 /* === section entrance (one restrained pattern for lists) === */
 </style>
 </head>
@@ -486,7 +539,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 <header class="site-header">
  <div class="container site-nav">
   <a href="#top" class="brand" aria-label="Сайты и Аналитика"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M4 21V14M11 21V7M18 21V12M25 21V4" stroke="#84F0E0" stroke-width="3.6" stroke-linecap="round"/></svg></span><span data-i18n="brandA">Сайты</span><span class="sep">&</span><span data-i18n="brandB">Аналитика</span></a>
-  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#demo" data-i18n="navDemo">Примеры</a></nav>
+  <nav class="main-nav" id="mainNav" aria-label="Навигация"><a href="#problems" data-i18n="navProblems">Ваши задачи</a><a href="#demo" data-i18n="navDemo">Примеры</a><a href="#calc" data-i18n="navCalc">Стоимость</a></nav>
   <div class="nav-right"><button class="nav-contact" type="button" data-open-lead><span data-i18n="navCta">Оставить заявку</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><button class="menu-btn" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
  </div>
 </header>
@@ -565,6 +618,15 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
   </div>
  </section>
 </main>
+ <section class="calc-section" id="calc" aria-labelledby="calcHeading">
+  <div class="container">
+   <div class="calc-intro">
+    <h2 id="calcHeading" data-i18n="calcHeading">Сколько это стоит?</h2>
+    <p class="section-description" data-i18n="calcDesc">Соберите задачу из нескольких ответов — увидите вилку цены и срок. Расчёт можно сразу отправить заявкой, а можно оставить заявку и без него.</p>
+   </div>
+   <div class="calc-card" id="calcRoot"></div>
+  </div>
+ </section>
 <div class="cookie-bar" id="cookieBar" role="region" aria-label="Cookie" hidden>
  <p data-i18n="cookieText">Сайт использует cookie и Google Analytics, чтобы считать посещения и понимать, какие разделы полезны. Данные о посещениях обрабатываются Google LLC (США).</p>
  <div class="cookie-actions"><button type="button" class="cookie-btn cookie-accept" id="cookieAccept" data-i18n="cookieAccept">Принять</button><button type="button" class="cookie-btn" id="cookieDecline" data-i18n="cookieDecline">Отклонить</button></div>
@@ -673,7 +735,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 const COPY={
 ru:{
  brandA:'Сайты',brandB:'Аналитика',brandFull:'Сайты и Аналитика',navProblems:'Ваши задачи',navDemo:'Примеры',navServices:'Решения',navProcess:'Этапы',navContact:'Контакты',navCta:'Оставить заявку',
- heroTag:'Сайты · бизнес‑аналитика · продуктовая аналитика · ИИ',heroTitleA:'Где теряются деньги и клиенты?',heroTitleB:'Покажем на цифрах.',heroLead:'Поможем понять, что улучшать: соберём данные, найдём слабые места и объясним выводы. Создаём сайты, внедряем аналитику и ИИ под ключ.',ctaDiscuss:'Оставить заявку',ctaExplore:'Какие задачи решаем',trustOne:'Только проверяемые выводы',trustTwo:'Покажем и научим',badgeProto:'Прототип за 48 часов',badgeLaunch:'Запуск за 4⁠–⁠8 недель',badgeNda:'Работаем под NDA',
+ heroTag:'Сайты · бизнес‑аналитика · продуктовая аналитика · ИИ',heroTitleA:'Где теряются деньги и клиенты?',heroTitleB:'Покажем на цифрах.',heroLead:'Поможем понять, что улучшать: соберём данные, найдём слабые места и объясним выводы. Создаём сайты, внедряем аналитику и ИИ под ключ.',ctaDiscuss:'Оставить заявку',ctaExplore:'Какие задачи решаем',trustOne:'Только проверяемые выводы',trustTwo:'Покажем и научим',navCalc:'Стоимость',calcHeading:'Сколько это стоит?',calcDesc:'Соберите задачу из нескольких ответов — увидите вилку цены и срок. Расчёт можно сразу отправить заявкой, а можно оставить заявку и без него.',badgeProto:'Прототип за 48 часов',badgeLaunch:'Запуск за 4⁠–⁠8 недель',badgeNda:'Работаем под NDA',
  problemsTag:'НАЧНЁМ С ВАШЕЙ ЗАДАЧИ',problemsHeading:'Что сейчас мешает вашему бизнесу?',problemsDesc:'Не нужно разбираться в сложных инструментах. Вы описываете проблему — мы показываем, какое решение и какие цифры помогут.',
  problemLink:'Как решаем',problemsHeading:"Что сейчас мешает вашему бизнесу?",problemsDesc:"Откройте мысль — покажем, как решаем это: по шагам и технически.",howLabel:"Как решаем:",seeExample:"Смотреть пример",discussTask:"Обсудить задачу",t1q:"Вы точно знаете, сколько зарабатываете после всех расходов?",t1a:"соберём все деньги бизнеса в один дашборд.",t1s1:"Подключаем CRM, 1С, банковские выписки и таблицы — через выгрузки или API.",t1s2:"Сводим данные в одну базу (SQL), считаем выручку, маржу и расходы по направлениям.",t1s3:"Дашборд с фильтрами по периодам, менеджерам и каналам обновляется сам.",t2q:"Сколько клиентов уходит на полпути к оплате — и почему?",t2a:"найдём шаг, на котором ломается путь клиента.",t2s1:"Настраиваем сбор событий на сайте или в приложении: Яндекс Метрика, GA4 или своё логирование.",t2s2:"Строим воронки, когорты и удержание — видно, где и кто теряется.",t2s3:"Предлагаем изменения и проверяем их A/B-тестом на цифрах, а не на ощущениях.",t3q:"Каждый отчёт — через аналитика и через три дня?",t3a:"ИИ-ассистент отвечает на вопросы о бизнесе за секунды.",t3s1:"Подключаем ИИ только к согласованным источникам данных — без лишнего доступа.",t3s2:"Настраиваем ответы с цифрами и ссылкой на источник, проверяем точность на ваших вопросах.",t3s3:"Работает в привычном чате — Telegram или веб; учим команду им пользоваться.",t4q:"Ваш сайт приносит заявки — или просто существует?",t4a:"делаем сайт, который понятно объясняет и продаёт.",t4s1:"Структура и тексты под вашего клиента, удобная версия для телефона.",t4s2:"Формы и кнопки связи плюс аналитика: видно, откуда пришла каждая заявка.",t4s3:"Быстрая загрузка, базовое SEO, публикация на вашем домене и передача доступов.",problemBottom:'Узнали свою ситуацию? Начните с короткого описания задачи.',problemBottomLink:'Оставить заявку',
  problemBizQuestion:'Продажи идут, но прибыль непонятна?',problemBizResult:'Покажем, где заработать больше и куда уходят деньги. На цифрах.',problemBizDetail:'Соберём продажи, расходы и прибыль в понятный отчёт. Объясним, на что смотреть и как пользоваться самостоятельно.',
@@ -704,7 +766,7 @@ ru:{
 },
 en:{
  brandA:'Websites',brandB:'Analytics',brandFull:'Websites & Analytics',navProblems:'Your challenges',navDemo:'Examples',navServices:'Solutions',navProcess:'Our process',navContact:'Contact',navCta:'Send an enquiry',
- heroTag:'Websites · business analytics · product analytics · AI',heroTitleA:'Where are revenue and customers slipping away?',heroTitleB:'We’ll show you in the numbers.',heroLead:'Understand what to improve: we connect your data, reveal friction points and explain the findings. Websites, analytics and AI delivered end to end.',ctaDiscuss:'Send an enquiry',ctaExplore:'Explore the problems we solve',trustOne:'Verifiable findings',trustTwo:'We show you how it works',badgeProto:'Prototype in 48 hours',badgeLaunch:'Launch in 4⁠–⁠8 weeks',badgeNda:'NDA by default',
+ heroTag:'Websites · business analytics · product analytics · AI',heroTitleA:'Where are revenue and customers slipping away?',heroTitleB:'We’ll show you in the numbers.',heroLead:'Understand what to improve: we connect your data, reveal friction points and explain the findings. Websites, analytics and AI delivered end to end.',ctaDiscuss:'Send an enquiry',ctaExplore:'Explore the problems we solve',trustOne:'Verifiable findings',trustTwo:'We show you how it works',navCalc:'Pricing',calcHeading:'What does it cost?',calcDesc:'Answer a few questions to see a price range and timeline. Send the estimate with your request — or send a request without it.',badgeProto:'Prototype in 48 hours',badgeLaunch:'Launch in 4⁠–⁠8 weeks',badgeNda:'NDA by default',
  problemsTag:'START WITH YOUR CHALLENGE',problemsHeading:'What is holding your business back?',problemsDesc:'You don’t need to master complex tools. Tell us the problem — we’ll show which solution and metrics can help.',
  problemLink:'See the solution',problemsHeading:"What is holding your business back?",problemsDesc:"Open a thought — we’ll show how we solve it, step by step and technically.",howLabel:"How we solve it:",seeExample:"See an example",discussTask:"Discuss your task",t1q:"Do you really know what you earn after all costs?",t1a:"we bring all of your business money into one dashboard.",t1s1:"We connect your CRM, accounting, bank statements and spreadsheets — via exports or API.",t1s2:"Data goes into one database (SQL); we calculate revenue, margin and costs by line of business.",t1s3:"A dashboard with filters by period, manager and channel that updates itself.",t2q:"How many customers drop off halfway to payment — and why?",t2a:"we find the step where the customer journey breaks.",t2s1:"We set up event tracking on your site or app: Yandex Metrica, GA4 or custom logging.",t2s2:"We build funnels, cohorts and retention — you see where and who is lost.",t2s3:"We suggest changes and verify them with A/B tests, by numbers, not gut feeling.",t3q:"Every report goes through an analyst and takes three days?",t3a:"an AI assistant answers business questions in seconds.",t3s1:"We connect AI only to the data sources you approve — no extra access.",t3s2:"Answers come with numbers and a source link; we test accuracy on your real questions.",t3s3:"It works in the chat you already use — Telegram or web; we train your team.",t4q:"Does your website bring in leads — or does it just exist?",t4a:"we build a site that explains clearly and sells.",t4s1:"Structure and copy written for your customer, a comfortable mobile version.",t4s2:"Contact forms and buttons plus analytics: you see where every lead came from.",t4s3:"Fast loading, basic SEO, launch on your domain and full handover.",problemBottom:'Recognize the problem? Start with a short description.',problemBottomLink:'Send an enquiry',
  problemBizQuestion:'Sales are coming in, but profit is unclear?',problemBizResult:'See where you can earn more and where the money goes. Backed by numbers.',problemBizDetail:'We bring sales, costs and profit into one clear report. We explain what to look at and how to use it yourself.',
@@ -984,7 +1046,7 @@ async function submitLead(e){
   if($('#leadHoneypot').value)return;
   if(!LEAD_DELIVERY_ENABLED){
     // Local preview ONLY. No fetch, email, analytics event, storage or external transfer.
-    $('#leadEntry').hidden=true;$('#leadSuccess').hidden=false;$('#leadFinish').focus();
+    $('#leadEntry').hidden=true;$('#leadSuccess').hidden=false;window.leadEstimate=null;window.paintLeadEstimate&&paintLeadEstimate();$('#leadFinish').focus();
     return;
   }
   const data={
@@ -994,6 +1056,7 @@ async function submitLead(e){
     'Способ связи / Contact type':info.method,
     'Контакт / Contact':info.contact,
     'Описание задачи / Project details':info.message||'(не указано / not provided)',
+    'Расчёт / Estimate':window.leadEstimate?(window.leadEstimate.price+' · '+window.leadEstimate.term+' · '+window.leadEstimate.line):'(без расчёта / none)',
     'Согласие на обработку / Data processing consent':'Yes / Да',
     'Время отправки / Submitted at':new Date().toISOString(),
     'Язык сайта / Website language':state.locale,
@@ -1017,7 +1080,7 @@ async function submitLead(e){
       else showLeadStatus(dict.formError,'error');
       return;
     }
-    track('generate_lead',{contact_method:leadMethod,site_language:state.locale});$('#leadEntry').hidden=true;$('#leadSuccess').hidden=false;$('#leadFinish').focus();
+    track('generate_lead',{contact_method:leadMethod,site_language:state.locale});$('#leadEntry').hidden=true;$('#leadSuccess').hidden=false;window.leadEstimate=null;window.paintLeadEstimate&&paintLeadEstimate();$('#leadFinish').focus();
   }catch(error){
     showLeadStatus(dict.formError,'error');
   }finally{
@@ -1099,6 +1162,127 @@ detectLocaleByIP();
  function choose(val){try{localStorage.setItem('cookieConsent',val)}catch{}bar.hidden=true;if(val==='accepted'&&window.loadAnalytics)loadAnalytics()}
  document.getElementById('cookieAccept').addEventListener('click',()=>choose('accepted'));
  document.getElementById('cookieDecline').addEventListener('click',()=>choose('declined'));
+})();
+/* ===== Cost calculator: price ranges in RUB (ru) or USD (en), estimate can be attached to the lead ===== */
+(function(){
+ const root=document.getElementById('calcRoot');if(!root)return;
+ const ICON={
+  dash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10m6 10V4m6 16v-7m4 7V8"/></svg>',
+  product:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 11h10M10 16h4M11 20h2"/></svg>',
+  ai:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-8l-5 3v-3a3 3 0 0 1-3-3V9a3 3 0 0 1 2-3Z"/><path d="m9 12 2 2 4-4"/></svg>',
+  web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="3"/><path d="M3 9h18M7 14h10"/></svg>'};
+ const CHECK='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 6.2 2.2 2.2 4.8-4.8"/></svg>';
+ const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
+ // base ranges: RUB in thousands, USD in dollars
+ const BASE={
+  rub:{dash:{s:[40,60],m:[70,120],l:[150,250]},product:{s:[50,80],m:[90,150],l:[180,300]},ai:{s:[60,90],m:[120,200],l:[250,400]},web:{s:[35,60],m:[60,100],l:[120,200]}},
+  usd:{dash:{s:[900,1500],m:[2000,4000],l:[5000,9000]},product:{s:[1200,2000],m:[2500,5000],l:[6000,12000]},ai:{s:[1500,2500],m:[3000,6000],l:[7000,14000]},web:{s:[700,1200],m:[1500,3000],l:[3500,6000]}}};
+ const SUPPORT={rub:{s:10,m:20,l:40},usd:{s:200,m:400,l:800}};
+ const WEEKS={dash:{s:[2,3],m:[3,5],l:[5,8]},product:{s:[3,4],m:[4,6],l:[6,8]},ai:{s:[3,4],m:[4,6],l:[6,8]},web:{s:[1,2],m:[2,4],l:[4,6]}};
+ const T={
+  ru:{svcQ:'Что нужно сделать?',segQ:'Размер бизнеса',svc:{dash:'Дашборд',product:'Продуктовая аналитика',ai:'ИИ-ассистент',web:'Сайт'},
+   seg:{s:'Стартап',m:'Малый бизнес',l:'Средний бизнес'},segHint:{s:'до 15 сотрудников',m:'15–100 сотрудников',l:'100–500 сотрудников'},
+   q:{
+    dash:[['src','Сколько источников данных?',['1','2–3','4 и больше'],[0,.2,.45],'CRM, 1С, таблицы, банк, реклама'],['scr','Сколько экранов дашборда?',['1–2','3–5','6 и больше'],[0,.25,.55]]],
+    product:[['plat','Где собираем данные?',['Сайт','Приложение','Сайт и приложение'],[0,.15,.35]],['ev','Сколько действий пользователя отслеживаем?',['до 20','20–50','больше 50'],[0,.2,.45],'регистрация, корзина, оплата и т. п.']],
+    ai:[['src','Сколько источников подключаем?',['1–2','3–5','6 и больше'],[0,.3,.6]],['ch','Где будет работать ассистент?',['Telegram','Веб-чат','Telegram и веб'],[0,.1,.2]]],
+    web:[['pg','Какой сайт нужен?',['Лендинг','до 5 страниц','до 10 страниц'],[0,.4,.8]],['lng','Сколько языков?',['Один','Два'],[0,.2]]]},
+   exQ:'Дополнительно',
+   ex:{dash:[['clean','Очистка и сведение данных',.15],['auto','Автообновление каждый день',.1],['train','Обучение команды',.05]],
+    product:[['ab','A/B-тесты',.2],['board','Дашборд по метрикам',.15],['train','Обучение команды',.05]],
+    ai:[['reports','Отчёты по расписанию',.15],['train','Обучение команды',.05]],
+    web:[['copy','Тексты под ключ',.15],['crm','Заявки в CRM',.15]]},
+   supp:'Поддержка после запуска',
+   inc:{dash:['Подключение источников и сведение данных','Дашборд с фильтрами по периодам и разрезам','Передача доступов и инструкция'],
+    product:['План событий и настройка сбора','Воронки, когорты и удержание','Выводы и гипотезы для роста'],
+    ai:['Подключение к согласованным данным','Проверка точности ответов','Запуск в рабочем чате'],
+    web:['Структура, дизайн и мобильная версия','Формы связи и аналитика заявок','Публикация на вашем домене']},
+   resLabel:'Предварительная стоимость',term:'Срок',weeks:'нед.',support:'Поддержка',perMonth:'в месяц',noSupport:'не нужна',
+   send:'Отправить заявку с расчётом',note:'Это предварительная оценка. Точную стоимость назовём после короткого звонка. Можно начать с прототипа за 48 часов.',
+   estTitle:'Ваш расчёт',estRemove:'убрать',calcLink:'Не знаете бюджет? Рассчитайте стоимость'},
+  en:{svcQ:'What do you need?',segQ:'Company size',svc:{dash:'Dashboard',product:'Product analytics',ai:'AI assistant',web:'Website'},
+   seg:{s:'Startup',m:'Small business',l:'Mid-size business'},segHint:{s:'up to 15 people',m:'15–100 people',l:'100–500 people'},
+   q:{
+    dash:[['src','How many data sources?',['1','2–3','4 or more'],[0,.2,.45],'CRM, accounting, spreadsheets, bank, ads'],['scr','How many dashboard screens?',['1–2','3–5','6 or more'],[0,.25,.55]]],
+    product:[['plat','Where do we collect data?',['Website','App','Website and app'],[0,.15,.35]],['ev','How many user actions do we track?',['up to 20','20–50','over 50'],[0,.2,.45],'sign-up, cart, payment, etc.']],
+    ai:[['src','How many sources do we connect?',['1–2','3–5','6 or more'],[0,.3,.6]],['ch','Where will the assistant live?',['Telegram','Web chat','Telegram and web'],[0,.1,.2]]],
+    web:[['pg','What kind of site?',['Landing page','up to 5 pages','up to 10 pages'],[0,.4,.8]],['lng','How many languages?',['One','Two'],[0,.2]]]},
+   exQ:'Extras',
+   ex:{dash:[['clean','Data cleaning and merging',.15],['auto','Daily auto-refresh',.1],['train','Team training',.05]],
+    product:[['ab','A/B tests',.2],['board','Metrics dashboard',.15],['train','Team training',.05]],
+    ai:[['reports','Scheduled reports',.15],['train','Team training',.05]],
+    web:[['copy','Copywriting included',.15],['crm','Leads into your CRM',.15]]},
+   supp:'Support after launch',
+   inc:{dash:['Source connection and data merging','Dashboard with period and segment filters','Handover and a short guide'],
+    product:['Tracking plan and event setup','Funnels, cohorts and retention','Findings and growth hypotheses'],
+    ai:['Connection to approved data only','Answer accuracy testing','Launch in your team chat'],
+    web:['Structure, design and mobile version','Contact forms and lead analytics','Launch on your domain']},
+   resLabel:'Estimated cost',term:'Timeline',weeks:'wks',support:'Support',perMonth:'per month',noSupport:'not needed',
+   send:'Send a request with this estimate',note:'This is a preliminary estimate. We confirm the exact price after a short call. You can start with a 48-hour prototype.',
+   estTitle:'Your estimate',estRemove:'remove',calcLink:'Not sure about the budget? Estimate the cost'}};
+ const st={svc:'dash',seg:'m',a:{},ex:{},supp:false};
+ const L=()=>state.locale==='ru'?'ru':'en',CUR=()=>L()==='ru'?'rub':'usd';
+ function fmt(v){return L()==='ru'?new Intl.NumberFormat('ru-RU').format(v*1000)+' ₽':'$'+new Intl.NumberFormat('en-US').format(v)}
+ function range(a,b){return L()==='ru'?new Intl.NumberFormat('ru-RU').format(a*1000)+' – '+new Intl.NumberFormat('ru-RU').format(b*1000)+' ₽':fmt(a)+' – '+fmt(b)}
+ const SHORT={ru:{src:'Источники',scr:'Экраны',plat:'Где данные',ev:'События',ch:'Канал',pg:'Сайт',lng:'Языки'},en:{src:'Sources',scr:'Screens',plat:'Platform',ev:'Events',ch:'Channel',pg:'Site',lng:'Languages'}};
+ function calc(){
+  const t=T[L()],qs=t.q[st.svc];let k=0;
+  qs.forEach(q=>{k+=q[3][st.a[st.svc+q[0]]||0]});
+  t.ex[st.svc].forEach(e=>{if(st.ex[st.svc+e[0]])k+=e[2]});
+  const b=BASE[CUR()][st.svc][st.seg],r=CUR()==='rub'?5:100;
+  const lo=Math.round(b[0]*(1+k)/r)*r,hi=Math.round(b[1]*(1+k)/r)*r;
+  const w=WEEKS[st.svc][st.seg];return{lo,hi,w:[w[0],w[1]+(k>.4?1:0)+(k>.8?1:0)],k};
+ }
+ function summary(){
+  const t=T[L()],r=calc(),qs=t.q[st.svc];
+  const parts=[t.svc[st.svc],t.seg[st.seg]].concat(qs.map(q=>SHORT[L()][q[0]]+': '+q[2][st.a[st.svc+q[0]]||0]));
+  const ex=t.ex[st.svc].filter(e=>st.ex[st.svc+e[0]]).map(e=>e[1]);if(ex.length)parts.push(ex.join(', '));
+  if(st.supp)parts.push(t.support+': '+fmt(SUPPORT[CUR()][st.seg])+' '+t.perMonth);
+  return{line:parts.join(' · '),price:range(r.lo,r.hi),term:r.w[0]+'–'+r.w[1]+' '+t.weeks};
+ }
+ function seg(name,labels,cur,hint){return `<div><p class="calc-q" id="cq-${name}">${labels.q}</p><div class="calc-seg" role="group" aria-labelledby="cq-${name}" style="--n:${labels.o.length}">${labels.o.map((o,i)=>`<button type="button" data-q="${name}" data-v="${i}" aria-pressed="${i===cur}">${o}</button>`).join('')}</div>${hint?`<span class="calc-hint">${hint}</span>`:''}</div>`}
+ function render(flash){
+  const t=T[L()],r=calc(),s=summary();
+  root.innerHTML=`<div class="calc-form">
+   <div><p class="calc-q" id="cq-svc">${t.svcQ}</p><div class="calc-services" role="group" aria-labelledby="cq-svc">${['dash','product','ai','web'].map(k=>`<button type="button" class="calc-svc" data-svc="${k}" aria-pressed="${st.svc===k}"><span class="ic" aria-hidden="true">${ICON[k]}</span>${t.svc[k]}</button>`).join('')}</div></div>
+   ${seg('seg',{q:t.segQ,o:['s','m','l'].map(x=>t.seg[x])},['s','m','l'].indexOf(st.seg),t.segHint[st.seg])}
+   ${t.q[st.svc].map(q=>seg(q[0],{q:q[1],o:q[2]},st.a[st.svc+q[0]]||0,q[4])).join('')}
+   <div><p class="calc-q">${t.exQ}</p><div class="calc-extras">${t.ex[st.svc].map(e=>`<button type="button" class="calc-chip" data-ex="${e[0]}" aria-pressed="${!!st.ex[st.svc+e[0]]}"><span class="box" aria-hidden="true">${CHECK}</span>${e[1]}</button>`).join('')}<button type="button" class="calc-chip" data-supp aria-pressed="${st.supp}"><span class="box" aria-hidden="true">${CHECK}</span>${t.supp}</button></div></div>
+  </div>
+  <aside class="calc-result" aria-live="polite">
+   <p class="calc-result-label">${t.resLabel}</p>
+   <p class="calc-price${flash?' calc-flash':''}">${s.price}</p>
+   <dl class="calc-meta"><div><dt>${t.term}</dt><dd>${s.term}</dd></div><div><dt>${t.support}</dt><dd>${st.supp?fmt(SUPPORT[CUR()][st.seg])+' '+t.perMonth:t.noSupport}</dd></div></dl>
+   <ul class="calc-includes">${t.inc[st.svc].map(x=>`<li>${x}</li>`).join('')}</ul>
+   <button type="button" class="calc-send" id="calcSend">${t.send}${ARROW}</button>
+   <p class="calc-note">${t.note}</p>
+  </aside>`;
+ }
+ root.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.svc){st.svc=b.dataset.svc}
+  else if(b.dataset.q==='seg'){st.seg=['s','m','l'][+b.dataset.v]}
+  else if(b.dataset.q){st.a[st.svc+b.dataset.q]=+b.dataset.v}
+  else if(b.dataset.ex){const k=st.svc+b.dataset.ex;st.ex[k]=!st.ex[k]}
+  else if(b.hasAttribute('data-supp')){st.supp=!st.supp}
+  else if(b.id==='calcSend'){attach();return}
+  else return;
+  const focusSel=b.dataset.svc?`[data-svc="${b.dataset.svc}"]`:b.dataset.q?`[data-q="${b.dataset.q}"][data-v="${b.dataset.v}"]`:b.dataset.ex?`[data-ex="${b.dataset.ex}"]`:'[data-supp]';
+  render(true);root.querySelector(focusSel)?.focus();
+ });
+ // attach estimate to the lead form
+ const entry=document.getElementById('leadEntry'),form=document.getElementById('leadForm');
+ const box=document.createElement('div');box.className='lead-estimate';box.hidden=true;form.parentNode.insertBefore(box,form);
+ const link=document.createElement('button');link.type='button';link.className='lead-calc-link';form.parentNode.insertBefore(link,form);
+ window.leadEstimate=null;
+ function paintLead(){
+  const t=T[L()];link.textContent=t.calcLink;link.hidden=!!window.leadEstimate;box.hidden=!window.leadEstimate;
+  if(window.leadEstimate){box.innerHTML=`<div><b>${t.estTitle}: ${window.leadEstimate.price}, ${window.leadEstimate.term}</b>${window.leadEstimate.line}</div><button type="button">${t.estRemove}</button>`;box.querySelector('button').onclick=()=>{window.leadEstimate=null;paintLead()}}
+ }
+ function attach(){const s=summary();window.leadEstimate=s;try{track('calc_send',{service:st.svc,segment:st.seg,currency:CUR()})}catch{}openLead();paintLead()}
+ link.addEventListener('click',()=>{closeLead();document.getElementById('calc').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+ const _ra=renderAll;renderAll=function(){_ra();render(false);paintLead()};
+ window.paintLeadEstimate=paintLead;render(false);paintLead();
 })();
 /* ===== Lists rise in once, content visible by default ===== */
 (function(){
