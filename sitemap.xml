@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://leonidbaliakin.github.io/LeoAnalyst/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://leonidbaliakin.github.io/LeoAnalyst/dashboards/product-analytics/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://leonidbaliakin.github.io/LeoAnalyst/dashboards/finance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://leonidbaliakin.github.io/LeoAnalyst/dashboards/beauty-salon/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://leonidbaliakin.github.io/LeoAnalyst/dashboards/staff-crm/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://leonidbaliakin.github.io/LeoAnalyst/dashboards/logistics/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://analyticsbuild.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://analyticsbuild.com/dashboards/product-analytics/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://analyticsbuild.com/dashboards/finance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://analyticsbuild.com/dashboards/beauty-salon/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://analyticsbuild.com/dashboards/staff-crm/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://analyticsbuild.com/dashboards/logistics/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
