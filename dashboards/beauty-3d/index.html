@@ -1,5 +1,7 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mira 3D — концепт</title>
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<script src="../_shared/geo-locale.js?v=1"></script>
+<script>(function(){try{if(localStorage.getItem('cookieConsent')!=='accepted')return}catch(e){return}window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-RD7CLDCHGF');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-RD7CLDCHGF';document.head.appendChild(s)})();</script><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D-дашборд салона красоты — пример | LeoAnalyst</title><meta name="description" content="Интерактивный 3D-дашборд салона красоты: финансы, клиенты, мастера, склад и расходы.">
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--paper:#f6f1f4;--surface:#fff;--line:#ece3e8;--ink:#2a1f2d;--muted:#8a7b88;--fern:#6e3f8f;--fern-2:#9a6cc4;--fern-soft:#efe5f7;--peach:#f0a07e;--rose:#d9667f;--good:#2f8a64;--sky:#7b8fe0}
@@ -12,7 +14,7 @@
 .kpis{display:flex;gap:8px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 14px;min-width:112px;box-shadow:0 8px 24px -14px rgba(110,63,143,.25)}
 .kpi small{display:block;font-size:11.5px;color:var(--muted)}.kpi b{font-size:19px;letter-spacing:-.02em}.kpi .up{color:var(--good);font-size:12px;font-weight:600;margin-left:4px}
-.tag{position:fixed;z-index:4;transform:translate(-50%,-100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:9px 12px 10px;box-shadow:0 14px 34px -16px rgba(60,30,70,.35);min-width:120px;max-width:210px}
+.tag{cursor:pointer;position:fixed;z-index:4;transform:translate(-50%,-100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:9px 12px 10px;box-shadow:0 14px 34px -16px rgba(60,30,70,.35);min-width:120px;max-width:210px}
 .tag:after{content:"";position:absolute;left:50%;bottom:-12px;width:1px;height:12px;background:#cdbfd0}
 .tag i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
 .tag small{font-size:11.5px;color:var(--muted);font-weight:600}.tag b{display:block;font-size:17px;letter-spacing:-.02em;margin:2px 0 1px}
@@ -28,11 +30,10 @@
 .tag{min-width:0;max-width:150px;padding:7px 9px}.tag b{font-size:14px}.tag span{display:none}.dock{left:12px;right:12px;transform:none;overflow-x:auto}.dock button{padding:8px 12px;white-space:nowrap}.hint{display:none}.pin{display:none}}
 </style></head><body>
 <div id="world"></div>
-<div class="top"><div class="brand"><div class="logo">M</div><div><b>Mira</b><span>салон красоты · демо</span></div></div>
-<div class="kpis"><div class="kpi"><small>Выручка, 30 дней</small><b>1,24 млн ₽</b><span class="up">↑5,8%</span></div><div class="kpi"><small>Остаётся на руках</small><b>146 тыс. ₽</b></div><div class="kpi"><small>Загрузка мастеров</small><b>78%</b></div></div></div>
+<div class="top" id="top"></div>
 <div id="tags"></div>
-<div class="hint">Поворачивайте мышью · нажмите на зону, чтобы открыть раздел</div>
-<nav class="dock"><button class="on">Салон</button><button>Финансы</button><button>Клиенты</button><button>Мастера</button><button>Склад</button><button>Расходы</button></nav>
+<div class="hint" id="hint"></div>
+<nav class="dock" id="dock"></nav>
 <script src="../logistics/three.min.js"></script>
 <script src="../logistics/orbit.js"></script>
 <script>
@@ -138,17 +139,28 @@ const clock=new THREE.Clock();
 function walk(dt){walkers.forEach(w=>{if(!reduce)w.t+=dt;const u=((w.t*w.sp)/w.len)%1;const p=w.curve.getPointAt(u),q=w.curve.getPointAt((u+.002)%1);
  w.g.position.set(p.x,0,p.z);w.g.rotation.y=Math.atan2(q.x-p.x,q.z-p.z);const s=reduce?0:Math.sin(w.t*w.sp*5);
  w.g.userData.legs[0].rotation.x=s*.45;w.g.userData.legs[1].rotation.x=-s*.45;w.g.position.y=Math.abs(s)*.05})}
+// i18n
+const RU=document.documentElement.lang!=='en';const L=(r,e)=>RU?r:e;
+const money=(rub,unit)=>{if(RU)return unit;const u=rub/92;return u>=1e6?'$'+(u/1e6).toFixed(2)+'M':'$'+(u/1e3).toFixed(1)+'K'};
+const FULL='../beauty-salon/';
+document.getElementById('top').innerHTML=`<div class="brand"><div class="logo">M</div><div><b>Mira</b><span>${L('салон красоты · демо','beauty studio · demo')}</span></div></div>
+<div class="kpis"><div class="kpi"><small>${L('Выручка, 30 дней','Revenue, 30 days')}</small><b>${money(1240000,'1,24 млн ₽')}</b><span class="up">↑${L("5,8","5.8")}%</span></div><div class="kpi"><small>${L('Остаётся на руках','Kept after costs')}</small><b>${money(146000,'146 тыс. ₽')}</b></div><div class="kpi"><small>${L('Загрузка мастеров','Specialist load')}</small><b>78%</b></div></div>`;
+document.getElementById('hint').textContent=L('Поворачивайте мышью · нажмите на зону, чтобы открыть раздел','Drag to rotate · click a zone to open its section');
+const DOCK=[['Салон','Salon'],['Финансы','Finance'],['Клиенты','Clients'],['Мастера','Specialists'],['Склад','Stock'],['Расходы','Overheads']];
+document.getElementById('dock').innerHTML=DOCK.map((d,i)=>`<button${i?'':' class="on"'}>${L(d[0],d[1])}</button>`).join('');
+document.querySelectorAll('#dock button').forEach((b,i)=>{if(i)b.onclick=()=>location.href=FULL});
 // tags
 const TAGS=[
- {p:[12.4,3.2,1.2],c:'#2f8a64',h:'Финансы',b:'146 тыс. ₽ на руках',s:'выручка 1,24 млн · рентабельность 11,8%',e:'Открыть →'},
- {p:[4.6,3.6,5.6],c:'#6e3f8f',h:'Клиенты',b:'689 визитов',s:'14 записей сегодня · 41% вернулись',e:'Открыть →'},
- {p:[-.4,5.8,-8],c:'#9a6cc4',h:'Мастера',b:'6 мастеров · 78%',s:'загрузка · зарплаты 496 тыс. ₽',e:'Открыть →'},
- {p:[12.3,5.4,-8],c:'#f0a07e',h:'Склад',b:'186 тыс. ₽',s:'материалы · 15% выручки',w:'краска: расход +18% к норме',e:'Открыть →'},
- {p:[13.2,3,8],c:'#7b8fe0',h:'Расходы',b:'412 тыс. ₽ / мес',s:'аренда, ЖКХ, реклама, прочее',e:'Открыть →'},
+ {p:[12.4,3.2,1.2],c:'#2f8a64',h:L('Финансы','Finance'),b:L('146 тыс. ₽ на руках',money(146000)+' kept'),e:L('Открыть →','Open →')},
+ {p:[4.6,3.6,5.6],c:'#6e3f8f',h:L('Клиенты','Clients'),b:L('689 визитов','689 visits'),e:L('Открыть →','Open →')},
+ {p:[-.4,5.8,-8],c:'#9a6cc4',h:L('Мастера','Specialists'),b:L('6 мастеров · 78%','6 specialists · 78%'),e:L('Открыть →','Open →')},
+ {p:[12.3,5.4,-8],c:'#f0a07e',h:L('Склад','Stock'),b:money(186000,'186 тыс. ₽'),w:L('краска: расход +18% к норме','hair dye: +18% over norm'),e:L('Открыть →','Open →')},
+ {p:[13.2,3,8],c:'#7b8fe0',h:L('Расходы','Overheads'),b:money(412000,'412 тыс. ₽')+L(' / мес',' / mo'),e:L('Открыть →','Open →')},
 ];
-const PINS=[['Анна','92%','#2f8a64'],['Ольга','81%','#2f8a64'],['Мария','58%','#d9667f'],['Кира','84%','#2f8a64'],['Ева','76%','#9a6cc4'],['Дина','69%','#9a6cc4']];
+const PINS_RU=[['Анна','92%','#2f8a64'],['Ольга','81%','#2f8a64'],['Мария','58%','#d9667f'],['Кира','84%','#2f8a64'],['Ева','76%','#9a6cc4'],['Дина','69%','#9a6cc4']];
+const PINS=RU?PINS_RU:PINS_RU.map((p,i)=>[['Anna','Olga','Maria','Kira','Eva','Dina'][i],p[1],p[2]]);
 const T=document.getElementById('tags');
-TAGS.forEach(t=>{t.el=document.createElement('div');t.el.className='tag';t.el.innerHTML=`<small><i style="background:${t.c}"></i>${t.h}</small><b>${t.b}</b><span>${t.s}</span>${t.w?`<span class="warn">${t.w}</span>`:''}<em>${t.e}</em>`;T.appendChild(t.el);t.v=new THREE.Vector3(...t.p)});
+TAGS.forEach(t=>{t.el=document.createElement('div');t.el.className='tag';t.el.innerHTML=`<small><i style="background:${t.c}"></i>${t.h}</small><b>${t.b}</b><span>${t.s||''}</span>${t.w?`<span class="warn">${t.w}</span>`:''}<em>${t.e}</em>`;t.el.onclick=()=>location.href=FULL;T.appendChild(t.el);t.v=new THREE.Vector3(...t.p)});
 const pins=pinsAt.map((v,i)=>{const el=document.createElement('div');el.className='pin';el.innerHTML=`<u style="background:${PINS[i][2]}">${PINS[i][1].replace('%','')}</u>${PINS[i][0]}`;T.appendChild(el);return {el,v}});
 function size(){const w=innerWidth,h=innerHeight;R.setSize(w,h);C.aspect=w/h;C.fov=w<700?48:30;C.updateProjectionMatrix()}
 addEventListener('resize',size);size();
