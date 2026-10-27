@@ -1,0 +1,157 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mira 3D — концепт</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f6f1f4;--surface:#fff;--line:#ece3e8;--ink:#2a1f2d;--muted:#8a7b88;--fern:#6e3f8f;--fern-2:#9a6cc4;--fern-soft:#efe5f7;--peach:#f0a07e;--rose:#d9667f;--good:#2f8a64;--sky:#7b8fe0}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--paper);font-family:Onest,system-ui,sans-serif;color:var(--ink)}
+#world{position:fixed;inset:0}
+.top{position:fixed;left:18px;right:18px;top:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 16px 10px 10px;box-shadow:0 8px 24px -14px rgba(110,63,143,.25)}
+.logo{width:36px;height:36px;border-radius:50%;background:var(--fern);display:grid;place-items:center;color:#fff;font-weight:700}
+.brand b{display:block;font-size:17px}.brand span{font-size:12px;color:var(--muted)}
+.kpis{display:flex;gap:8px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 14px;min-width:112px;box-shadow:0 8px 24px -14px rgba(110,63,143,.25)}
+.kpi small{display:block;font-size:11.5px;color:var(--muted)}.kpi b{font-size:19px;letter-spacing:-.02em}.kpi .up{color:var(--good);font-size:12px;font-weight:600;margin-left:4px}
+.tag{position:fixed;z-index:4;transform:translate(-50%,-100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:9px 12px 10px;box-shadow:0 14px 34px -16px rgba(60,30,70,.35);min-width:120px;max-width:210px}
+.tag:after{content:"";position:absolute;left:50%;bottom:-12px;width:1px;height:12px;background:#cdbfd0}
+.tag i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.tag small{font-size:11.5px;color:var(--muted);font-weight:600}.tag b{display:block;font-size:17px;letter-spacing:-.02em;margin:2px 0 1px}
+.tag span{display:none;font-size:12px;color:var(--muted);line-height:1.35}.tag span.warn{display:block}.tag em{display:block;font-style:normal;font-size:12px;font-weight:650;color:var(--fern);margin-top:5px}
+.tag .warn{color:var(--rose);font-weight:600}
+.pin{position:fixed;z-index:3;transform:translate(-50%,-100%);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 9px 4px 5px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:6px;box-shadow:0 8px 18px -10px rgba(60,30,70,.35);white-space:nowrap}
+.pin u{text-decoration:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:10px}
+.dock{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:3px;padding:5px;background:var(--surface);border:1px solid var(--line);border-radius:999px;box-shadow:0 12px 30px -16px rgba(60,30,70,.35);z-index:5}
+.dock button{border:0;background:transparent;padding:9px 16px;border-radius:999px;font:inherit;font-size:13.5px;font-weight:550;color:var(--muted)}
+.dock button.on{background:var(--ink);color:#fff}
+.hint{position:fixed;left:18px;bottom:22px;font-size:12px;color:var(--muted);z-index:5;max-width:190px}
+@media(max-width:700px){.kpis .kpi:nth-child(3){display:none}.kpi{min-width:0;padding:7px 10px}.kpi b{font-size:16px}.brand{padding:8px 12px 8px 8px}.brand span{display:none}.top{flex-direction:column}
+.tag{min-width:0;max-width:150px;padding:7px 9px}.tag b{font-size:14px}.tag span{display:none}.dock{left:12px;right:12px;transform:none;overflow-x:auto}.dock button{padding:8px 12px;white-space:nowrap}.hint{display:none}.pin{display:none}}
+</style></head><body>
+<div id="world"></div>
+<div class="top"><div class="brand"><div class="logo">M</div><div><b>Mira</b><span>салон красоты · демо</span></div></div>
+<div class="kpis"><div class="kpi"><small>Выручка, 30 дней</small><b>1,24 млн ₽</b><span class="up">↑5,8%</span></div><div class="kpi"><small>Остаётся на руках</small><b>146 тыс. ₽</b></div><div class="kpi"><small>Загрузка мастеров</small><b>78%</b></div></div></div>
+<div id="tags"></div>
+<div class="hint">Поворачивайте мышью · нажмите на зону, чтобы открыть раздел</div>
+<nav class="dock"><button class="on">Салон</button><button>Финансы</button><button>Клиенты</button><button>Мастера</button><button>Склад</button><button>Расходы</button></nav>
+<script src="../logistics/three.min.js"></script>
+<script src="../logistics/orbit.js"></script>
+<script>
+const W=document.getElementById('world');const mobile=innerWidth<700;
+const R=new THREE.WebGLRenderer({antialias:true});R.setPixelRatio(Math.min(2,devicePixelRatio));R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputColorSpace=THREE.SRGBColorSpace;W.appendChild(R.domElement);
+const S=new THREE.Scene();S.background=new THREE.Color('#f6f1f4');
+const C=new THREE.PerspectiveCamera(30,1,.1,500);C.position.set(30,30,36);
+const O=new OrbitControls(C,R.domElement);O.target.set(0,0,0);O.enableDamping=true;O.maxPolarAngle=1.25;O.minDistance=25;O.maxDistance=80;
+S.add(new THREE.HemisphereLight('#ffffff','#e8dbe4',1.6));
+const sun=new THREE.DirectionalLight('#fff6f0',2.2);sun.position.set(18,32,14);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-25,right:25,top:25,bottom:-25});sun.shadow.bias=-.0005;S.add(sun);
+const M=c=>new THREE.MeshStandardMaterial({color:c,roughness:.82});
+function box(w,h,d,c,x,y,z,p=S){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),typeof c==='string'?M(c):c);m.position.set(x,y+h/2,z);m.castShadow=m.receiveShadow=true;p.add(m);return m}
+function cyl(r,h,c,x,y,z,seg=24){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,seg),M(c));m.position.set(x,y+h/2,z);m.castShadow=m.receiveShadow=true;S.add(m);return m}
+// base + floors
+box(32,.6,22,'#efe4ea',0,-.6,0);
+box(31,.05,21,'#fbf7f9',0,0,0);
+box(9,.06,9.5,'#efe5f7',-10.5,0,4.6);   // nails
+box(8.4,.06,8.2,'#f3ecf0',-11,0,-6);     // cosmetology
+box(6.2,.06,7.4,'#ece6e2',12.2,0,-6.6);  // storage
+box(6.2,.06,7.2,'#f1eaf3',12.2,0,0.8);   // manager office
+box(4.2,.06,5,'#e9e4ea',13.2,0,7.8);     // utility
+const WALL='#e6d9e2',WH=4.2;
+box(31,WH,.4,WALL,0,0,-10.3);box(.4,WH,21,WALL,-15.3,0,0);
+box(.3,2.6,8.2,WALL,-6.8,0,-6.2);box(8.2,1.1,.3,WALL,-11,0,-2);
+box(.3,2.6,7.4,WALL,9.1,0,-6.6);box(6.2,2.6,.3,WALL,12.2,0,-2.9);
+box(.3,2.6,4.2,WALL,9.1,0,-.8);box(.3,1,2.4,WALL,9.1,0,3.2);box(6.2,2.6,.3,WALL,12.2,0,4.4); // office glass-ish low front
+box(.3,2.6,5,WALL,11.1,0,7.8);
+// RECEPTION
+box(5.2,1.3,1.4,'#6e3f8f',4.6,0,5.6);box(5.4,.12,1.7,'#ffffff',4.6,1.3,5.6);
+box(.9,.5,.7,'#2a1f2d',5.8,1.42,5.5);box(.7,.08,.5,'#f6f1f4',5.8,1.92,5.55);box(.6,.4,.5,'#9a6cc4',3.4,1.42,5.5);
+// waiting sofa
+box(4.4,.7,1.6,'#f0a07e',-2.4,0,8.6);box(4.4,1,.4,'#e88e69',-2.4,.7,9.3);box(.5,.6,1.6,'#e88e69',-4.4,.7,8.6);box(.5,.6,1.6,'#e88e69',-.4,.7,8.6);
+cyl(.9,.5,'#ffffff',1.2,0,8.8);
+function plant(x,z,s=1){cyl(.35*s,.7*s,'#d9667f',x,0,z);const f=new THREE.Mesh(new THREE.SphereGeometry(.75*s,12,10),M('#7fae86'));f.position.set(x,.7*s+.65*s,z);f.castShadow=true;S.add(f)}
+plant(-5,9.4);plant(9.6,9.3,1.1);plant(-14.4,-1,1.1);plant(14.6,3.6,.9);
+box(2.6,.05,1.4,'#6e3f8f',6.6,.06,9.9); // entrance mat
+// HAIR HALL
+const pinsAt=[];
+const hairX=[-4.6,-.4,3.8];
+hairX.forEach(x=>{box(2.2,2.6,.15,'#cfe0f5',x,1,-10.0);box(2.6,.15,.25,'#9a6cc4',x,3.6,-10);box(2.4,.1,.8,'#ffffff',x,1,-9.7);
+ cyl(.25,.6,'#3a2d40',x,0,-7.4);box(1.4,.35,1.3,'#6e3f8f',x,.6,-7.4);box(1.4,1.2,.3,'#6e3f8f',x,.95,-6.8)});
+box(1.6,1,1,'#ffffff',7,0,-9.4);cyl(.45,.15,'#cfe0f5',7,1,-9.3);
+// NAILS
+const nailZ=[2.6,7];
+nailZ.forEach(z=>{const x=-12.6;box(2.6,1,1.3,'#ffffff',x,0,z);box(.1,1,.1,'#2a1f2d',x+1.05,1,z-.35);box(.3,.1,.5,'#2a1f2d',x+1.05,2,z-.2);
+ box(1,.5,1,'#f0a07e',x,0,z+1.3);box(1,1.1,.25,'#f0a07e',x,.5,z+1.85);box(.9,.5,.9,'#9a6cc4',x,0,z-1.25)});
+// COSMETOLOGY
+box(4.4,.9,1.6,'#ffffff',-11.2,0,-6.4);box(1.2,.25,1.4,'#efe5f7',-13,.9,-6.4);box(.6,.9,.6,'#2a1f2d',-11.2,0,-6.4);
+box(1.6,2.2,.7,'#9a6cc4',-8.2,0,-9.6);
+// STORAGE
+const pal=['#f0a07e','#d9667f','#9a6cc4','#7b8fe0','#ffffff'];
+[[10.2,-9.6],[14.6,-9.6]].forEach(([x,z],k)=>{for(let lv=0;lv<4;lv++){box(3.6,.08,1,'#b9a5b3',x+(k?-1.6:1.6),lv*.85,z);for(let j=0;j<4;j++)box(.6,.5+((j+lv)%2)*.2,.6,pal[(j+lv+k)%5],x+(k?-1.6:1.6)-1.2+j*.8,lv*.85+.08,z)}});
+box(.9,.9,.9,'#e0b48f',12.6,0,-4.4);box(.7,.7,.7,'#e0b48f',13.5,0,-4.7);
+// MANAGER OFFICE
+box(3.2,1.1,1.5,'#ffffff',12.6,0,0.2);box(3.4,.1,1.7,'#6e3f8f',12.6,1.1,0.2);
+box(1,.06,.7,'#2a1f2d',12.4,1.2,0.1);box(1,.65,.06,'#2a1f2d',12.4,1.25,-.25);box(.9,.55,.02,'#9a6cc4',12.4,1.3,-.21);
+box(1.1,.5,1.1,'#2a1f2d',12.6,0,-1.3);box(1.1,1.1,.25,'#2a1f2d',12.6,.5,-1.85);
+box(1,1.4,.9,'#7b8fe0',14.6,0,-2);box(.12,.12,.05,'#ffffff',14.6,.9,-1.53);
+box(.12,1.6,2.4,'#f0a07e',15,1,1.2); // chart board
+// UTILITY / EXPENSES
+box(1.6,2.2,.3,'#ffffff',13.6,1,5.4);box(.5,.5,.1,'#2a1f2d',13.3,2.3,5.6);box(.5,.5,.1,'#2a1f2d',13.9,2.3,5.6);box(.5,.5,.1,'#7b8fe0',13.3,1.5,5.6);
+cyl(.45,1.8,'#ffffff',14.6,0,9.6);box(2.4,.7,.6,'#ffffff',-1,3.1,-9.9);
+
+// PEOPLE
+const SKIN=['#f3d2bd','#e8bfa0','#d9a582','#f6dccb'],HAIR=['#3a2a25','#7a4a32','#c89a5a','#2a1f2d','#a8573d'];
+function person(o){const g=new THREE.Group();const sk=o.skin||SKIN[0],sh=o.shirt,pa=o.pants||'#3d3442',hr=o.hair||HAIR[0];
+ const part=(w,h,d,c,x,y,z)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(c));m.position.set(x,y,z);m.castShadow=true;g.add(m);return m};
+ let legs=[];
+ if(o.pose==='sit'){legs.push(part(.26,.24,.75,pa,-.16,.12,.3),part(.26,.24,.75,pa,.16,.12,.3));part(.26,.55,.24,pa,-.16,-.15,.62);part(.26,.55,.24,pa,.16,-.15,.62);g.userData.base=0}
+ else{legs.push(part(.26,.95,.28,pa,-.16,.475,0),part(.26,.95,.28,pa,.16,.475,0));g.userData.base=.95}
+ const b=g.userData.base;
+ const body=new THREE.Mesh(new THREE.CylinderGeometry(.3,.36,.95,14),M(sh));body.position.y=b+.47;body.castShadow=true;g.add(body);
+ const arms=[part(.18,.75,.2,sh,-.43,b+.5,0),part(.18,.75,.2,sh,.43,b+.5,0)];
+ if(o.arms==='front'){arms.forEach(a=>{a.rotation.x=-1.1;a.position.z=.3;a.position.y=b+.62})}
+ const head=new THREE.Mesh(new THREE.SphereGeometry(.27,16,12),M(sk));head.position.y=b+1.2;head.castShadow=true;g.add(head);
+ const hairM=new THREE.Mesh(new THREE.SphereGeometry(.29,16,12,0,Math.PI*2,0,Math.PI*.55),M(hr));hairM.position.y=b+1.24;hairM.rotation.x=-.25;g.add(hairM);
+ if(o.long){part(.5,.5,.14,hr,0,b+1.02,-.2)}
+ g.position.set(o.x,o.y||0,o.z);g.rotation.y=o.rot||0;S.add(g);g.userData.legs=legs;return g}
+const UNI='#6e3f8f';
+// hair hall: clients seated, masters standing behind
+hairX.forEach((x,i)=>{person({pose:'sit',x,y:.95,z:-7.3,rot:Math.PI,shirt:['#7b8fe0','#f0a07e','#ffffff'][i],skin:SKIN[i],hair:HAIR[i+1],long:i!==1});
+ person({x:x+1,z:-6.1,rot:Math.PI*1.08,shirt:UNI,skin:SKIN[(i+2)%4],hair:HAIR[i],long:i!==2,arms:'front'});pinsAt.push(new THREE.Vector3(x+.5,3.6,-6.6))});
+// nails: client on orange chair facing -x, master on lilac stool facing +x
+nailZ.forEach((z,i)=>{person({pose:'sit',x:-12.6,y:.5,z:z+1.25,rot:Math.PI,shirt:['#d9667f','#7b8fe0'][i],skin:SKIN[i+1],hair:HAIR[i+2],long:true,arms:'front'});
+ person({pose:'sit',x:-12.6,y:.5,z:z-1.25,rot:0,shirt:UNI,skin:SKIN[3-i],hair:HAIR[i*3],long:i===0,arms:'front'});pinsAt.push(new THREE.Vector3(-12.6,2.9,z-1.25))});
+// cosmetology: client lying, master standing
+const lying=person({x:-11.4,y:1.35,z:-6.4,shirt:'#f0a07e',pants:'#efe5f7',skin:SKIN[0],hair:HAIR[2],long:true});lying.rotation.set(0,0,Math.PI/2);lying.position.set(-10,1.25,-6.4);
+person({x:-11,z:-5,rot:Math.PI,shirt:UNI,skin:SKIN[1],hair:HAIR[4],long:true,arms:'front'});pinsAt.push(new THREE.Vector3(-11,3.4,-5));
+// reception admin, waiting client, manager
+person({x:4.6,z:4.5,rot:0,shirt:'#9a6cc4',skin:SKIN[2],hair:HAIR[0],long:true,arms:'front'});
+person({pose:'sit',x:-3.3,y:.7,z:8.3,rot:Math.PI,shirt:'#7fae86',skin:SKIN[3],hair:HAIR[1]});
+person({pose:'sit',x:-1.4,y:.7,z:8.3,rot:Math.PI,shirt:'#f0a07e',skin:SKIN[0],hair:HAIR[3],long:true});
+person({pose:'sit',x:12.6,y:.5,z:-1.2,rot:0,shirt:'#2a1f2d',skin:SKIN[1],hair:HAIR[0],arms:'front'});
+// walkers
+const walkers=[
+ {g:person({x:0,z:0,shirt:'#d9667f',skin:SKIN[2],hair:HAIR[2],long:true}),path:[[6.6,10.2],[6.6,7.4],[3,7.2],[2,-3.5],[6.6,-5.2],[6.8,-8.2]],sp:1.6,t:0},
+ {g:person({x:0,z:0,shirt:'#7b8fe0',skin:SKIN[0],hair:HAIR[1]}),path:[[-1.6,6.6],[-6,4.5],[-8.6,4.6],[-6,1],[1,0],[5,3.8]],sp:1.4,t:7},
+ {g:person({x:0,z:0,shirt:UNI,skin:SKIN[3],hair:HAIR[4],long:true}),path:[[7.6,-3],[9.8,1.6],[7.6,3.6],[0,-2.5],[-5,-4.5],[1,-4]],sp:1.2,t:3}];
+walkers.forEach(w=>{const pts=w.path.map(([x,z])=>new THREE.Vector3(x,0,z));w.curve=new THREE.CatmullRomCurve3(pts,true,'centripetal');w.len=w.curve.getLength()});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clock=new THREE.Clock();
+function walk(dt){walkers.forEach(w=>{if(!reduce)w.t+=dt;const u=((w.t*w.sp)/w.len)%1;const p=w.curve.getPointAt(u),q=w.curve.getPointAt((u+.002)%1);
+ w.g.position.set(p.x,0,p.z);w.g.rotation.y=Math.atan2(q.x-p.x,q.z-p.z);const s=reduce?0:Math.sin(w.t*w.sp*5);
+ w.g.userData.legs[0].rotation.x=s*.45;w.g.userData.legs[1].rotation.x=-s*.45;w.g.position.y=Math.abs(s)*.05})}
+// tags
+const TAGS=[
+ {p:[12.4,3.2,1.2],c:'#2f8a64',h:'Финансы',b:'146 тыс. ₽ на руках',s:'выручка 1,24 млн · рентабельность 11,8%',e:'Открыть →'},
+ {p:[4.6,3.6,5.6],c:'#6e3f8f',h:'Клиенты',b:'689 визитов',s:'14 записей сегодня · 41% вернулись',e:'Открыть →'},
+ {p:[-.4,5.8,-8],c:'#9a6cc4',h:'Мастера',b:'6 мастеров · 78%',s:'загрузка · зарплаты 496 тыс. ₽',e:'Открыть →'},
+ {p:[12.3,5.4,-8],c:'#f0a07e',h:'Склад',b:'186 тыс. ₽',s:'материалы · 15% выручки',w:'краска: расход +18% к норме',e:'Открыть →'},
+ {p:[13.2,3,8],c:'#7b8fe0',h:'Расходы',b:'412 тыс. ₽ / мес',s:'аренда, ЖКХ, реклама, прочее',e:'Открыть →'},
+];
+const PINS=[['Анна','92%','#2f8a64'],['Ольга','81%','#2f8a64'],['Мария','58%','#d9667f'],['Кира','84%','#2f8a64'],['Ева','76%','#9a6cc4'],['Дина','69%','#9a6cc4']];
+const T=document.getElementById('tags');
+TAGS.forEach(t=>{t.el=document.createElement('div');t.el.className='tag';t.el.innerHTML=`<small><i style="background:${t.c}"></i>${t.h}</small><b>${t.b}</b><span>${t.s}</span>${t.w?`<span class="warn">${t.w}</span>`:''}<em>${t.e}</em>`;T.appendChild(t.el);t.v=new THREE.Vector3(...t.p)});
+const pins=pinsAt.map((v,i)=>{const el=document.createElement('div');el.className='pin';el.innerHTML=`<u style="background:${PINS[i][2]}">${PINS[i][1].replace('%','')}</u>${PINS[i][0]}`;T.appendChild(el);return {el,v}});
+function size(){const w=innerWidth,h=innerHeight;R.setSize(w,h);C.aspect=w/h;C.fov=w<700?48:30;C.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+const tmp=new THREE.Vector3();
+function place(o){tmp.copy(o.v).project(C);o.el.style.left=(tmp.x*.5+.5)*innerWidth+'px';o.el.style.top=(-tmp.y*.5+.5)*innerHeight-10+'px'}
+(function loop(){walk(Math.min(clock.getDelta(),.05));O.update();R.render(S,C);TAGS.forEach(place);pins.forEach(place);requestAnimationFrame(loop)})();
+</script></body></html>
