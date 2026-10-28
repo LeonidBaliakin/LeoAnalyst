@@ -221,7 +221,6 @@ h2{font-weight:775;font-size:clamp(32px,4.3vw,58px);letter-spacing:-.061em;line-
 .contact-panel .solid-btn{border-color:#fff;background:#fff;color:#11131a}
 .contact-panel .solid-btn:hover{background:#e9ebee}
 .solutions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:8px}
-.solutions-grid>.solution-custom{grid-column:span 2}
 .solution-card{display:flex;flex-direction:column;gap:10px;min-height:190px;padding:24px;border:1px solid #e3e5ea;border-radius:22px;background:#fff;color:#17191e;text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s,border-color .2s}
 a.solution-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(20,24,40,.35);border-color:#cfd3dc}
 .solution-icon{display:inline-flex;width:44px;height:44px;align-items:center;justify-content:center;border-radius:14px;background:#17191e;color:#fff}
@@ -240,8 +239,8 @@ a.solution-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rg
 .dash-modal-close{width:38px;height:38px;border:1px solid #e3e5ea;border-radius:999px;background:#fff;font-size:16px;cursor:pointer}
 .dash-modal-close:hover{background:#f1f2f4}
 #dashModalFrame{flex:1;width:100%;border:0;background:#fff}
-@media(max-width:900px){.solutions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.solutions-grid>.solution-custom{grid-column:auto}}
-@media(max-width:600px){.solutions-grid{grid-template-columns:1fr}.solutions-grid>.solution-custom{grid-column:auto}.solution-card{min-height:0}.dash-modal{padding:0}.dash-modal-box{border-radius:0}.dash-modal-link{display:none}}
+@media(max-width:900px){.solutions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.solutions-grid{grid-template-columns:1fr}.solution-card{min-height:0}.dash-modal{padding:0}.dash-modal-box{border-radius:0}.dash-modal-link{display:none}}
 .footer{padding:26px 0 36px;border-top:1px solid #e7e8ec}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#7b7e86;font-size:12px}
 .footer-left{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
