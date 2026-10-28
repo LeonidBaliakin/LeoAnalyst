@@ -1203,8 +1203,8 @@ detectLocaleByIP();
  const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
  // base ranges: RUB in thousands, USD in dollars
  const BASE={
-  rub:{dash:{s:[40,60],m:[70,120],l:[150,250]},product:{s:[50,80],m:[90,150],l:[180,300]},ai:{s:[60,90],m:[120,200],l:[250,400]},web:{s:[35,60],m:[60,100],l:[120,200]}},
-  usd:{dash:{s:[900,1500],m:[2000,4000],l:[5000,9000]},product:{s:[1200,2000],m:[2500,5000],l:[6000,12000]},ai:{s:[1500,2500],m:[3000,6000],l:[7000,14000]},web:{s:[700,1200],m:[1500,3000],l:[3500,6000]}}};
+  rub:{dash:{s:[65,80],m:[70,120],l:[150,250]},product:{s:[50,80],m:[90,150],l:[180,300]},ai:{s:[60,90],m:[120,200],l:[250,400]},web:{s:[35,60],m:[60,100],l:[120,200]}},
+  usd:{dash:{s:[1300,1700],m:[2000,4000],l:[5000,9000]},product:{s:[1200,2000],m:[2500,5000],l:[6000,12000]},ai:{s:[1500,2500],m:[3000,6000],l:[7000,14000]},web:{s:[700,1200],m:[1500,3000],l:[3500,6000]}}};
  const SUPPORT={rub:{s:10,m:20,l:40},usd:{s:200,m:400,l:800}};
  const WEEKS={dash:{s:[2,3],m:[3,5],l:[5,8]},product:{s:[3,4],m:[4,6],l:[6,8]},ai:{s:[3,4],m:[4,6],l:[6,8]},web:{s:[1,2],m:[2,4],l:[4,6]}};
  const T={
@@ -1216,7 +1216,7 @@ detectLocaleByIP();
     ai:[['src','Сколько источников подключаем?',['1–2','3–5','6 и больше'],[0,.3,.6]],['ch','Где будет работать ассистент?',['Telegram','Веб-чат','Telegram и веб'],[0,.1,.2]]],
     web:[['pg','Какой сайт нужен?',['Лендинг','до 5 страниц','до 10 страниц'],[0,.4,.8]],['lng','Сколько языков?',['Один','Два'],[0,.2]]]},
    exQ:'Дополнительно',
-   ex:{dash:[['clean','Очистка и сведение данных',.15],['auto','Автообновление каждый день',.1],['train','Обучение команды',.05]],
+   ex:{dash:[['clean','Очистка и сведение данных',.15],['auto','Автообновление каждый день',.1],['db','Отдельная база данных и сервер',.25],['train','Обучение команды',.05]],
     product:[['ab','A/B-тесты',.2],['board','Дашборд по метрикам',.15],['train','Обучение команды',.05]],
     ai:[['reports','Отчёты по расписанию',.15],['train','Обучение команды',.05]],
     web:[['copy','Тексты под ключ',.15],['crm','Заявки в CRM',.15]]},
@@ -1236,7 +1236,7 @@ detectLocaleByIP();
     ai:[['src','How many sources do we connect?',['1–2','3–5','6 or more'],[0,.3,.6]],['ch','Where will the assistant live?',['Telegram','Web chat','Telegram and web'],[0,.1,.2]]],
     web:[['pg','What kind of site?',['Landing page','up to 5 pages','up to 10 pages'],[0,.4,.8]],['lng','How many languages?',['One','Two'],[0,.2]]]},
    exQ:'Extras',
-   ex:{dash:[['clean','Data cleaning and merging',.15],['auto','Daily auto-refresh',.1],['train','Team training',.05]],
+   ex:{dash:[['clean','Data cleaning and merging',.15],['auto','Daily auto-refresh',.1],['db','Separate database and server',.25],['train','Team training',.05]],
     product:[['ab','A/B tests',.2],['board','Metrics dashboard',.15],['train','Team training',.05]],
     ai:[['reports','Scheduled reports',.15],['train','Team training',.05]],
     web:[['copy','Copywriting included',.15],['crm','Leads into your CRM',.15]]},
@@ -1253,6 +1253,7 @@ detectLocaleByIP();
  function fmt(v){return L()==='ru'?new Intl.NumberFormat('ru-RU').format(v*1000)+' ₽':'$'+new Intl.NumberFormat('en-US').format(v)}
  function range(a,b){return L()==='ru'?new Intl.NumberFormat('ru-RU').format(a*1000)+' – '+new Intl.NumberFormat('ru-RU').format(b*1000)+' ₽':fmt(a)+' – '+fmt(b)}
  const SHORT={ru:{src:'Источники',scr:'Экраны',plat:'Где данные',ev:'События',ch:'Канал',pg:'Сайт',lng:'Языки'},en:{src:'Sources',scr:'Screens',plat:'Platform',ev:'Events',ch:'Channel',pg:'Site',lng:'Languages'}};
+ function supp(){const v=SUPPORT[CUR()][st.seg];return st.svc==='dash'&&st.ex['dashdb']?Math.max(v,CUR()==='rub'?20:400):v}
  function calc(){
   const t=T[L()],qs=t.q[st.svc];let k=0;
   qs.forEach(q=>{k+=q[3][st.a[st.svc+q[0]]||0]});
@@ -1265,7 +1266,7 @@ detectLocaleByIP();
   const t=T[L()],r=calc(),qs=t.q[st.svc];
   const parts=[t.svc[st.svc],t.seg[st.seg]].concat(qs.map(q=>SHORT[L()][q[0]]+': '+q[2][st.a[st.svc+q[0]]||0]));
   const ex=t.ex[st.svc].filter(e=>st.ex[st.svc+e[0]]).map(e=>e[1]);if(ex.length)parts.push(ex.join(', '));
-  if(st.supp)parts.push(t.support+': '+fmt(SUPPORT[CUR()][st.seg])+' '+t.perMonth);
+  if(st.supp)parts.push(t.support+': '+fmt(supp())+' '+t.perMonth);
   return{line:parts.join(' · '),price:range(r.lo,r.hi),term:r.w[0]+'–'+r.w[1]+' '+t.weeks};
  }
  function seg(name,labels,cur,hint){return `<div><p class="calc-q" id="cq-${name}">${labels.q}</p><div class="calc-seg" role="group" aria-labelledby="cq-${name}" style="--n:${labels.o.length}">${labels.o.map((o,i)=>`<button type="button" data-q="${name}" data-v="${i}" aria-pressed="${i===cur}">${o}</button>`).join('')}</div>${hint?`<span class="calc-hint">${hint}</span>`:''}</div>`}
@@ -1280,7 +1281,7 @@ detectLocaleByIP();
   <aside class="calc-result" aria-live="polite">
    <p class="calc-result-label">${t.resLabel}</p>
    <p class="calc-price">${s.price}</p>
-   <dl class="calc-meta"><div><dt>${t.term}</dt><dd>${s.term}</dd></div><div><dt>${t.support}</dt><dd>${st.supp?fmt(SUPPORT[CUR()][st.seg])+' '+t.perMonth:t.noSupport}</dd></div></dl>
+   <dl class="calc-meta"><div><dt>${t.term}</dt><dd>${s.term}</dd></div><div><dt>${t.support}</dt><dd>${st.supp?fmt(supp())+' '+t.perMonth:t.noSupport}</dd></div></dl>
    <ul class="calc-includes">${t.inc[st.svc].map(x=>`<li>${x}</li>`).join('')}</ul>
    <button type="button" class="calc-send" id="calcSend">${t.send}${ARROW}</button>
    <p class="calc-note">${t.note}</p>
