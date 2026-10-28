@@ -5,16 +5,16 @@
  const today=new Date();today.setHours(0,0,0,0);const DAY=864e5,T0=today.getTime();
  const depts=[{id:'dev',ru:'Разработка',en:'Engineering'},{id:'design',ru:'Дизайн',en:'Design'},{id:'marketing',ru:'Маркетинг',en:'Marketing'},{id:'sales',ru:'Продажи',en:'Sales'},{id:'mgmt',ru:'Управление',en:'Management'}];
  const people=[
-  {id:'p1',ru:'Ирина Соколова',en:'Irina Sokolova',role:{ru:'Руководитель проектов',en:'Project lead'},dept:'mgmt',city:{ru:'Санкт-Петербург',en:'St Petersburg'},status:'online',hue:20},
-  {id:'p2',ru:'Максим Егоров',en:'Maxim Egorov',role:{ru:'Бэкенд-разработчик',en:'Backend developer'},dept:'dev',city:{ru:'Санкт-Петербург',en:'St Petersburg'},status:'online',hue:210},
-  {id:'p3',ru:'Полина Руднева',en:'Polina Rudneva',role:{ru:'Продуктовый дизайнер',en:'Product designer'},dept:'design',city:{ru:'Москва',en:'Moscow'},status:'online',hue:350},
-  {id:'p4',ru:'Артём Ли',en:'Artem Li',role:{ru:'Фронтенд-разработчик',en:'Frontend developer'},dept:'dev',city:{ru:'Казань',en:'Kazan'},status:'away',hue:160},
-  {id:'p5',ru:'Мария Ковач',en:'Maria Kovach',role:{ru:'Графический дизайнер',en:'Brand designer'},dept:'design',city:{ru:'Москва',en:'Moscow'},status:'away',hue:45},
-  {id:'p6',ru:'Денис Орлов',en:'Denis Orlov',role:{ru:'Тестировщик',en:'QA engineer'},dept:'dev',city:{ru:'Новосибирск',en:'Novosibirsk'},status:'offline',hue:265},
-  {id:'p7',ru:'Ольга Миронова',en:'Olga Mironova',role:{ru:'Маркетолог',en:'Marketing manager'},dept:'marketing',city:{ru:'Санкт-Петербург',en:'St Petersburg'},status:'online',hue:300},
-  {id:'p8',ru:'Кирилл Белов',en:'Kirill Belov',role:{ru:'Менеджер по продажам',en:'Account executive'},dept:'sales',city:{ru:'Москва',en:'Moscow'},status:'online',hue:120},
-  {id:'p9',ru:'Анна Ким',en:'Anna Kim',role:{ru:'Аккаунт-менеджер',en:'Account manager'},dept:'sales',city:{ru:'Екатеринбург',en:'Yekaterinburg'},status:'offline',hue:190},
-  {id:'p10',ru:'Глеб Тихонов',en:'Gleb Tikhonov',role:{ru:'Контент-менеджер',en:'Content manager'},dept:'marketing',city:{ru:'Санкт-Петербург',en:'St Petersburg'},status:'away',hue:30}
+  {id:'p1',ru:'Ирина Соколова',en:'Emily Carter',role:{ru:'Руководитель проектов',en:'Project lead'},dept:'mgmt',city:{ru:'Санкт-Петербург',en:'London'},status:'online',hue:20},
+  {id:'p2',ru:'Максим Егоров',en:'Lucas Meyer',role:{ru:'Бэкенд-разработчик',en:'Backend developer'},dept:'dev',city:{ru:'Санкт-Петербург',en:'London'},status:'online',hue:210},
+  {id:'p3',ru:'Полина Руднева',en:'Chloe Martin',role:{ru:'Продуктовый дизайнер',en:'Product designer'},dept:'design',city:{ru:'Москва',en:'Berlin'},status:'online',hue:350},
+  {id:'p4',ru:'Артём Ли',en:'Daniel Kim',role:{ru:'Фронтенд-разработчик',en:'Frontend developer'},dept:'dev',city:{ru:'Казань',en:'Amsterdam'},status:'away',hue:160},
+  {id:'p5',ru:'Мария Ковач',en:'Sofia Novak',role:{ru:'Графический дизайнер',en:'Brand designer'},dept:'design',city:{ru:'Москва',en:'Berlin'},status:'away',hue:45},
+  {id:'p6',ru:'Денис Орлов',en:'Jonas Weber',role:{ru:'Тестировщик',en:'QA engineer'},dept:'dev',city:{ru:'Новосибирск',en:'Lisbon'},status:'offline',hue:265},
+  {id:'p7',ru:'Ольга Миронова',en:'Hannah Brooks',role:{ru:'Маркетолог',en:'Marketing manager'},dept:'marketing',city:{ru:'Санкт-Петербург',en:'London'},status:'online',hue:300},
+  {id:'p8',ru:'Кирилл Белов',en:'Ryan Cooper',role:{ru:'Менеджер по продажам',en:'Account executive'},dept:'sales',city:{ru:'Москва',en:'Berlin'},status:'online',hue:120},
+  {id:'p9',ru:'Анна Ким',en:'Laura Jansen',role:{ru:'Аккаунт-менеджер',en:'Account manager'},dept:'sales',city:{ru:'Екатеринбург',en:'Warsaw'},status:'offline',hue:190},
+  {id:'p10',ru:'Глеб Тихонов',en:'Oliver Grant',role:{ru:'Контент-менеджер',en:'Content manager'},dept:'marketing',city:{ru:'Санкт-Петербург',en:'London'},status:'away',hue:30}
  ];
  const projects=[
   {id:'pr1',ru:'Мобильное приложение доставки',en:'Delivery mobile app',client:{ru:'Сеть пекарен',en:'Bakery chain'},due:T0+12*DAY,progress:62,icon:'bars',color:'#2c55c9',status:'running'},

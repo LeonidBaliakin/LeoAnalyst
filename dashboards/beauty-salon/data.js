@@ -32,30 +32,30 @@
     {id:'s18',cat:'body',ru:'SPA-программа',en:'SPA ritual',price:6500,min:120,w:1.3,tag:'new',art:'candle',hue:34}
   ];
   const masters=[
-    {id:'m1',ru:'Анна Ковалёва',en:'Anna Kovaleva',role:{ru:'Топ-стилист',en:'Senior stylist'},cats:['hair'],rating:4.9,color:'#9a6cc4'},
-    {id:'m2',ru:'Ирина Белова',en:'Irina Belova',role:{ru:'Колорист',en:'Colourist'},cats:['hair'],rating:4.8,color:'#e88a62'},
-    {id:'m3',ru:'Дмитрий Орлов',en:'Dmitry Orlov',role:{ru:'Барбер',en:'Barber'},cats:['hair'],rating:4.7,color:'#6f7fd6'},
-    {id:'m4',ru:'Ольга Смирнова',en:'Olga Smirnova',role:{ru:'Мастер ногтевого сервиса',en:'Nail artist'},cats:['nails'],rating:4.9,color:'#d9667f'},
-    {id:'m5',ru:'Мария Лебедева',en:'Maria Lebedeva',role:{ru:'Мастер ногтевого сервиса',en:'Nail artist'},cats:['nails'],rating:4.6,color:'#b98ad8'},
-    {id:'m6',ru:'Екатерина Волкова',en:'Ekaterina Volkova',role:{ru:'Косметолог',en:'Cosmetologist'},cats:['face'],rating:4.9,color:'#e0a07a'},
-    {id:'m7',ru:'Алина Морозова',en:'Alina Morozova',role:{ru:'Бровист, лэшмейкер',en:'Brow & lash artist'},cats:['brows'],rating:4.8,color:'#c79a3e'},
-    {id:'m8',ru:'Сергей Никитин',en:'Sergey Nikitin',role:{ru:'Массажист',en:'Massage therapist'},cats:['body','face'],rating:4.7,color:'#5f9e9a'}
+    {id:'m1',ru:'Анна Ковалёва',en:'Emma Collins',role:{ru:'Топ-стилист',en:'Senior stylist'},cats:['hair'],rating:4.9,color:'#9a6cc4'},
+    {id:'m2',ru:'Ирина Белова',en:'Olivia Hart',role:{ru:'Колорист',en:'Colourist'},cats:['hair'],rating:4.8,color:'#e88a62'},
+    {id:'m3',ru:'Дмитрий Орлов',en:'James Turner',role:{ru:'Барбер',en:'Barber'},cats:['hair'],rating:4.7,color:'#6f7fd6'},
+    {id:'m4',ru:'Ольга Смирнова',en:'Sophie Bennett',role:{ru:'Мастер ногтевого сервиса',en:'Nail artist'},cats:['nails'],rating:4.9,color:'#d9667f'},
+    {id:'m5',ru:'Мария Лебедева',en:'Chloe Evans',role:{ru:'Мастер ногтевого сервиса',en:'Nail artist'},cats:['nails'],rating:4.6,color:'#b98ad8'},
+    {id:'m6',ru:'Екатерина Волкова',en:'Grace Morgan',role:{ru:'Косметолог',en:'Cosmetologist'},cats:['face'],rating:4.9,color:'#e0a07a'},
+    {id:'m7',ru:'Алина Морозова',en:'Mia Russell',role:{ru:'Бровист, лэшмейкер',en:'Brow & lash artist'},cats:['brows'],rating:4.8,color:'#c79a3e'},
+    {id:'m8',ru:'Сергей Никитин',en:'Liam Parker',role:{ru:'Массажист',en:'Massage therapist'},cats:['body','face'],rating:4.7,color:'#5f9e9a'}
   ];
   const channels=[
     {id:'online',ru:'Онлайн-запись',en:'Online booking',w:38,color:'#9a6cc4'},
     {id:'phone',ru:'Телефон и мессенджеры',en:'Phone & messengers',w:24,color:'#6f7fd6'},
     {id:'social',ru:'Соцсети',en:'Social media',w:16,color:'#f0a07e'},
-    {id:'maps',ru:'Яндекс Карты',en:'Yandex Maps',w:14,color:'#d9667f'},
+    {id:'maps',ru:'Яндекс Карты',en:'Google Maps',w:14,color:'#d9667f'},
     {id:'referral',ru:'Рекомендации',en:'Referrals',w:8,color:'#5f9e9a'}
   ];
   const districts=[
-    {id:'d1',ru:'Мурино',en:'Murino',w:24},{id:'d2',ru:'Кудрово',en:'Kudrovo',w:19},{id:'d3',ru:'Всеволожск',en:'Vsevolozhsk',w:17},
-    {id:'d4',ru:'Девяткино',en:'Devyatkino',w:13},{id:'d5',ru:'Приморский район',en:'Primorsky district',w:10},
-    {id:'d6',ru:'Выборгский район',en:'Vyborgsky district',w:9},{id:'d7',ru:'Другие',en:'Other',w:8}
+    {id:'d1',ru:'Мурино',en:'Islington',w:24},{id:'d2',ru:'Кудрово',en:'Hackney',w:19},{id:'d3',ru:'Всеволожск',en:'Camden',w:17},
+    {id:'d4',ru:'Девяткино',en:'Shoreditch',w:13},{id:'d5',ru:'Приморский район',en:'Clapham',w:10},
+    {id:'d6',ru:'Выборгский район',en:'Battersea',w:9},{id:'d7',ru:'Другие',en:'Other',w:8}
   ];
   const firstNames=['Анна','Мария','Елена','Ольга','Наталья','Татьяна','Ирина','Светлана','Юлия','Дарья','Ксения','Алёна','Виктория','Полина','Екатерина','Софья','Алексей','Михаил','Игорь','Артём'];
-  const firstEn=['Anna','Maria','Elena','Olga','Natalia','Tatiana','Irina','Svetlana','Yulia','Daria','Ksenia','Alyona','Victoria','Polina','Ekaterina','Sofia','Alexey','Mikhail','Igor','Artem'];
-  const lastLetters='АБВГДЕЗИКЛМНОПРСТФЧШ';const lastEn='ABVGDEZIKLMNOPRSTFCS';
+  const firstEn=['Amelia','Isla','Ella','Lily','Ava','Freya','Harper','Ruby','Evie','Poppy','Zoe','Alice','Victoria','Holly','Kate','Sophia','Oliver','Jack','Harry','Noah'];
+  const lastLetters='АБВГДЕЗИКЛМНОПРСТФЧШ';const lastEn='ABCDEFGHJKLMNPRSTWYH';
 
   const today=new Date();today.setHours(0,0,0,0);
   const DAY=864e5,START=new Date(today.getTime()-400*DAY),END=new Date(today.getTime()+14*DAY);

@@ -32,7 +32,7 @@
     }
     return list[list.length - 1];
   };
-  const countries = ['RU', 'US', 'DE', 'IN', 'BR'];
+  const countries = document.documentElement.lang === 'en' ? ['GB', 'US', 'DE', 'IN', 'BR'] : ['RU', 'US', 'DE', 'IN', 'BR'];
   const platforms = ['web', 'ios', 'android'];
   const channels = ['organic', 'paid', 'direct', 'social', 'referral'];
   const users = [];

@@ -169,7 +169,7 @@ function pageOverview(){
  <div class="grid g-hero">
   <section class="card welcome">
    <span class="when"><i></i>${esc(now.toLocaleDateString(state.lang==='ru'?'ru-RU':'en-GB',{weekday:'long',day:'numeric',month:'long'}))} · ${String(hour).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}</span>
-   <h1>${greet},<br>${T('Анна','Anna')}!</h1>
+   <h1>${greet},<br>${T('Анна','Emma')}!</h1>
    <p>${T(`Сегодня в студии <b>${todayB.length} записей</b>, впереди ещё ${left}. Ответа ждут <b>${pending} клиентов</b>, у мастеров свободно около ${freeHours} часов.`,`<b>${todayB.length} bookings</b> today, ${left} still ahead. <b>${pending} clients</b> are waiting for a reply, and the team has about ${freeHours} free hours.`)}</p>
    <div class="row"><button class="btn btn-primary" data-act="new">${ico('plus',16)}${T('Новая запись','New booking')}</button><button class="btn" data-act="go" data-v="bookings">${ico('calendar',16)}${T('Журнал записей','Booking log')}</button></div>
   </section>
@@ -397,7 +397,7 @@ function render(){
     <div style="position:relative"><button class="icon-btn" data-act="bell" aria-expanded="${state.popover}" aria-label="${T('Уведомления','Notifications')}">${ico('bell',18)}<span class="dot">${al.length}</span></button>
      ${state.popover?`<div class="pop" role="dialog"><h4>${T('Что требует внимания','Needs your attention')}</h4>${al.map(a=>`<button class="pop-item" style="border:0;background:none;width:100%;text-align:left" data-act="go" data-v="${a.go}"><i style="background:${a.c}"></i><span>${esc(a.t)}</span></button>`).join('')}</div>`:''}</div>
     <button class="btn btn-primary" data-act="new">${ico('plus',16)}<span>${T('Запись','Booking')}</span></button>
-    <span class="user"><span class="avatar" style="background:var(--fern)">${T('АС','AS')}</span><span class="u-text"><small>${T('Управляющая','Studio manager')}</small><b>${T('Анна Соколова','Anna Sokolova')}</b></span></span>
+    <span class="user"><span class="avatar" style="background:var(--fern)">${T('АС','ES')}</span><span class="u-text"><small>${T('Управляющая','Studio manager')}</small><b>${T('Анна Соколова','Emma Sullivan')}</b></span></span>
    </div></header>
   <main class="content" id="main">${page}<p class="foot">${T('Демонстрационный дашборд LeoAnalyst. Студия, клиенты и цифры вымышлены','LeoAnalyst demo dashboard. The studio, clients and numbers are fictional')} · ${T('курс','rate')} $1 = ${D.usdRate} ₽</p></main>
  </div></div>

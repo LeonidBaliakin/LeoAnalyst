@@ -158,7 +158,7 @@ const TAGS=[
  {p:[13.2,3,8],c:'#7b8fe0',h:L('Расходы','Overheads'),b:money(412000,'412 тыс. ₽')+L(' / мес',' / mo'),e:L('Открыть →','Open →')},
 ];
 const PINS_RU=[['Анна','92%','#2f8a64'],['Ольга','81%','#2f8a64'],['Мария','58%','#d9667f'],['Кира','84%','#2f8a64'],['Ева','76%','#9a6cc4'],['Дина','69%','#9a6cc4']];
-const PINS=RU?PINS_RU:PINS_RU.map((p,i)=>[['Anna','Olga','Maria','Kira','Eva','Dina'][i],p[1],p[2]]);
+const PINS=RU?PINS_RU:PINS_RU.map((p,i)=>[['Emma','Olivia','Sophie','Chloe','Grace','Mia'][i],p[1],p[2]]);
 const T=document.getElementById('tags');
 TAGS.forEach(t=>{t.el=document.createElement('div');t.el.className='tag';t.el.innerHTML=`<small><i style="background:${t.c}"></i>${t.h}</small><b>${t.b}</b><span>${t.s||''}</span>${t.w?`<span class="warn">${t.w}</span>`:''}<em>${t.e}</em>`;t.el.onclick=()=>location.href=FULL;T.appendChild(t.el);t.v=new THREE.Vector3(...t.p)});
 const pins=pinsAt.map((v,i)=>{const el=document.createElement('div');el.className='pin';el.innerHTML=`<u style="background:${PINS[i][2]}">${PINS[i][1].replace('%','')}</u>${PINS[i][0]}`;T.appendChild(el);return {el,v}});
