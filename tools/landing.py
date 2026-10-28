@@ -1,139 +1,127 @@
-"""Builds service (landing) pages from content dicts.
+"""Builds service (landing) pages as trimmed copies of the home page.
 
-Usage: python3 tools/landing.py <slug>   (pages are defined in tools/pages_*.py)
-Russian text goes into the HTML (indexed by Yandex); English goes into
-<template id="page-en"> and is swapped in by /assets/landing.js.
+Each landing page = home page header + hero (texts for one search query)
++ one example dashboard + enquiry block. Same styles, scripts and lead form.
+Rebuild every landing page after changing index.html:
+
+    python3 tools/landing.py            # all pages
+    python3 tools/landing.py <slug>     # one page
+
+Page texts live in tools/pages.py.
 """
-import json, html, sys, importlib, os
+import json, os, re, sys, html
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pages import PAGES  # noqa: E402
 
 ORIGIN = 'https://analyticsbuild.com'
+BRAND_RU, BRAND_EN = 'Сайты и Аналитика', 'Websites & Analytics'
 ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'
-LOGO = '<svg viewBox="0 0 64 64" fill="none"><path d="M14 46V31M27 46V19M40 46V27M52 46V13" stroke="#7EDBD3" stroke-width="7" stroke-linecap="round"/></svg>'
-EXAMPLES = {
-    'ru': [('logistics', 'Логистика'), ('sea-containers', 'Морские перевозки'), ('forwarding', 'Экспедирование'),
-           ('staff-crm', 'Персонал и CRM'), ('finance', 'Финансы'), ('product-analytics', 'Продуктовая аналитика'), ('beauty-3d', 'Бьюти-сфера')],
-    'en': [('logistics', 'Logistics'), ('sea-containers', 'Ocean shipping'), ('forwarding', 'Freight forwarding'),
-           ('staff-crm', 'Team &amp; CRM'), ('finance', 'Finance'), ('product-analytics', 'Product analytics'), ('beauty-3d', 'Beauty salon')],
-}
-UI = {
-    'ru': dict(home='Главная', see='Посмотреть пример', example_sub='Это живой дашборд на вымышленных данных. Пощёлкайте разделы — так будет выглядеть и ваш, только с вашими цифрами.',
-               demo='Демо-данные', price_h='Сколько стоит', price_sub='Цена зависит от числа источников данных и экранов. Точный расчёт — в калькуляторе на главной.',
-               calc='Рассчитать стоимость', faq='Частые вопросы', q='', lang=''),
-    'en': dict(home='Home', see='See an example', example_sub='A live dashboard with sample data. Click through the sections — yours will look like this, with your numbers.',
-               demo='Sample data', price_h='Pricing', price_sub='The price depends on the number of data sources and screens. Get an exact estimate in the calculator on the home page.',
-               calc='Calculate the price', faq='FAQ', q='?lang=en', lang='en'),
-}
+CSS = '''
+/* landing pages */
+.lp-example{padding:24px 0 72px}
+.lp-frame{background:var(--board);border-radius:28px;padding:14px}
+.lp-frame-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px 8px 12px;color:#fff;font-size:15px;font-weight:700}
+.lp-frame-bar span{font-size:13px;font-weight:500;color:#a9afbd}
+.lp-frame-in{border-radius:18px;overflow:hidden;background:#fff;height:min(720px,80vh)}
+.lp-frame-in iframe{display:block;width:100%;height:100%;border:0}
+.lp-contact{padding:0 0 88px}
+.lp-card{background:var(--board);color:#fff;border-radius:28px;padding:clamp(28px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.lp-card small{display:block;font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--mint);margin-bottom:12px}
+.lp-card h2{color:#fff;margin:0 0 10px;font-size:clamp(26px,3.6vw,40px);line-height:1.1;letter-spacing:-.035em;max-width:20ch}
+.lp-card p{margin:0;color:#a9afbd;max-width:48ch;line-height:1.55}
+.lp-card .solid-btn{background:#fff;color:var(--ink)}
+@media(max-width:600px){.lp-frame{border-radius:22px;padding:8px}.lp-frame-in{height:72vh;border-radius:14px}.lp-example{padding:8px 0 48px}}
+'''
 
 
-def main_block(c, lang):
-    u = UI[lang]; q = u['q']; amp = '&amp;' if q else '?'
-    home = '/' + q
-    dh = '' if q else ' data-home'
-    out = [f'<main id="page">',
-           f' <section class="hero"><div class="wrap">',
-           f'  <p class="crumbs"><a href="{home}"{dh}>{u["home"]}</a> / {c["crumb"]}</p>',
-           f'  <h1>{c["h1"]}</h1>',
-           f'  <p class="lead">{c["lead"]}</p>',
-           f'  <div class="hero-actions">',
-           f'   <a class="btn btn-dark" href="/{q}{amp if q else "?"}lead=1"{dh}>{c["cta"]} {ARROW}</a>',
-           f'   <a class="btn btn-ghost" href="#example">{u["see"]}</a>',
-           f'  </div>',
-           f'  <div class="facts">'] + [f'   <div class="fact"><b>{b}</b><span>{s}</span></div>' for b, s in c['facts']] + [
-           f'  </div>', f' </div></section>', '',
-           f' <section class="sec"><div class="wrap">', f'  <h2>{c["pains_h"]}</h2>', f'  <p class="sub">{c["pains_sub"]}</p>',
-           f'  <div class="pains">'] + [f'   <div class="pain">{p}</div>' for p in c['pains']] + [
-           f'  </div>', f' </div></section>', '',
-           f' <section class="sec"><div class="wrap">', f'  <h2>{c["metrics_h"]}</h2>', f'  <p class="sub">{c["metrics_sub"]}</p>',
-           f'  <div class="metrics">'] + [f'   <div class="metric"><b>{b}</b><p>{p}</p></div>' for b, p in c['metrics']] + [
-           f'  </div>', f' </div></section>', '']
-    ex_slug, ex_name = c['example']
-    src = f'/dashboards/{ex_slug}/' + q
-    out += [f' <section class="sec" id="example"><div class="wrap">', f'  <h2>{c["example_h"]}</h2>', f'  <p class="sub">{u["example_sub"]}</p>',
-            f'  <div class="example">', f'   <div class="example-bar"><b>{ex_name}</b><span>{u["demo"]}</span></div>',
-            f'   <div class="example-frame"><iframe src="{src}" title="{html.escape(ex_name)}" loading="lazy"></iframe></div>',
-            f'  </div>', f'  <div class="more">']
-    for slug, name in EXAMPLES[lang]:
-        if slug == ex_slug:
-            continue
-        out.append(f'   <a href="/dashboards/{slug}/{q}"{dh}>{name}</a>')
-    out += [f'  </div>', f' </div></section>', '',
-            f' <section class="sec"><div class="wrap">', f'  <h2>{u["price_h"]}</h2>', f'  <p class="sub">{u["price_sub"]}</p>',
-            f'  <div class="price">', f'   <div class="price-main">', f'    <small>{c["price_label"]}</small>',
-            f'    <div class="sum">{c["price"]}</div>', f'    <p>{c["price_note"]}</p>',
-            f'    <a class="btn btn-light" href="/{q}#calc"{dh}>{u["calc"]}</a>', f'   </div>',
-            f'   <div class="price-side">', f'    <ul>'] + [f'     <li>{i}</li>' for i in c['includes']] + [
-            f'    </ul>', f'   </div>', f'  </div>', f' </div></section>', '',
-            f' <section class="sec"><div class="wrap">', f'  <h2>{u["faq"]}</h2>', f'  <div class="faq">'] + [
-            f'   <details><summary>{qq}</summary><p>{a}</p></details>' for qq, a in c['faq']] + [
-            f'  </div>', f' </div></section>', '',
-            f' <section class="sec"><div class="wrap">', f'  <div class="cta">',
-            f'   <div><h2>{c["final_h"]}</h2><p>{c["final_p"]}</p></div>',
-            f'   <a class="btn" href="/{q}{amp if q else "?"}lead=1"{dh}>{c["final_btn"]} {ARROW}</a>',
-            f'  </div>', f' </div></section>', '</main>']
-    return '\n'.join(out)
-
-
-def render(p):
+def build(p):
+    s = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
     ru, en = p['ru'], p['en']
     url = f'{ORIGIN}/{p["slug"]}/'
-    brand_ru, brand_en = 'Сайты и Аналитика', 'Websites & Analytics'
-    t_ru, t_en = f'{ru["title"]} | {brand_ru}', f'{en["title"]} | {brand_en}'
-    strip = lambda s: html.unescape(s.replace('<em>', '').replace('</em>', ''))
-    ld = [{"@context": "https://schema.org", "@type": "Service", "name": strip(ru['crumb']), "serviceType": p['service_type'],
-           "provider": {"@id": f"{ORIGIN}/#service"}, "areaServed": ["RU", "Worldwide"], "url": url,
-           "offers": {"@type": "Offer", "priceCurrency": "RUB", "price": str(p['min_price']),
-                      "priceSpecification": {"@type": "PriceSpecification", "minPrice": str(p['min_price']), "priceCurrency": "RUB"}}},
-          {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
-              {"@type": "ListItem", "position": 1, "name": brand_ru, "item": f"{ORIGIN}/"},
-              {"@type": "ListItem", "position": 2, "name": strip(ru['crumb']), "item": url}]},
-          {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
-              {"@type": "Question", "name": strip(qq), "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for qq, a in ru['faq']]}]
+    t_ru, t_en = f'{ru["title"]} | {BRAND_RU}', f'{en["title"]} | {BRAND_EN}'
     e = html.escape
-    head = f'''<!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<script src="/dashboards/_shared/geo-locale.js?v=2"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{e(t_ru)}</title>
-<meta name="description" content="{e(ru["description"])}">
-<link rel="alternate" hreflang="ru" href="{url}">
-<link rel="alternate" hreflang="en" href="{url}?lang=en">
-<link rel="alternate" hreflang="x-default" href="{url}?lang=en">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="{brand_ru}">
-<meta property="og:title" content="{e(t_ru)}">
-<meta property="og:description" content="{e(ru["description"])}">
-<meta property="og:image" content="{ORIGIN}/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#fafafa">
-<script type="application/json" id="seo-i18n">{json.dumps({"ru": {"title": t_ru, "description": ru["description"]}, "en": {"title": t_en, "description": en["description"]}}, ensure_ascii=False)}</script>
-<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
-<link rel="stylesheet" href="/assets/landing.css?v=1">
-</head>
-<body>
-<header class="top"><div class="wrap top-in">
- <a class="brand" href="/" data-home><i>{LOGO}</i><b data-en="Websites &amp; Analytics">Сайты и Аналитика</b></a>
- <a class="btn btn-dark" href="/?lead=1" data-home data-en="Send an enquiry">Оставить заявку</a>
-</div></header>
+
+    def sub(pat, val, flags=0, count=1):
+        nonlocal s
+        n = len(re.findall(pat, s, flags))
+        assert n >= 1, pat
+        s = re.sub(pat, lambda m: val, s, count=count, flags=flags)
+
+    # ---- head ----
+    sub(r'<title>[^<]*</title>', f'<title>{e(t_ru)}</title>')
+    sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(ru["desc"])}">')
+    sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{e(t_ru)}">')
+    sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{e(ru["desc"])}">')
+    sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="{url}">')
+    sub(r'<link rel="canonical" href="[^"]*" id="canonicalLink">', f'<link rel="canonical" href="{url}" id="canonicalLink">')
+    sub(r'<link rel="alternate" hreflang="ru" href="[^"]*">', f'<link rel="alternate" hreflang="ru" href="{url}">')
+    sub(r'<link rel="alternate" hreflang="en" href="[^"]*">', f'<link rel="alternate" hreflang="en" href="{url}?lang=en">')
+    sub(r'<link rel="alternate" hreflang="x-default" href="[^"]*">', f'<link rel="alternate" hreflang="x-default" href="{url}?lang=en">')
+    sub(r'<meta name="(yandex|google)-site-verification"[^>]*>\n', '', count=0)
+    ld = [{"@context": "https://schema.org", "@type": "Service", "name": ru['crumb'], "serviceType": ru['crumb'],
+           "provider": {"@id": f"{ORIGIN}/#service"}, "areaServed": ["RU", "Worldwide"], "url": url},
+          {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+              {"@type": "ListItem", "position": 1, "name": BRAND_RU, "item": f"{ORIGIN}/"},
+              {"@type": "ListItem", "position": 2, "name": ru['crumb'], "item": url}]}]
+    sub(r'<script type="application/ld\+json">.*?</script>', f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>', re.S)
+
+    def copy(c, title, lang):
+        return {'pageTitle': title, 'pageDesc': c['desc'], 'heroTag': c['tag'], 'heroTitleA': c['qs'][0], 'heroQs': c['qs'],
+                'heroLead': c['lead'], 'ctaExplore': c['see'], 'lpExHeading': c['ex_h'], 'lpExDesc': c['ex_p'],
+                'lpExName': c['ex_name'], 'lpExDemo': 'Демо-данные' if lang == 'ru' else 'Sample data',
+                'lpTag': c['final_tag'], 'lpHeading': c['final_h'], 'lpDesc': c['final_p']}
+    landing = {'ru': copy(ru, t_ru, 'ru'), 'en': copy(en, t_en, 'en')}
+    sub(r'<meta charset="utf-8">\n', '<meta charset="utf-8">\n<script>window.LANDING=%s;window.LANDING_URL=%s;</script>\n'
+        % (json.dumps(landing, ensure_ascii=False), json.dumps(url)))
+    sub(r'</style>', CSS + '</style>')
+
+    # ---- links: page lives one level down ----
+    s = re.sub(r'(href|src)="(?!https?:|#|/|mailto:|data:|javascript:)([^"]+)"', r'\1="/\2"', s)
+    for a in ('problems', 'demo', 'calc'):
+        s = s.replace(f'href="#{a}"', f'href="/#{a}"')
+    s = s.replace('<a href="#top" class="brand"', '<a href="/" class="brand"')
+
+    # ---- hero static text (what Yandex reads) ----
+    sub(r'<span data-i18n="heroTag">[^<]*</span>', f'<span data-i18n="heroTag">{ru["tag"]}</span>')
+    sub(r'<span class="q-fallback" data-i18n="heroTitleA">[^<]*</span>', f'<span class="q-fallback" data-i18n="heroTitleA">{ru.get("seo_q", ru["qs"][0])}</span>')
+    sub(r'<p class="hero-lead" data-i18n="heroLead">[^<]*</p>', f'<p class="hero-lead" data-i18n="heroLead">{ru["lead"]}</p>')
+    sub(r'<a href="/#problems" class="light-btn"><span data-i18n="ctaExplore">[^<]*</span>',
+        f'<a href="#example" class="light-btn"><span data-i18n="ctaExplore">{ru["see"]}</span>')
+
+    # ---- body: drop problems, examples grid and calculator; add one example + enquiry ----
+    sub(r'\n <section class="problems-section".*?\n </section>\n', '\n', re.S)
+    ex = p['example']
+    block = f'''
+ <section class="lp-example" id="example">
+  <div class="container">
+   <div class="showcase-intro"><div><h2 data-i18n="lpExHeading">{ru["ex_h"]}</h2></div><p class="section-description" data-i18n="lpExDesc">{ru["ex_p"]}</p></div>
+   <div class="lp-frame"><div class="lp-frame-bar"><b data-i18n="lpExName">{ru["ex_name"]}</b><span data-i18n="lpExDemo">Демо-данные</span></div>
+    <div class="lp-frame-in"><iframe id="lpFrame" src="/dashboards/{ex}/" title="{e(ru["ex_name"])}" loading="lazy"></iframe></div></div>
+   <script>if(window.PAGE_LANG==='en')document.getElementById('lpFrame').src='/dashboards/{ex}/?lang=en';</script>
+  </div>
+ </section>
+ <section class="lp-contact" id="contact">
+  <div class="container"><div class="lp-card">
+   <div><small data-i18n="lpTag">{ru["final_tag"]}</small><h2 data-i18n="lpHeading">{ru["final_h"]}</h2><p data-i18n="lpDesc">{ru["final_p"]}</p></div>
+   <button type="button" class="solid-btn" data-open-lead><span data-i18n="ctaDiscuss">Оставить заявку</span>{ARROW}</button>
+  </div></div>
+ </section>
 '''
-    foot = '''<footer class="foot"><div class="wrap foot-in">
- <span>© <span data-en="Websites &amp; Analytics">Сайты и Аналитика</span> · <a href="mailto:analystleogroup@gmail.com">analystleogroup@gmail.com</a></span>
- <nav><a href="/" data-home data-en="Home">Главная</a><a href="/privacy/" data-home data-en="Privacy policy">Политика конфиденциальности</a></nav>
-</div></footer>
-<script src="/assets/landing.js?v=1"></script>
-</body>
-</html>
-'''
-    return head + '\n' + main_block(ru, 'ru') + '\n\n<template id="page-en">\n' + main_block(en, 'en') + '\n</template>\n\n' + foot
+    sub(r'\n <section class="showcase" id="demo">.*?\n </section>\n', block, re.S)
+    sub(r'\n <section class="calc-section" id="calc".*?\n </section>\n', '\n', re.S)
+    return s
+
+
+def main():
+    slugs = sys.argv[1:] or list(PAGES)
+    for slug in slugs:
+        out = build(PAGES[slug])
+        os.makedirs(os.path.join(ROOT, slug), exist_ok=True)
+        open(os.path.join(ROOT, slug, 'index.html'), 'w', encoding='utf-8').write(out)
+        print('built', slug)
 
 
 if __name__ == '__main__':
-    sys.path.insert(0, os.path.dirname(__file__))
-    slug = sys.argv[1]
-    mod = importlib.import_module('pages_' + slug.replace('-', '_'))
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    os.makedirs(os.path.join(root, slug), exist_ok=True)
-    with open(os.path.join(root, slug, 'index.html'), 'w', encoding='utf-8') as f:
-        f.write(render(mod.PAGE))
-    print('built', slug)
+    main()

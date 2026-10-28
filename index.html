@@ -25,7 +25,7 @@
 <link rel="alternate" hreflang="ru" href="https://analyticsbuild.com/">
 <link rel="alternate" hreflang="en" href="https://analyticsbuild.com/?lang=en">
 <link rel="alternate" hreflang="x-default" href="https://analyticsbuild.com/?lang=en">
-<script>if(window.PAGE_LANG==='en'){document.getElementById('canonicalLink').href='https://analyticsbuild.com/?lang=en'}</script>
+<script>(function(){var u=window.LANDING_URL||'https://analyticsbuild.com/';document.getElementById('canonicalLink').href=u+(window.PAGE_LANG==='en'?'?lang=en':'')})()</script>
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:url" content="https://analyticsbuild.com/">
 <meta property="og:site_name" content="Сайты и Аналитика">
@@ -255,7 +255,7 @@ a.solution-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rg
 .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#7b7e86;font-size:12px}
 .footer-left{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .footer-left strong{color:#282b32;font-weight:760}
-.footer-links{display:flex;gap:20px;align-items:center}
+.footer-links{display:flex;gap:10px 20px;align-items:center;flex-wrap:wrap}
 .footer-links a:hover{color:#111}
 @media(max-width:1100px){
  .dashboard{grid-template-columns:68px minmax(0,1fr)}.rail{padding-inline:7px}.dash-content{padding:22px 17px}.glass-card{padding:17px}.analytics-row{grid-template-columns:1.42fr minmax(245px,.92fr)}
@@ -834,6 +834,7 @@ en:{
  noData:'No data',points:'pp',periodNames:['7 days','30 days','90 days'],chartUnits:{revenue:'Revenue',orders:'Orders',conversion:'Conversion',visits:'Visitors'},plotAccess:'Interactive chart. Use left and right arrows to explore data points.',expanded:'Exit full screen',expand:'Open full screen',menuOpen:'Open menu',menuClose:'Close menu',fromPrev:'vs previous period',currency:'$'
 }
 };
+if(window.LANDING){Object.assign(COPY.ru,LANDING.ru||{});Object.assign(COPY.en,LANDING.en||{})}
 const $=(q,root=document)=>root.querySelector(q), $$=(q,root=document)=>Array.from(root.querySelectorAll(q));
 const state={locale:'ru',period:30,source:'all',metric:'revenue',view:'overview',funnelIndex:3,hoverIndex:null};
 const sources=[{id:'search',share:.38,visit:.36,color:'#6e96ff'},{id:'market',share:.27,visit:.28,color:'#8f79e5'},{id:'social',share:.21,visit:.24,color:'#f0a66c'},{id:'referral',share:.14,visit:.12,color:'#53cbb8'}];
@@ -926,8 +927,8 @@ function renderAll(){const d=COPY[state.locale];
   $('#leadResultText').textContent=LEAD_DELIVERY_ENABLED?d.formSuccessText:d.formPreviewText;
  $('#menuBtn').setAttribute('aria-label',d.menuOpen);
  document.documentElement.lang=state.locale;
- document.title=state.locale==='ru'?"Дашборды и бизнес-аналитика под ключ: где бизнес теряет деньги | Сайты и Аналитика":"Dashboards & Business Analytics for Small Business — Find Lost Revenue | Websites & Analytics";
- const pageDescription=state.locale==='ru'?"Делаем дашборды и отчёты для владельцев и руководителей: прибыль, маржа, расходы, клиенты, логистика. Данные из 1С, CRM и таблиц. Сайты и внедрение ИИ. Примеры и цены.":"Custom dashboards and reports for owners and managers: profit, margin, costs, customers, logistics. Data from your accounting, CRM and spreadsheets. Websites and AI. Live examples and prices.";
+ document.title=d.pageTitle||(state.locale==='ru'?"Дашборды и бизнес-аналитика под ключ: где бизнес теряет деньги | Сайты и Аналитика":"Dashboards & Business Analytics for Small Business — Find Lost Revenue | Websites & Analytics");
+ const pageDescription=d.pageDesc||(state.locale==='ru'?"Делаем дашборды и отчёты для владельцев и руководителей: прибыль, маржа, расходы, клиенты, логистика. Данные из 1С, CRM и таблиц. Сайты и внедрение ИИ. Примеры и цены.":"Custom dashboards and reports for owners and managers: profit, margin, costs, customers, logistics. Data from your accounting, CRM and spreadsheets. Websites and AI. Live examples and prices.");
  $('meta[property="og:locale"]').content=state.locale==='ru'?'ru_RU':'en_US';
  $('meta[name="description"]').content=pageDescription;
  $('meta[property="og:title"]').content=document.title;
