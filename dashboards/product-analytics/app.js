@@ -632,7 +632,7 @@
   function layout(s,body) {
     const item=tabs.find(t=>t.id===state.page)||tabs[0];
     const pageTitle=state.page==='overview'?T('Продукт под контролем','Your product, in focus'):T(item.ru,item.en);
-    document.title=`${T(item.ru,item.en)} · Pulse / LeoAnalyst`;
+    // page title is kept for search (set by geo-locale.js)
     document.documentElement.lang=state.lang;
     document.body.classList.toggle('dark',state.theme==='dark');
     return `<div class="shell"><aside class="sidebar ${state.navOpen?'open':''}" id="sidebar">

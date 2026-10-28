@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+User-agent: Yandex
+Allow: /
+Clean-param: lang /
+
 Sitemap: https://analyticsbuild.com/sitemap.xml

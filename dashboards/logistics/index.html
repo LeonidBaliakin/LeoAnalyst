@@ -2,7 +2,21 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-<script src="../_shared/geo-locale.js?v=1"></script>
+<script src="../_shared/geo-locale.js?v=2"></script>
+<link rel="preload" href="three.min.js?v=202610241410" as="script">
+<title>Дашборд транспортной компании: загрузка парка, рейсы, маржа — 3D-пример | LeoAnalyst</title>
+<meta name="description" content="3D-дашборд для транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и топливо.">
+<link rel="alternate" hreflang="ru" href="https://analyticsbuild.com/dashboards/logistics/">
+<link rel="alternate" hreflang="en" href="https://analyticsbuild.com/dashboards/logistics/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://analyticsbuild.com/dashboards/logistics/?lang=en">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LeoAnalyst">
+<meta property="og:title" content="Дашборд транспортной компании: загрузка парка, рейсы, маржа — 3D-пример | LeoAnalyst">
+<meta property="og:description" content="3D-дашборд для транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и топливо.">
+<meta property="og:image" content="https://analyticsbuild.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/json" id="seo-i18n">{"ru": {"title": "Дашборд транспортной компании: загрузка парка, рейсы, маржа — 3D-пример | LeoAnalyst", "description": "3D-дашборд для транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и топливо."}, "en": {"title": "Trucking & Fleet Dashboard: Utilization, Trips, Margin — 3D Example | LeoAnalyst", "description": "3D dashboard for a trucking company: ton-km, fleet utilization, own vs hired trucks, repairs, drivers, revenue, margin and fuel costs."}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Дашборд транспортной компании: загрузка парка, рейсы, маржа — 3D-пример", "description": "3D-дашборд для транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и топливо.", "url": "https://analyticsbuild.com/dashboards/logistics/", "inLanguage": "ru", "isPartOf": {"@type": "WebSite", "name": "LeoAnalyst", "url": "https://analyticsbuild.com/"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "LeoAnalyst", "item": "https://analyticsbuild.com/"}, {"@type": "ListItem", "position": 2, "name": "Дашборд транспортной компании", "item": "https://analyticsbuild.com/dashboards/logistics/"}]}}</script>
 <!-- Google Analytics 4 -->
 <script>
   (function(){try{if(localStorage.getItem('cookieConsent')!=='accepted')return}catch(e){return}
@@ -12,15 +26,6 @@
 </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#efeae2">
-  <link rel="canonical" href="https://analyticsbuild.com/dashboards/logistics/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://analyticsbuild.com/dashboards/logistics/">
-  <meta property="og:title" content="3D-дашборд транспортной компании — пример | LeoAnalyst">
-  <meta property="og:description" content="Интерактивный 3D-дашборд транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и цена топлива. Демо-данные.">
-  <meta property="og:image" content="https://analyticsbuild.com/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>3D-дашборд транспортной компании — пример | LeoAnalyst</title>
-  <meta name="description" content="Интерактивный 3D-дашборд транспортной компании: тонно-километры, загрузка парка, свой и наёмный транспорт, ремонты, водители, выручка, маржа и цена топлива. Демо-данные.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">

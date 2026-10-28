@@ -4,18 +4,28 @@
 <meta charset="utf-8">
 <meta name="yandex-verification" content="c8ab5bb92e23dffe" />
 <meta name="google-site-verification" content="lLGjybUNhVYjjVlHIigqH1v5pKnFoH7f4Ce1vQtF4YQ" />
-<!-- Google Analytics 4: loaded only after the visitor accepts cookies -->
+<!-- Google Analytics 4 + Yandex Metrica: loaded only after the visitor accepts cookies -->
 <script>
+  window.YM_ID=113847848; /* Yandex Metrica counter id */
+  /* Search engines: / is Russian, /?lang=en is English. Crawlers get the language of the address. */
+  window.PAGE_LANG=/[?&]lang=en(&|$)/.test(location.search)?'en':'ru';
+  window.IS_BOT=/bot|crawl|spider|slurp|yandex|bingpreview|lighthouse|pagespeed|google-inspectiontool|googleother|facebookexternalhit|telegrambot|vkshare/i.test(navigator.userAgent||'');
   window.loadAnalytics=function(){if(window.__gaLoaded)return;window.__gaLoaded=true;
     window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};
     gtag('js',new Date());gtag('config','G-RD7CLDCHGF');
-    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-RD7CLDCHGF';document.head.appendChild(s)};
-  try{if(localStorage.getItem('cookieConsent')==='accepted')loadAnalytics()}catch(e){}
+    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-RD7CLDCHGF';document.head.appendChild(s);
+    if(window.YM_ID){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+    ym(window.YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true})}};
+  try{if(!window.IS_BOT&&localStorage.getItem('cookieConsent')==='accepted')loadAnalytics()}catch(e){}
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fafafa">
-<meta name="description" content="Покажем, где бизнес теряет деньги и клиентов, и что улучшить. Бизнес- и продуктовая аналитика, сайты и внедрение ИИ под ключ.">
-<link rel="canonical" href="https://analyticsbuild.com/">
+<meta name="description" content="Делаем дашборды и отчёты для владельцев и руководителей: прибыль, маржа, расходы, клиенты, логистика. Данные из 1С, CRM и таблиц. Сайты и внедрение ИИ. Примеры и цены.">
+<link rel="canonical" href="https://analyticsbuild.com/" id="canonicalLink">
+<link rel="alternate" hreflang="ru" href="https://analyticsbuild.com/">
+<link rel="alternate" hreflang="en" href="https://analyticsbuild.com/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://analyticsbuild.com/?lang=en">
+<script>if(window.PAGE_LANG==='en'){document.getElementById('canonicalLink').href='https://analyticsbuild.com/?lang=en'}</script>
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:url" content="https://analyticsbuild.com/">
 <meta property="og:site_name" content="LeoAnalyst">
@@ -27,11 +37,11 @@
 <meta property="og:image:alt" content="Сайты и аналитика — покажем на цифрах, где теряются деньги и клиенты">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://analyticsbuild.com/og-image.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "LeoAnalyst — сайты и аналитика", "url": "https://analyticsbuild.com/", "image": "https://analyticsbuild.com/og-image.png", "email": "analystleogroup@gmail.com", "founder": {"@type": "Person", "name": "Леонид Балякин", "jobTitle": "Аналитик: бизнес- и продуктовая аналитика"}, "areaServed": ["RU", "Worldwide"], "availableLanguage": ["ru", "en"], "description": "Бизнес- и продуктовая аналитика, дашборды, разработка сайтов и внедрение ИИ для малого и среднего бизнеса.", "knowsAbout": ["Бизнес-аналитика", "Продуктовая аналитика", "Дашборды", "Разработка сайтов", "Внедрение ИИ"]}</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://analyticsbuild.com/#service", "name": "LeoAnalyst — дашборды, аналитика и сайты", "url": "https://analyticsbuild.com/", "image": "https://analyticsbuild.com/og-image.png", "email": "analystleogroup@gmail.com", "areaServed": ["RU", "Worldwide"], "availableLanguage": ["ru", "en"], "description": "Дашборды и отчёты для малого и среднего бизнеса: прибыль, маржа, расходы, клиенты, логистика. Бизнес- и продуктовая аналитика, разработка сайтов, внедрение ИИ.", "knowsAbout": ["Бизнес-аналитика", "Продуктовая аналитика", "Дашборды", "Power BI", "1С", "Разработка сайтов", "Внедрение ИИ", "Аналитика логистики"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Услуги", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Разработка дашбордов для бизнеса"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Бизнес-аналитика: прибыль, маржа, расходы"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Продуктовая аналитика: воронки, удержание, LTV"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Дашборды для логистики и транспортных компаний"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Разработка сайтов"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Внедрение ИИ в бизнес-процессы"}}]}}, {"@context": "https://schema.org", "@type": "WebSite", "name": "LeoAnalyst", "url": "https://analyticsbuild.com/", "inLanguage": ["ru", "en"]}]</script>
 <meta property="og:type" content="website">
-<meta property="og:title" content="Где теряются деньги и клиенты? Покажем на цифрах.">
-<meta property="og:description" content="Находим точки роста и потерь в бизнесе. Создаём сайты, внедряем аналитику и ИИ. Интерактивный пример внутри.">
-<title>Покажем на цифрах, где бизнес теряет деньги и клиентов</title>
+<meta property="og:title" content="Дашборды и бизнес-аналитика под ключ: где бизнес теряет деньги | LeoAnalyst">
+<meta property="og:description" content="Делаем дашборды и отчёты для владельцев и руководителей: прибыль, маржа, расходы, клиенты, логистика. Данные из 1С, CRM и таблиц. Сайты и внедрение ИИ. Примеры и цены.">
+<title>Дашборды и бизнес-аналитика под ключ: где бизнес теряет деньги | LeoAnalyst</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101524'/%3E%3Cpath d='M14 42V29M27 42V19M40 42V25M52 42V13' stroke='%237EDBD3' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 :root{color-scheme:light;--paper:#fafafa;--white:#fff;--ink:#16171c;--muted:#6e7078;--line:#e7e8ec;--blue:#1275ff;--mint:#4fd6c7;--radius:26px;--board:#10131e;--ease:cubic-bezier(.23,1,.32,1);--ease-drawer:cubic-bezier(.32,.72,0,1)}
@@ -485,7 +495,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 @media(max-width:600px){.thought-q{font-size:15px}.thought-solve{font-size:16px}.thought-inner{padding:0 16px}}
 @media(prefers-reduced-motion:reduce){.js-thoughts .thought-body,.js-thoughts .thought-inner,.thought-plus,.thought{transition:none}}
 .cookie-bar{position:fixed;z-index:60;left:20px;bottom:20px;width:min(420px,calc(100% - 40px));background:#fff;border:1px solid #e3e5ea;border-radius:20px;padding:16px 18px;box-shadow:0 20px 50px -20px rgba(20,24,40,.35);animation:cookie-in .45s var(--ease)}
-.cookie-bar p{margin:0 0 12px;font-size:13px;line-height:1.55;color:#4f5560}
+.cookie-bar p{margin:0 0 12px;font-size:13px;line-height:1.55;color:#4f5560}.cookie-link{color:#1a74de;text-decoration:underline;text-underline-offset:3px}.lead-privacy a{color:#1a74de}
 .cookie-actions{display:flex;gap:8px}
 .cookie-btn{border:1px solid #d8dbe3;background:#fff;color:#1d2027;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:background .18s,transform .18s}
 .cookie-btn:hover{background:#f3f4f6}.cookie-btn:active{transform:scale(.97)}
@@ -655,10 +665,10 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
   </div>
  </section>
 <div class="cookie-bar" id="cookieBar" role="region" aria-label="Cookie" hidden>
- <p data-i18n="cookieText">Сайт использует cookie и Google Analytics, чтобы считать посещения и понимать, какие разделы полезны. Данные о посещениях обрабатываются Google LLC (США).</p>
+ <p><span data-i18n="cookieText">Сайт использует cookie, Яндекс Метрику и Google Analytics, чтобы считать посещения и понимать, какие разделы полезны.</span> <a class="cookie-link" href="privacy/" data-i18n="cookiePolicy">Политика конфиденциальности</a></p>
  <div class="cookie-actions"><button type="button" class="cookie-btn cookie-accept" id="cookieAccept" data-i18n="cookieAccept">Принять</button><button type="button" class="cookie-btn" id="cookieDecline" data-i18n="cookieDecline">Отклонить</button></div>
 </div>
-<footer class="footer"><div class="container footer-inner"><div class="footer-left"><strong data-i18n="brandFull">Сайты и Аналитика</strong><span data-i18n="footerDisclosure">В интерактивном примере используются вымышленные данные.</span></div><div class="footer-links"><a href="#top" data-i18n="footerTop">Наверх ↑</a><a href="mailto:analystleogroup@gmail.com">analystleogroup@gmail.com</a></div></div></footer>
+<footer class="footer"><div class="container footer-inner"><div class="footer-left"><strong data-i18n="brandFull">Сайты и Аналитика</strong><span data-i18n="footerDisclosure">В интерактивном примере используются вымышленные данные.</span></div><div class="footer-links"><a href="privacy/" data-i18n="footerPrivacy">Политика конфиденциальности</a><a href="#top" data-i18n="footerTop">Наверх ↑</a><a href="mailto:analystleogroup@gmail.com">analystleogroup@gmail.com</a></div></div></footer>
 
 <!-- Lead form preview: email delivery is disabled until the site is launched and configured. -->
 <div class="lead-overlay" id="leadOverlay" hidden>
@@ -738,6 +748,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
     <details class="lead-privacy" id="leadPrivacy">
      <summary data-i18n="formPrivacyToggle">Как используются мои данные?</summary>
      <p id="leadPrivacyText" data-i18n="formPrivacyText">Сейчас форма работает в режиме предварительного просмотра: данные не отправляются и не сохраняются на сервере. После запуска сайта они будут использоваться только для ответа на заявку.</p>
+     <p><a href="privacy/" target="_blank" rel="noopener" data-i18n="formPolicyLink">Политика конфиденциальности</a></p>
     </details>
     <input class="lead-honeypot" type="text" id="leadHoneypot" autocomplete="off" tabindex="-1" aria-hidden="true">
     <p id="leadStatus" class="lead-status" role="status" aria-live="polite" hidden></p>
@@ -779,7 +790,7 @@ ru:{
  serviceProductTitle:'Продуктовая аналитика',serviceProductDesc:'Покажем путь клиента до покупки, точки потерь и как измерять результат изменений.',prodPoint1:'Сбор пользовательских событий',prodPoint2:'Воронки, удержание, конверсии',prodPoint3:'Проверяемые гипотезы улучшений',
  serviceAiTitle:'Внедрение ИИ',serviceAiDesc:'Подключим ИИ к данным, проверим точность ответов и научим вас получать отчёты простыми вопросами.',aiPoint1:'Подключение согласованных источников',aiPoint2:'Настройка и проверка ответов',aiPoint3:'Обучение вашей команды',
  processTag:'ЭТАПЫ РАБОТЫ',processHeading:'Всё понятно. От первой встречи до результата.',processDesc:'Сначала определяем задачу и согласуем стоимость. Затем создаём, проверяем и передаём решение с понятными инструкциями.',step1Title:'Разбираем задачу',step1Desc:'Узнаём цели, доступные данные и что важно для вашего бизнеса.',step2Title:'Согласуем план',step2Desc:'Фиксируем объём, сроки, стоимость и конечный результат.',step3Title:'Создаём и проверяем',step3Desc:'Разрабатываем, тестируем на реальных сценариях, показываем прогресс.',step4Title:'Передаём и объясняем',step4Desc:'Вы получаете рабочий инструмент и понимаете, как им пользоваться.',
- contactTag:'ОБСУДИМ ВАШУ ЗАДАЧУ',contactHeading:'Расскажите, что не получается. Разберёмся вместе.',contactDesc:'Нужен сайт, понятная прибыль, больше покупок или ответы от ИИ? Предложим решение, этапы и стоимость до начала работ.',contactCta:'Оставить заявку',footerDisclosure:'В интерактивном примере используются вымышленные данные.',footerCopy:'© 2026 Леонид Балякин · самозанятый',footerTop:'Наверх ↑',cookieText:'Сайт использует cookie и Google Analytics, чтобы считать посещения и понимать, какие разделы полезны. Данные о посещениях обрабатываются Google LLC (США).',cookieAccept:'Принять',cookieDecline:'Отклонить',
+ contactTag:'ОБСУДИМ ВАШУ ЗАДАЧУ',contactHeading:'Расскажите, что не получается. Разберёмся вместе.',contactDesc:'Нужен сайт, понятная прибыль, больше покупок или ответы от ИИ? Предложим решение, этапы и стоимость до начала работ.',contactCta:'Оставить заявку',footerDisclosure:'В интерактивном примере используются вымышленные данные.',footerCopy:'© 2026 Леонид Балякин · самозанятый',footerTop:'Наверх ↑',cookieText:'Сайт использует cookie, Яндекс Метрику и Google Analytics, чтобы считать посещения и понимать, какие разделы полезны.',cookiePolicy:'Политика конфиденциальности',footerPrivacy:'Политика конфиденциальности',formPolicyLink:'Политика конфиденциальности',cookieAccept:'Принять',cookieDecline:'Отклонить',
 
   formKicker:'ОСТАВИТЬ ЗАЯВКУ',formTitle:'Расскажите о вашей задаче',formSubtitle:'Заполните несколько полей — мы свяжемся с вами, обсудим задачу и стоимость.',
   formNameLabel:'Ваше имя',formNamePlaceholder:'Как к вам обращаться',formIndustryLabel:'Направление бизнеса',formIndustryPlaceholder:'Например, кофейня, интернет-магазин',
@@ -810,7 +821,7 @@ en:{
  serviceProductTitle:'Product analytics',serviceProductDesc:'Map the customer journey, locate drop-offs and measure the impact of product changes.',prodPoint1:'User event tracking',prodPoint2:'Funnels, retention and conversions',prodPoint3:'Testable ideas for improvement',
  serviceAiTitle:'AI implementation',serviceAiDesc:'Connect AI to your data, validate its answers and learn to get reports by asking simple questions.',aiPoint1:'Connecting approved data sources',aiPoint2:'Configuring and verifying answers',aiPoint3:'Training your team',
  processTag:'HOW WE WORK',processHeading:'Clear from first call to final handover.',processDesc:'First, we define the challenge and agree on cost. Then we build, test and hand over a working solution with clear guidance.',step1Title:'Understand your challenge',step1Desc:'Clarify your goals, available data and priorities.',step2Title:'Agree on the plan',step2Desc:'Define the scope, timing, price and expected deliverables.',step3Title:'Build and validate',step3Desc:'Develop, test with realistic scenarios, and share progress.',step4Title:'Hand over and explain',step4Desc:'Get a working solution and know exactly how to use it.',
- contactTag:'LET’S DISCUSS YOUR CHALLENGE',contactHeading:'Tell us what isn’t working. We’ll work it out together.',contactDesc:'Need a website, clearer profit numbers, more purchases or AI answers? We’ll outline the solution, steps and price before work begins.',contactCta:'Send an enquiry',footerDisclosure:'The interactive demo uses illustrative data.',footerCopy:'© 2026 Leonid Baliakin · self-employed',footerTop:'Back to top ↑',cookieText:'This site uses cookies and Google Analytics to count visits and see which sections are useful. Visit data is processed by Google LLC (USA).',cookieAccept:'Accept',cookieDecline:'Decline',
+ contactTag:'LET’S DISCUSS YOUR CHALLENGE',contactHeading:'Tell us what isn’t working. We’ll work it out together.',contactDesc:'Need a website, clearer profit numbers, more purchases or AI answers? We’ll outline the solution, steps and price before work begins.',contactCta:'Send an enquiry',footerDisclosure:'The interactive demo uses illustrative data.',footerCopy:'© 2026 Leonid Baliakin · self-employed',footerTop:'Back to top ↑',cookieText:'This site uses cookies, Yandex Metrica and Google Analytics to count visits and see which sections are useful.',cookiePolicy:'Privacy policy',footerPrivacy:'Privacy policy',formPolicyLink:'Privacy policy',cookieAccept:'Accept',cookieDecline:'Decline',
 
   formKicker:'SEND AN ENQUIRY',formTitle:'Tell us about your project',formSubtitle:'A few details are enough. We’ll get in touch to discuss your goals, timeline and budget.',
   formNameLabel:'Your name',formNamePlaceholder:'What should we call you?',formIndustryLabel:'Your business',formIndustryPlaceholder:'e.g. coffee shop, online store, SaaS',
@@ -915,8 +926,9 @@ function renderAll(){const d=COPY[state.locale];
   $('#leadResultText').textContent=LEAD_DELIVERY_ENABLED?d.formSuccessText:d.formPreviewText;
  $('#menuBtn').setAttribute('aria-label',d.menuOpen);
  document.documentElement.lang=state.locale;
- document.title=state.locale==='ru'?'Где бизнес теряет деньги и клиентов? Покажем на цифрах':'Where is your business losing revenue and customers?';
- const pageDescription=state.locale==='ru'?'Покажем, где бизнес теряет деньги и клиентов и что улучшить. Сайты, бизнес- и продуктовая аналитика, внедрение ИИ под ключ.':'Find where your business loses revenue and customers, and what to improve. Websites, business and product analytics, and AI implementation.';
+ document.title=state.locale==='ru'?"Дашборды и бизнес-аналитика под ключ: где бизнес теряет деньги | LeoAnalyst":"Dashboards & Business Analytics for Small Business — Find Lost Revenue | LeoAnalyst";
+ const pageDescription=state.locale==='ru'?"Делаем дашборды и отчёты для владельцев и руководителей: прибыль, маржа, расходы, клиенты, логистика. Данные из 1С, CRM и таблиц. Сайты и внедрение ИИ. Примеры и цены.":"Custom dashboards and reports for owners and managers: profit, margin, costs, customers, logistics. Data from your accounting, CRM and spreadsheets. Websites and AI. Live examples and prices.";
+ $('meta[property="og:locale"]').content=state.locale==='ru'?'ru_RU':'en_US';
  $('meta[name="description"]').content=pageDescription;
  $('meta[property="og:title"]').content=document.title;
  $('meta[property="og:description"]').content=pageDescription;
@@ -1172,9 +1184,12 @@ async function detectLocaleByIP(){
  finally{clearTimeout(timeout)}
 }
 // Language + currency come only from the IP country (RU/BY -> ru + ₽, otherwise en + $). No manual switch.
-try{const g=localStorage.getItem('geoLocale');state.locale=(g==='ru'||g==='en')?g:browserLanguage()}catch{state.locale=browserLanguage()}
+if(window.IS_BOT){state.locale=window.PAGE_LANG;applyDetectedCountry(window.PAGE_LANG==='ru'?'RU':'US')}
+else{try{const g=localStorage.getItem('geoLocale');state.locale=(g==='ru'||g==='en')?g:browserLanguage()}catch{state.locale=browserLanguage()}}
+if(window.PAGE_LANG==='en')$$('a[href^="dashboards/"]').forEach(a=>a.setAttribute('href',a.getAttribute('href').replace(/\/$/,'/?lang=en')));
 renderAll();
-detectLocaleByIP();
+if(!window.IS_BOT)detectLocaleByIP();
+$$('#leadForm input,#leadForm textarea').forEach(el=>el.classList.add('ym-disable-keys'));
 /* ===== Problems as thoughts: hover (desktop) or tap to open ===== */
 (function(){
  const cloud=document.getElementById('thoughtCloud');if(!cloud)return;

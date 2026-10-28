@@ -1,7 +1,20 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8">
-<script src="../_shared/geo-locale.js?v=1"></script>
+<script src="../_shared/geo-locale.js?v=2"></script>
+<link rel="preload" href="../logistics/three.min.js?v=202610241410" as="script">
+<title>3D-дашборд салона красоты: финансы, клиенты, мастера, склад — пример | LeoAnalyst</title>
+<meta name="description" content="3D-модель салона красоты: нажмите на зону — финансы, ресепшн и клиенты, мастера, склад и аренда с коммуналкой.">
+<link rel="alternate" hreflang="ru" href="https://analyticsbuild.com/dashboards/beauty-3d/">
+<link rel="alternate" hreflang="en" href="https://analyticsbuild.com/dashboards/beauty-3d/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://analyticsbuild.com/dashboards/beauty-3d/?lang=en">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LeoAnalyst">
+<meta property="og:title" content="3D-дашборд салона красоты: финансы, клиенты, мастера, склад — пример | LeoAnalyst">
+<meta property="og:description" content="3D-модель салона красоты: нажмите на зону — финансы, ресепшн и клиенты, мастера, склад и аренда с коммуналкой.">
+<meta property="og:image" content="https://analyticsbuild.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/json" id="seo-i18n">{"ru": {"title": "3D-дашборд салона красоты: финансы, клиенты, мастера, склад — пример | LeoAnalyst", "description": "3D-модель салона красоты: нажмите на зону — финансы, ресепшн и клиенты, мастера, склад и аренда с коммуналкой."}, "en": {"title": "3D Beauty Salon Dashboard: Finance, Clients, Staff, Stock — Example | LeoAnalyst", "description": "3D beauty salon model: click a zone to see finance, front desk and clients, staff, stock and rent & utilities."}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "3D-дашборд салона красоты: финансы, клиенты, мастера, склад — пример", "description": "3D-модель салона красоты: нажмите на зону — финансы, ресепшн и клиенты, мастера, склад и аренда с коммуналкой.", "url": "https://analyticsbuild.com/dashboards/beauty-3d/", "inLanguage": "ru", "isPartOf": {"@type": "WebSite", "name": "LeoAnalyst", "url": "https://analyticsbuild.com/"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "LeoAnalyst", "item": "https://analyticsbuild.com/"}, {"@type": "ListItem", "position": 2, "name": "3D-дашборд салона красоты", "item": "https://analyticsbuild.com/dashboards/beauty-3d/"}]}}</script>
 <script>(function(){try{if(localStorage.getItem('cookieConsent')!=='accepted')return}catch(e){return}window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-RD7CLDCHGF');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-RD7CLDCHGF';document.head.appendChild(s)})();</script><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>3D-дашборд салона красоты — пример | LeoAnalyst</title><meta name="description" content="Интерактивный 3D-дашборд салона красоты: финансы, клиенты, мастера, склад и расходы.">
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--paper:#f6f1f4;--surface:#fff;--line:#ece3e8;--ink:#2a1f2d;--muted:#8a7b88;--fern:#6e3f8f;--fern-2:#9a6cc4;--fern-soft:#efe5f7;--peach:#f0a07e;--rose:#d9667f;--good:#2f8a64;--sky:#7b8fe0}
@@ -34,8 +47,8 @@
 <div id="tags"></div>
 <div class="hint" id="hint"></div>
 <nav class="dock" id="dock"></nav>
-<script src="../logistics/three.min.js"></script>
-<script src="../logistics/orbit.js"></script>
+<script src="../logistics/three.min.js?v=202610241410"></script>
+<script src="../logistics/orbit.js?v=202610241410"></script>
 <script>
 const W=document.getElementById('world');const mobile=innerWidth<700;
 const R=new THREE.WebGLRenderer({antialias:true});R.setPixelRatio(Math.min(2,devicePixelRatio));R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputColorSpace=THREE.SRGBColorSpace;W.appendChild(R.domElement);
