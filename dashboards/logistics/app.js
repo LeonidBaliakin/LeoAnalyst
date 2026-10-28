@@ -137,7 +137,7 @@ const RENDER={office:secOffice,parking:secParking,repair:secRepair,warehouse:sec
 function renderPanel(){const id=state.inside;if(!id)return;jobs.length=0;const s=SECTIONS.find(x=>x.id===id);
  $('#sheet').innerHTML=`<div class="sh-head"><div class="sh-row"><button class="back" data-act="leave">← ${T('На базу','Back to base')}</button><div class="tabs" role="tablist">${SECTIONS.map(x=>`<button data-act="go" data-v="${x.id}" class="${x.id===id?'on':''}">${L(x)}</button>`).join('')}</div></div>
  <div class="sh-title"><div><h2>${L(s)}</h2><p>${L(SUB[id])}</p></div><div class="filters"><div class="tabs">${['all','heavy','medium'].map(k=>`<button data-act="seg" data-v="${k}" class="${state.seg===k?'on':''}">${L(SEGL[k])}</button>`).join('')}</div>${id==='parking'||id==='drivers'?'':`<div class="tabs">${[7,30,90,365].map(d=>`<button data-act="period" data-v="${d}" class="${state.period===d?'on':''}">${d===365?T('Год','Year'):d+T(' дн.',' d')}</button>`).join('')}</div>`}</div></div></div>
- ${RENDER[id]()}<p class="foot-note">${T('Демонстрационный дашборд LeoAnalyst. Компания «Магистраль», люди и цифры вымышлены','LeoAnalyst demo dashboard. «Magistral», its people and numbers are fictional')}</p>
+ ${RENDER[id]()}<p class="foot-note">${T('Демонстрационный дашборд «Сайты и Аналитика». Компания «Магистраль», люди и цифры вымышлены','Websites & Analytics demo dashboard. «Magistral», its people and numbers are fictional')}</p>
  ${state.modal?vehModal(state.modal):''}`;
  requestAnimationFrame(()=>jobs.forEach(f=>{try{f()}catch(e){console.error(e)}}));}
 

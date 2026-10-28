@@ -399,7 +399,7 @@ function render(){
     <button class="btn btn-primary" data-act="new">${ico('plus',16)}<span>${T('Запись','Booking')}</span></button>
     <span class="user"><span class="avatar" style="background:var(--fern)">${T('АС','ES')}</span><span class="u-text"><small>${T('Управляющая','Studio manager')}</small><b>${T('Анна Соколова','Emma Sullivan')}</b></span></span>
    </div></header>
-  <main class="content" id="main">${page}<p class="foot">${T('Демонстрационный дашборд LeoAnalyst. Студия, клиенты и цифры вымышлены','LeoAnalyst demo dashboard. The studio, clients and numbers are fictional')} · ${T('курс','rate')} $1 = ${D.usdRate} ₽</p></main>
+  <main class="content" id="main">${page}<p class="foot">${T('Демонстрационный дашборд «Сайты и Аналитика». Студия, клиенты и цифры вымышлены','Websites & Analytics demo dashboard. The studio, clients and numbers are fictional')} · ${T('курс','rate')} $1 = ${D.usdRate} ₽</p></main>
  </div></div>
  ${state.modal?`<div class="overlay" data-act="overlay"><div class="modal" role="dialog" aria-modal="true">${state.modal.type==='svc'?modalService(state.modal.id):modalNew(state.modal.id)}</div></div>`:''}`;
  drawCharts();fillMasters();

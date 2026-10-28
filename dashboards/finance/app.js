@@ -99,7 +99,7 @@ function uiHead(){let meta=nav.find(n=>n[0]===state.section)||nav[0];const descr
  insights:['Находите возможности роста на основе фактов','Find actionable opportunities backed by numbers']
 };
  return `<header class="topbar"><div class="topbar-inner">
-  <a href="../../index.html" class="brand" title="LeoAnalyst" target="_top"><div class="brand-mark">${icon('chart',21)}</div><div><div class="brand-name">LEO<span class="orange">.</span> FINANCE</div><div class="brand-caption">ANALYTICS STUDIO · DEMO</div></div></a>
+  <a href="../../index.html" class="brand" title="Сайты и Аналитика" target="_top"><div class="brand-mark">${icon('chart',21)}</div><div><div class="brand-name">${tx('ФИНАНСЫ','FINANCE')}<span class="orange">.</span></div><div class="brand-caption">${tx('ДЕМО-ДАШБОРД','DEMO DASHBOARD')}</div></div></a>
   <nav class="main-tabs" aria-label="${tx('Разделы','Sections')}">${nav.map(navButton).join('')}</nav>
   <div class="topbar-actions"><span class="status-chip" title="${tx('Демонстрационные данные','Synthetic demo data')}">${tx('Демо','Demo')}</span>
    <button class="lang-btn" data-action="lang" aria-label="${tx('Сменить язык','Change language')}">${state.lang==='ru'?'RU':'EN'}</button>
@@ -108,7 +108,7 @@ function uiHead(){let meta=nav.find(n=>n[0]===state.section)||nav[0];const descr
    <span class="avatar">LA</span>
   </div></div></header>
   <nav class="rail" aria-label="${tx('Быстрая навигация','Quick navigation')}">${nav.slice(0,7).map(n=>`<button class="rail-btn ${state.section===n[0]?'active':''}" title="${tx(n[1],n[2])}" data-action="nav" data-page="${n[0]}">${icon(n[3])}</button>`).join('')}<div class="rail-sep"></div><button class="rail-btn ${state.section==='insights'?'active':''}" title="${tx('Выводы','Insights')}" data-action="nav" data-page="insights">${icon('sparkles')}</button></nav>
-  <main class="dashboard"><div class="breadcrumbs"><span class="live-dot"></span>LEOANALYST <span> / </span> FINANCE OS <span> / </span> <span class="orange">${tx(meta[1],meta[2])}</span></div>
+  <main class="dashboard"><div class="breadcrumbs"><span class="live-dot"></span>${tx('ДЕМО','DEMO')} <span> / </span> ${tx('ФИНАНСЫ','FINANCE')} <span> / </span> <span class="orange">${tx(meta[1],meta[2])}</span></div>
   <div class="heading-row"><div><h1 class="page-title">${tx(meta[1],meta[2])}</h1><p class="page-sub">${tx(...descr[state.section])} · ${tx('Все данные вымышленные','All data is synthetic')}</p></div>
   <div class="heading-actions"><button class="btn btn-secondary" data-action="help">${icon('info')}${tx('Методика','Methodology')}</button><button class="btn btn-primary" data-action="export">${icon('download')}${tx('Скачать CSV','Export CSV')}</button></div></div>`;
 }
@@ -117,7 +117,7 @@ function filterBar(){return `<section class="filters" aria-label="${tx('Филь
   <div class="filter-vline"></div><label class="filter-label" for="dateEnd">${tx('По дату','As of')}</label><input id="dateEnd" data-filter="end" class="form-input" type="date" value="${state.end}" min="2025-10-14" max="${BASE}"/>
   <div class="filter-vline"></div><label class="filter-label" for="unitSelect">${tx('Направление','Business unit')}</label><select id="unitSelect" data-filter="unit" class="form-select"><option value="all">${tx('Все направления','All units')}</option>${D.units.map(u=>`<option value="${u.id}" ${u.id===state.unit?'selected':''}>${e(u[state.lang])}</option>`).join('')}</select>
   <div class="filters-spacer"></div><span class="date-chip">${icon('calendar',14)} ${dateFmt(range().start,true)} — ${dateFmt(state.end,true)}</span><button class="btn btn-soft small-btn" data-action="reset">${icon('refresh',13)}${tx('Сбросить','Reset')}</button></section>`;}
-function foot(){return `<div class="footer-note">© LeoAnalyst · Finance OS. ${tx('Это интерактивный макет с вымышленными данными. Не является финансовой отчётностью или инвестиционным советом. Курс демонстрации:','Synthetic interactive showcase; not financial reporting or advice. Demo rate:')} $1 = ${fnumber(D.RUB_PER_USD)} ₽ · ${tx('Состояние на','Data through')} ${dateFmt(BASE)}.</div></main>`;}
+function foot(){return `<div class="footer-note">${tx('Это интерактивный макет с вымышленными данными. Не является финансовой отчётностью или инвестиционным советом. Курс демонстрации:','Synthetic interactive showcase; not financial reporting or advice. Demo rate:')} $1 = ${fnumber(D.RUB_PER_USD)} ₽ · ${tx('Состояние на','Data through')} ${dateFmt(BASE)}.</div></main>`;}
 function makeChartShell(svg){return `<div class="chart"><div class="chart-tooltip" aria-hidden="true"></div>${svg}</div>`;}
 function chooseBuckets(rows,days=state.period,end=state.end){
  const endD=day(end).getTime(),startD=endD-(days-1)*DAY;
