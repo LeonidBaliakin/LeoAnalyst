@@ -4,16 +4,13 @@
 <meta charset="utf-8">
 <script>window.LANDING={"ru": {"pageTitle": "Финансовый анализ бизнеса: прибыль, маржа, рентабельность | Сайты и Аналитика", "pageDesc": "Покажем, почему нет прибыли: рентабельность по товарам, клиентам и направлениям, маржа, расходы и деньги на счетах в одном финансовом дашборде.", "heroTag": "Финансовый анализ · рентабельность · прибыль", "heroTitleA": "Почему продажи растут, а прибыли нет?", "heroQs": ["Почему продажи растут, а прибыли нет?", "Почему прибыль есть, а денег нет?", "Какие товары работают в минус?", "Куда на самом деле уходят деньги?", "Откуда просадка в марже?"], "heroLead": "Разберём рентабельность по товарам, клиентам и направлениям и соберём финансовый дашборд: каждый месяц видно, что приносит деньги, а что их съедает.", "ctaExplore": "Посмотреть пример", "lpExHeading": "Так выглядит финансовый дашборд", "lpExDesc": "Живой пример на вымышленных данных: прибыль, расходы, движение денег и прогноз. Пощёлкайте разделы - ваш будет таким же, только с вашими цифрами.", "lpExName": "Финансы", "lpExDemo": "Демо-данные", "lpTag": "ОБСУДИМ ВАШУ ЗАДАЧУ", "lpHeading": "Покажем, где теряется прибыль", "lpDesc": "Созвонимся на 15 минут, разберём вашу ситуацию и назовём стоимость до начала работ."}, "en": {"pageTitle": "Financial Dashboard for Business: Profit, Margin, Profitability | Websites & Analytics", "pageDesc": "See where your profit goes: profitability by product, client and business line, margins, costs and cash flow in one financial dashboard.", "heroTag": "Financial analysis · profitability · profit", "heroTitleA": "Why are sales up but profit isn’t?", "heroQs": ["Why are sales up but profit isn’t?", "Why is there profit but no cash?", "Which products lose money?", "Where is the money really going?", "Where did the margin drop come from?"], "heroLead": "We break down profitability by product, client and business line and build a financial dashboard that shows every month what makes money and what eats it.", "ctaExplore": "See an example", "lpExHeading": "This is what a financial dashboard looks like", "lpExDesc": "A live example with sample data: profit, costs, cash flow and forecast. Click through the sections - yours will look like this, with your numbers.", "lpExName": "Finance", "lpExDemo": "Sample data", "lpTag": "LET’S DISCUSS YOUR CHALLENGE", "lpHeading": "Let’s find where your profit goes", "lpDesc": "A 15-minute call: we’ll look at your situation and give you a price before any work starts."}};window.LANDING_URL="https://analyticsbuild.com/financial-dashboard/";</script>
 <meta name="yandex-verification" content="c8ab5bb92e23dffe" />
-<!-- Google Analytics 4 + Yandex Metrica: loaded only after the visitor accepts cookies -->
+<!-- Yandex Metrica: loaded only after the visitor accepts cookies (data stays in Russia) -->
 <script>
   window.YM_ID=113847848; /* Yandex Metrica counter id */
   /* Search engines: / is Russian, /?lang=en is English. Crawlers get the language of the address. */
   window.PAGE_LANG=/[?&]lang=en(&|$)/.test(location.search)?'en':'ru';
   window.IS_BOT=/bot|crawl|spider|slurp|yandex|bingpreview|lighthouse|pagespeed|google-inspectiontool|googleother|facebookexternalhit|telegrambot|vkshare/i.test(navigator.userAgent||'');
-  window.loadAnalytics=function(){if(window.__gaLoaded)return;window.__gaLoaded=true;
-    window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};
-    gtag('js',new Date());gtag('config','G-RD7CLDCHGF');
-    var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-RD7CLDCHGF';document.head.appendChild(s);
+  window.loadAnalytics=function(){if(window.__ymLoaded)return;window.__ymLoaded=true;
     if(window.YM_ID){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
     ym(window.YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true})}};
   try{if(!window.IS_BOT&&localStorage.getItem('cookieConsent')==='accepted')loadAnalytics()}catch(e){}
@@ -396,6 +393,7 @@ h1{max-width:1130px;font-size:clamp(43px,6.0vw,78px);line-height:1.07}
  .lead-consent{display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:19px;color:#606875;line-height:1.56;font-size:12.5px}
  .lead-consent a{color:#1a74de;text-decoration:underline;text-underline-offset:3px}.lead-consent input{flex:0 0 auto;width:18px;height:18px;accent-color:#1a74de;cursor:pointer;margin:1px 0 0}
  .lead-privacy{margin:6px 0 14px 28px}
+ .lead-docs{margin:6px 0 0 28px;font-size:12px;color:#78808b}.lead-docs a{color:#287bd2;text-decoration:underline;text-underline-offset:3px}
  .lead-privacy summary{font-size:12px;color:#287bd2;cursor:pointer;display:inline-block;text-decoration:underline;text-underline-offset:3px}
  .lead-privacy p{font-size:12px;color:#78808b;line-height:1.65;margin:9px 0 0}
  .lead-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
@@ -634,12 +632,12 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
  </section>
 </main>
 <div class="cookie-bar" id="cookieBar" role="region" aria-label="Cookie" hidden>
- <p><span data-i18n="cookieText">Сайт использует cookie, Яндекс Метрику и Google Analytics, чтобы считать посещения и понимать, какие разделы полезны.</span> <a class="cookie-link" href="/privacy/" data-i18n="cookiePolicy">Политика конфиденциальности</a></p>
+ <p><span data-i18n="cookieText">Сайт использует cookie и Яндекс Метрику, чтобы считать посещения и понимать, какие разделы полезны.</span> <a class="cookie-link" href="/privacy/" data-i18n="cookiePolicy">Политика конфиденциальности</a></p>
  <div class="cookie-actions"><button type="button" class="cookie-btn cookie-accept" id="cookieAccept" data-i18n="cookieAccept">Принять</button><button type="button" class="cookie-btn" id="cookieDecline" data-i18n="cookieDecline">Отклонить</button></div>
 </div>
 <footer class="footer"><div class="container footer-inner"><div class="footer-left"><strong data-i18n="brandFull">Сайты и Аналитика</strong><span data-i18n="footerDisclosure">В интерактивном примере используются вымышленные данные.</span></div><div class="footer-links"><a href="/management-reporting/" data-svc data-i18n="svcReporting">Управленческая отчётность</a><a href="/financial-dashboard/" data-svc data-i18n="svcFinance">Финансы и прибыль</a><a href="/1c-power-bi/" data-svc data-i18n="svcBi">Дашборды из 1С и Power BI</a><a href="/sales-analytics/" data-svc data-i18n="svcSales">Аналитика продаж</a><a href="/logistics-analytics/" data-svc data-i18n="svcLogistics">Аналитика для логистики</a><a href="/privacy/" data-i18n="footerPrivacy">Политика конфиденциальности</a><a href="#top" data-i18n="footerTop">Наверх ↑</a><a href="mailto:analystleogroup@gmail.com">analystleogroup@gmail.com</a></div></div></footer>
 
-<!-- Lead form: enquiries are delivered to analystleogroup@gmail.com via Google Apps Script. -->
+<!-- Lead form: enquiries go to our Yandex Cloud function and are stored in Yandex Mail (Russia). -->
 <div class="lead-overlay" id="leadOverlay" hidden>
  <section class="lead-dialog" role="dialog" aria-modal="true" aria-labelledby="leadTitle" aria-describedby="leadSubtitle" tabindex="-1">
   <button class="lead-close" type="button" id="leadClose" aria-label="Закрыть окно" title="Close">
@@ -711,12 +709,12 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
     </div>
     <label class="lead-consent" for="leadConsent">
      <input type="checkbox" id="leadConsent" required>
-     <span data-i18n="formConsent">Согласен(на) на обработку персональных данных для ответа на мою заявку.</span>
+     <span data-i18n="formConsent">Даю согласие на обработку персональных данных для ответа на мою заявку.</span>
     </label>
+    <p class="lead-docs"><a href="/consent/" target="_blank" rel="noopener" data-i18n="formConsentDoc">Текст согласия</a> · <a href="/privacy/" target="_blank" rel="noopener" data-i18n="formPolicyDoc">Политика конфиденциальности</a></p>
     <details class="lead-privacy" id="leadPrivacy">
      <summary data-i18n="formPrivacyToggle">Как используются мои данные?</summary>
-     <p id="leadPrivacyText" data-i18n="formPrivacyText">Имя, направление бизнеса, контакт и текст заявки используются только для ответа на обращение. Для доставки на analystleogroup@gmail.com они передаются через сервис Google (Apps Script и Gmail). Мы не используем эти данные для рекламных рассылок. По вопросам обработки и удаления: analystleogroup@gmail.com.</p>
-     <p><a href="/privacy/" target="_blank" rel="noopener" data-i18n="formPolicyLink">Политика конфиденциальности</a></p>
+     <p id="leadPrivacyText" data-i18n="formPrivacyText">Имя, направление бизнеса, контакт и текст заявки используются только для ответа на обращение. Заявка принимается и хранится в России (Yandex Cloud и Яндекс Почта). Данные не передаются за рубеж и не используются для рекламных рассылок. Вопросы и удаление данных: analystleogroup@gmail.com.</p>
     </details>
     <input class="lead-honeypot" type="text" id="leadHoneypot" autocomplete="off" tabindex="-1" aria-hidden="true">
     <p id="leadStatus" class="lead-status" role="status" aria-live="polite" hidden></p>
@@ -758,13 +756,13 @@ ru:{
  serviceProductTitle:'Продуктовая аналитика',serviceProductDesc:'Покажем путь клиента до покупки, точки потерь и как измерять результат изменений.',prodPoint1:'Сбор пользовательских событий',prodPoint2:'Воронки, удержание, конверсии',prodPoint3:'Проверяемые гипотезы улучшений',
  serviceAiTitle:'Внедрение ИИ',serviceAiDesc:'Подключим ИИ к данным, проверим точность ответов и научим вас получать отчёты простыми вопросами.',aiPoint1:'Подключение согласованных источников',aiPoint2:'Настройка и проверка ответов',aiPoint3:'Обучение вашей команды',
  processTag:'ЭТАПЫ РАБОТЫ',processHeading:'Всё понятно. От первой встречи до результата.',processDesc:'Сначала определяем задачу и согласуем стоимость. Затем создаём, проверяем и передаём решение с понятными инструкциями.',step1Title:'Разбираем задачу',step1Desc:'Узнаём цели, доступные данные и что важно для вашего бизнеса.',step2Title:'Согласуем план',step2Desc:'Фиксируем объём, сроки, стоимость и конечный результат.',step3Title:'Создаём и проверяем',step3Desc:'Разрабатываем, тестируем на реальных сценариях, показываем прогресс.',step4Title:'Передаём и объясняем',step4Desc:'Вы получаете рабочий инструмент и понимаете, как им пользоваться.',
- contactTag:'ОБСУДИМ ВАШУ ЗАДАЧУ',contactHeading:'Расскажите, что не получается. Разберёмся вместе.',contactDesc:'Нужен сайт, понятная прибыль, больше покупок или ответы от ИИ? Предложим решение, этапы и стоимость до начала работ.',contactCta:'Оставить заявку',footerDisclosure:'В интерактивном примере используются вымышленные данные.',footerCopy:'© 2026 Леонид Балякин · самозанятый',footerTop:'Наверх ↑',cookieText:'Сайт использует cookie, Яндекс Метрику и Google Analytics, чтобы считать посещения и понимать, какие разделы полезны.',cookiePolicy:'Политика конфиденциальности',footerPrivacy:'Политика конфиденциальности',footerReporting:'Управленческая отчётность',footerFinance:'Финансы и прибыль',navServices:'Услуги',svcReporting:'Управленческая отчётность',svcFinance:'Финансы и прибыль',svcBi:'Дашборды из 1С и Power BI',svcSales:'Аналитика продаж',svcLogistics:'Аналитика для логистики',formPolicyLink:'Политика конфиденциальности',cookieAccept:'Принять',cookieDecline:'Отклонить',
+ contactTag:'ОБСУДИМ ВАШУ ЗАДАЧУ',contactHeading:'Расскажите, что не получается. Разберёмся вместе.',contactDesc:'Нужен сайт, понятная прибыль, больше покупок или ответы от ИИ? Предложим решение, этапы и стоимость до начала работ.',contactCta:'Оставить заявку',footerDisclosure:'В интерактивном примере используются вымышленные данные.',footerCopy:'© 2026 Леонид Балякин · самозанятый',footerTop:'Наверх ↑',cookieText:'Сайт использует cookie и Яндекс Метрику, чтобы считать посещения и понимать, какие разделы полезны.',cookiePolicy:'Политика конфиденциальности',footerPrivacy:'Политика конфиденциальности',footerReporting:'Управленческая отчётность',footerFinance:'Финансы и прибыль',navServices:'Услуги',svcReporting:'Управленческая отчётность',svcFinance:'Финансы и прибыль',svcBi:'Дашборды из 1С и Power BI',svcSales:'Аналитика продаж',svcLogistics:'Аналитика для логистики',formPolicyLink:'Политика конфиденциальности',cookieAccept:'Принять',cookieDecline:'Отклонить',
 
   formKicker:'ОСТАВИТЬ ЗАЯВКУ',formTitle:'Расскажите о вашей задаче',formSubtitle:'Заполните несколько полей - мы свяжемся с вами, обсудим задачу и стоимость.',
   formNameLabel:'Ваше имя',formNamePlaceholder:'Как к вам обращаться',formIndustryLabel:'Направление бизнеса',formIndustryPlaceholder:'Например, кофейня, интернет-магазин',
   formContactLabel:'Контакт для связи',formContactHint:'Выберите, как вам удобнее получить ответ.',methodPhone:'Телефон',countryOther:'Другой код',countryLabel:'Код страны',
-  formMessageLabel:'Что хотите сделать?',formOptional:'необязательно',formMessagePlaceholder:'Коротко опишите задачу, если удобно',formConsent:'Согласен(на) на обработку персональных данных для ответа на мою заявку.',
-  formPrivacyToggle:'Как используются мои данные?',formPrivacyText:'Имя, направление бизнеса, контакт и текст заявки используются только для ответа на обращение. Для доставки на analystleogroup@gmail.com они передаются через сервис Google (Apps Script и Gmail). Мы не используем эти данные для рекламных рассылок. По вопросам обработки и удаления: analystleogroup@gmail.com.',
+  formMessageLabel:'Что хотите сделать?',formOptional:'необязательно',formMessagePlaceholder:'Коротко опишите задачу, если удобно',formConsent:'Даю согласие на обработку персональных данных для ответа на мою заявку.',formConsentDoc:'Текст согласия',formPolicyDoc:'Политика конфиденциальности',
+  formPrivacyToggle:'Как используются мои данные?',formPrivacyText:'Имя, направление бизнеса, контакт и текст заявки используются только для ответа на обращение. Заявка принимается и хранится в России (Yandex Cloud и Яндекс Почта). Данные не передаются за рубеж и не используются для рекламных рассылок. Вопросы и удаление данных: analystleogroup@gmail.com.',
   formSubmit:'Отправить заявку',formSending:'Отправляем заявку…',formRequiredNote:'* Обязательные поля. Галочка согласия изначально не установлена.',formSuccessTitle:'Заявка отправлена',formSuccessText:'Спасибо! Заявка передана. Мы свяжемся с вами по указанному контакту.',formClose:'Готово',formCloseAria:'Закрыть окно',
   formInvalidName:'Укажите ваше имя (не меньше 2 символов).',formInvalidIndustry:'Укажите направление бизнеса.',formInvalidPhone:'Проверьте номер телефона. Код страны уже указан слева.',formInvalidTelegram:'Укажите корректный Telegram: 5–32 символа, без пробелов.',formInvalidEmail:'Проверьте адрес электронной почты.',formInvalidConsent:'Для отправки нужно согласиться на обработку данных.',formInvalidDial:'Укажите код страны цифрами.',
   formError:'Не удалось отправить заявку. Попробуйте ещё раз или напишите на analystleogroup@gmail.com.',formActivation:'Отправка пока не активирована. Напишите на analystleogroup@gmail.com.',
@@ -789,13 +787,13 @@ en:{
  serviceProductTitle:'Product analytics',serviceProductDesc:'Map the customer journey, locate drop-offs and measure the impact of product changes.',prodPoint1:'User event tracking',prodPoint2:'Funnels, retention and conversions',prodPoint3:'Testable ideas for improvement',
  serviceAiTitle:'AI implementation',serviceAiDesc:'Connect AI to your data, validate its answers and learn to get reports by asking simple questions.',aiPoint1:'Connecting approved data sources',aiPoint2:'Configuring and verifying answers',aiPoint3:'Training your team',
  processTag:'HOW WE WORK',processHeading:'Clear from first call to final handover.',processDesc:'First, we define the challenge and agree on cost. Then we build, test and hand over a working solution with clear guidance.',step1Title:'Understand your challenge',step1Desc:'Clarify your goals, available data and priorities.',step2Title:'Agree on the plan',step2Desc:'Define the scope, timing, price and expected deliverables.',step3Title:'Build and validate',step3Desc:'Develop, test with realistic scenarios, and share progress.',step4Title:'Hand over and explain',step4Desc:'Get a working solution and know exactly how to use it.',
- contactTag:'LET’S DISCUSS YOUR CHALLENGE',contactHeading:'Tell us what isn’t working. We’ll work it out together.',contactDesc:'Need a website, clearer profit numbers, more purchases or AI answers? We’ll outline the solution, steps and price before work begins.',contactCta:'Send an enquiry',footerDisclosure:'The interactive demo uses illustrative data.',footerCopy:'© 2026 Leonid Baliakin · self-employed',footerTop:'Back to top ↑',cookieText:'This site uses cookies, Yandex Metrica and Google Analytics to count visits and see which sections are useful.',cookiePolicy:'Privacy policy',footerPrivacy:'Privacy policy',footerReporting:'KPI dashboard',footerFinance:'Financial dashboard',navServices:'Services',svcReporting:'KPI dashboard',svcFinance:'Financial dashboard',svcBi:'Power BI dashboards',svcSales:'Sales analytics',svcLogistics:'Logistics dashboard',formPolicyLink:'Privacy policy',cookieAccept:'Accept',cookieDecline:'Decline',
+ contactTag:'LET’S DISCUSS YOUR CHALLENGE',contactHeading:'Tell us what isn’t working. We’ll work it out together.',contactDesc:'Need a website, clearer profit numbers, more purchases or AI answers? We’ll outline the solution, steps and price before work begins.',contactCta:'Send an enquiry',footerDisclosure:'The interactive demo uses illustrative data.',footerCopy:'© 2026 Leonid Baliakin · self-employed',footerTop:'Back to top ↑',cookieText:'This site uses cookies and Yandex Metrica to count visits and see which sections are useful.',cookiePolicy:'Privacy policy',footerPrivacy:'Privacy policy',footerReporting:'KPI dashboard',footerFinance:'Financial dashboard',navServices:'Services',svcReporting:'KPI dashboard',svcFinance:'Financial dashboard',svcBi:'Power BI dashboards',svcSales:'Sales analytics',svcLogistics:'Logistics dashboard',formPolicyLink:'Privacy policy',cookieAccept:'Accept',cookieDecline:'Decline',
 
   formKicker:'SEND AN ENQUIRY',formTitle:'Tell us about your project',formSubtitle:'A few details are enough. We’ll get in touch to discuss your goals, timeline and budget.',
   formNameLabel:'Your name',formNamePlaceholder:'What should we call you?',formIndustryLabel:'Your business',formIndustryPlaceholder:'e.g. coffee shop, online store, SaaS',
   formContactLabel:'How can we reach you?',formContactHint:'Choose the most convenient way for us to reply.',methodPhone:'Phone',countryOther:'Other code',countryLabel:'Country dialling code',
-  formMessageLabel:'What would you like to achieve?',formOptional:'optional',formMessagePlaceholder:'Briefly describe your idea or challenge (optional)',formConsent:'I agree to the processing of my personal data to respond to this enquiry.',
-  formPrivacyToggle:'How will my data be used?',formPrivacyText:'Your name, business area, contact details and message are used only to answer your enquiry. They are delivered to analystleogroup@gmail.com via Google services (Apps Script and Gmail). We do not use them for marketing emails. For data questions or deletion requests: analystleogroup@gmail.com.',
+  formMessageLabel:'What would you like to achieve?',formOptional:'optional',formMessagePlaceholder:'Briefly describe your idea or challenge (optional)',formConsent:'I consent to the processing of my personal data to respond to this enquiry.',formConsentDoc:'Consent text',formPolicyDoc:'Privacy policy',
+  formPrivacyToggle:'How will my data be used?',formPrivacyText:'Your name, business area, contact details and message are used only to answer your enquiry. Enquiries are received and stored in Russia (Yandex Cloud and Yandex Mail). We do not use them for marketing emails. For data questions or deletion requests: analystleogroup@gmail.com.',
   formSubmit:'Send enquiry',formSending:'Sending…',formRequiredNote:'* Required fields. The consent checkbox is unchecked by default.',formSuccessTitle:'Enquiry sent',formSuccessText:'Thank you! Your request has been submitted. We’ll contact you using the details provided.',formClose:'Done',formCloseAria:'Close form',
   formInvalidName:'Please enter your name (at least 2 characters).',formInvalidIndustry:'Please enter your business area.',formInvalidPhone:'Please check your phone number. The country code is already added.',formInvalidTelegram:'Please enter a valid Telegram username: 5–32 characters, no spaces.',formInvalidEmail:'Please enter a valid email address.',formInvalidConsent:'Please agree to the data processing notice before submitting.',formInvalidDial:'Please enter a numeric country code.',
   formError:'We couldn’t send your enquiry. Please try again or email analystleogroup@gmail.com.',formActivation:'This form has not been activated yet. Please email analystleogroup@gmail.com.',
@@ -920,7 +918,7 @@ function modalMotion(ov,box,sheet,dir,done){
 const dashModal=$('#dashModal'),dashFrame=$('#dashModalFrame');let dashLastFocus=null;
 function openDashboard(card){const url=card.dataset.dashboard;try{localStorage.setItem('pulse_lang',state.locale);localStorage.setItem('leoFinance_language',JSON.stringify(state.locale));localStorage.setItem('mira_lang',JSON.stringify(state.locale));localStorage.setItem('ritm_lang',JSON.stringify(state.locale));localStorage.setItem('mag_lang',JSON.stringify(state.locale))}catch{}
  dashLastFocus=card;$('#dashModalTitle').textContent=COPY[state.locale][card.dataset.titleKey]||'';$('#dashModalNewTab').href=url;
- dashFrame.src=url;dashClosing=false;dashModal.hidden=false;modalMotion(dashModal,dashModal.firstElementChild,matchMedia('(max-width:600px)').matches,'in');try{gtag('event','open_dashboard',{dashboard:card.dataset.titleKey})}catch{}document.body.style.overflow='hidden';$('#dashModalClose').focus();}
+ dashFrame.src=url;dashClosing=false;dashModal.hidden=false;modalMotion(dashModal,dashModal.firstElementChild,matchMedia('(max-width:600px)').matches,'in');track('open_dashboard',{dashboard:card.dataset.titleKey});document.body.style.overflow='hidden';$('#dashModalClose').focus();}
 let dashClosing=false;
 function closeDashboard(){if(dashModal.hidden||dashClosing)return;dashClosing=true;document.body.style.overflow='';dashLastFocus?.focus();
  modalMotion(dashModal,dashModal.firstElementChild,matchMedia('(max-width:600px)').matches,'out',()=>{if(!dashClosing)return;dashClosing=false;dashModal.hidden=true;dashFrame.src='about:blank'});}
@@ -931,11 +929,12 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dashModal.hidden)c
 $('#menuBtn').addEventListener('click',()=>{const opened=$('#mainNav').classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',String(opened));$('#menuBtn').setAttribute('aria-label',COPY[state.locale][opened?'menuClose':'menuOpen'])});
 $$('#mainNav a').forEach(a=>a.addEventListener('click',()=>{$('#mainNav').classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false')}));
 
-// Lead form configuration: submissions go to a Google Apps Script web app that emails LEAD_RECIPIENT.
+// Lead form configuration: submissions go to the Yandex Cloud function (backend/yandex-function).
 // text/plain body avoids a CORS preflight, which Apps Script does not support.
 const LEAD_DELIVERY_ENABLED=true;
 const LEAD_RECIPIENT='analystleogroup@gmail.com';
-const LEAD_ENDPOINT='https://script.google.com/macros/s/AKfycbz0YnN5OtLmj_zOMyPGEXEbz10LzC0G8t_Ck9qOlh03aZ7f-Jcn0tN_culRVYEPz6w7/exec';
+const LEADS_API='%%LEADS_API%%'; /* Yandex Cloud function: enquiries + country by IP, data stays in Russia */
+const LEAD_ENDPOINT=LEADS_API;
 const PHONE_COUNTRIES={RU:'7',BY:'375',KZ:'7',US:'1',CA:'1',GB:'44',DE:'49',FR:'33',ES:'34',IT:'39',PL:'48',NL:'31',TR:'90',AE:'971',UA:'380',IN:'91',ID:'62',BR:'55',MX:'52'};
 let leadMethod='phone',leadInFlight=false,phoneCountryChosen=false,leadLastFocus=null,visitorPhoneCountry='RU';
 const lead=$('#leadOverlay');
@@ -1116,7 +1115,7 @@ async function submitLead(e){
     $('#leadSubmit [data-i18n="formSubmit"]').textContent=LEAD_DELIVERY_ENABLED?COPY[state.locale].formSubmit:COPY[state.locale].formPreviewSubmit;
   }
 }
-function track(name,params){try{if(typeof gtag==='function')gtag('event',name,params||{})}catch{}}
+function track(name,params){try{if(typeof ym==='function'&&window.YM_ID)ym(window.YM_ID,'reachGoal',name,params||{})}catch{}}
 $$('[data-open-lead]').forEach(el=>el.addEventListener('click',()=>{const where=el.closest('header')?'header':(el.closest('section[id]')?.id||el.closest('section')?.className.split(' ')[0]||'page');track('lead_form_open',{button_location:where,site_language:state.locale});openLead()}));
 $('#leadClose').addEventListener('click',closeLead);
 $('#leadFinish').addEventListener('click',closeLead);
@@ -1145,8 +1144,8 @@ async function detectLocaleByIP(){
  const ctrl=new AbortController(),timeout=setTimeout(()=>ctrl.abort(),2400);
  try{
   let country;
-  try{const r=await fetch('https://ipwho.is/?fields=success,country_code',{signal:ctrl.signal,cache:'no-store'});if(!r.ok)throw Error('Geo IP unavailable');const data=await r.json();country=data.success!==false?data.country_code:null;if(!/^[A-Z]{2}$/.test(country||''))throw Error('Invalid geo country');}
-  catch{const r=await fetch('https://ipapi.co/json/',{signal:ctrl.signal,cache:'no-store'});if(!r.ok)throw Error('Geo IP fallback unavailable');const data=await r.json();country=data.country_code;if(!/^[A-Z]{2}$/.test(country||''))throw Error('Invalid fallback country');}
+  if(LEADS_API.indexOf('%%')===0)return;
+  const r=await fetch(LEADS_API+'?geo=1',{signal:ctrl.signal,cache:'no-store'});if(!r.ok)throw Error('Geo unavailable');const data=await r.json();country=data.country_code;if(!/^[A-Z]{2}$/.test(country||''))throw Error('Invalid geo country');
   applyDetectedCountry(country);const requested=(country==='RU'||country==='BY')?'ru':'en';try{localStorage.setItem('geoLocale',requested)}catch{}if(state.locale!==requested){state.locale=requested;renderAll()}
  }catch{/* Cached country or browser language stays in place when geolocation is unreachable. */}
  finally{clearTimeout(timeout)}
@@ -1155,7 +1154,7 @@ async function detectLocaleByIP(){
 if(window.FORCE_LOCALE){state.locale=window.FORCE_LOCALE;applyDetectedCountry(window.FORCE_LOCALE==='ru'?'RU':'US')}
 else if(window.IS_BOT){state.locale=window.PAGE_LANG;applyDetectedCountry(window.PAGE_LANG==='ru'?'RU':'US')}
 else{try{const g=localStorage.getItem('geoLocale');state.locale=(g==='ru'||g==='en')?g:browserLanguage()}catch{state.locale=browserLanguage()}}
-if(window.PAGE_LANG==='en')$$('a[href^="dashboards/"],a[data-svc]').forEach(a=>a.setAttribute('href',a.getAttribute('href').replace(/\/$/,'/?lang=en')));
+if(window.PAGE_LANG==='en')$$('a[href^="dashboards/"],a[data-svc],a[href="/consent/"],a[href="/privacy/"]').forEach(a=>a.setAttribute('href',a.getAttribute('href').replace(/\/$/,'/?lang=en')));
 renderAll();
 if(!window.IS_BOT&&!window.FORCE_LOCALE)detectLocaleByIP();
 document.addEventListener('click',e=>{const d=document.getElementById('navSvc');if(d&&d.open&&!d.contains(e.target))d.open=false});

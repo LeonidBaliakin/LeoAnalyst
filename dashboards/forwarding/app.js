@@ -6,7 +6,7 @@ const loc=RU?'ru-RU':'en-GB',nf=(v,d=0)=>new Intl.NumberFormat(loc,{maximumFract
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function money(v,short){if(!RU){const x=v/D.usdRate,a=Math.abs(x);if(short){if(a>=1e6)return '$'+nf(x/1e6,2)+'M';if(a>=1e4)return '$'+nf(x/1e3,0)+'K'}return '$'+nf(x)}const a=Math.abs(v);if(short){if(a>=1e6)return nf(v/1e6,1)+' млн ₽';if(a>=1e4)return nf(v/1e3,0)+' тыс. ₽'}return nf(v)+' ₽'}
 const days=n=>RU?n+' '+(n%10===1&&n%100!==11?'день':n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?'дня':'дней'):n+(n===1?' day':' days');
-const track=(e,p)=>{try{gtag('event',e,p)}catch(_){}};
+const track=(e,p)=>{try{if(window.ym&&window.YM_ID)ym(window.YM_ID,'reachGoal',e,p)}catch(_){}};
 const ini=n=>n.split(' ').map(w=>w[0]).join('').slice(0,2);
 const F=D.fin,last=F[11],prev=F[10],margin=last.profit/last.rev*100,pmargin=prev.profit/prev.rev*100;
 const fu=D.funnel,conv=fu[3][1]/fu[0][1]*100,pconv=D.convTrend[4];

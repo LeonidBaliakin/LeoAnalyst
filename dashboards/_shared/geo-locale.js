@@ -59,6 +59,7 @@
 
   /* ---- Yandex Metrica, only after cookie consent (same rule as Google Analytics) ---- */
   var YM_ID=113847848; /* Yandex Metrica counter */
+  window.YM_ID=YM_ID;
   try{if(YM_ID&&!IS_BOT&&window.self===window.top&&localStorage.getItem('cookieConsent')==='accepted'){
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
     ym(YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
@@ -74,6 +75,8 @@
   }
   function fetchJSON(url){return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
   if(!window.fetch)return;
-  fetchJSON('https://ipwho.is/?fields=success,country_code').then(function(d){if(d.success===false)throw 0;done(d.country_code)})
-    .catch(function(){return fetchJSON('https://ipapi.co/json/').then(function(d){done(d.country_code)})}).catch(function(){});
+  /* country by IP from our own function in Yandex Cloud (Russia) */
+  var API=window.LEADS_API||'%%LEADS_API%%';
+  if(API.indexOf('%%')===0)return;
+  fetchJSON(API+'?geo=1').then(function(d){done(d.country_code)}).catch(function(){});
 })();

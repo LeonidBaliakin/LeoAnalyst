@@ -10,7 +10,7 @@ const pct=(v,d=1)=>nf(v,d)+'%';
 function money(v,short){if(!RU){const x=v/D.usdRate,a=Math.abs(x);if(short){if(a>=1e6)return '$'+nf(x/1e6,a>=1e7?1:2)+'M';if(a>=1e4)return '$'+nf(x/1e3,0)+'K'}return '$'+nf(x)}
  const a=Math.abs(v);if(short){if(a>=1e6)return nf(v/1e6,a>=1e8?0:1)+' млн ₽';if(a>=1e4)return nf(v/1e3,0)+' тыс. ₽'}return nf(v)+' ₽'}
 const days=n=>RU?n+' '+(n%10===1&&n%100!==11?'день':n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?'дня':'дней'):n+(n===1?' day':' days');
-const track=(e,p)=>{try{gtag('event',e,p)}catch(_){}};
+const track=(e,p)=>{try{if(window.ym&&window.YM_ID)ym(window.YM_ID,'reachGoal',e,p)}catch(_){}};
 
 /* ---------- vessels geometry ---------- */
 const R=6371,rad=x=>x*Math.PI/180;

@@ -1,0 +1,10 @@
+{
+  "name": "analyticsbuild-leads",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "geoip-country": ">=4",
+    "nodemailer": "^6.9.0"
+  }
+}

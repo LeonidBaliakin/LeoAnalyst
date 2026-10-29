@@ -193,7 +193,7 @@ let tw=null;function fly(pos,target,ms,done){const p0=C.position.clone(),t0=ctr.
 const panel=$('#panel');
 function setDock(){$$('#dock button').forEach(b=>b.classList.toggle('on',(b.dataset.v||'')===(state.inside||'')));}
 function enter(id,instant){const first=!state.inside;state.inside=id;state.modal=null;setDock();ctr.autoRotate=false;const g=groups[id];const tgt=g.position.clone().add(new THREE.Vector3(0,2.5,0)),pos=g.position.clone().add(new THREE.Vector3(10,7,12));
- if(window.gtag)try{gtag('event','open_section',{section:id})}catch(_){}
+ try{if(window.ym&&window.YM_ID)ym(window.YM_ID,'reachGoal','open_section',{section:id})}catch(_){}
  if(first&&!instant){fly(pos,tgt,1000,()=>{renderPanel();panel.classList.add('on');panel.setAttribute('aria-hidden','false');$('#sheet').scrollTop=0;$('.back',panel)&&$('.back',panel).focus();});}
  else{C.position.copy(pos);ctr.target.copy(tgt);renderPanel();panel.classList.add('on');$('#sheet').scrollTop=0;}}
 function leave(){panel.classList.remove('on');panel.setAttribute('aria-hidden','true');state.inside=null;state.modal=null;setDock();fly(HOME.clone(),new THREE.Vector3(0,0,0),900,()=>{ctr.autoRotate=!matchMedia('(prefers-reduced-motion: reduce)').matches;});}
