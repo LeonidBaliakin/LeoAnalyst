@@ -65,6 +65,10 @@
     ym(YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
   }}catch(e){}
 
+  if(!IS_BOT){(function(){try{var K='leadSrc',q=new URLSearchParams(location.search),u=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(function(k){return q.get(k)}).filter(Boolean),old={};try{old=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+ if(old.t&&Date.now()-old.t>2592e6)old={};var r='';try{if(document.referrer){var h=new URL(document.referrer).host;if(h&&h!==location.host)r=h}}catch(e){}
+ if(u.length)old={src:u.join(' / ').slice(0,200),ref:r||old.ref||'',land:location.pathname,t:Date.now()};else if(r&&!old.src&&!old.ref)old={ref:r,land:location.pathname,t:Date.now()};
+ if(old.t)localStorage.setItem(K,JSON.stringify(old))}catch(e){}})();}
   if(IS_BOT)return;
   // confirm by IP; if the country says otherwise, store it and reload once
   function done(country){

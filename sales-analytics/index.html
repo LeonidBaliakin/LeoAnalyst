@@ -934,6 +934,11 @@ $$('#mainNav a').forEach(a=>a.addEventListener('click',()=>{$('#mainNav').classL
 // text/plain body avoids a CORS preflight, which Apps Script does not support.
 const LEAD_DELIVERY_ENABLED=true;
 const LEAD_RECIPIENT='analystleogroup@gmail.com';
+/* where the visitor came from (UTM tags / referring site), kept 30 days, sent with the enquiry */
+(function(){try{var K='leadSrc',q=new URLSearchParams(location.search),u=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(function(k){return q.get(k)}).filter(Boolean),old={};try{old=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+ if(old.t&&Date.now()-old.t>2592e6)old={};var r='';try{if(document.referrer){var h=new URL(document.referrer).host;if(h&&h!==location.host)r=h}}catch(e){}
+ if(u.length)old={src:u.join(' / ').slice(0,200),ref:r||old.ref||'',land:location.pathname,t:Date.now()};else if(r&&!old.src&&!old.ref)old={ref:r,land:location.pathname,t:Date.now()};
+ if(old.t)localStorage.setItem(K,JSON.stringify(old))}catch(e){}})();
 const LEADS_API='https://functions.yandexcloud.net/d4en0qej0cuuk8g2ue4a'; /* Yandex Cloud function: enquiries + country by IP, data stays in Russia */
 const LEAD_ENDPOINT=LEADS_API;
 const PHONE_COUNTRIES={RU:'7',BY:'375',KZ:'7',US:'1',CA:'1',GB:'44',DE:'49',FR:'33',ES:'34',IT:'39',PL:'48',NL:'31',TR:'90',AE:'971',UA:'380',IN:'91',ID:'62',BR:'55',MX:'52'};
@@ -1088,7 +1093,8 @@ async function submitLead(e){
     'Согласие на обработку / Data processing consent':'Yes / Да',
     'Время отправки / Submitted at':new Date().toISOString(),
     'Язык сайта / Website language':state.locale,
-    'Страница / Page':location.origin+location.pathname
+    'Страница / Page':location.origin+location.pathname,
+    'Источник / Source':(()=>{try{const o=JSON.parse(localStorage.getItem('leadSrc')||'{}');return [o.src||'(прямой заход / direct)',o.ref?('с сайта '+o.ref):'',o.land?('первая страница '+o.land):''].filter(Boolean).join(' · ')}catch{return '-'}})()
   };
   if(info.method==='email')data.email=info.contact;
   leadInFlight=true;$('#leadSubmit').disabled=true;
