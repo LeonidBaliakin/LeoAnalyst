@@ -76,7 +76,7 @@
   function fetchJSON(url){return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
   if(!window.fetch)return;
   /* country by IP from our own function in Yandex Cloud (Russia) */
-  var API=window.LEADS_API||'%%LEADS_API%%';
+  var API=window.LEADS_API||'https://functions.yandexcloud.net/d4en0qej0cuuk8g2ue4a';
   if(API.indexOf('%%')===0)return;
   fetchJSON(API+'?geo=1').then(function(d){done(d.country_code)}).catch(function(){});
 })();
