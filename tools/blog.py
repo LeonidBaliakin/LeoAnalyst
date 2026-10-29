@@ -103,7 +103,7 @@ def build_index():
 {cards}
   </div>
  </div></section>{cta()}'''
-    ld = [{"@context": "https://schema.org", "@type": "Blog", "name": f"Статьи — {BRAND}", "url": url, "inLanguage": "ru",
+    ld = [{"@context": "https://schema.org", "@type": "Blog", "name": f"Статьи - {BRAND}", "url": url, "inLanguage": "ru",
            "blogPost": [{"@type": "BlogPosting", "headline": p['title'], "url": f"{ORIGIN}/blog/{p['slug']}/", "datePublished": p['date']} for p in POSTS]},
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": BRAND, "item": f"{ORIGIN}/"},

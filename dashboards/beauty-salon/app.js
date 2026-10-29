@@ -1,4 +1,4 @@
-/* Mira · beauty studio — LeoAnalyst interactive demo. All data is synthetic. */
+/* Mira · beauty studio - LeoAnalyst interactive demo. All data is synthetic. */
 (function(){
 'use strict';
 const D=window.BEAUTY_DATA,DAY=D.DAY,TODAY=D.today;
@@ -163,7 +163,7 @@ function pageOverview(){
  const topSvc=D.services.map(s=>({s,rev:st[s.id].rev,n:st[s.id].n})).sort((a,b)=>b.rev-a.rev).slice(0,5);const topMax=topSvc[0].rev||1;
  chartJobs.push(()=>{const el=$('#ovBars');if(!el)return;const mode=state.barMode;let labels=[],nw=[],rp=[],rv=[],titles=[];
   if(mode==='month'){for(let i=11;i>=0;i--){const d=new Date(TODAY);d.setDate(1);d.setMonth(d.getMonth()-i);const f=d.getTime(),e=new Date(d.getFullYear(),d.getMonth()+1,0).getTime();const bs=all().filter(b=>b.t>=f&&b.t<=Math.min(e,TODAY)&&done(b));labels.push(d.toLocaleDateString(state.lang==='ru'?'ru-RU':'en-GB',{month:'short'}).replace('.',''));titles.push(d.toLocaleDateString(state.lang==='ru'?'ru-RU':'en-GB',{month:'long',year:'numeric'}));nw.push(bs.filter(isNew).length);rp.push(bs.filter(b=>!isNew(b)).length);rv.push(sum(bs,b=>b.price));}}
-  else{for(let i=11;i>=0;i--){const e=TODAY-i*7*DAY,f=e-6*DAY;const bs=all().filter(b=>b.t>=f&&b.t<=e&&done(b));labels.push(dt(f));titles.push(dt(f)+' — '+dt(e));nw.push(bs.filter(isNew).length);rp.push(bs.filter(b=>!isNew(b)).length);rv.push(sum(bs,b=>b.price));}}
+  else{for(let i=11;i>=0;i--){const e=TODAY-i*7*DAY,f=e-6*DAY;const bs=all().filter(b=>b.t>=f&&b.t<=e&&done(b));labels.push(dt(f));titles.push(dt(f)+' - '+dt(e));nw.push(bs.filter(isNew).length);rp.push(bs.filter(b=>!isNew(b)).length);rv.push(sum(bs,b=>b.price));}}
   barChart(el,{labels,highlight:11,series:[{name:T('Повторные визиты','Returning visits'),data:rp,color:'var(--fern-2)'},{name:T('Новые клиенты','New clients'),data:nw,color:'var(--peach)'}],fmt:v=>num(v),fmtAxis:v=>num(v),tipTitle:i=>titles[i],extraTip:i=>`<div class="tr"><span>${T('Выручка','Revenue')}</span><span>${money(rv[i])}</span></div>`,aria:T('Визиты по месяцам','Visits by month')});});
  return`
  <div class="grid g-hero">
@@ -258,7 +258,7 @@ function pageBookings(){
   <section class="card"><div class="card-head"><div><h2 class="card-title">${T('Путь записи','Booking journey')}</h2><p class="card-sub">${T('Сколько клиентов доходит до визита и возвращается','How many clients reach the chair and come back')}</p></div></div>
    <div class="funnel">${steps.map((s,i)=>`<div class="fn"><b>${s[0]}</b><span class="vl">${num(s[1])}<small>${pct(s[1]/(n||1)*100,0)}</small></span><span class="track"><span class="fill" style="width:${(s[1]/(n||1)*100).toFixed(1)}%;opacity:${1-i*.14}"></span></span>${i?`<span class="drop">−${num(steps[i-1][1]-s[1])} ${T('на этом шаге','at this step')}</span>`:''}</div>`).join('')}</div></section>
   <section class="card"><div class="card-head"><div><h2 class="card-title">${T('Загрузка по часам','Busy hours')}</h2><p class="card-sub">${T('Записи по дням недели и времени начала','Bookings by weekday and start time')}</p></div></div>
-   <div class="heat"><span></span>${[...Array(12)].map((_,h)=>`<span class="h">${h%2===0?9+h:''}</span>`).join('')}${hm2.map((row,d)=>`<span class="d">${days[d]}</span>${row.map((v,h)=>`<span class="c" title="${days[d]} ${9+h}:00 — ${num(v)} ${T('записей','bookings')}" style="background:color-mix(in srgb,var(--fern-2) ${Math.round(8+v/hmax*88)}%,var(--surface-2))"></span>`).join('')}`).join('')}</div>
+   <div class="heat"><span></span>${[...Array(12)].map((_,h)=>`<span class="h">${h%2===0?9+h:''}</span>`).join('')}${hm2.map((row,d)=>`<span class="d">${days[d]}</span>${row.map((v,h)=>`<span class="c" title="${days[d]} ${9+h}:00 - ${num(v)} ${T('записей','bookings')}" style="background:color-mix(in srgb,var(--fern-2) ${Math.round(8+v/hmax*88)}%,var(--surface-2))"></span>`).join('')}`).join('')}</div>
    <div class="heat-key">${T('меньше','fewer')}${[10,35,60,85].map(p=>`<span style="background:color-mix(in srgb,var(--fern-2) ${p}%,var(--surface-2))"></span>`).join('')}${T('больше','more')}</div></section>
  </div>
  <section class="card mt"><div class="card-head"><div><h2 class="card-title">${T('Журнал записей','Booking log')}</h2><p class="card-sub">${T('Показано','Showing')} ${num(shown.length)} ${T('из','of')} ${num(j.length)}</p></div>
@@ -316,13 +316,13 @@ function pageClients(){
   <section class="card"><div class="card-head"><div><h2 class="card-title">${T('Клиенты по районам','Clients by area')}</h2><p class="card-sub">${T('Куда направить рекламу и листовки','Where to aim ads and flyers')}</p></div></div>
    <div>${dl.map(([id,v])=>`<div class="rank"><span class="n">${dl.findIndex(x=>x[0]===id)+1}</span><span><b>${esc(L(distById[id]))}</b><small>${num(v.cl.size)} ${T('клиентов','clients')} · ${pct(v.rev/dtot*100)}</small></span><span class="vl">${money(v.rev,true)}</span><span class="track"><span class="fill" style="width:${(v.rev/dmax*100).toFixed(1)}%"></span></span></div>`).join('')}</div></section>
  </div>
- <section class="card mt"><div class="card-head"><div><h2 class="card-title">${T('Постоянные клиенты','Loyal clients')}</h2><p class="card-sub">${T('Больше всего потратили за год — им стоит предложить абонемент','Highest spend this year — good candidates for a membership')}</p></div></div>
+ <section class="card mt"><div class="card-head"><div><h2 class="card-title">${T('Постоянные клиенты','Loyal clients')}</h2><p class="card-sub">${T('Больше всего потратили за год - им стоит предложить абонемент','Highest spend this year - good candidates for a membership')}</p></div></div>
   <div class="tbl-wrap"><table class="tbl"><thead><tr><th>${T('Клиент','Client')}</th><th class="num">${T('Визитов','Visits')}</th><th class="hide-sm">${T('Любимая услуга','Favourite service')}</th><th class="num hide-sm">${T('Последний визит','Last visit')}</th><th class="num">${T('Потратил','Spent')}</th></tr></thead>
   <tbody>${topC.map(([id,c])=>{const fav=Object.entries(c.svc).sort((a,b)=>b[1]-a[1])[0][0];const cl=cliById[id];return`<tr><td>${esc(L(cl))}<small>${esc(L(distById[cl.district]))} · ${esc(L(chById[cl.channel]))}</small></td><td class="num">${num(c.n)}</td><td class="hide-sm">${esc(L(svcById[fav]))}</td><td class="num hide-sm">${dt(c.last)}</td><td class="num">${money(c.rev)}</td></tr>`;}).join('')}</tbody></table></div></section>`;}
 
 function buckets_(days,group){const [f]=range(days);const labels=[],buckets=[],titles=[];
  if(group==='day'){for(let t=f;t<=TODAY;t+=DAY){buckets.push([t,t]);labels.push(dt(t));titles.push(dt(t,{weekday:'short',day:'numeric',month:'long'}));}}
- else if(group==='week'){for(let e=TODAY;e>=f;e-=7*DAY){const s=Math.max(f,e-6*DAY);buckets.unshift([s,e]);labels.unshift(dt(s));titles.unshift(dt(s)+' — '+dt(e));}}
+ else if(group==='week'){for(let e=TODAY;e>=f;e-=7*DAY){const s=Math.max(f,e-6*DAY);buckets.unshift([s,e]);labels.unshift(dt(s));titles.unshift(dt(s)+' - '+dt(e));}}
  else{let d=new Date(f);d.setDate(1);while(d.getTime()<=TODAY){const s=Math.max(f,d.getTime()),e=Math.min(TODAY,new Date(d.getFullYear(),d.getMonth()+1,0).getTime());buckets.push([s,e]);labels.push(d.toLocaleDateString(state.lang==='ru'?'ru-RU':'en-GB',{month:'short'}).replace('.',''));titles.push(d.toLocaleDateString(state.lang==='ru'?'ru-RU':'en-GB',{month:'long',year:'numeric'}));d.setMonth(d.getMonth()+1);}}
  return{labels,buckets,titles};}
 const METRICS=[
@@ -377,7 +377,7 @@ function fillMasters(){const sel=$('#nfMaster'),sv=$('#nfService');if(!sel||!sv)
 
 /* ---------- shell ---------- */
 function alerts(){const st=serviceStats(30),low=lowServices(st);const pend=all().filter(b=>b.status==='pending'&&b.t<=TODAY+DAY).length;const ns=all().filter(b=>b.status==='noshow'&&b.t>=TODAY-7*DAY).length;
- return[{c:'var(--honey)',t:T(`${pend} записей на сегодня и завтра ждут подтверждения`,`${pend} bookings for today and tomorrow need confirming`),go:'bookings'},{c:'var(--rose)',t:T(`${ns} неявок за неделю — стоит напоминать за день SMS-кой`,`${ns} no-shows this week — consider a reminder text the day before`),go:'bookings'},{c:'var(--sky)',t:T(`Мало записей: ${low.map(s=>L(s)).join(', ')}`,`Underbooked: ${low.map(s=>L(s)).join(', ')}`),go:'services'}];}
+ return[{c:'var(--honey)',t:T(`${pend} записей на сегодня и завтра ждут подтверждения`,`${pend} bookings for today and tomorrow need confirming`),go:'bookings'},{c:'var(--rose)',t:T(`${ns} неявок за неделю - стоит напоминать за день SMS-кой`,`${ns} no-shows this week - consider a reminder text the day before`),go:'bookings'},{c:'var(--sky)',t:T(`Мало записей: ${low.map(s=>L(s)).join(', ')}`,`Underbooked: ${low.map(s=>L(s)).join(', ')}`),go:'services'}];}
 function render(){
  chartJobs.length=0;artUid=0;document.documentElement.lang=state.lang;document.body.classList.toggle('dark',state.theme==='dark');
  const al=alerts();const page={overview:pageOverview,services:pageServices,bookings:pageBookings,masters:pageMasters,clients:pageClients,reports:pageReports}[state.page]();

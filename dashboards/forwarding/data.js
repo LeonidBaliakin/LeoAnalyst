@@ -1,4 +1,4 @@
-/* «Вектор Логистик» — LeoAnalyst freight forwarding demo. Synthetic, deterministic data. */
+/* «Вектор Логистик» - LeoAnalyst freight forwarding demo. Synthetic, deterministic data. */
 (function(){
 const EN=document.documentElement.lang==='en';
 let s=4417;const rnd=()=>{s=(s*1103515245+12345)%2147483648;return s/2147483648};

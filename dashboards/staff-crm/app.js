@@ -1,4 +1,4 @@
-/* Ritm · team workspace — LeoAnalyst interactive demo. Synthetic data only. */
+/* Ritm · team workspace - LeoAnalyst interactive demo. Synthetic data only. */
 (function(){
 'use strict';
 const D=window.RITM_DATA,DAY=D.DAY,TODAY=D.today;
@@ -85,7 +85,7 @@ function pageDashboard(){
  const pct=Math.round(doneN/all*100);
  const team=D.people.slice(0,5).map(p=>{const t=D.tasks.find(x=>x.assignees.includes(p.id)&&x.status!=='done')||D.tasks.find(x=>x.assignees.includes(p.id));return{p,t};});
  return`
- <div class="ph"><div><h1>${T('Дашборд','Dashboard')}</h1><p>${T('Всё, над чем работает команда, — в одном спокойном месте','Everything your team is shipping, in one calm place')}</p></div>
+ <div class="ph"><div><h1>${T('Дашборд','Dashboard')}</h1><p>${T('Всё, над чем работает команда, - в одном спокойном месте','Everything your team is shipping, in one calm place')}</p></div>
   <div class="acts"><button class="btn btn-p" data-act="newtask">${ico('plus',16)}${T('Новая задача','New task')}</button><button class="btn btn-hide-sm" data-act="toast" data-v="${T('Импорт данных доступен в полной версии','Data import is available in the full version')}">${ico('import',16)}${T('Импорт данных','Import data')}</button></div></div>
  <div class="g g4">
   ${stat(T('Всего проектов','Total projects'),tot,'+3',T('с прошлого месяца','since last month'),true)}
@@ -94,10 +94,10 @@ function pageDashboard(){
   ${stat(T('Ждут проверки','Awaiting review'),pending,'',T('нужна ваша оценка','need your sign-off'))}
  </div>
  <div class="g gdash mt">
-  <section class="card has-caps span-all"><div class="ch"><div><h2 class="ct">${T('Закрытые задачи за неделю','Tasks closed this week')}</h2><p class="cs">${T('Наведите на день — штриховкой показаны будущие дни','Hover a day — hatched days are still ahead')}</p></div></div>
+  <section class="card has-caps span-all"><div class="ch"><div><h2 class="ct">${T('Закрытые задачи за неделю','Tasks closed this week')}</h2><p class="cs">${T('Наведите на день - штриховкой показаны будущие дни','Hover a day - hatched days are still ahead')}</p></div></div>
    <div class="caps">${week.map((w,i)=>`<button class="cap" data-act="cap" data-v="${i}" aria-pressed="${i===sel}" aria-label="${days[i]}: ${w.future?T('ещё впереди','ahead'):w.v+' '+T('задач','tasks')}"><span class="bubble">${w.future?T('впереди','ahead'):w.v+' '+T('задач','tasks')}</span><span class="pill ${w.future?'off':''}" style="height:${w.future?62:Math.max(18,w.v/wmax*100)}%;${w.future?'':`background:${i===sel?'var(--bar-1)':w.v/wmax>.7?'var(--bar-2)':'var(--bar-3)'}`}"></span><span>${days[i]}</span></button>`).join('')}</div></section>
   <section class="card remind"><div class="ch"><h2 class="ct">${T('Напоминание','Reminder')}</h2></div>
-   <h3>${esc(L(ev))}</h3><p>${T('Сегодня','Today')}, ${ev.start}:00 — ${ev.end}:00 · ${esc(L(prj[ev.project]))}</p>
+   <h3>${esc(L(ev))}</h3><p>${T('Сегодня','Today')}, ${ev.start}:00 - ${ev.end}:00 · ${esc(L(prj[ev.project]))}</p>
    <div class="avs" style="justify-content:flex-start;margin:12px 0 0 7px">${ev.people.map(id=>av(ppl[id])).join('')}</div>
    <button class="btn btn-p" data-act="meet">${ico('video',16)}${T('Начать встречу','Start meeting')}</button>
    <div class="next-ev"><h4>${T('Дальше по плану','Coming up')}</h4>${D.events.filter(e=>e.t>TODAY).sort((x,y)=>x.t-y.t||x.start-y.start).slice(0,3).map(e=>`<button class="ne" data-act="go" data-v="calendar"><span>${esc(L(e))}</span><small>${dt(e.t,{weekday:'short',day:'numeric',month:'short'})}, ${e.start}:00</small></button>`).join('')}</div></section>
@@ -159,13 +159,13 @@ function pageCalendar(){
  const evOn=t=>D.events.filter(e=>e.t===t).sort((a,b)=>a.start-b.start);
  const daysH=state.lang==='ru'?['Пн','Вт','Ср','Чт','Пт','Сб','Вс']:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];const hdr=state.weekStart==='mon'?daysH:[daysH[6],...daysH.slice(0,6)];
  const sel=evOn(state.calDay);const upcoming=D.events.filter(e=>e.t>state.calDay).sort((a,b)=>a.t-b.t||a.start-b.start).slice(0,4);
- const evHtml=e=>`<div class="ev"><i style="background:${kindColor[e.kind]}"></i><div><b>${esc(L(e))}</b><small>${e.start}:00 — ${e.end}:00 · ${esc(L(prj[e.project]))}</small><div class="avs" style="justify-content:flex-start">${e.people.map(id=>av(ppl[id])).join('')}</div></div></div>`;
+ const evHtml=e=>`<div class="ev"><i style="background:${kindColor[e.kind]}"></i><div><b>${esc(L(e))}</b><small>${e.start}:00 - ${e.end}:00 · ${esc(L(prj[e.project]))}</small><div class="avs" style="justify-content:flex-start">${e.people.map(id=>av(ppl[id])).join('')}</div></div></div>`;
  return`
  <div class="ph"><div><h1>${T('Календарь','Calendar')}</h1><p>${T('Встречи, созвоны и релизы команды','Meetings, calls and releases')}</p></div><div class="acts"><button class="btn" data-act="cal" data-v="-1" aria-label="${T('Предыдущий месяц','Previous month')}">‹</button><button class="btn" data-act="cal" data-v="0">${T('Сегодня','Today')}</button><button class="btn" data-act="cal" data-v="1" aria-label="${T('Следующий месяц','Next month')}">›</button></div></div>
  <div class="g g21"><section class="card"><div class="ch"><h2 class="ct">${(m=>m.charAt(0).toUpperCase()+m.slice(1))(base.toLocaleDateString(loc(),{month:'long',year:'numeric'}))}</h2></div>
   <div class="cal">${hdr.map(d=>`<span class="dh">${d}</span>`).join('')}${cells.map(t=>{const d=new Date(t),es=evOn(t);return`<button data-act="day" data-v="${t}" class="${d.getMonth()!==m?'out':''} ${t===TODAY?'today':''}" aria-pressed="${t===state.calDay}" aria-label="${dt(t,{day:'numeric',month:'long'})}: ${es.length} ${T('событий','events')}">${d.getDate()}<span class="dots">${es.slice(0,3).map(e=>`<i style="background:${t===state.calDay?'#fff':kindColor[e.kind]}"></i>`).join('')}</span></button>`;}).join('')}</div></section>
   <div class="stack" style="display:flex;flex-direction:column;gap:16px"><section class="card"><div class="ch"><h2 class="ct">${dt(state.calDay,{weekday:'long',day:'numeric',month:'long'})}</h2><button class="btn btn-sm" data-act="toast" data-v="${T('Событие добавлено (демо)','Event added (demo)')}">${ico('plus',14)}${T('Событие','Event')}</button></div>
-   <div class="agenda">${sel.map(evHtml).join('')||`<p class="cs">${T('В этот день встреч нет — хорошее время для глубокой работы.','No meetings this day — good time for focused work.')}</p>`}</div></section>
+   <div class="agenda">${sel.map(evHtml).join('')||`<p class="cs">${T('В этот день встреч нет - хорошее время для глубокой работы.','No meetings this day - good time for focused work.')}</p>`}</div></section>
    <section class="card"><div class="ch"><h2 class="ct">${T('Дальше по плану','Coming up')}</h2></div><div class="agenda">${upcoming.map(e=>`<div class="ev"><i style="background:${kindColor[e.kind]}"></i><div><b>${esc(L(e))}</b><small>${dt(e.t,{weekday:'short',day:'numeric',month:'short'})}, ${e.start}:00</small></div></div>`).join('')}</div></section></div></div>`;}
 
 function pageAnalytics(){
@@ -187,7 +187,7 @@ function pageAnalytics(){
  </div>
  <div class="g g21 mt"><section class="card"><div class="ch"><div><h2 class="ct">${T('Скорость команды','Throughput')}</h2><p class="cs">${T('Закрытые задачи в день, среднее за 7 дней, в сравнении с прошлым периодом','Tasks closed per day, 7-day average, vs the previous period')}</p></div><div class="legend"><span><i style="background:var(--bar-2)"></i>${T('Этот период','This period')}</span><span><i class="dash"></i>${T('Прошлый','Previous')}</span></div></div><div class="chart" id="thru"></div></section>
   <section class="card"><div class="ch"><div><h2 class="ct">${T('Время по проектам','Time by project')}</h2><p class="cs">${T('Где команда проводит часы','Where the hours go')}</p></div></div><div class="donut-wrap">${donut(ph.map(x=>({v:x.v,c:x.p.color})))}<div class="dl">${ph.map(x=>`<div><i style="background:${x.p.color}"></i><span>${esc(L(x.p))}</span><b>${num(x.v)} ${T('ч','h')}</b></div>`).join('')}</div></div></section></div>
- <section class="card mt"><div class="ch"><div><h2 class="ct">${T('Загрузка сотрудников','Team workload')}</h2><p class="cs">${T('Выше 85% — риск выгорания и сорванных сроков','Above 85% — risk of burnout and missed deadlines')}</p></div></div>
+ <section class="card mt"><div class="ch"><div><h2 class="ct">${T('Загрузка сотрудников','Team workload')}</h2><p class="cs">${T('Выше 85% - риск выгорания и сорванных сроков','Above 85% - risk of burnout and missed deadlines')}</p></div></div>
   ${loads.map(({p,s})=>`<div class="hbar"><span>${av(p)}${esc(L(p).split(' ')[0])}</span><span class="t"><i style="width:${s.load}%;background:${s.load>85?'var(--danger)':s.load>65?'var(--bar-2)':'var(--bar-3)'}"></i></span><b>${s.load}%</b></div>`).join('')}</section>`;}
 function aStat(l,v,c){return`<section class="card stat"><div class="lab">${l}</div><div class="num" style="font-size:32px">${v}</div><div class="foot">${c}${T('к прошлому периоду','vs previous period')}</div></section>`;}
 
@@ -224,8 +224,8 @@ function render(){
  $('#app').innerHTML=`<div class="app">
  <aside class="side"><div class="logo"><span>${ico('logo')}</span><b>Ritm</b></div>
   <h6>${T('Меню','Menu')}</h6><nav class="nav">${PAGES.map(navBtn).join('')}</nav>
-  <h6>${T('Общее','General')}</h6><nav class="nav">${navBtn({id:'settings',icon:'gear',ru:'Настройки',en:'Settings'})}<button data-act="toast" data-v="${T('Справка откроется в полной версии','Help opens in the full version')}">${ico('help')}<span class="lbl">${T('Помощь','Help')}</span></button><button data-act="toast" data-v="${T('Это демо — выйти нельзя 🙂','This is a demo — nowhere to log out to')}">${ico('out')}<span class="lbl">${T('Выйти','Log out')}</span></button></nav>
-  <div class="promo"><span style="position:relative;z-index:1">${ico('phone',20)}</span><b style="position:relative;z-index:1">${T('Ritm для iOS и Android','Ritm for iOS & Android')}</b><small style="position:relative;z-index:1">${T('Задачи всегда под рукой','Your board, in your pocket')}</small><button class="pbtn" data-act="toast" data-v="${T('Приложение — часть демо','The app is part of the demo')}">${T('Скачать','Download')}</button></div></aside>
+  <h6>${T('Общее','General')}</h6><nav class="nav">${navBtn({id:'settings',icon:'gear',ru:'Настройки',en:'Settings'})}<button data-act="toast" data-v="${T('Справка откроется в полной версии','Help opens in the full version')}">${ico('help')}<span class="lbl">${T('Помощь','Help')}</span></button><button data-act="toast" data-v="${T('Это демо - выйти нельзя 🙂','This is a demo - nowhere to log out to')}">${ico('out')}<span class="lbl">${T('Выйти','Log out')}</span></button></nav>
+  <div class="promo"><span style="position:relative;z-index:1">${ico('phone',20)}</span><b style="position:relative;z-index:1">${T('Ritm для iOS и Android','Ritm for iOS & Android')}</b><small style="position:relative;z-index:1">${T('Задачи всегда под рукой','Your board, in your pocket')}</small><button class="pbtn" data-act="toast" data-v="${T('Приложение - часть демо','The app is part of the demo')}">${T('Скачать','Download')}</button></div></aside>
  <main class="main"><div class="top"><span class="logo-m"><span>${ico('logo',16)}</span>Ritm</span>
   <label class="search">${ico('search')}<input id="q" value="${esc(state.q)}" placeholder="${T('Поиск задач и людей','Search tasks & people')}" aria-label="${T('Поиск задач и людей','Search tasks & people')}"><kbd>⌘K</kbd></label>
   <div class="top-r"><button class="ibtn" data-act="lang" aria-label="${T('Switch to English','Переключить на русский')}">${state.lang==='ru'?'EN':'RU'}</button><button class="ibtn" data-act="theme" data-v="${state.theme==='dark'?'light':'dark'}" aria-label="${T('Сменить тему','Toggle theme')}">${ico(state.theme==='dark'?'sun':'moon')}</button><button class="ibtn" data-act="toast" data-v="${T('3 новых сообщения от команды','3 new messages from the team')}" aria-label="${T('Сообщения','Messages')}">${ico('mail')}<span class="dot"></span></button><button class="ibtn" data-act="go" data-v="tasks" aria-label="${T('Уведомления','Notifications')}">${ico('bell')}<span class="dot"></span></button>
@@ -253,7 +253,7 @@ document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if
  case'week':state.weekStart=v;store.set('week',v);break;
  case'toast':toast(v);return;
  case'cap':state.capSel=+v;break;
- case'meet':toast(T('Встреча началась — демо без видео','Meeting started — demo without video'));return;
+ case'meet':toast(T('Встреча началась - демо без видео','Meeting started - demo without video'));return;
  case'proj':state.page='tasks';state.q=L(prj[v]);break;
  case'timer':{const t=state.timer;if(t.running){t.acc+=Date.now()-t.start;t.running=false;}else{t.start=Date.now();t.running=true;}break;}
  case'stoptimer':{const s=elapsed();state.timer={running:false,start:Date.now(),acc:0};toast(T(`Записано ${Math.floor(s/3600)} ч ${Math.floor(s%3600/60)} мин`,`Logged ${Math.floor(s/3600)}h ${Math.floor(s%3600/60)}m`));break;}

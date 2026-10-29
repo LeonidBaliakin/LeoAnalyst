@@ -357,15 +357,15 @@
     const gradient=values.map((v,i)=>{const from=running;running+=total?v.active/total*100:0;return `${palette[i]} ${from}% ${running}%`;}).join(',');
     const label=kind==='platform'?T('Платформы','Platforms'):kind==='country'?T('География','Geography'):T('Источники','Channels');
     return `<section class="card"><div class="card-inner"><div class="card-header"><div><h2 class="card-title">${label}</h2><p class="card-subtitle">${T('Распределение активных пользователей','Active user breakdown')}</p></div><span class="card-head-tag">${T('Можно фильтровать','Interactive')}</span></div>
-      <div class="donut-row"><div class="donut" style="background:conic-gradient(${gradient||'#e9eef0 0 100%'})"><div class="donut-center"><strong>${total?compact(total):'—'}</strong><small>${T('пользователей','users')}</small></div></div><div class="donut-legend">
-      ${values.map((v,i)=>`<button class="legend-row" data-segment="${kind}|${v.value}"><small><span class="legend-mark" style="background:${palette[i]}"></span>${esc(groupName(v.value,kind))}</small><b>${total?pct(v.active/total,0):'—'}</b></button>`).join('')}
+      <div class="donut-row"><div class="donut" style="background:conic-gradient(${gradient||'#e9eef0 0 100%'})"><div class="donut-center"><strong>${total?compact(total):'-'}</strong><small>${T('пользователей','users')}</small></div></div><div class="donut-legend">
+      ${values.map((v,i)=>`<button class="legend-row" data-segment="${kind}|${v.value}"><small><span class="legend-mark" style="background:${palette[i]}"></span>${esc(groupName(v.value,kind))}</small><b>${total?pct(v.active/total,0):'-'}</b></button>`).join('')}
       </div></div></div></section>`;
   }
   function narrative(s) {
     const ltv=s.metrics.ltv,conv=s.metrics.conversion;
     const idea = s.metrics.d7 < .33
-      ? {title:T('Удержание — ключевая возможность роста','Retention is a growth opportunity'),text:T(`На 7-й день возвращаются ${pct(s.metrics.retention)} новых пользователей. Проверьте первый опыт, полезность ключевой функции и напоминания.`,`Only ${pct(s.metrics.retention)} of new users return on day 7. Review onboarding, core value discovery, and re-engagement.`),tab:'retention'}
-      : {title:T('Усилите переход к оплате','Improve the path to payment'),text:T(`Платящая аудитория за период — ${pct(conv)} активных пользователей. Изучите шаги регистрации, активации и оплаты.`,`Paying users account for ${pct(conv)} of active users. Explore signup, activation and payment steps.`),tab:'funnels'};
+      ? {title:T('Удержание - ключевая возможность роста','Retention is a growth opportunity'),text:T(`На 7-й день возвращаются ${pct(s.metrics.retention)} новых пользователей. Проверьте первый опыт, полезность ключевой функции и напоминания.`,`Only ${pct(s.metrics.retention)} of new users return on day 7. Review onboarding, core value discovery, and re-engagement.`),tab:'retention'}
+      : {title:T('Усилите переход к оплате','Improve the path to payment'),text:T(`Платящая аудитория за период - ${pct(conv)} активных пользователей. Изучите шаги регистрации, активации и оплаты.`,`Paying users account for ${pct(conv)} of active users. Explore signup, activation and payment steps.`),tab:'funnels'};
     return `<section class="narrative-card"><span class="hint">${ico('sparkles','icon-inline')} ${T('Что показывают цифры','What the data suggests')}</span><h3>${idea.title}</h3><p>${idea.text}</p><button class="goto-link" data-page="${idea.tab}">${T('Перейти к деталям','Explore the data')} ${ico('arrow','icon-inline')}</button></section>`;
   }
   function quickStats(s) {
@@ -444,8 +444,8 @@
     };
     return `<section class="card retention-matrix-card"><div class="card-inner"><div class="card-header"><div><h2 class="card-title">${T('Когортная карта удержания','Retention cohort heatmap')}</h2><p class="card-subtitle">${T('Точный возврат на D1, D3, D7 и другие дни. Наведите на ячейку или нажмите для подробностей.','Exact-day returns for D1, D3, D7 and more. Hover or click a cell for details.')}</p></div><span class="card-head-tag">${T('Интерактивно','Interactive')}</span></div>
     <div class="table-scroll"><table class="cohort-table daily-cohort-table"><thead><tr><th>${T('Неделя регистрации','Signup week')}</th><th>${T('Пользователи','Users')}</th>${ages.map(d=>`<th>D${d}</th>`).join('')}</tr></thead><tbody>
-    ${cohorts.map((c,i)=>`<tr><th class="cohort-name">${shortDay(c.begin)}–${shortDay(c.end)}</th><td class="cohort-users">${number(c.users)}</td>${c.cells.map((value,j)=>value===null?`<td><span class="cohort-empty" title="${T('Срок наблюдения не завершён','Not mature yet')}">—</span></td>`:`<td><button type="button" class="cohort-cell daily-cell ${value>.2?'high-retention':''}" style="background:${heat(value,ages[j])}" data-retention-cell="${i}|${j}" title="D${ages[j]} · ${pct(value)}">${pct(value,0)}</button></td>`).join('')}</tr>`).join('')}</tbody></table></div>
-    <div class="heatmap-foot"><div class="heatmap-key"><span>${T('Низкое','Lower')}</span><i></i><i></i><i></i><i></i><i></i><span>${T('Высокое','Higher')}</span></div><span class="micro-label">${T('Пустые ячейки — когорта ещё не достигла этого дня','Empty cells mean the cohort has not yet matured')}</span></div>
+    ${cohorts.map((c,i)=>`<tr><th class="cohort-name">${shortDay(c.begin)}–${shortDay(c.end)}</th><td class="cohort-users">${number(c.users)}</td>${c.cells.map((value,j)=>value===null?`<td><span class="cohort-empty" title="${T('Срок наблюдения не завершён','Not mature yet')}">-</span></td>`:`<td><button type="button" class="cohort-cell daily-cell ${value>.2?'high-retention':''}" style="background:${heat(value,ages[j])}" data-retention-cell="${i}|${j}" title="D${ages[j]} · ${pct(value)}">${pct(value,0)}</button></td>`).join('')}</tr>`).join('')}</tbody></table></div>
+    <div class="heatmap-foot"><div class="heatmap-key"><span>${T('Низкое','Lower')}</span><i></i><i></i><i></i><i></i><i></i><span>${T('Высокое','Higher')}</span></div><span class="micro-label">${T('Пустые ячейки - когорта ещё не достигла этого дня','Empty cells mean the cohort has not yet matured')}</span></div>
     </div></section>`;
   }
   function retentionPage(s) {
@@ -457,7 +457,7 @@
       ${summaryTile('D30 retention',pct(d30.rate),T('Вернулись на тридцатый день','Returned on day thirty'),'repeat')}
       </div>${retentionHeatmap(s)}<div class="grid-equal retention-explain">
       <section class="card"><div class="card-inner"><div class="card-header"><div><h2 class="card-title">${T('Как читать таблицу','How to read this matrix')}</h2><p class="card-subtitle">${T('Одна строка = одна неделя регистраций','One row = one signup week')}</p></div></div>
-      <div class="retention-guide"><div><span class="guide-step">01</span><b>${T('Когорта','Cohort')}</b><p>${T('Люди, зарегистрировавшиеся в течение одной недели.','Users who signed up during the same week.')}</p></div><div><span class="guide-step">02</span><b>${T('Точный день','Exact day')}</b><p>${T('D7 = возврат ровно на седьмой день, а не в любой день первой недели.','D7 means returning on day seven, not any day during that week.')}</p></div><div><span class="guide-step">03</span><b>${T('Сравнивайте','Compare')}</b><p>${T('По строкам видно удержание отдельной группы; по столбцам — качество новых когорт.','Rows show one group’s retention; columns reveal trends across signup cohorts.')}</p></div></div></div></section>
+      <div class="retention-guide"><div><span class="guide-step">01</span><b>${T('Когорта','Cohort')}</b><p>${T('Люди, зарегистрировавшиеся в течение одной недели.','Users who signed up during the same week.')}</p></div><div><span class="guide-step">02</span><b>${T('Точный день','Exact day')}</b><p>${T('D7 = возврат ровно на седьмой день, а не в любой день первой недели.','D7 means returning on day seven, not any day during that week.')}</p></div><div><span class="guide-step">03</span><b>${T('Сравнивайте','Compare')}</b><p>${T('По строкам видно удержание отдельной группы; по столбцам - качество новых когорт.','Rows show one group’s retention; columns reveal trends across signup cohorts.')}</p></div></div></div></section>
       <section class="focus-card"><div class="focus-tag">${T('Ключевой сигнал','Key signal')}</div><h2>${T('От первого дня к седьмому','From day one to day seven')}</h2><div class="focus-value">${number(Math.max(0,drop)*100,1)} ${T('п.п.','pp')}</div><p>${T('Разница между D1 и D7. Найдите, какие первые действия связаны с повторным использованием продукта.','The gap between D1 and D7. Investigate which first actions are tied to repeat product usage.')}</p><button type="button" data-page="cohorts">${T('Открыть недельные когорты','Explore weekly cohorts')} ${ico('arrow','icon-inline')}</button></section>
       </div>`;
   }
@@ -465,19 +465,19 @@
     const rows=funnelFor(s), first=rows[0].count,last=rows.at(-1).count;
     const step=clamp(state.funnelStep,0,3);
     const explanations=[
-      T('Регистрация — отправная точка. Здесь считаются только пользователи, зарегистрировавшиеся в выбранном периоде.','Sign-up is the starting point. Only users who joined during the selected period are counted.'),
+      T('Регистрация - отправная точка. Здесь считаются только пользователи, зарегистрировавшиеся в выбранном периоде.','Sign-up is the starting point. Only users who joined during the selected period are counted.'),
       T('Проверьте, достаточно ли прост первый запуск и понятно ли пользователю, что делать после регистрации.','Evaluate whether onboarding is short enough and the next action is immediately clear.'),
-      T('Покажите ценность ключевой функции до предложения оплаты — это обычно повышает готовность платить.','Demonstrate core product value before introducing the paywall to increase purchase intent.'),
+      T('Покажите ценность ключевой функции до предложения оплаты - это обычно повышает готовность платить.','Demonstrate core product value before introducing the paywall to increase purchase intent.'),
       T('Анализируйте цены, неудобные формы оплаты и причины отклонённых платежей.','Examine pricing clarity, checkout friction, and failed payment reasons.')
     ];
     return `<div class="grid-three">
       ${summaryTile(T('Регистрации','Sign-ups'),number(first),T('Размер входной когорты','Cohort size'),'users')}
       ${summaryTile(T('Оплатили','Converted to paid'),number(last),T('Первые оплаты','First purchases'),'wallet')}
-      ${summaryTile(T('Конверсия в оплату','Signup → purchase'),first?pct(last/first):'—',T('От регистрации до первой покупки','From signup to first purchase'),'funnel')}
+      ${summaryTile(T('Конверсия в оплату','Signup → purchase'),first?pct(last/first):'-',T('От регистрации до первой покупки','From signup to first purchase'),'funnel')}
     </div><div class="funnel-layout">
       <section class="card"><div class="card-inner"><div class="card-header"><div><h2 class="card-title">${T('Воронка активации и оплаты','Activation & purchase funnel')}</h2><p class="card-subtitle">${T('Нажмите на этап, чтобы увидеть рекомендации','Select a step for recommendations')}</p></div></div>
         <div class="funnel-rows">${rows.map(r=>`<button class="funnel-step ${r.i===step?'selected':''}" data-funnel="${r.i}"><div class="funnel-step-head"><strong>${r.i+1}. ${r.label}</strong><span>${number(r.count)}</span></div><div class="progress-track"><div class="progress-fill" style="background:${palette[r.i]};width:${r.percent*100}%"></div></div><div class="funnel-note"><span>${pct(r.percent,1)} ${T('от входа','of sign-ups')}</span><span>${r.i?T('Прошли шаг','Step-through')+' '+pct(r.fromPrev,1):'100%'}</span></div></button>`).join('')}</div>
-      </div></section><section class="narrative-card"><span class="hint">${T('Этап','Stage')} ${step+1} / 4</span><h3>${rows[step].label}</h3><p>${explanations[step]}</p><p>${T('Потеря относительно предыдущего шага','Drop-off vs previous stage')}: <strong style="color:#a8f5d8">${step?number(rows[step-1].count-rows[step].count):'—'}</strong></p><button class="goto-link" data-page="insights">${T('Посмотреть выводы','See recommendations')}${ico('arrow','icon-inline')}</button></section>
+      </div></section><section class="narrative-card"><span class="hint">${T('Этап','Stage')} ${step+1} / 4</span><h3>${rows[step].label}</h3><p>${explanations[step]}</p><p>${T('Потеря относительно предыдущего шага','Drop-off vs previous stage')}: <strong style="color:#a8f5d8">${step?number(rows[step-1].count-rows[step].count):'-'}</strong></p><button class="goto-link" data-page="insights">${T('Посмотреть выводы','See recommendations')}${ico('arrow','icon-inline')}</button></section>
     </div>`;
   }
   function revenuePage(s) {
@@ -530,7 +530,7 @@
       ${summaryTile('D30 retention',pct(s.metrics.d30),T('Точный возврат на 30-й день','Exact day-30 return'),'repeat')}</div>
       <section class="card"><div class="card-inner"><div class="card-header"><div><h2 class="card-title">${T('Недельные когорты','Weekly retention cohorts')}</h2><p class="card-subtitle">${T('Возврат хотя бы в один из дней каждой недели жизни. Выберите ячейку для деталей.','Returned at least once in each lifecycle week. Select any cell to inspect.')}</p></div><span class="card-head-tag">${T('Интерактивная таблица','Interactive matrix')}</span></div>
       <div class="table-scroll"><table class="cohort-table"><thead><tr><th>${T('Регистрация','Signup week')}</th><th>${T('Польз.','Users')}</th>${Array.from({length:9},(_,i)=>`<th>W${i}</th>`).join('')}</tr></thead><tbody>
-      ${cohorts.map((c,i)=>`<tr><th class="cohort-name">${shortDay(c.begin)}–${shortDay(c.end)}</th><td class="cohort-users">${number(c.users)}</td>${c.weeks.map((value,w)=>value===null?`<td><span class="cohort-empty">—</span></td>`:`<td><button class="cohort-cell" style="background:${state.theme==='dark'?'rgba(24,183,142,':'rgba(38,194,152,'}${Math.max(.06,value*.85).toFixed(3)})" data-cohort="${i}|${w}" title="${pct(value)}">${pct(value,0)}</button></td>`).join('')}</tr>`).join('')}</tbody></table></div>
+      ${cohorts.map((c,i)=>`<tr><th class="cohort-name">${shortDay(c.begin)}–${shortDay(c.end)}</th><td class="cohort-users">${number(c.users)}</td>${c.weeks.map((value,w)=>value===null?`<td><span class="cohort-empty">-</span></td>`:`<td><button class="cohort-cell" style="background:${state.theme==='dark'?'rgba(24,183,142,':'rgba(38,194,152,'}${Math.max(.06,value*.85).toFixed(3)})" data-cohort="${i}|${w}" title="${pct(value)}">${pct(value,0)}</button></td>`).join('')}</tr>`).join('')}</tbody></table></div>
       <div class="legend" style="margin-top:19px"><span class="legend-item"><span class="legend-mark" style="background:#c9f8e5"></span>${T('Низкое удержание','Lower retention')}</span><span class="legend-item"><span class="legend-mark" style="background:#23be95"></span>${T('Высокое удержание','Higher retention')}</span><span class="micro-label">${T('W0 = все регистрации; W1 = дни 7–13 и т. д.','W0 = all signups; W1 = days 7–13, etc.')}</span></div>
       </div></section>`;
   }
@@ -565,8 +565,8 @@
     const extraMoney=extraUsers*avgPay;
     const items=[
       {icon:'repeat',name:T('Удержание на D7','Day-7 retention'),desc:T(`Сейчас возвращается ${pct(s.metrics.retention)} пользователей зрелых когорт. Проверьте, какие действия совершает человек в первую неделю.`,`Currently ${pct(s.metrics.retention)} of mature cohorts return on day 7. Study what users do in the first week.`),goto:'retention',tag:'D7'},
-      {icon:'funnel',name:T('Конверсия в первую оплату','First purchase conversion'),desc:T(`Доля платящих за период — ${pct(rate)}. Выясните, на каком шаге регистрации, активации и оплаты больше всего потерь.`,`Paying share is ${pct(rate)}. Identify the largest drop-off between sign-up, activation and payment.`),goto:'funnels',tag:T('Воронка','Funnel')},
-      {icon:'wallet',name:T('Выручка на пользователя','Revenue per user'),desc:T(`ARPU за период — ${money(s.metrics.arpu)}, ARPPU — ${money(s.metrics.arppu)}. Разделите платежи по планам и источникам.`,`Period ARPU is ${money(s.metrics.arpu)}, ARPPU is ${money(s.metrics.arppu)}. Compare payment performance by channel.`),goto:'revenue',tag:'ARPU'},
+      {icon:'funnel',name:T('Конверсия в первую оплату','First purchase conversion'),desc:T(`Доля платящих за период - ${pct(rate)}. Выясните, на каком шаге регистрации, активации и оплаты больше всего потерь.`,`Paying share is ${pct(rate)}. Identify the largest drop-off between sign-up, activation and payment.`),goto:'funnels',tag:T('Воронка','Funnel')},
+      {icon:'wallet',name:T('Выручка на пользователя','Revenue per user'),desc:T(`ARPU за период - ${money(s.metrics.arpu)}, ARPPU - ${money(s.metrics.arppu)}. Разделите платежи по планам и источникам.`,`Period ARPU is ${money(s.metrics.arpu)}, ARPPU is ${money(s.metrics.arppu)}. Compare payment performance by channel.`),goto:'revenue',tag:'ARPU'},
       {icon:'users',name:T('Рост активной аудитории','Active audience growth'),desc:T(`За выбранный период зарегистрировалось ${number(s.metrics.signups)} пользователей. Сопоставьте приток и активную аудиторию по платформам.`,`${number(s.metrics.signups)} users joined during this period. Compare acquisition to active users by platform.`),goto:'audience',tag:'MAU'},
     ];
     return `<div class="grid-main"><section class="card"><div class="card-inner"><div class="card-header"><div><h2 class="card-title">${T('Оценка потенциала','What-if calculator')}</h2><p class="card-subtitle">${T('Как изменение конверсии может повлиять на выручку','How an uplift in conversion could affect revenue')}</p></div></div>
@@ -620,9 +620,9 @@
     </section>`;
   }
   const subtitles={
-    overview:['Вся картина продукта — в одном месте','A clear picture of your product performance'],
+    overview:['Вся картина продукта - в одном месте','A clear picture of your product performance'],
     audience:['Кто приходит, как растёт аудитория и откуда пользователи','Who your users are, how they grow, and where they come from'],
-    retention:['Понимайте, кто и когда возвращается в продукт','Understand who comes back — and when'],
+    retention:['Понимайте, кто и когда возвращается в продукт','Understand who comes back - and when'],
     funnels:['На каких шагах теряются потенциальные покупатели','Find the drop-offs along the conversion journey'],
     revenue:['Платежи, выручка и экономика пользователей','Payments, revenue and user-level economics'],
     cohorts:['Поведение пользователей с одинаковой датой регистрации','How signup cohorts behave over time'],
