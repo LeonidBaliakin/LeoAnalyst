@@ -179,4 +179,6 @@ addEventListener('resize',size);size();
 const tmp=new THREE.Vector3();
 function place(o){tmp.copy(o.v).project(C);o.el.style.left=(tmp.x*.5+.5)*innerWidth+'px';o.el.style.top=(-tmp.y*.5+.5)*innerHeight-10+'px'}
 (function loop(){walk(Math.min(clock.getDelta(),.05));O.update();R.render(S,C);TAGS.forEach(place);pins.forEach(place);requestAnimationFrame(loop)})();
-</script></body></html>
+</script><script>window.VIEW_TOGGLE={page:'3d',other:'../beauty-salon/'};</script>
+<script src="../_shared/view-toggle.js?v=1"></script>
+</body></html>

@@ -144,7 +144,7 @@ const panel=$('#panel'),sheet=$('#sheet');let lastFocus=null;
 function open(id){if(id==='terminal'){close();return}cur=id;lastFocus=lastFocus||document.activeElement;
  sheet.innerHTML=`<div class="sh-head"><div class="tabs">${SECS.filter(s=>s[0]!=='terminal').map(s=>`<button data-tab="${s[0]}"${s[0]===id?' class="on"':''}>${T(s[1],s[2])}</button>`).join('')}</div><button class="close" id="close" aria-label="${T('Закрыть','Close')}">✕</button></div>`+SEC[id]();
  panel.classList.add('on');panel.setAttribute('aria-hidden','false');$$('#dock button').forEach(b=>b.classList.toggle('on',b.dataset.open===id));$('#close').focus({preventScroll:true});track('open_section',{section:id})}
-function close(){cur=null;panel.classList.remove('on');panel.setAttribute('aria-hidden','true');$$('#dock button').forEach(b=>b.classList.toggle('on',b.dataset.open==='terminal'));if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});lastFocus=null}
+function close(){if(document.body.classList.contains('flat'))return;cur=null;panel.classList.remove('on');panel.setAttribute('aria-hidden','true');$$('#dock button').forEach(b=>b.classList.toggle('on',b.dataset.open==='terminal'));if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});lastFocus=null}
 function rerender(){const y=sheet.scrollTop;open(cur);sheet.scrollTop=y}
 document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o){open(o.dataset.open);return}
  const v=e.target.closest('[data-vessel]');if(v){selVessel=v.dataset.vessel;open('vessels');return}
@@ -232,5 +232,6 @@ R3.domElement.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-do
  let s=null;if(p.z<-5)s='clients';else if(p.x<-14&&p.z>6)s='finance';else if(p.x>21&&p.z>9)s='sales';else if(Math.abs(p.z-6.2)<1.3)s='rail';else if(Math.abs(p.z-.4)<2)s='trucks';else if(p.z>9)s='dispatch';if(s)open(s)});
 function size(){R3.setSize(innerWidth,innerHeight);C.aspect=innerWidth/innerHeight;C.fov=innerWidth<700?52:innerWidth<1100?38:30;C.updateProjectionMatrix()}addEventListener('resize',size);size();
 const tmp=new THREE.Vector3(),clock=new THREE.Clock();
+window.DASH3D={enter:id=>open(id||cur||SECS.find(x=>x[0]!=='terminal')[0]),leave:()=>close()};
 (function loop(){const dt=Math.min(clock.getDelta(),.05);if(!cur){tick(dt);O.update();R3.render(S,C);TAGS.forEach(t=>{tmp.copy(t.v).project(C);t.el.style.left=(tmp.x*.5+.5)*innerWidth+'px';t.el.style.top=(-tmp.y*.5+.5)*innerHeight-10+'px'})}requestAnimationFrame(loop)})();
 })();
