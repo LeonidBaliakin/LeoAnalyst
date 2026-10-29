@@ -66,6 +66,7 @@ svg{display:block}
 .main-nav{display:flex;align-items:center;gap:32px;margin-left:auto}
 .main-nav a{font-size:13px;font-weight:630;color:#565862;transition:color .18s}
 .main-nav a:hover{color:#08080a}
+html[lang="en"] .nav-blog{display:none}
 .nav-svc{position:relative}
 .nav-svc summary{list-style:none;cursor:pointer;font-size:13px;font-weight:630;color:#565862;display:flex;align-items:center;gap:6px;transition:color .18s}
 .nav-svc summary::-webkit-details-marker{display:none}
@@ -597,7 +598,7 @@ html{scrollbar-color:#c5c9d2 #f3f4f6;caret-color:#1275ff}
 <header class="site-header">
  <div class="container site-nav">
   <a href="/" class="brand" aria-label="Сайты и Аналитика"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M4 21V14M11 21V7M18 21V12M25 21V4" stroke="#84F0E0" stroke-width="3.6" stroke-linecap="round"/></svg></span><span data-i18n="brandA">Сайты</span><span class="sep">&</span><span data-i18n="brandB">Аналитика</span></a>
-  <nav class="main-nav" id="mainNav" aria-label="Навигация"><details class="nav-svc" id="navSvc"><summary data-i18n="navServices">Услуги</summary><div class="nav-svc-list"><a href="/management-reporting/" data-svc data-i18n="svcReporting">Управленческая отчётность</a><a href="/financial-dashboard/" data-svc data-i18n="svcFinance">Финансы и прибыль</a><a href="/1c-power-bi/" data-svc data-i18n="svcBi">Дашборды из 1С и Power BI</a><a href="/sales-analytics/" data-svc data-i18n="svcSales">Аналитика продаж</a><a href="/logistics-analytics/" data-svc data-i18n="svcLogistics">Аналитика для логистики</a></div></details><a href="/#problems" data-i18n="navProblems">Ваши задачи</a><a href="/#demo" data-i18n="navDemo">Примеры</a><a href="/#calc" data-i18n="navCalc">Стоимость</a></nav>
+  <nav class="main-nav" id="mainNav" aria-label="Навигация"><details class="nav-svc" id="navSvc"><summary data-i18n="navServices">Услуги</summary><div class="nav-svc-list"><a href="/management-reporting/" data-svc data-i18n="svcReporting">Управленческая отчётность</a><a href="/financial-dashboard/" data-svc data-i18n="svcFinance">Финансы и прибыль</a><a href="/1c-power-bi/" data-svc data-i18n="svcBi">Дашборды из 1С и Power BI</a><a href="/sales-analytics/" data-svc data-i18n="svcSales">Аналитика продаж</a><a href="/logistics-analytics/" data-svc data-i18n="svcLogistics">Аналитика для логистики</a></div></details><a href="/#problems" data-i18n="navProblems">Ваши задачи</a><a href="/#demo" data-i18n="navDemo">Примеры</a><a href="/#calc" data-i18n="navCalc">Стоимость</a><a href="/blog/" class="nav-blog">Статьи</a></nav>
   <div class="nav-right"><button class="nav-contact" type="button" data-open-lead><span data-i18n="navCta">Оставить заявку</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><button class="menu-btn" id="menuBtn" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
  </div>
 </header>
@@ -1151,11 +1152,12 @@ async function detectLocaleByIP(){
  finally{clearTimeout(timeout)}
 }
 // Language + currency come only from the IP country (RU/BY -> ru + ₽, otherwise en + $). No manual switch.
-if(window.IS_BOT){state.locale=window.PAGE_LANG;applyDetectedCountry(window.PAGE_LANG==='ru'?'RU':'US')}
+if(window.FORCE_LOCALE){state.locale=window.FORCE_LOCALE;applyDetectedCountry(window.FORCE_LOCALE==='ru'?'RU':'US')}
+else if(window.IS_BOT){state.locale=window.PAGE_LANG;applyDetectedCountry(window.PAGE_LANG==='ru'?'RU':'US')}
 else{try{const g=localStorage.getItem('geoLocale');state.locale=(g==='ru'||g==='en')?g:browserLanguage()}catch{state.locale=browserLanguage()}}
 if(window.PAGE_LANG==='en')$$('a[href^="dashboards/"],a[data-svc]').forEach(a=>a.setAttribute('href',a.getAttribute('href').replace(/\/$/,'/?lang=en')));
 renderAll();
-if(!window.IS_BOT)detectLocaleByIP();
+if(!window.IS_BOT&&!window.FORCE_LOCALE)detectLocaleByIP();
 document.addEventListener('click',e=>{const d=document.getElementById('navSvc');if(d&&d.open&&!d.contains(e.target))d.open=false});
 $$('#leadForm input,#leadForm textarea').forEach(el=>el.classList.add('ym-disable-keys'));
 if(new URLSearchParams(location.search).has('lead'))setTimeout(()=>{try{openLead()}catch{}},300);
