@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2338"/>
+      <stop offset="100%" stop-color="#12182a"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#2a3550" stroke-width="0.6" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="url(#land)"/>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+  <!-- stylized region blobs -->
+  <ellipse cx="640" cy="360" rx="280" ry="210" fill="#24304a" opacity="0.55"/>
+  <ellipse cx="640" cy="360" rx="120" ry="95" fill="#2e3d5c" opacity="0.7"/>
+  <!-- roads -->
+  <g fill="none" stroke="#3d4f72" stroke-width="3" opacity="0.7">
+    <path d="M80 360 H1200"/>
+    <path d="M640 40 V680"/>
+    <path d="M180 120 C400 200 500 280 640 360 C780 440 900 520 1100 600"/>
+    <path d="M200 600 C420 500 520 420 640 360 C760 300 880 220 1080 140"/>
+    <path d="M100 500 C300 480 500 400 640 360 C780 320 960 280 1180 260"/>
+    <path d="M140 200 C360 280 480 320 640 360 C800 400 940 480 1160 560"/>
+  </g>
+  <g fill="none" stroke="#4a5f88" stroke-width="1.5" opacity="0.55">
+    <circle cx="640" cy="360" r="90"/>
+    <circle cx="640" cy="360" r="160"/>
+    <circle cx="640" cy="360" r="230"/>
+  </g>
+  <!-- rivers -->
+  <path d="M420 80 C480 180 520 260 560 340 C600 420 620 500 700 640" fill="none" stroke="#3a6a8a" stroke-width="8" opacity="0.35"/>
+  <path d="M420 80 C480 180 520 260 560 340 C600 420 620 500 700 640" fill="none" stroke="#4a8aaa" stroke-width="3" opacity="0.45"/>
+  <!-- districts labels -->
+  <g fill="#6a7a9a" font-family="system-ui,sans-serif" font-size="14" opacity="0.7">
+    <text x="610" y="350">Москва</text>
+    <text x="200" y="180">Тверь</text>
+    <text x="980" y="200">Владимир</text>
+    <text x="180" y="520">Калуга</text>
+    <text x="980" y="520">Рязань</text>
+    <text x="560" y="120">Сергиев Посад</text>
+    <text x="700" y="620">Подольск</text>
+  </g>
+  <rect x="0" y="0" width="1280" height="720" fill="none" stroke="#2a3550" stroke-width="2"/>
+</svg>
