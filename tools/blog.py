@@ -59,7 +59,7 @@ def base(title, desc, url, ld, content):
         assert re.search(pat, s, flags), pat
         s = re.sub(pat, lambda m: val, s, count=count, flags=flags)
 
-    full = f'{title} | {BRAND}'
+    full = title
     sub(r'<title>[^<]*</title>', f'<title>{e(full)}</title>')
     sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(desc)}">')
     sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{e(full)}">')
@@ -108,7 +108,7 @@ def build_index():
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": BRAND, "item": f"{ORIGIN}/"},
               {"@type": "ListItem", "position": 2, "name": "Статьи", "item": url}]}]
-    return base('Статьи о цифрах в бизнесе: прибыль, деньги, продажи, отчёты', 'Статьи простым языком о прибыли, деньгах, продажах, управленческой отчётности и дашбордах для владельцев и руководителей бизнеса.', url, ld, content)
+    return base('Статьи о цифрах в бизнесе: прибыль, продажи, отчёты', 'Статьи простым языком о прибыли, деньгах, продажах, управленческой отчётности и дашбордах для владельцев и руководителей бизнеса.', url, ld, content)
 
 
 def build_post(p):
@@ -136,7 +136,7 @@ def build_post(p):
               {"@type": "ListItem", "position": 1, "name": BRAND, "item": f"{ORIGIN}/"},
               {"@type": "ListItem", "position": 2, "name": "Статьи", "item": f"{ORIGIN}/blog/"},
               {"@type": "ListItem", "position": 3, "name": p['title'], "item": url}]}]
-    return base(p['title'], p['desc'], url, ld, content)
+    return base(p.get('seo_title', p['title']), p['desc'], url, ld, content)
 
 
 def main():
