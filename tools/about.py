@@ -46,6 +46,7 @@ def main():
 <ul>
  <li>Почта: <a href="mailto:analystleogroup@gmail.com">analystleogroup@gmail.com</a></li>
  <li>Сообщество ВКонтакте: <a href="https://vk.ru/analyticsbuild" rel="me noopener" target="_blank">vk.ru/analyticsbuild</a></li>
+ <li>Канал на Дзене: <a href="https://dzen.ru/id/6ae34ff6e289c924db117c66" rel="me noopener" target="_blank">статьи об аналитике для бизнеса</a></li>
  <li>Яндекс Карты: <a href="https://yandex.ru/maps/org/66144833648/" rel="noopener" target="_blank">карточка «Сайты и Аналитика»</a></li>
 </ul>
    </div>
@@ -57,7 +58,7 @@ def main():
               "url": url, "email": "analystleogroup@gmail.com", "worksFor": {"@id": f"{ORIGIN}/#service", "@type": "ProfessionalService", "name": BRAND},
               "address": {"@type": "PostalAddress", "addressLocality": "Санкт-Петербург", "addressCountry": "RU"},
               "knowsAbout": ["Бизнес-аналитика", "Продуктовая аналитика", "Дашборды", "Power BI", "Яндекс DataLens", "SQL", "PostgreSQL", "ClickHouse", "A/B-тесты", "Логистика"],
-              "sameAs": ["https://vk.ru/analyticsbuild", "https://yandex.ru/maps/org/66144833648/"]}
+              "sameAs": ["https://vk.ru/analyticsbuild", "https://dzen.ru/id/6ae34ff6e289c924db117c66", "https://yandex.ru/maps/org/66144833648/"]}
     ld = [{"@context": "https://schema.org", "@type": "ProfilePage", "url": url, "inLanguage": "ru", "mainEntity": {"@id": f"{ORIGIN}/about/#person"}}, person,
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": BRAND, "item": f"{ORIGIN}/"},
