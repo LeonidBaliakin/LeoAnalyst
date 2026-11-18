@@ -369,4 +369,64 @@ MORE = {
    ],
   },
  },
+ 'dashboard-stomatologii': {
+  'ru': {
+   'metrics_h': '7 цифр, которые показывает дашборд клиники',
+   'metrics': [
+    ('Доходимость до лечения', 'Какая доля пациентов после консультации и плана лечения возвращается лечиться. Обычно здесь главная потеря выручки клиники: план составили, а пациент ушёл.'),
+    ('Загрузка врачей и кресел', 'Сколько часов каждый врач и каждое кресло работали из доступных. Видно пустые окна, перегруженные дни и время, когда стоит перераспределить смены.'),
+    ('Неявки и отмены', 'Сколько записей сорвалось за неделю и месяц и сколько это стоило в рублях. Помогает настроить напоминания и предоплату на дорогие приёмы.'),
+    ('Выручка по направлениям', 'Терапия, гигиена, хирургия, имплантация, ортопедия, ортодонтия, детский приём - что приносит деньги, а что занимает кресло и почти ничего не даёт.'),
+    ('Средний чек по врачам', 'Средний чек и выручка каждого врача, доля комплексного лечения. Понятно, кому нужна помощь, а чей опыт стоит передать остальным.'),
+    ('Повторные визиты и гигиена', 'Сколько пациентов возвращаются на профгигиену через 6 месяцев и кому пора напомнить о визите.'),
+    ('План-факт и каналы', 'Выручка с начала месяца против плана, прогноз, и откуда приходят пациенты: Яндекс Карты, звонки, рекомендации, реклама.'),
+   ],
+   'get_h': 'Что даёт аналитика стоматологии',
+   'get': [
+    ('Видно, где клиника теряет деньги', 'Неявки, пациенты без лечения после консультации, пустые часы врачей - всё в рублях. Сразу понятно, что исправлять первым.'),
+    ('Главврач и владелец видят одно и то же', 'Одни цифры для всех вместо отчётов администраторов, бухгалтера и CRM, которые не сходятся между собой.'),
+    ('Реклама оценивается по выручке', 'Видно, сколько пациентов и денег принёс каждый канал за полгода, а не только число звонков.'),
+    ('Несколько филиалов на одном экране', 'Сравнение клиник по загрузке, среднему чеку и доходимости до лечения.'),
+   ],
+   'price_h': 'Сколько стоит дашборд для стоматологии',
+   'price': [
+    'Дашборд для клиники под ключ - от 65 000 ₽. Для клиники на 2-6 кресел обычно хватает 4-6 экранов: врачи, пациенты, направления, деньги, план.',
+    'Срок - 2-5 недель. Бесплатно считаем доходимость до лечения и потери от неявок по выгрузке за 3 месяца - так вы увидите пользу до оплаты.',
+   ],
+   'faq': [
+    ('С какими медицинскими программами работаете?', 'IDENT, Dental4Windows, 1С:Медицина, Medesk, Инфоклиника и другие - если есть выгрузка в Excel или API. Плюс касса, банк и таблицы расходов.'),
+    ('А как быть с врачебной тайной и персональными данными?', 'Для аналитики не нужны диагнозы и ФИО: работаем с обезличенными записями - дата, врач, услуга, сумма. Договор и NDA, данные можно хранить на вашем сервере.'),
+    ('У нас небольшая клиника. Есть смысл?', 'Да: в небольшой клинике каждое пустое окно и каждая неявка заметны в выручке. Дашборд для 2-3 кресел делается быстрее и стоит дешевле.'),
+   ],
+  },
+  'en': {
+   'metrics_h': '7 numbers a clinic dashboard shows',
+   'metrics': [
+    ('Treatment acceptance', 'The share of patients who come back for treatment after a consultation and plan - usually the biggest revenue leak.'),
+    ('Dentist and chair utilization', 'Booked vs available hours for each dentist and chair.'),
+    ('No-shows and cancellations', 'How many appointments fell through and what they cost.'),
+    ('Revenue by treatment line', 'General, hygiene, surgery, implants, prosthodontics, orthodontics, paediatric.'),
+    ('Average ticket by dentist', 'Ticket and revenue per dentist, share of complex treatment.'),
+    ('Return visits', 'Patients who return for hygiene after 6 months and who is due a reminder.'),
+    ('Plan and channels', 'Month-to-date revenue vs target, forecast and patient sources.'),
+   ],
+   'get_h': 'What clinic analytics gives you',
+   'get': [
+    ('See where money leaks', 'No-shows, untreated patients and empty dentist hours - all in money.'),
+    ('One set of numbers', 'Owner and chief dentist see the same figures.'),
+    ('Ads judged by revenue', 'Patients and revenue per channel over 6 months.'),
+    ('All branches on one screen', 'Compare clinics by utilization, ticket and treatment acceptance.'),
+   ],
+   'price_h': 'How much it costs',
+   'price': [
+    'A clinic dashboard starts at $1,300. A 2-6 chair clinic usually needs 4-6 screens.',
+    'Timeline: 2-5 weeks. We calculate treatment acceptance and no-show losses for free from a 3-month export.',
+   ],
+   'faq': [
+    ('Which practice software do you support?', 'Any system with an Excel export or API, plus POS, bank and expense sheets.'),
+    ('What about patient confidentiality?', 'Analytics doesn’t need names or diagnoses: we work with anonymised records - date, dentist, treatment, amount. NDA by default.'),
+    ('We are a small clinic. Worth it?', 'Yes - in a small clinic every empty slot and no-show shows up in revenue.'),
+   ],
+  },
+ },
 }

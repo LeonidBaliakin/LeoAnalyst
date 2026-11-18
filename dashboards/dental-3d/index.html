@@ -1,0 +1,209 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<script src="../_shared/geo-locale.js?v=4"></script>
+<link rel="preload" href="../logistics/three.min.js?v=202610241410" as="script">
+<title>3D-дашборд стоматологии: кабинеты, врачи, пациенты - пример</title>
+<meta name="description" content="3D-модель стоматологической клиники: нажмите на зону - кабинеты и врачи, ресепшн и пациенты, рентген, финансы и материалы.">
+<link rel="canonical" href="https://analyticsbuild.com/dashboards/dental-3d/">
+<link rel="alternate" hreflang="ru" href="https://analyticsbuild.com/dashboards/dental-3d/">
+<link rel="alternate" hreflang="en" href="https://analyticsbuild.com/dashboards/dental-3d/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://analyticsbuild.com/dashboards/dental-3d/?lang=en">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Сайты и Аналитика">
+<meta property="og:title" content="3D-дашборд стоматологии: кабинеты, врачи, пациенты - пример">
+<meta property="og:description" content="3D-модель стоматологической клиники: нажмите на зону - кабинеты и врачи, ресепшн и пациенты, рентген, финансы и материалы.">
+<meta property="og:image" content="https://analyticsbuild.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/json" id="seo-i18n">{"ru": {"title": "3D-дашборд стоматологии: кабинеты, врачи, пациенты - пример", "description": "3D-модель стоматологической клиники: нажмите на зону - кабинеты и врачи, ресепшн и пациенты, рентген, финансы и материалы."}, "en": {"title": "3D Dental Clinic Dashboard Example", "description": "3D dental clinic model: click a zone to see treatment rooms and dentists, front desk and patients, X-ray, finance and supplies."}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "3D-дашборд стоматологии: кабинеты, врачи, пациенты - пример", "description": "3D-модель стоматологической клиники: нажмите на зону - кабинеты и врачи, ресепшн и пациенты, рентген, финансы и материалы.", "url": "https://analyticsbuild.com/dashboards/dental-3d/", "inLanguage": "ru", "isPartOf": {"@type": "WebSite", "name": "Сайты и Аналитика", "url": "https://analyticsbuild.com/"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Сайты и Аналитика", "item": "https://analyticsbuild.com/"}, {"@type": "ListItem", "position": 2, "name": "3D-дашборд стоматологии", "item": "https://analyticsbuild.com/dashboards/dental-3d/"}]}}</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--paper:#f2f7fb;--surface:#fff;--line:#dde8f1;--ink:#14263a;--muted:#6f8396;--fern:#1565c0;--fern-2:#13a3b5;--fern-soft:#e3f1fb;--peach:#6fb2ee;--rose:#e0607a;--good:#13a37a;--sky:#3f86d9}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--paper);font-family:Onest,system-ui,sans-serif;color:var(--ink)}
+#world{position:fixed;inset:0}
+.top{position:fixed;left:18px;right:18px;top:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 16px 10px 10px;box-shadow:0 8px 24px -14px rgba(21,101,192,.22)}
+.logo{width:36px;height:36px;border-radius:50%;background:var(--fern);display:grid;place-items:center;color:#fff;font-weight:700}
+.brand b{display:block;font-size:17px}.brand span{font-size:12px;color:var(--muted)}
+.kpis{display:flex;gap:8px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 14px;min-width:112px;box-shadow:0 8px 24px -14px rgba(21,101,192,.22)}
+.kpi small{display:block;font-size:11.5px;color:var(--muted)}.kpi b{font-size:19px;letter-spacing:-.02em}.kpi .up{color:var(--good);font-size:12px;font-weight:600;margin-left:4px}
+.tag{cursor:pointer;position:fixed;z-index:4;transform:translate(-50%,-100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:9px 12px 10px;box-shadow:0 14px 34px -16px rgba(20,50,80,.3);min-width:120px;max-width:210px}
+.tag:after{content:"";position:absolute;left:50%;bottom:-12px;width:1px;height:12px;background:#bcd0e0}
+.tag i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.tag small{font-size:11.5px;color:var(--muted);font-weight:600}.tag b{display:block;font-size:17px;letter-spacing:-.02em;margin:2px 0 1px}
+.tag span{display:none;font-size:12px;color:var(--muted);line-height:1.35}.tag span.warn{display:block}.tag em{display:block;font-style:normal;font-size:12px;font-weight:650;color:var(--fern);margin-top:5px}
+.tag .warn{color:var(--rose);font-weight:600}
+.pin{position:fixed;z-index:3;transform:translate(-50%,-100%);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 9px 4px 5px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:6px;box-shadow:0 8px 18px -10px rgba(20,50,80,.3);white-space:nowrap}
+.pin u{text-decoration:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:10px}
+.dock{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:3px;padding:5px;background:var(--surface);border:1px solid var(--line);border-radius:999px;box-shadow:0 12px 30px -16px rgba(20,50,80,.3);z-index:5}
+.dock button{border:0;background:transparent;padding:9px 16px;border-radius:999px;font:inherit;font-size:13.5px;font-weight:550;color:var(--muted)}
+.dock button.on{background:var(--ink);color:#fff}
+.hint{position:fixed;left:18px;bottom:66px;font-size:12px;color:var(--muted);z-index:5;max-width:190px}
+@media(max-width:700px){.kpis .kpi:nth-child(3){display:none}.kpi{min-width:0;padding:7px 10px}.kpi b{font-size:16px}.brand{padding:8px 12px 8px 8px}.brand span{display:none}.top{flex-direction:column}
+.tag{min-width:0;max-width:150px;padding:7px 9px}.tag b{font-size:14px}.tag span{display:none}.dock{left:12px;right:12px;transform:none;overflow-x:auto}.dock button{padding:8px 12px;white-space:nowrap}.hint{display:none}.pin{display:none}}
+</style></head><body>
+<div id="world"></div>
+<div class="top" id="top"></div>
+<div id="tags"></div>
+<div class="hint" id="hint"></div>
+<nav class="dock" id="dock"></nav>
+<script src="../logistics/three.min.js?v=202610241410"></script>
+<script src="../logistics/orbit.js?v=202610241410"></script>
+<script>
+const W=document.getElementById('world');const mobile=innerWidth<700;
+const R=new THREE.WebGLRenderer({antialias:true});R.setPixelRatio(Math.min(2,devicePixelRatio));R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputColorSpace=THREE.SRGBColorSpace;W.appendChild(R.domElement);
+const S=new THREE.Scene();S.background=new THREE.Color('#f2f7fb');
+const C=new THREE.PerspectiveCamera(30,1,.1,500);C.position.set(30,30,36);
+const O=new OrbitControls(C,R.domElement);O.target.set(0,0,0);O.enableDamping=true;O.maxPolarAngle=1.25;O.minDistance=25;O.maxDistance=80;
+S.add(new THREE.HemisphereLight('#ffffff','#dbe7f0',1.6));
+const sun=new THREE.DirectionalLight('#fffaf4',2.2);sun.position.set(18,32,14);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-25,right:25,top:25,bottom:-25});sun.shadow.bias=-.0005;S.add(sun);
+const M=c=>new THREE.MeshStandardMaterial({color:c,roughness:.75});
+function box(w,h,d,c,x,y,z,p=S){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),typeof c==='string'?M(c):c);m.position.set(x,y+h/2,z);m.castShadow=m.receiveShadow=true;p.add(m);return m}
+function cyl(r,h,c,x,y,z,seg=24){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,seg),M(c));m.position.set(x,y+h/2,z);m.castShadow=m.receiveShadow=true;S.add(m);return m}
+const BLUE='#1565c0',TEAL='#13a3b5',LIGHT='#6fb2ee',WALL='#dbe6ee',WH=4.2;
+// base + floors
+box(32,.6,22,'#e4edf3',0,-.6,0);
+box(31,.05,21,'#fbfdfe',0,0,0);
+box(25,.06,8,'#eef6fb',-2.6,0,-6);        // treatment rooms
+box(8.6,.06,7.6,'#e6f6f8',-10.8,0,5.6);    // kids room
+box(6.2,.06,7.2,'#e8eef3',12.2,0,-6.8);    // x-ray
+box(6.2,.06,6.6,'#eef3f8',12.2,0,0.6);     // office
+box(4.2,.06,5,'#e3f1f4',13.2,0,7.8);       // sterilization
+// outer walls
+box(31,WH,.4,WALL,0,0,-10.3);box(.4,WH,21,WALL,-15.3,0,0);
+// treatment room partitions (4 rooms along back wall)
+const roomX=[-12,-6,0,6];
+[-9,-3,3,9.1].forEach(x=>box(.25,2.6,8,WALL,x,0,-6.2));
+roomX.forEach(x=>{box(1.6,2.6,.25,WALL,x-2.2,0,-2.2);box(1.6,2.6,.25,WALL,x+2.2,0,-2.2);box(2.8,.5,.25,WALL,x,2.1,-2.2)});
+// kids room walls
+box(8.6,2.6,.25,WALL,-10.8,0,1.8);box(.25,2.6,4.6,WALL,-6.5,0,7.6);
+// x-ray (lead-lined: thicker walls), office, sterilization
+box(.4,2.6,4.4,'#c9d6e0',9.1,0,-8.1);box(6.2,2.6,.4,'#c9d6e0',12.2,0,-3.2);box(.4,.5,2.2,'#c9d6e0',9.1,2.1,-4.8);
+const door=new THREE.Mesh(new THREE.BoxGeometry(.1,2.1,1.6),M(TEAL));door.geometry.translate(0,1.05,.8);door.position.set(9.15,0,-5.9);door.rotation.y=Math.PI*0.6;door.castShadow=true;S.add(door);
+box(.3,2.6,4,WALL,9.1,0,-.6);box(.3,1,2.4,WALL,9.1,0,3);box(6.2,2.6,.3,WALL,12.2,0,4.1);
+box(.3,2.6,5,WALL,11.1,0,7.8);
+// warning lamp over x-ray door
+box(.5,.25,.15,'#e0607a',9.35,2.7,-4.8);
+// DENTAL CHAIR
+function chair(x,z,acc){
+ cyl(.45,.12,'#cfd9e2',x,0,z);cyl(.18,.55,'#9fb1c1',x,.12,z);
+ box(1.1,.25,1.5,acc,x,.67,z+.25);                       // seat
+ const back=box(1.1,.2,1.6,acc,x,0,0);back.position.set(x,1.25,z-1.15);back.rotation.x=-.55; // backrest
+ box(.6,.15,.45,acc,x,1.55,z-2.05);                        // headrest
+ box(1,.2,.9,acc,x,.55,z+1.35);box(.9,.1,.4,'#9fb1c1',x,.3,z+1.75); // leg rest
+ // lamp arm
+ cyl(.07,2.8,'#c3cfd9',x+1.1,0,z-1.9);box(.08,.08,1.4,'#c3cfd9',x+1.1,2.8,z-1.3);
+ box(.7,.2,.4,'#ffffff',x+.7,2.55,z-.7);box(.5,.03,.25,'#fff7c2',x+.7,2.54,z-.7);
+ // instrument tray + spittoon unit
+ cyl(.06,1.15,'#c3cfd9',x-1.1,0,z+.2);box(.9,.08,.6,'#ffffff',x-1.1,1.15,z+.2);box(.5,.05,.3,'#cfe6f5',x-1.1,1.23,z+.2);
+ cyl(.18,1,'#ffffff',x+.95,0,z-.3);cyl(.22,.12,'#cfe6f5',x+.95,1,z-.3,18);
+ // cabinet + monitor on wall
+ box(2.2,.9,.6,'#ffffff',x,0,-9.75);box(2.3,.06,.7,'#eaf2f8',x,.9,-9.75);
+ box(1,.65,.06,'#14263a',x+1.6,1.6,-10);box(.9,.55,.02,'#3f86d9',x+1.6,1.65,-9.96);
+}
+const chairCols=[BLUE,TEAL,BLUE,TEAL];
+roomX.forEach((x,i)=>chair(x,-5.8,chairCols[i]));
+chair(-11.6,5.2,LIGHT); // kids
+box(1.6,.6,1.2,'#ffd27a',-8.2,0,6.6);box(.8,.8,.8,'#7fd0c4',-8.2,.6,6.6); // toys
+// RECEPTION
+box(5.2,1.3,1.4,BLUE,4.6,0,5.6);box(5.4,.12,1.7,'#ffffff',4.6,1.3,5.6);
+box(.9,.5,.7,'#14263a',5.8,1.42,5.5);box(.7,.08,.5,'#f2f7fb',5.8,1.92,5.55);box(.6,.4,.5,TEAL,3.4,1.42,5.5);
+// waiting sofa
+box(4.4,.7,1.6,'#9cc9ee',-1.6,0,8.6);box(4.4,1,.4,'#7fb6e4',-1.6,.7,9.3);box(.5,.6,1.6,'#7fb6e4',-3.6,.7,8.6);box(.5,.6,1.6,'#7fb6e4',.4,.7,8.6);
+cyl(.9,.5,'#ffffff',2,0,8.8);
+function plant(x,z,s=1){cyl(.35*s,.7*s,'#ffffff',x,0,z);const f=new THREE.Mesh(new THREE.SphereGeometry(.75*s,12,10),M('#7fae86'));f.position.set(x,.7*s+.65*s,z);f.castShadow=true;S.add(f)}
+plant(-4.6,9.4);plant(9.6,9.3,1.1);plant(14.6,3.4,.9);
+box(2.6,.05,1.4,BLUE,6.6,.06,9.9); // entrance mat
+// X-RAY / CT
+cyl(.6,.15,'#cfd9e2',12.2,0,-7.6);cyl(.15,2.2,'#e9eef2',12.2,.15,-7.6);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(.75,.22,14,30,Math.PI*1.4),M('#ffffff'));ring.position.set(12.2,2.15,-7.6);ring.rotation.x=Math.PI/2;ring.rotation.z=-Math.PI*0.2;ring.castShadow=true;S.add(ring);
+box(1,.18,.5,TEAL,12.2,1.55,-6.9);
+box(1.6,1,.8,'#ffffff',14.4,0,-4.2);box(.9,.6,.06,'#14263a',14.4,1.05,-4.4);box(.8,.5,.02,TEAL,14.4,1.1,-4.36);
+// MANAGER OFFICE
+box(3.2,1.1,1.5,'#ffffff',12.6,0,0.2);box(3.4,.1,1.7,BLUE,12.6,1.1,0.2);
+box(1,.06,.7,'#14263a',12.6,1.2,0);box(1,.65,.06,'#14263a',12.6,1.25,.35);box(.9,.55,.02,LIGHT,12.6,1.3,.31);
+box(1.1,.5,1.1,'#14263a',12.6,0,-1.3);box(1.1,1.1,.25,'#14263a',12.6,.5,-1.85);
+box(.12,1.6,2.4,TEAL,15,1,2.2);
+// STERILIZATION / SUPPLIES
+box(2.6,1,.8,'#ffffff',13.4,0,9.4);box(.8,.6,.6,'#c3cfd9',12.8,1,9.4);box(.6,.5,.5,'#c3cfd9',13.9,1,9.4);
+for(let lv=0;lv<3;lv++){box(.6,.06,2.6,'#b8c8d4',14.9,lv*.8,7.4);for(let j=0;j<3;j++)box(.5,.45,.6,[BLUE,TEAL,'#ffffff',LIGHT][(j+lv)%4],14.9,lv*.8+.06,6.6+j*.8)}
+// PEOPLE
+const SKIN=['#f3d2bd','#e8bfa0','#d9a582','#f6dccb'],HAIR=['#3a2a25','#7a4a32','#c89a5a','#2a1f2d','#a8573d'];
+function person(o){const g=new THREE.Group();const sk=o.skin||SKIN[0],sh=o.shirt,pa=o.pants||'#33475c',hr=o.hair||HAIR[0];
+ const part=(w,h,d,c,x,y,z)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(c));m.position.set(x,y,z);m.castShadow=true;g.add(m);return m};
+ let legs=[];
+ if(o.pose==='sit'){legs.push(part(.26,.24,.75,pa,-.16,.12,.3),part(.26,.24,.75,pa,.16,.12,.3));part(.26,.55,.24,pa,-.16,-.15,.62);part(.26,.55,.24,pa,.16,-.15,.62);g.userData.base=0}
+ else{legs.push(part(.26,.95,.28,pa,-.16,.475,0),part(.26,.95,.28,pa,.16,.475,0));g.userData.base=.95}
+ const b=g.userData.base;
+ const body=new THREE.Mesh(new THREE.CylinderGeometry(.3,.36,.95,14),M(sh));body.position.y=b+.47;body.castShadow=true;g.add(body);
+ const arms=[part(.18,.75,.2,sh,-.43,b+.5,0),part(.18,.75,.2,sh,.43,b+.5,0)];
+ if(o.arms==='front'){arms.forEach(a=>{a.rotation.x=-1.1;a.position.z=.3;a.position.y=b+.62})}
+ const head=new THREE.Mesh(new THREE.SphereGeometry(.27,16,12),M(sk));head.position.y=b+1.2;head.castShadow=true;g.add(head);
+ const hairM=new THREE.Mesh(new THREE.SphereGeometry(.29,16,12,0,Math.PI*2,0,Math.PI*.55),M(o.cap||hr));hairM.position.y=b+1.24;hairM.rotation.x=-.25;g.add(hairM);
+ if(o.long&&!o.cap){part(.5,.5,.14,hr,0,b+1.02,-.2)}
+ if(o.mask){part(.34,.16,.06,'#9fd8e0',0,b+1.13,.25)}
+ g.position.set(o.x,o.y||0,o.z);g.rotation.y=o.rot||0;S.add(g);g.userData.legs=legs;return g}
+const pinsAt=[];
+// patients reclined in chairs, dentists beside, assistants opposite
+const SCRUB=[BLUE,TEAL,'#2f6db5','#0e8fa3'];
+roomX.forEach((x,i)=>{const p=person({x,y:0,z:0,shirt:['#f0a07e','#ffffff','#7fae86','#d9a0c8'][i],skin:SKIN[i],hair:HAIR[i+1],long:i%2===0});
+ p.rotation.set(-1.2,0,0);p.position.set(x,.95,-4.6);
+ person({x:x-.95,z:-6.6,rot:Math.PI*.55,shirt:SCRUB[i],pants:SCRUB[i],skin:SKIN[(i+2)%4],cap:'#ffffff',mask:true,arms:'front'});
+ if(i<2)person({x:x+1.15,z:-4.3,rot:-Math.PI*.6,shirt:'#9cd3dc',pants:'#9cd3dc',skin:SKIN[(i+1)%4],cap:'#9cd3dc',mask:true,arms:'front'});
+ pinsAt.push(new THREE.Vector3(x-.95,3.4,-6.6))});
+// kids room
+const kid=person({x:-11.6,z:0,shirt:'#ffd27a',skin:SKIN[3],hair:HAIR[2]});kid.scale.setScalar(.7);kid.rotation.set(-1.2,0,0);kid.position.set(-11.6,.95,6.2);
+person({x:-12.55,z:4.4,rot:Math.PI*.55,shirt:LIGHT,pants:LIGHT,skin:SKIN[1],cap:'#ffffff',mask:true,long:true,arms:'front'});pinsAt.push(new THREE.Vector3(-12.55,3.4,4.4));
+person({x:-9.2,z:4.2,rot:-Math.PI*.4,shirt:'#d9a0c8',skin:SKIN[0],hair:HAIR[1],long:true}); // parent
+// x-ray tech + patient
+person({x:12.2,z:-7.6,rot:0,shirt:'#ffffff',skin:SKIN[2],hair:HAIR[3]});
+person({x:14.4,z:-3.3,rot:Math.PI,shirt:TEAL,pants:TEAL,skin:SKIN[1],hair:HAIR[0],arms:'front'});
+// reception admin, waiting patients, manager, sterilization nurse
+person({x:4.6,z:4.5,rot:0,shirt:TEAL,skin:SKIN[2],hair:HAIR[0],long:true,arms:'front'});
+person({pose:'sit',x:-2.5,y:.7,z:8.3,rot:Math.PI,shirt:'#7fae86',skin:SKIN[3],hair:HAIR[1]});
+person({pose:'sit',x:-.6,y:.7,z:8.3,rot:Math.PI,shirt:'#f0a07e',skin:SKIN[0],hair:HAIR[3],long:true});
+person({pose:'sit',x:12.6,y:.5,z:-1.2,rot:0,shirt:'#14263a',skin:SKIN[1],hair:HAIR[0],arms:'front'});
+person({x:13.4,z:8.5,rot:0,shirt:'#9cd3dc',pants:'#9cd3dc',skin:SKIN[0],cap:'#9cd3dc',arms:'front'});
+// walkers
+const walkers=[
+ {g:person({x:0,z:0,shirt:'#e0607a',skin:SKIN[2],hair:HAIR[2],long:true}),path:[[6.6,10.2],[6.6,7.4],[3,7.2],[1,0],[-3,-.6],[-1,2.5]],sp:1.6,t:0},
+ {g:person({x:0,z:0,shirt:'#6fb2ee',skin:SKIN[0],hair:HAIR[1]}),path:[[-2,6.4],[-5,3.6],[-4,0],[3,-.4],[7.6,1.2],[5,3.6]],sp:1.4,t:7},
+ {g:person({x:0,z:0,shirt:BLUE,pants:BLUE,skin:SKIN[3],cap:'#ffffff'}),path:[[7.6,-1],[8.2,2.6],[7.6,-4.6],[2,-.8],[-6,-.6],[1,-1.2]],sp:1.2,t:3}];
+walkers.forEach(w=>{const pts=w.path.map(([x,z])=>new THREE.Vector3(x,0,z));w.curve=new THREE.CatmullRomCurve3(pts,true,'centripetal');w.len=w.curve.getLength()});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clock=new THREE.Clock();
+function walk(dt){walkers.forEach(w=>{if(!reduce)w.t+=dt;const u=((w.t*w.sp)/w.len)%1;const p=w.curve.getPointAt(u),q=w.curve.getPointAt((u+.002)%1);
+ w.g.position.set(p.x,0,p.z);w.g.rotation.y=Math.atan2(q.x-p.x,q.z-p.z);const s=reduce?0:Math.sin(w.t*w.sp*5);
+ w.g.userData.legs[0].rotation.x=s*.45;w.g.userData.legs[1].rotation.x=-s*.45;w.g.position.y=Math.abs(s)*.05})}
+// i18n
+const RU=document.documentElement.lang!=='en';const L=(r,e)=>RU?r:e;
+const money=(rub,unit)=>{if(RU)return unit;const u=rub/92;return u>=1e6?'$'+(u/1e6).toFixed(2)+'M':'$'+(u/1e3).toFixed(1)+'K'};
+const FULL='../dental/';
+const TOOTH='<svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 5.5C10.3 4 8.6 3.4 7 3.6 4.4 4 3 6.2 3.3 9c.2 1.8.9 3.3 1.4 5 .5 1.8.7 3.6 1.3 5.3.3.9.9 1.4 1.6 1.3.8-.1 1.2-.8 1.4-1.7l.8-3.6c.2-.8.7-1.2 1.2-1.2h2c.5 0 1 .4 1.2 1.2l.8 3.6c.2.9.6 1.6 1.4 1.7.7.1 1.3-.4 1.6-1.3.6-1.7.8-3.5 1.3-5.3.5-1.7 1.2-3.2 1.4-5 .3-2.8-1.1-5-3.7-5.4-1.6-.2-3.3.4-5 1.9z"/></svg>';
+document.getElementById('top').innerHTML=`<div class="brand"><div class="logo">${TOOTH}</div><div><b>${L('Улыбка','Smile')}</b><span>${L('стоматологическая клиника · демо','dental clinic · demo')}</span></div></div>
+<div class="kpis"><div class="kpi"><small>${L('Выручка, 30 дней','Revenue, 30 days')}</small><b>${money(6270000,'6,3 млн ₽')}</b><span class="up">↑${L("4,1","4.1")}%</span></div><div class="kpi"><small>${L('Доходимость до лечения','Treatment acceptance')}</small><b>56%</b></div><div class="kpi"><small>${L('Загрузка кресел','Chair utilisation')}</small><b>81%</b></div></div>`;
+document.getElementById('hint').textContent=L('Поворачивайте мышью · нажмите на зону, чтобы открыть раздел','Drag to rotate · click a zone to open its section');
+const DOCK=[['Клиника','Clinic'],['Услуги','Services'],['Записи','Bookings'],['Врачи','Dentists'],['Пациенты','Patients'],['Отчёты','Reports']];
+document.getElementById('dock').innerHTML=DOCK.map((d,i)=>`<button${i?'':' class="on"'}>${L(d[0],d[1])}</button>`).join('');
+document.querySelectorAll('#dock button').forEach((b,i)=>{if(i)b.onclick=()=>location.href=FULL});
+const TAGS=[
+ {p:[12.4,3.2,1.2],c:'#13a37a',h:L('Финансы','Finance'),b:L('6,3 млн ₽ за 30 дней',money(6270000)+' in 30 days'),e:L('Открыть →','Open →')},
+ {p:[4.6,3.6,5.6],c:BLUE,h:L('Пациенты','Patients'),b:L('48% вернулись за 30 дней','48% return in 30 days'),w:L('9,5 млн ₽ в неначатых планах',money(9500000)+' in unstarted plans'),e:L('Открыть →','Open →')},
+ {p:[-3,5.8,-6.5],c:TEAL,h:L('Врачи и кабинеты','Dentists & rooms'),b:L('7 врачей · 81%','7 dentists · 81%'),e:L('Открыть →','Open →')},
+ {p:[12.2,5,-7],c:'#3f86d9',h:L('Рентген и КТ','X-ray & CT'),b:L('214 снимков / мес','214 scans / mo'),e:L('Открыть →','Open →')},
+ {p:[13.6,3,8.4],c:'#6fb2ee',h:L('Материалы','Supplies'),b:money(540000,'540 тыс. ₽')+L(' / мес',' / mo'),w:L('импланты: остаток на 9 дней','implants: 9 days left'),e:L('Открыть →','Open →')},
+];
+const PINS_RU=[['Ковалёва','94%','#13a37a'],['Белов','71%','#e0607a'],['Орлов','88%','#13a37a'],['Никитин','79%','#1565c0'],['Морозова','86%','#13a37a']];
+const PINS=RU?PINS_RU:PINS_RU.map((p,i)=>[['Collins','Hart','Turner','Parker','Russell'][i],p[1],p[2]]);
+const T=document.getElementById('tags');
+TAGS.forEach(t=>{t.el=document.createElement('div');t.el.className='tag';t.el.innerHTML=`<small><i style="background:${t.c}"></i>${t.h}</small><b>${t.b}</b><span>${t.s||''}</span>${t.w?`<span class="warn">${t.w}</span>`:''}<em>${t.e}</em>`;t.el.onclick=()=>location.href=FULL;T.appendChild(t.el);t.v=new THREE.Vector3(...t.p)});
+const pins=pinsAt.map((v,i)=>{const el=document.createElement('div');el.className='pin';el.innerHTML=`<u style="background:${PINS[i][2]}">${PINS[i][1].replace('%','')}</u>${PINS[i][0]}`;T.appendChild(el);return {el,v}});
+function size(){const w=innerWidth,h=innerHeight;R.setSize(w,h);C.aspect=w/h;C.fov=w<700?48:30;C.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+const tmp=new THREE.Vector3();
+function place(o){tmp.copy(o.v).project(C);o.el.style.left=(tmp.x*.5+.5)*innerWidth+'px';o.el.style.top=(-tmp.y*.5+.5)*innerHeight-10+'px'}
+(function loop(){walk(Math.min(clock.getDelta(),.05));O.update();R.render(S,C);TAGS.forEach(place);pins.forEach(place);requestAnimationFrame(loop)})();
+</script><script>window.VIEW_TOGGLE={page:'3d',other:'../dental/'};</script>
+<script src="../_shared/view-toggle.js?v=1"></script>
+<!--seo-about--><style id="seo-about-css">.seo-about{position:fixed;left:16px;bottom:16px;z-index:41;max-width:min(440px,calc(100vw - 32px));font:400 14px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;color:#1d1f25}.seo-about>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid rgba(20,24,40,.12);box-shadow:0 12px 30px -14px rgba(20,24,40,.45);font-weight:650;font-size:12.5px;color:#30333b;backdrop-filter:blur(10px)}.seo-about>summary::-webkit-details-marker{display:none}.seo-about>summary::before{content:"i";display:grid;place-items:center;width:16px;height:16px;border-radius:50%;background:#17191e;color:#fff;font:700 10.5px/1 Georgia,serif}.seo-about[open]>summary{margin-bottom:8px}.seo-about .sa-box{background:#fff;border:1px solid rgba(20,24,40,.1);border-radius:18px;padding:18px 20px;box-shadow:0 24px 50px -20px rgba(20,24,40,.5);max-height:min(62vh,520px);overflow:auto}.seo-about h1{font-size:19px;line-height:1.25;margin:0 0 10px;letter-spacing:-.01em}.seo-about p{margin:0 0 10px;color:#41444d}.seo-about ul{margin:0 0 10px;padding-left:18px;color:#41444d}.seo-about li{margin:0 0 4px}.seo-about .sa-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.seo-about .sa-links a{display:inline-block;padding:7px 12px;border-radius:999px;background:#17191e;color:#fff;text-decoration:none;font-weight:600;font-size:13px}.seo-about .sa-links a+a{background:#eef0f3;color:#17191e}html[lang="en"] .seo-about [lang="ru"],html:not([lang="en"]) .seo-about [lang="en"]{display:none}@media(max-width:700px){.seo-about{left:10px;bottom:74px}}</style><details class="seo-about"><summary><span lang="ru">О дашборде</span><span lang="en">About</span></summary><div class="sa-box"><div lang="ru"><h1>3D-дашборд стоматологии</h1><p>Тот же дашборд стоматологической клиники, но в виде 3D-модели помещения. Нажмите на зону - кабинеты врачей, ресепшн, рентген, кабинет управляющего или стерилизационную - и откроются цифры этой части клиники. Пример на вымышленных данных.</p><p>Над каждым врачом видна загрузка его кресла. На ресепшн - удержание пациентов и деньги в неначатых планах лечения. В стерилизационной - остатки материалов и имплантов.</p><p>На какие вопросы отвечает: какие кресла простаивают; сколько пациентов не дошли до лечения после консультации и на какую сумму; какие материалы скоро закончатся. Удобно показывать цифры врачам и администраторам.</p><ul><li>Загрузка кресел и врачей</li><li>Доходимость до лечения и удержание пациентов</li><li>Переключение между 3D и обычным видом</li></ul><p>Сделаем 3D- или обычный дашборд для вашей клиники - от 65 000 ₽.</p><div class="sa-links"><a href="/dashboards/">Все примеры дашбордов</a><a href="/dashboards/dental/">Обычная версия дашборда стоматологии</a></div></div><div lang="en"><p><b>3D dental clinic dashboard</b></p><p>The dental clinic dashboard as a 3D floor model: click a treatment room, the front desk, X-ray or the supplies room to open the numbers for that part of the clinic. Sample data.</p><ul><li>Chair and dentist utilization</li><li>Treatment acceptance and patient retention</li><li>Switch between 3D and flat view</li></ul><p>We can build a 3D or flat dashboard for your clinic.</p><div class="sa-links"><a href="/?lang=en">Websites &amp; Analytics</a></div></div></div></details><!--/seo-about-->
+</body></html>

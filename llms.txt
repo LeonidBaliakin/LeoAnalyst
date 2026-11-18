@@ -24,6 +24,7 @@
 ## Отраслевые решения
 
 - [Дашборд и аналитика для салона красоты](https://analyticsbuild.com/dashboard-salona-krasoty/): возвраты клиентов, загрузка мастеров, выручка за час, каналы; данные из YCLIENTS, DIKIDI, Арники и кассы
+- [Дашборд и аналитика для стоматологии](https://analyticsbuild.com/dashboard-stomatologii/): доходимость до лечения, удержание пациентов, загрузка врачей и кресел; данные из IDENT, Dental4Windows, 1С:Медицина
 
 ## Примеры дашбордов (интерактивные, демо-данные)
 
@@ -31,6 +32,7 @@
 - [Финансовый дашборд](https://analyticsbuild.com/dashboards/finance/)
 - [Опт и розница](https://analyticsbuild.com/dashboards/retail/)
 - [Салон красоты](https://analyticsbuild.com/dashboards/beauty-salon/)
+- [Стоматологическая клиника](https://analyticsbuild.com/dashboards/dental/) и [3D-версия](https://analyticsbuild.com/dashboards/dental-3d/)
 - [Транспортная компания](https://analyticsbuild.com/dashboards/logistics/)
 - [Экспедиторская компания](https://analyticsbuild.com/dashboards/forwarding/)
 - [Морские контейнерные перевозки](https://analyticsbuild.com/dashboards/sea-containers/)

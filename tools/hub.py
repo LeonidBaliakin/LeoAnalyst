@@ -9,8 +9,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from blog import base, cta, ORIGIN, BRAND, ARROW, ROOT  # noqa: E402
 from dash_seo import DASH  # noqa: E402
 
-ORDER = ['finance', 'retail', 'beauty-salon', 'beauty-3d', 'logistics', 'forwarding', 'sea-containers', 'product-analytics', 'staff-crm']
-TAGS = {'finance': 'Финансы', 'retail': 'Опт и розница', 'beauty-salon': 'Салоны красоты', 'beauty-3d': 'Салоны красоты · 3D',
+ORDER = ['finance', 'retail', 'beauty-salon', 'beauty-3d', 'dental', 'dental-3d', 'logistics', 'forwarding', 'sea-containers', 'product-analytics', 'staff-crm']
+TAGS = {'finance': 'Финансы', 'retail': 'Опт и розница', 'beauty-salon': 'Салоны красоты', 'beauty-3d': 'Салоны красоты · 3D', 'dental': 'Стоматология', 'dental-3d': 'Стоматология · 3D',
         'logistics': 'Логистика · 3D', 'forwarding': 'Экспедирование', 'sea-containers': 'Морские перевозки · 3D',
         'product-analytics': 'Продуктовая аналитика', 'staff-crm': 'Команда и задачи'}
 
@@ -31,7 +31,7 @@ def main():
     content = f'''{CSS}
  <section class="blog"><div class="container">
   <div class="blog-head"><p class="blog-crumbs"><a href="/">Главная</a> / Примеры дашбордов</p><h1>Примеры дашбордов для бизнеса</h1>
-  <p>9 живых интерактивных дашбордов для разных отраслей: финансы, торговля, салоны красоты, логистика, продуктовая аналитика и команда. Данные вымышленные, но всё работает: меняйте периоды, открывайте разделы, нажимайте на графики.</p></div>
+  <p>11 живых интерактивных дашбордов для разных отраслей: финансы, торговля, салоны красоты, стоматология, логистика, продуктовая аналитика и команда. Данные вымышленные, но всё работает: меняйте периоды, открывайте разделы, нажимайте на графики.</p></div>
   <div class="post-grid">
 {cards}
   </div>

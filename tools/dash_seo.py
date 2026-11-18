@@ -174,6 +174,42 @@ DASH = {
          'li': ['Data from task trackers or spreadsheets', 'Workload and time tracking', 'Deadlines and overdue tasks'],
          'end': 'We can build one for your team.'},
  },
+ 'dental': {
+  'service': ('/dashboard-stomatologii/', 'Дашборд для стоматологии под ключ', 'Dental clinic dashboard'),
+  'ru': {
+   'title': 'Дашборд стоматологии: врачи, пациенты, выручка - пример',
+   'h1': 'Дашборд для стоматологической клиники',
+   'card': 'Загрузка врачей и кресел, повторные визиты, выручка по направлениям и план месяца.',
+   'p': ['Дашборд для стоматологической клиники: сколько пациентов записано и пришло, как загружены врачи, какие направления приносят выручку и выполняется ли план месяца. Пример на вымышленных данных - пощёлкайте разделы.',
+         'Внутри: записи и неявки по дням, загрузка каждого врача по часам, выручка по терапии, гигиене, хирургии, ортопедии и ортодонтии, средний чек, повторные визиты и каналы, из которых приходят пациенты. Отдельно видно услуги с низкой загрузкой и записи, которые ждут подтверждения.'],
+   'q': 'На какие вопросы отвечает: почему выручка ниже плана; у каких врачей пустые окна; сколько пациентов после консультации не вернулись на лечение; какие направления стоит продвигать; окупается ли реклама на Яндекс Картах. Подходит частным клиникам на 2-10 кресел и сетям.',
+   'li': ['Данные из IDENT, Dental4Windows, 1С:Медицина, Medesk и кассы', 'Загрузка врачей и кресел по часам', 'Повторные визиты и неявки'],
+   'end': 'Соберём такой дашборд для вашей клиники - от 65 000 ₽, прототип за 48 часов.',
+  },
+  'en': {'title': 'Dental Clinic Dashboard Example: Dentists, Patients', 'h1': 'Dental clinic dashboard',
+         'card': 'Dentist and chair utilization, return visits, revenue by treatment and monthly plan.',
+         'p': ['A sample-data dashboard for a dental clinic: appointments and no-shows, utilization of each dentist, revenue by treatment line, average ticket, return visits and acquisition channels.'],
+         'li': ['Data from practice management software and POS', 'Dentist and chair utilization', 'Return visits and no-shows'],
+         'end': 'We can build one for your clinic.'},
+ },
+ 'dental-3d': {
+  'service': ('/dashboards/dental/', 'Обычная версия дашборда стоматологии', 'Flat version'),
+  'ru': {
+   'title': '3D-дашборд стоматологии: кабинеты, врачи, пациенты - пример',
+   'h1': '3D-дашборд стоматологии',
+   'card': 'Клиника в 3D: загрузка кресел, доходимость до лечения, рентген и материалы.',
+   'p': ['Тот же дашборд стоматологической клиники, но в виде 3D-модели помещения. Нажмите на зону - кабинеты врачей, ресепшн, рентген, кабинет управляющего или стерилизационную - и откроются цифры этой части клиники. Пример на вымышленных данных.',
+         'Над каждым врачом видна загрузка его кресла. На ресепшн - удержание пациентов и деньги в неначатых планах лечения. В стерилизационной - остатки материалов и имплантов.'],
+   'q': 'На какие вопросы отвечает: какие кресла простаивают; сколько пациентов не дошли до лечения после консультации и на какую сумму; какие материалы скоро закончатся. Удобно показывать цифры врачам и администраторам.',
+   'li': ['Загрузка кресел и врачей', 'Доходимость до лечения и удержание пациентов', 'Переключение между 3D и обычным видом'],
+   'end': 'Сделаем 3D- или обычный дашборд для вашей клиники - от 65 000 ₽.',
+  },
+  'en': {'title': '3D Dental Clinic Dashboard Example', 'h1': '3D dental clinic dashboard',
+         'card': 'A 3D clinic: chair utilization, treatment acceptance, X-ray and supplies.',
+         'p': ['The dental clinic dashboard as a 3D floor model: click a treatment room, the front desk, X-ray or the supplies room to open the numbers for that part of the clinic. Sample data.'],
+         'li': ['Chair and dentist utilization', 'Treatment acceptance and patient retention', 'Switch between 3D and flat view'],
+         'end': 'We can build a 3D or flat dashboard for your clinic.'},
+ },
 }
 
 CSS = ('<style id="seo-about-css">'
@@ -230,7 +266,7 @@ def apply(slug):
         s = s.replace('<link rel="alternate" hreflang="ru"', f'<link rel="canonical" href="{url}">\n<link rel="alternate" hreflang="ru"', 1)
     # noscript h1 -> p (the real H1 lives in the panel)
     s = re.sub(r'(<noscript>\s*)<h1>(.*?)</h1>', r'\1<p><b>\2</b></p>', s, flags=re.S)
-    s = re.sub(r'<!--seo-about-->.*?<!--/seo-about-->', '', s, flags=re.S)
+    s = re.sub(r'\n*<!--seo-about-->.*?<!--/seo-about-->\n*', '\n', s, flags=re.S)
     s = s.replace('</body>', panel(slug) + '\n</body>', 1)
     open(p, 'w', encoding='utf-8').write(s)
 
