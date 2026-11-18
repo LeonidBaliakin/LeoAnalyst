@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>Страница не найдена - Сайты и Аналитика</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101524'/%3E%3Cpath d='M14 42V29M27 42V19M40 42V25M52 42V13' stroke='%237EDBD3' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafafa;color:#16171c;font:400 16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;padding:32px}
+main{max-width:640px;width:100%}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:780;letter-spacing:-.04em;color:inherit;text-decoration:none;margin-bottom:40px}
+.brand i{width:34px;height:34px;border-radius:11px;background:#16191f;display:grid;place-items:center}
+.code{font-size:15px;font-weight:700;color:#2fb8a5;letter-spacing:.08em}
+h1{font-size:clamp(34px,6vw,56px);letter-spacing:-.05em;line-height:1.05;margin:10px 0 14px}
+p{color:#6e7078;margin:0 0 28px;font-size:17px}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.links a{display:block;background:#fff;border:1px solid #e7e8ec;border-radius:16px;padding:16px 18px;color:inherit;text-decoration:none;font-weight:650;transition:border-color .2s ease}
+.links a:hover{border-color:#cfd2d9}
+.links a.main{background:#16171c;color:#fff;border-color:#16171c}
+@media(max-width:520px){.links{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+ <a class="brand" href="/"><i><svg width="20" height="20" viewBox="0 0 64 64"><path d="M14 42V29M27 42V19M40 42V25M52 42V13" stroke="#7EDBD3" stroke-width="7" stroke-linecap="round"/></svg></i>Сайты &amp; Аналитика</a>
+ <div class="code">ОШИБКА 404</div>
+ <h1 id="t">Такой страницы нет</h1>
+ <p id="d">Возможно, в ссылке опечатка или страница переехала. Вот куда можно перейти:</p>
+ <nav class="links">
+  <a class="main" href="/" id="l1">На главную</a>
+  <a href="/dashboards/" id="l2">Примеры дашбордов</a>
+  <a href="/management-reporting/" id="l3">Управленческая отчётность</a>
+  <a href="/financial-dashboard/" id="l4">Финансы и прибыль</a>
+  <a href="/sales-analytics/" id="l5">Аналитика продаж</a>
+  <a href="/blog/" id="l6">Статьи</a>
+ </nav>
+</main>
+<script>
+(function(){try{var en=/[?&]lang=en/.test(location.search)||(localStorage.getItem('geoLocale')||(/^(ru|be)/i.test(navigator.language||'')?'ru':'en'))==='en';if(!en)return;
+document.documentElement.lang='en';document.title='Page not found - Websites & Analytics';
+var t={t:'This page doesn’t exist',d:'There may be a typo in the link, or the page has moved. Here is where you can go:',l1:'Home',l2:'Dashboard examples',l3:'KPI dashboard',l4:'Financial dashboard',l5:'Sales analytics',l6:'Articles (RU)'};
+for(var k in t){var e=document.getElementById(k);if(e)e.textContent=t[k]}
+document.querySelector('.code').textContent='ERROR 404';document.querySelector('.brand').lastChild.textContent='Websites & Analytics';
+['l1','l2','l3','l4','l5'].forEach(function(id){var a=document.getElementById(id);a.href=a.getAttribute('href')+'?lang=en'})}catch(e){}})();
+</script>
+</body>
+</html>

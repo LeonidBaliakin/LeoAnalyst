@@ -1,0 +1,40 @@
+# Сайты и Аналитика (analyticsbuild.com)
+
+> Частный аналитик Леонид Балякин: дашборды и бизнес-аналитика под ключ, продуктовая аналитика, внедрение ИИ и сайты для малого и среднего бизнеса. Работа удалённо по России и миру. Данные из 1С, CRM, банка, касс и таблиц собираются в один дашборд, который обновляется сам. Прототип за 48 часов, запуск за 2-8 недель. Дашборд под ключ - от 65 000 ₽.
+
+Контакт: analystleogroup@gmail.com. Сайт на русском, английская версия - по адресу с ?lang=en.
+
+## Услуги
+
+- [Управленческая отчётность и дашборд руководителя](https://analyticsbuild.com/management-reporting/): продажи, план-факт, прибыль, долги клиентов и деньги на одном экране
+- [Финансовый анализ бизнеса](https://analyticsbuild.com/financial-dashboard/): почему нет прибыли, рентабельность по товарам, клиентам и направлениям, движение денег, бюджет и прогноз
+- [Дашборды из 1С и Power BI](https://analyticsbuild.com/1c-power-bi/): отчёты из 1С, CRM и таблиц в Power BI, DataLens или веб-дашборде
+- [Аналитика продаж](https://analyticsbuild.com/sales-analytics/): воронка, план-факт по менеджерам, каналы рекламы, маркетплейсы
+- [Аналитика для транспортной компании](https://analyticsbuild.com/logistics-analytics/): загрузка парка, маржа по рейсам и клиентам, ремонты, топливо, экспедирование
+- [Внедрение ИИ в бизнес-процессы](https://analyticsbuild.com/ai-implementation/): ИИ-ассистент по данным компании, обработка заявок, писем и документов
+- [Разработка сайта под ключ](https://analyticsbuild.com/website-development/): сайт с текстами под клиента, мобильной версией и аналитикой заявок
+
+## Примеры дашбордов (интерактивные, демо-данные)
+
+- [Каталог всех примеров](https://analyticsbuild.com/dashboards/)
+- [Финансовый дашборд](https://analyticsbuild.com/dashboards/finance/)
+- [Опт и розница](https://analyticsbuild.com/dashboards/retail/)
+- [Салон красоты](https://analyticsbuild.com/dashboards/beauty-salon/)
+- [Транспортная компания](https://analyticsbuild.com/dashboards/logistics/)
+- [Экспедиторская компания](https://analyticsbuild.com/dashboards/forwarding/)
+- [Морские контейнерные перевозки](https://analyticsbuild.com/dashboards/sea-containers/)
+- [Продуктовая аналитика](https://analyticsbuild.com/dashboards/product-analytics/)
+- [Команда и задачи](https://analyticsbuild.com/dashboards/staff-crm/)
+
+## Статьи
+
+- [Все статьи](https://analyticsbuild.com/blog/)
+- [Анализ рентабельности бизнеса](https://analyticsbuild.com/blog/analiz-rentabelnosti/)
+- [Отчёт для руководителя: какие KPI смотреть](https://analyticsbuild.com/blog/otchet-dlya-rukovoditelya/)
+- [Почему прибыль есть, а денег нет](https://analyticsbuild.com/blog/pribyl-est-a-deneg-net/)
+- [Управленческая отчётность из 1С](https://analyticsbuild.com/blog/upravlencheskaya-otchetnost-iz-1s/)
+- [Дашборд для салона красоты](https://analyticsbuild.com/blog/dashbord-dlya-salona-krasoty/)
+
+## English
+
+Websites & Analytics: dashboards and business analytics done for you, product analytics, AI implementation and websites for small and mid-sized businesses. Remote work worldwide. English pages: add ?lang=en to any service or example URL, e.g. https://analyticsbuild.com/?lang=en

@@ -151,6 +151,7 @@ def build(p):
     # ---- hero static text (what Yandex reads) ----
     sub(r'<span data-i18n="heroTag">[^<]*</span>', f'<span data-i18n="heroTag">{ru["tag"]}</span>')
     sub(r'<span class="q-fallback" data-i18n="heroTitleA">[^<]*</span>', f'<span class="q-fallback" data-i18n="heroTitleA">{ru.get("seo_q", ru["qs"][0])}</span>')
+    sub(r'<span class="sr-only q-seo" data-i18n="heroTitleA">[^<]*</span>', f'<span class="sr-only q-seo" data-i18n="heroTitleA">{ru.get("seo_q", ru["qs"][0])}</span>')
     sub(r'<p class="hero-lead" data-i18n="heroLead">[^<]*</p>', f'<p class="hero-lead" data-i18n="heroLead">{ru["lead"]}</p>')
     sub(r'<a href="/#problems" class="light-btn"><span data-i18n="ctaExplore">[^<]*</span>',
         f'<a href="#example" class="light-btn"><span data-i18n="ctaExplore">{ru["see"]}</span>')
@@ -179,6 +180,7 @@ def build(p):
 '''
     sub(r'\n <section class="showcase" id="demo">.*?\n </section>\n', block, re.S)
     sub(r'\n <section class="calc-section" id="calc".*?\n </section>\n', '\n', re.S)
+    sub(r'\n <section class="svc-links".*?\n </section>\n', '\n', re.S)
     return s
 
 
