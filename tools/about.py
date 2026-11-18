@@ -9,11 +9,20 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from blog import base, cta, ORIGIN, BRAND, ROOT  # noqa: E402
 
 
+def cta_en():
+    return cta().replace('<section class="blog-cta">', '<section class="blog-cta ab-en">', 1).replace(
+        'Покажем на цифрах, что происходит в вашем бизнесе', 'Let’s see what your numbers say').replace(
+        'Созвонимся на 15 минут, разберём вашу ситуацию и назовём стоимость до начала работ.',
+        'A 15-minute call: we’ll look at your situation and give you a price before any work starts.').replace(
+        '<span>Оставить заявку</span>', '<span>Send an enquiry</span>')
+
+
 def main():
     url = f'{ORIGIN}/about/'
     content = f'''
  <section class="blog"><div class="container">
-  <article class="post">
+  <style>html[lang="en"] .ab-ru{{display:none}}html:not([lang="en"]) .ab-en{{display:none}}</style>
+  <article class="post ab-ru" lang="ru">
    <div class="blog-head"><p class="blog-crumbs"><a href="/">Главная</a> / Обо мне</p>
    <h1>Леонид Балякин - аналитик и руководитель продукта</h1>
    <p class="post-lead">«Сайты и Аналитика» - это я. Делаю дашборды, бизнес- и продуктовую аналитику, сайты и внедряю ИИ для малого и среднего бизнеса. Работаю сам, без посредников и менеджеров: вы общаетесь напрямую с тем, кто считает ваши цифры.</p></div>
@@ -51,12 +60,39 @@ def main():
 </ul>
    </div>
   </article>
- </div></section>{cta()}'''
+  <article class="post ab-en" lang="en">
+   <div class="blog-head"><p class="blog-crumbs"><a href="/?lang=en">Home</a> / About</p>
+   <h1>Leonid Baliakin - analyst and product lead</h1>
+   <p class="post-lead">Websites &amp; Analytics is me. I build dashboards, business and product analytics, websites and AI tools for small and mid-sized businesses. No middlemen or account managers: you talk directly to the person working with your numbers.</p></div>
+   <div class="post-body">
+<h2>Experience</h2>
+<p>5+ years in product analytics and product management. As a product lead in an international tech company I set up event tracking, built funnels, cohorts, retention, LTV and ARPU reports and validated changes with A/B tests. One result: +10% subscription revenue after reworking plans and pricing.</p>
+<p>Before analytics I worked in freight logistics - calling carriers, comparing lane rates and placing loads. So dashboards for trucking and forwarding companies come from real hands-on experience.</p>
+<h2>Tools</h2>
+<ul>
+ <li>Data: SQL, PostgreSQL, ClickHouse.</li>
+ <li>Dashboards: Power BI, web dashboards, Excel and Google Sheets.</li>
+ <li>Product analytics: GA4, event logging, mobile analytics SDKs.</li>
+ <li>Sources: accounting/ERP systems, CRMs, bank statements, POS, marketplaces, spreadsheets.</li>
+</ul>
+<h2>How I work</h2>
+<ul>
+ <li>A 15-minute call to understand the decisions you make and the numbers you are missing.</li>
+ <li>A prototype in 48 hours on your exports or sample data.</li>
+ <li>A fixed price before work starts: dashboards from $1,300.</li>
+ <li>NDA by default. The first month of fixes after launch is free.</li>
+</ul>
+<h2>Where I work</h2>
+<p>Fully remote, with clients worldwide. See live examples in the <a href="/dashboards/?lang=en">dashboard catalogue</a>.</p>
+<h2>Contact</h2>
+<ul><li>Email: <a href="mailto:analystleogroup@gmail.com">analystleogroup@gmail.com</a></li></ul>
+   </div>
+  </article>
+ </div></section>{cta().replace('<section class="blog-cta">','<section class="blog-cta ab-ru">',1)}{cta_en()}'''
     person = {"@context": "https://schema.org", "@type": "Person", "@id": f"{ORIGIN}/about/#person", "name": "Леонид Балякин",
               "alternateName": "Leonid Baliakin", "jobTitle": "Бизнес- и продуктовый аналитик, руководитель продукта",
               "description": "Частный аналитик: дашборды, бизнес- и продуктовая аналитика, сайты и внедрение ИИ для малого и среднего бизнеса.",
               "url": url, "email": "analystleogroup@gmail.com", "worksFor": {"@id": f"{ORIGIN}/#service", "@type": "ProfessionalService", "name": BRAND},
-              "address": {"@type": "PostalAddress", "addressLocality": "Санкт-Петербург", "addressCountry": "RU"},
               "knowsAbout": ["Бизнес-аналитика", "Продуктовая аналитика", "Дашборды", "Power BI", "Яндекс DataLens", "SQL", "PostgreSQL", "ClickHouse", "A/B-тесты", "Логистика"],
               "sameAs": ["https://vk.ru/analyticsbuild", "https://dzen.ru/id/6ae34ff6e289c924db117c66", "https://yandex.ru/maps/org/66144833648/"]}
     ld = [{"@context": "https://schema.org", "@type": "ProfilePage", "url": url, "inLanguage": "ru", "mainEntity": {"@id": f"{ORIGIN}/about/#person"}}, person,
@@ -65,7 +101,8 @@ def main():
               {"@type": "ListItem", "position": 2, "name": "Обо мне", "item": url}]}]
     out = base('Леонид Балякин - аналитик данных и руководитель продукта',
                'Кто делает дашборды и аналитику «Сайты и Аналитика»: Леонид Балякин, больше 5 лет в продуктовой аналитике, опыт в логистике. SQL, Power BI, ClickHouse. Санкт-Петербург, удалённо.',
-               url, ld, content)
+               url, ld, content,
+               en=('Leonid Baliakin - Data Analyst and Product Lead', 'Who is behind Websites & Analytics: Leonid Baliakin, 5+ years in product analytics, background in freight logistics. Dashboards, analytics, websites and AI. Remote, worldwide.'))
     os.makedirs(os.path.join(ROOT, 'about'), exist_ok=True)
     open(os.path.join(ROOT, 'about', 'index.html'), 'w', encoding='utf-8').write(out)
     print('built /about/')

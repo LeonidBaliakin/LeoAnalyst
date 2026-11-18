@@ -51,7 +51,7 @@ CSS = '''
 '''
 
 
-def base(title, desc, url, ld, content):
+def base(title, desc, url, ld, content, en=None):
     s = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
     e = html.escape
 
@@ -73,8 +73,10 @@ def base(title, desc, url, ld, content):
     sub(r'<script type="application/ld\+json" id="homeFaqLd">.*?</script>\n', '', re.S)
     sub(r'<script type="application/ld\+json">.*?</script>', f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>', re.S)
     over = {'pageTitle': full, 'pageDesc': desc}
-    sub(r'<meta charset="utf-8">\n', '<meta charset="utf-8">\n<script>window.FORCE_LOCALE="ru";window.LANDING=%s;window.LANDING_URL=%s;</script>\n'
-        % (json.dumps({'ru': over, 'en': over}, ensure_ascii=False), json.dumps(url)))
+    over_en = {'pageTitle': en[0], 'pageDesc': en[1]} if en else over
+    force = '' if en else 'window.FORCE_LOCALE="ru";'
+    sub(r'<meta charset="utf-8">\n', '<meta charset="utf-8">\n<script>%swindow.LANDING=%s;window.LANDING_URL=%s;</script>\n'
+        % (force, json.dumps({'ru': over, 'en': over_en}, ensure_ascii=False), json.dumps(url)))
     sub(r'</style>', CSS + '</style>')
     s = re.sub(r'(href|src)="(?!https?:|#|/|mailto:|data:|javascript:)([^"]+)"', r'\1="/\2"', s)
     for a in ('problems', 'demo', 'calc'):
