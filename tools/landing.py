@@ -103,9 +103,17 @@ def more_html(slug):
 '''
 
 
+# starting price per page (RUB, USD) - shown in meta description and Service/Offer markup
+PRICE = {'website-development': (35000, 700), 'ai-implementation': (60000, 1500)}
+PRICE_DEFAULT = (65000, 1300)
+
+
 def build(p):
     s = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
-    ru, en = p['ru'], p['en']
+    rub, usd = PRICE.get(p['slug'], PRICE_DEFAULT)
+    ru, en = dict(p['ru']), dict(p['en'])
+    ru['desc'] = f"От {rub:,} ₽. ".replace(',', '\u00a0') + ru['desc']
+    en['desc'] = f"From ${usd:,}. " + en['desc']
     url = f'{ORIGIN}/{p["slug"]}/'
     t_ru, t_en = ru['title'], en['title']
     e = html.escape
@@ -128,7 +136,8 @@ def build(p):
     sub(r'<link rel="alternate" hreflang="x-default" href="[^"]*">', f'<link rel="alternate" hreflang="x-default" href="{url}?lang=en">')
     sub(r'<meta name="(yandex|google)-site-verification"[^>]*>\n', '', count=0)
     ld = [{"@context": "https://schema.org", "@type": "Service", "name": ru['crumb'], "serviceType": ru['crumb'],
-           "provider": {"@id": f"{ORIGIN}/#service"}, "areaServed": ["RU", "Worldwide"], "url": url},
+           "provider": {"@id": f"{ORIGIN}/#service"}, "areaServed": ["RU", "Worldwide"], "url": url,
+           "offers": {"@type": "Offer", "url": url, "priceCurrency": "RUB", "priceSpecification": {"@type": "PriceSpecification", "minPrice": rub, "priceCurrency": "RUB"}}},
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": BRAND_RU, "item": f"{ORIGIN}/"},
               {"@type": "ListItem", "position": 2, "name": ru['crumb'], "item": url}]}]
