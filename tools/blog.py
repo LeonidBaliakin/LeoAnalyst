@@ -34,6 +34,7 @@ CSS = '''
 .post-body{font-size:17px;line-height:1.75;color:#24262c}
 .post-body h2{font-size:clamp(23px,2.6vw,30px);letter-spacing:-.03em;line-height:1.2;margin:44px 0 14px;max-width:none;font-weight:760}
 .post-body p{margin:0 0 16px}
+.post-body a{color:#1d63d8;text-decoration:underline;text-underline-offset:2px}
 .post-body ul,.post-body ol{margin:0 0 18px;padding-left:22px}
 .post-body li{margin:0 0 10px;padding-left:4px}
 .post-service{margin:40px 0 0;background:#fff;border:1px solid #e7e8ec;border-radius:22px;padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
@@ -69,6 +70,7 @@ def base(title, desc, url, ld, content):
     sub(r'<link rel="canonical" href="[^"]*" id="canonicalLink">', f'<link rel="canonical" href="{url}" id="canonicalLink">')
     sub(r'<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n', '', count=0)
     sub(r'<meta name="(yandex|google)-site-verification"[^>]*>\n', '', count=0)
+    sub(r'<script type="application/ld\+json" id="homeFaqLd">.*?</script>\n', '', re.S)
     sub(r'<script type="application/ld\+json">.*?</script>', f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>', re.S)
     over = {'pageTitle': full, 'pageDesc': desc}
     sub(r'<meta charset="utf-8">\n', '<meta charset="utf-8">\n<script>window.FORCE_LOCALE="ru";window.LANDING=%s;window.LANDING_URL=%s;</script>\n'
@@ -123,7 +125,7 @@ def build_post(p):
  <section class="blog"><div class="container">
   <article class="post">
    <div class="blog-head"><p class="blog-crumbs"><a href="/">Главная</a> / <a href="/blog/">Статьи</a> / {p["tag"]}</p>
-   <h1>{p["title"]}</h1><p class="post-meta" style="margin:0 0 18px">{p["date_ru"]} · {p["read"]} чтения</p>
+   <h1>{p["title"]}</h1><p class="post-meta" style="margin:0 0 18px">{p["date_ru"]} · {p["read"]} чтения · Автор: <a href="/about/" style="color:inherit;text-decoration:underline">Леонид Балякин</a></p>
    <p class="post-lead">{p["lead"]}</p></div>
    <div class="post-body">{p["body"]}</div>
    <aside class="post-service"><div><small>КАК МЫ ПОМОГАЕМ</small><p>{text}</p></div><a class="light-btn" href="{href}"><span>{name}</span>{ARROW}</a></aside>
@@ -131,7 +133,7 @@ def build_post(p):
  </div></section>{cta()}'''
     ld = [{"@context": "https://schema.org", "@type": "BlogPosting", "headline": p['title'], "description": p['desc'], "datePublished": p['date'],
            "dateModified": p['date'], "inLanguage": "ru", "mainEntityOfPage": url, "image": f"{ORIGIN}/og-image.png",
-           "author": {"@type": "Organization", "name": BRAND, "url": f"{ORIGIN}/"}, "publisher": {"@type": "Organization", "name": BRAND, "url": f"{ORIGIN}/"}},
+           "author": {"@type": "Person", "@id": f"{ORIGIN}/about/#person", "name": "Леонид Балякин", "url": f"{ORIGIN}/about/"}, "publisher": {"@type": "Organization", "name": BRAND, "url": f"{ORIGIN}/"}},
           {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": BRAND, "item": f"{ORIGIN}/"},
               {"@type": "ListItem", "position": 2, "name": "Статьи", "item": f"{ORIGIN}/blog/"},

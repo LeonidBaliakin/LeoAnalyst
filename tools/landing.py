@@ -181,6 +181,8 @@ def build(p):
     sub(r'\n <section class="showcase" id="demo">.*?\n </section>\n', block, re.S)
     sub(r'\n <section class="calc-section" id="calc".*?\n </section>\n', '\n', re.S)
     sub(r'\n <section class="svc-links".*?\n </section>\n', '\n', re.S)
+    sub(r'\n <section class="home-faq".*?\n </section>\n', '\n', re.S)
+    sub(r'<script type="application/ld\+json" id="homeFaqLd">.*?</script>\n', '', re.S)
     return s
 
 
