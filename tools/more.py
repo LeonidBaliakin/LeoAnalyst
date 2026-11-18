@@ -309,4 +309,64 @@ MORE = {
    ],
   },
  },
+ 'dashboard-salona-krasoty': {
+  'ru': {
+   'metrics_h': '7 цифр, которые показывает дашборд салона',
+   'metrics': [
+    ('Возвраты новых клиентов', 'Какая доля клиентов, пришедших впервые, записывается снова в течение 60 дней. Это главная точка роста салона: привлечь нового клиента в разы дороже, чем вернуть.'),
+    ('Загрузка мастеров', 'Сколько часов каждый мастер работал с клиентами из доступных. Видно пустые окна, перегруженных мастеров и дни, когда стоит добавить смену или запустить акцию.'),
+    ('Выручка за час работы', 'Какие услуги приносят больше денег за час кресла, а какие занимают время и почти ничего не дают. Помогает пересобрать прайс и предложения.'),
+    ('Средний чек и допродажи', 'Средний чек по мастерам и услугам, доля визитов с дополнительной услугой или покупкой косметики.'),
+    ('Отток клиентов', 'Постоянные клиенты, которые давно не приходили. Список, кому стоит напомнить о записи, - прямо в дашборде.'),
+    ('Каналы привлечения', 'Откуда пришли клиенты - Яндекс Карты, ВКонтакте, сарафан, реклама - и кто из них остаётся, а кто приходит один раз по скидке.'),
+    ('План-факт выручки', 'Выручка по дням против плана месяца и прогноз: хватит ли записей, чтобы выйти на цель.'),
+   ],
+   'get_h': 'Что даёт аналитика салона красоты',
+   'get': [
+    ('Понятно, почему выручка выросла или упала', 'Выручка раскладывается на число клиентов, возвраты и средний чек. Сразу видно, что именно просело - и что исправлять.'),
+    ('Мастера работают с понятными целями', 'Каждый мастер видит свою загрузку, средний чек и возвраты клиентов. Разговор о результатах опирается на цифры, а не на ощущения.'),
+    ('Реклама окупается, а не просто тратится', 'Видно стоимость клиента по каждому каналу и сколько он приносит за полгода, а не только за первый визит.'),
+    ('Сеть салонов на одном экране', 'Если точек несколько - сравнение филиалов по загрузке, выручке и возвратам. Понятно, где учиться, а где наводить порядок.'),
+   ],
+   'price_h': 'Сколько стоит дашборд для салона красоты',
+   'price': [
+    'Дашборд для салона под ключ - от 65 000 ₽. Для одной точки с онлайн-записью обычно хватает 3-5 экранов: клиенты, мастера, услуги, каналы, деньги.',
+    'Срок - 2-4 недели. Бесплатно считаем возвраты клиентов по выгрузке за 3 месяца - так вы увидите пользу до того, как платить.',
+   ],
+   'faq': [
+    ('С какими программами записи работаете?', 'YCLIENTS, DIKIDI, Арника, Sonline, Universe и другие - если есть выгрузка в Excel или API. Плюс касса, банк и таблицы с расходами.'),
+    ('У нас один салон. Это не слишком сложно?', 'Нет, для одного салона дашборд как раз проще и быстрее: 3-5 экранов с главными цифрами. Часто уже первый расчёт возвратов показывает, где теряются деньги.'),
+    ('Мастера увидят цифры друг друга?', 'Как скажете. Можно настроить, чтобы мастер видел только свои показатели, а управляющий - всё.'),
+   ],
+  },
+  'en': {
+   'metrics_h': '7 numbers a salon dashboard shows',
+   'metrics': [
+    ('New client retention', 'The share of first-time clients who book again within 60 days - the main growth lever for a salon.'),
+    ('Staff utilization', 'Booked hours vs available hours for each stylist: empty slots and overloaded days.'),
+    ('Revenue per hour', 'Which services earn the most per chair hour and which just take time.'),
+    ('Average ticket and add-ons', 'Average ticket by stylist and service, share of visits with an extra service or product.'),
+    ('Churn', 'Regular clients who haven’t come back - a ready list for reminders.'),
+    ('Acquisition channels', 'Where clients come from and which channels bring clients who stay.'),
+    ('Revenue vs plan', 'Daily revenue against the monthly target, with a forecast.'),
+   ],
+   'get_h': 'What salon analytics gives you',
+   'get': [
+    ('Know why revenue changed', 'Revenue is split into clients, retention and average ticket - you see exactly what dropped.'),
+    ('Clear goals for staff', 'Each stylist sees their utilization, ticket and retention.'),
+    ('Ads that pay back', 'Cost per client by channel and their 6-month value, not just the first visit.'),
+    ('All locations on one screen', 'Compare branches by utilization, revenue and retention.'),
+   ],
+   'price_h': 'How much it costs',
+   'price': [
+    'A salon dashboard starts at $1,300. One location usually needs 3-5 screens.',
+    'Timeline: 2-4 weeks. We calculate your client retention for free from a 3-month export.',
+   ],
+   'faq': [
+    ('Which booking software do you support?', 'Most popular booking systems - anything with an Excel export or API - plus POS, bank and expense sheets.'),
+    ('We have just one salon. Is it overkill?', 'No - for one salon it is simpler and faster: 3-5 screens with the key numbers.'),
+    ('Will stylists see each other’s numbers?', 'Up to you: each stylist can see only their own numbers, the manager sees everything.'),
+   ],
+  },
+ },
 }

@@ -49,7 +49,7 @@ DASH = {
          'end': 'We can build one for your store or wholesale business.'},
  },
  'beauty-salon': {
-  'service': ('/blog/dashbord-dlya-salona-krasoty/', 'Статья: 7 цифр салона красоты', 'Article'),
+  'service': ('/dashboard-salona-krasoty/', 'Дашборд для салона под ключ', 'Salon dashboard'),
   'ru': {
    'title': 'Дашборд салона красоты: записи, мастера, клиенты - пример',
    'h1': 'Дашборд для салона красоты',

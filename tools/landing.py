@@ -75,6 +75,10 @@ def more_keys(slug, lang):
         k[f'm_pr{i}'] = x
     for i, (q, a) in enumerate(faq_items(slug, lang)):
         k[f'm_q{i}'], k[f'm_a{i}'] = q, a
+    if m.get('metrics'):
+        k['m_mt_h'] = m['metrics_h']
+        for i, (t, x) in enumerate(m['metrics']):
+            k[f'm_mt{i}t'], k[f'm_mt{i}p'] = t, x
     return k
 
 
@@ -86,7 +90,12 @@ def more_html(slug):
     st = ''.join(f'<li>{t(f"m_s{i}t", "h3")}{t(f"m_s{i}p", "p")}</li>' for i in range(len(steps)))
     pr = ''.join(t(f'm_pr{i}', 'p') for i in range(len(m['price'])))
     fq = ''.join(f'<details><summary data-i18n="m_q{i}">{k[f"m_q{i}"]}</summary>{t(f"m_a{i}", "p")}</details>' for i in range(len(faq_items(slug, 'ru'))))
-    return f'''
+    mt = ''
+    if m.get('metrics'):
+        cards = ''.join(f'<div class="lp-item">{t(f"m_mt{i}t", "h3")}{t(f"m_mt{i}p", "p")}</div>' for i in range(len(m['metrics'])))
+        mt = f'''
+ <section class="lp-more"><div class="container">{t("m_mt_h", "h2")}<div class="lp-grid">{cards}</div></div></section>'''
+    return mt + f'''
  <section class="lp-more" id="more"><div class="container">{t("m_get_h", "h2")}<div class="lp-grid">{get}</div></div></section>
  <section class="lp-more"><div class="container">{t("m_st_h", "h2")}<ol class="lp-steps">{st}</ol></div></section>
  <section class="lp-more"><div class="container">{t("m_pr_h", "h2")}<div class="lp-price">{pr}</div></div></section>
